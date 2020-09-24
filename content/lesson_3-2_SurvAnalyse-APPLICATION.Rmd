@@ -1,0 +1,805 @@
+---
+title: "Introduction to Survival Analysis"
+subtitle: "Smart Analytics for Big Data"
+author: "Iragaël Joly"
+date: "Automn 2020"
+categories: ["R"]
+tags: ["R Markdown", "plot", "regression"]
+authorbox: false
+link-citations: yes
+biblio-style: apalike
+bibliography: [post/data/biblio_hdr_v2.bib, post/data/Liste_Publi3.bib, post/data/biblio_SABD.bib]
+nocite: |
+  @Bivand2013, @lovelace2019
+---
+
+**A FINIR**
+
+```{r include=FALSE}
+library(dplyr)
+library(survival)
+library(survminer)
+
+```
+
+
+
+
+# Exercise - Unemployment duration
+
+Survival analysis models covariates that influence time-to-event.
+
+OLS regression methods are less efficient  because the time-to-event is typically not normally distributed (positive, skewed, nearly discret when rounding are present), and the model cannot handle censored observation, without modification.
+
+
+
+
+```{r}
+library(Ecdat)
+data(Unemployment)
+Unemployment # Necessary to obtain the DF !
+head(Unemployment)
+```
+
+
+## OLS regression
+
+```{r}
+summary(Unemployment$duration)
+plot(Unemployment$duration)
+boxplot(Unemployment$duration)
+plot(Unemployment$duration ~ Unemployment$sex)
+plot(Unemployment$duration ~ Unemployment$race)
+t.test(Unemployment$duration ~ Unemployment$sex)
+t.test(Unemployment$duration ~ Unemployment$race)
+t.test(Unemployment$duration ~ Unemployment$search)
+t.test(Unemployment$duration ~ Unemployment$pubemp)
+
+OLS1 <- lm(duration ~ race + pubemp , data=Unemployment)
+summary(OLS1)
+plot(OLS1)
+
+```
+
+
+
+## Survival analysis
+
+
+## Data Handling
+
+The duration data are of specific format.
+
+Function `Surv(time, status)` from `survival`package create data possibly censored.
+
+- `time`: real observed time
+- `status`: dummy for censored duration (`T`) or not(`F`) 
+
+
+In presence of time-varying covariates, we use: `Surv(start,stop,event,data=mydata)`, avec `start`and `stop` the beginning and the end of the time at risk, and `status` is 1 when the event is observed.
+
+## Survival curves & Life Table
+
+The function `survfit()`   computes Kaplan-Meier survival estimate.
+
+Its main arguments include:
+
+- a survival time data (from `Surv()`)
+- the data set containing the variables
+
+To compute survival curves:
+
+1. Simple survival curve that doesn’t consider any different groupings
+
+### Life Table
+
+```{r}
+Surv_time <- with( Unemployment, Surv(duration, spell))
+
+sfit1 <- survfit(Surv_time~1, data = Unemployment)
+sfit1
+surv_summary(sfit1)
+```
+
+### Survival curve & CI
+
+
+Information about the survival curves
+
+
+```{r}
+attr(surv_summary(sfit1), "table")
+
+```
+
+
+```{r}
+plot(sfit1)
+ggsurvplot(sfit1, conf.int=TRUE, pval=TRUE, risk.table=TRUE, 
+           palette=c("dodgerblue2", "orchid2"), 
+           title="KM Curve for Job Duration Survival", 
+           risk.table.height=.15)
+
+```
+
+
+## Different survival curves depending on sex
+
+```{r}
+addmargins( table(Unemployment$sex))
+
+sfit2 <- survfit(Surv_time~sex, data = Unemployment)
+sfit2
+surv_summary(sfit2)
+attr(surv_summary(sfit2), "table")
+plot(sfit2)
+```
+More complete and complex plot function:
+
+```{r}
+ggsurvplot(sfit2, conf.int=TRUE, pval=TRUE, risk.table=TRUE, 
+           legend.labs=c("male", "female"), legend.title="Sex",  
+           palette=c("dodgerblue2", "orchid2"), 
+           title="KM Curve for Job Duration Survival", 
+           risk.table.height=.15)
+ggsurvplot(
+   sfit2,                     # survfit object with calculated statistics.
+   pval = TRUE,             # show p-value of log-rank test.
+   conf.int = TRUE,         # show confidence intervals for 
+                            # point estimaes of survival curves.
+   #conf.int.style = "step",  # customize style of confidence intervals
+   xlab = "Time in weeks",   # customize X axis label.
+   break.time.by = 5,     # break X axis in time intervals by 200.
+   ggtheme = theme_light(), # customize plot and risk table with a theme.
+   risk.table = "abs_pct",  # absolute number and percentage at risk.
+  risk.table.y.text.col = T,# colour risk table text annotations.
+  risk.table.y.text = FALSE,# show bars instead of names in text annotations
+                            # in legend of risk table.
+  ncensor.plot = TRUE,      # plot the number of censored subjects at time t
+  surv.median.line = "hv",  # add the median survival pointer.
+  legend.labs = 
+    c("Male", "Female"),    # change legend labels.
+  palette = 
+    c("#E7B800", "#2E9FDF") # custom color palettes.
+)
+```
+
+## Cox Regression
+
+KM curves are good for visualizing differences in survival between two categorical groups, and the log-rank test for asking if there are differences in survival between different groups.
+
+But this doesn’t generalize well for assessing the effect of quantitative variables. 
+
+At some point we may want to assess how multiple variables work together to influence survival. 
+
+For example, we may want to simultaneously examine the effect of sex and socioeconomic status, so as to adjust for factors like income, access to care, etc., before concluding that gender influences some outcome.
+
+Cox PH regression can assess the effect of **both categorical and continuous** variables, and can model the effect of multiple variables at once. 
+
+The  `coxph()` function uses the same syntax as  `lm()`, `glm()`, etc.
+
+The response variable (left hand-side) is the duration formated with `Surv()`. `~` separate left and right hand side in the formula. Explanatory variables go on the right side.
+
+```{r}
+Coxfit <- coxph(Surv_time~sex, data=Unemployment)
+Coxfit
+```
+
+
+Interpretation:
+
+**Statistical significance**: `z` gives the Wald statistic value ($z = \beta/\sigma(\beta)$). The wald statistic tests $H_0:  \beta = 0$
+
+**Regression coefficients**: 
+
+- the *sign* of the regression $\beta$ give impact of the covariate on the hazard. A positive sign means that the hazard is higher. Thus the event is more likely, for subjects with higher values of that variable. 
+- $\beta$ gives the hazard ratio (HR) for the second group relative to the first group, that is, female versus male. 
+
+- *Hazard ratios* is given by $exp(\beta$. It gives the effect size of covariates. 
+
+> the multiplicative effect of that variable on the hazard rate (for each unit increase in that variable). 
+
+So, for a categorical variable like gender, going from male (baseline) to female results in approximately `r round((exp(Coxfit$coefficients)-1)*100,2)`   % change in hazard. 
+
+The rate of female is higher than the rate of male. 
+
+Remember:
+>    $HR=e^{\beta} =1$: No effect
+>    $HR=e^{\beta} >1$: Increase in hazard
+>    $HR=e^{\beta} <1$: Reduction in hazard 
+
+
+**Confidence intervals** of the hazard ratios. The summary output also gives upper and lower 95% confidence intervals for the hazard ratio ($exp(\beta)$).
+
+**Global statistical significance** of the model. Finally, p-values for three alternative tests for overall significance of the model are produced: likelihood-ratio test, Wald test, and score logrank statistics.
+
+These three methods are asymptotically equivalent. For large enough N, they will give similar results. For small N, they may differ somewhat. The Likelihood ratio test has better behavior for small sample sizes, so it is generally preferred.
+
+
+Notice that the p-value of the LR test is close to the p-value of the KM curve (which is the log-rank test). The two tests evaluate the difference in survival between gender group.
+
+
+```{r}
+summary(Coxfit)
+# log-rank
+survdiff(Surv_time~sex, data=Unemployment)
+# Wilcoxon
+survdiff(Surv_time~sex, data=Unemployment, rho = 1)
+
+# log-rank
+survdiff(Surv_time~sex + race, data=Unemployment)
+
+```
+
+## Cox model with multiple covariates
+
+For the sake of the exercise, let add a quantitative variables like `age`
+```{r}
+Unemployment$age <- abs(rnorm(length(Unemployment$duration), 35 , 20))
+Coxfit2 <- coxph(Surv_time~sex + race + search + pubemp + age, data=Unemployment)
+summary(Coxfit2)
+```
+
+The p-value for all three overall tests (likelihood, Wald, and score) are significant, indicating that the model is significant. 
+
+The three tests (likelihood, Wald, and score tests) evaluate the omnibus null hypothesis that all of the $\beta$ are 0 simultaneously.
+
+In the above example, the test statistics are in close agreement, and the omnibus null hypothesis is soundly rejected.
+
+In the multivariate Cox analysis, the covariates sex and ph.ecog remain significant (p < 0.05). However, the covariate age fails to be significant (p = 0.23, which is grater than 0.05).
+
+The p-value for `pubempyes` is `r HR = Coxfit2$coefficients[4]`, with a hazard ratio HR = `r exp(HR)` indicating a strong relationship between the public private status and return to employment.
+
+The hazard ratios of covariates are interpretable as multiplicative effects on the hazard. For example, holding the other covariates constant, being public status reduces the hazard by a factor of  = `r exp(HR)` , or `r 1-  exp(HR)*100` %. We conclude that, being public employee is associated with longer unemployment period.
+
+By contrast, the p-value for `searchyes` covariates is now `r summary(Coxfit2)$coefficients[3,5]`. The hazard ratio HR = `r exp( Coxfit2$coefficients[3])`. Holding the other covariates constant, an effective search induces weekly hazard of finding a job by a factor of `r exp( Coxfit2$coefficients[3])`, or ``r (exp( Coxfit2$coefficients[3])-1 )*100`1%, which is  a significant contribution.
+
+### Visualizing the estimated distribution of survival times
+
+**Plot the baseline survival function**
+
+Having fit a Cox model to the data, it’s possible to visualize the predicted survival proportion at any given point in time for a particular risk group. The function survfit() estimates the survival proportion, by default at the mean values of covariates.
+
+```{r}
+plot(survfit(Coxfit2))
+
+fit <- survfit(Coxfit2,  data = Unemployment)
+ggsurvplot(fit, conf.int = TRUE, palette = "Dark2", 
+           censor = FALSE, surv.median.line = "hv")
+
+
+```
+
+### Continuing with categorical `age`
+Finally, let’s try creating a categorical variable on `age`: upper or lower to the average age
+
+```{r}
+hist(Unemployment$age)
+ggplot(Unemployment, aes(age)) + geom_histogram(bins=20)
+Unemployment$cl_age <-  cut(Unemployment$age, breaks=c(0, mean(Unemployment$age), Inf), labels=c("young", "old"))
+
+ggsurvplot(survfit(Surv_time~cl_age, data=Unemployment), pval=TRUE)
+
+```
+
+The `survminer` package determines the optimal cutpoint for one or multiple continuous variables at once, using the maximally selected rank statistics from the `maxstat` R package.
+
+
+```{r}
+res.cut <- surv_cutpoint(Unemployment, time = "duration", event = "spell",    variables = c("age"))
+summary(res.cut)
+```
+
+
+```{r}
+# 2. Plot cutpoint for DEPDC1
+# palette = "npg" (nature publishing group), see ?ggpubr::ggpar
+plot(res.cut, "age", palette = "npg")
+```
+
+Categorize the variable
+
+```{r}
+res.cat <- surv_categorize(res.cut)
+head(res.cat)
+```
+
+Fit survival curves and visualize
+
+```{r}
+sfit3 <- survfit(Surv_time ~age, data = res.cat)
+ggsurvplot(sfit3, risk.table = TRUE, conf.int = TRUE)
+```
+
+
+Facet the output crossing categorical covariates
+
+
+```{r}
+sfit4 <- survfit( Surv_time ~ sex + pubemp + race,
+                data = Unemployment )
+
+ggsurv <- ggsurvplot(sfit4, fun = "event", conf.int = TRUE,
+  risk.table = TRUE, risk.table.col="strata", 
+  ggtheme = theme_bw())
+ggsurv
+
+```
+```{r}
+curv_facet <- ggsurv$plot + facet_grid(race~sex)
+curv_facet
+
+```
+
+Facetting risk tables: Generate risk table for each facet plot item
+
+```{r}
+ggsurv$table + facet_grid(race ~sex, scales = "free")+
+ theme(legend.position = "none")
+
+```
+
+
+
+(New in survminer 0.2.4: the survminer package can now determine the optimal cutpoint for one or multiple continuous variables at once, using the surv_cutpoint() and surv_categorize() functions. Refer to this blog post for more information.)
+TCGA
+
+
+Remember, the Cox regression analyzes the continuous variable over the whole range of its distribution, where the log-rank test on the Kaplan-Meier plot can change depending on how you categorize your continuous variable. They’re answering a similar question in a different way: the regression model is asking, “what is the effect of age on survival?”, while the log-rank test and the KM plot is asking, “are there differences in survival between those less than 70 and those greater than 70 years old?”.
+
+## Random Forests Model
+
+As a final example of what some might perceive as a data-science-like way to do time-to-event modeling, I’ll use the ranger() function to fit a Random Forests Ensemble model to the data. 
+
+`ranger()` builds a model for each observation in the data set. The next block of code builds the model using the same variables used in the Cox model above, and plots twenty random curves, along with a curve that represents the global average for all of the patients. Note that I am using plain old base R graphics here.
+
+
+```{r}
+library(ranger)
+# ranger model
+r_fit <- ranger(Surv_time ~ sex + race + search +  pubemp + age,
+                     data = Unemployment,
+                     mtry = 4,
+                     importance = "permutation",
+                     splitrule = "extratrees",
+                     verbose = TRUE)
+
+# Average the survival models
+death_times <- r_fit$unique.death.times 
+surv_prob <- data.frame(r_fit$survival)
+avg_prob <- sapply(surv_prob,mean)
+
+# Plot the survival models for each patient
+plot(r_fit$unique.death.times,r_fit$survival[1,], 
+     type = "l", 
+     ylim = c(0,1),
+     col = "red",
+     xlab = "Days",
+     ylab = "survival",
+     main = "Jobseeker Survival Curves")
+
+#
+cols <- colors()
+for (n in sample(c(2:dim(Unemployment)[1]), 20)){
+  lines(r_fit$unique.death.times, r_fit$survival[n,], type = "l", col = cols[n])
+}
+lines(death_times, avg_prob, lwd = 2)
+legend((range(Unemployment$duration)[2]-range(Unemployment$duration)[1])/2, 0.8, legend = c('Average = black'))
+
+```
+
+Ranks of variable importance
+
+```{r}
+vi <- data.frame(sort(round(r_fit$variable.importance, 4), decreasing = TRUE))
+names(vi) <- "importance"
+head(vi)
+
+```
+
+
+Finally, ploting the three baseloine survival curves (KM, Cox, RF)
+
+```{r}
+# Time, survival prob and model label for KM
+kmi <- rep("KM",length(sfit1$time))
+km_df <- data.frame(sfit1$time,sfit1$surv,kmi)
+names(km_df) <- c("Time","Surv","Model")
+# Time, survival prob and model label for COX
+bh <- basehaz(Coxfit)
+bs <- exp(-bh[,1])^(exp(Coxfit$coef))
+coxi <- rep("Cox",length(bh[,2]))
+cox_df <- data.frame(bh[,2],bs, coxi)
+names(cox_df) <- c("Time","Surv","Model")
+# Time, survival prob and model label for RF
+rfi <- rep("RF",length(r_fit$unique.death.times))
+rf_df <- data.frame(r_fit$unique.death.times,avg_prob,rfi)
+names(rf_df) <- c("Time","Surv","Model")
+
+plot_df <- rbind(km_df,cox_df,rf_df)
+
+p <- ggplot(plot_df, aes(x = Time, y = Surv, color = Model))
+p + geom_line()
+
+```
+
+
+## Diagnostic of Cox PH model
+
+
+1. Testing the proportional hazards assumption.
+2. Examining influential observations (or outliers).
+3. Detecting nonlinearity in relationship between the log hazard and the covariates.
+
+In order to check these model assumptions, Residuals method are used. The common residuals for the Cox model include:
+
+- Schoenfeld residuals to check the proportional hazards assumption
+- Martingale residual to assess nonlinearity
+- Deviance residual (symmetric transformation of the Martinguale residuals), to examine influential observations
+
+
+### Testing proportional Hazards assumption
+
+The PH assumption can be checked using statistical tests and graphical diagnostics based on the scaled Schoenfeld residuals.
+
+In principle, the Schoenfeld residuals are independent of time. A plot that shows a non-random pattern against time is evidence of violation of the PH assumption.
+
+The function `cox.zph()` provides a convenient solution to test the proportional hazards assumption for each covariate included in a Cox  model.
+
+For each covariate, correlation between the corresponding set of scaled Schoenfeld residuals with time is calculated to test for independence between residuals and time. 
+
+Additionally, it performs a global test for the model as a whole.
+
+The proportional hazard assumption is supported by a non-significant relationship between residuals and time, and refuted by a significant relationship.
+
+
+```{r}
+test.ph <- cox.zph(Coxfit)
+test.ph
+ggcoxzph(test.ph)
+
+test.ph <- cox.zph(Coxfit2)
+test.ph
+ggcoxzph(test.ph)
+
+```
+In the figure above, the solid line is a smoothing spline fit to the plot, with the dashed lines representing a $\pm 2 \sigma$ band around the fit.
+
+Systematic departures from a horizontal line are indicative of **non-proportional** hazards, since proportional hazards assumes that estimates $\beta_1, \beta_2,\dots \beta_k$ do not vary much over time.
+
+Another graphical methods for checking proportional hazards is to plot $\ln (-\ln (S(t)))$ vs. $t$ or $\ln(t)$ and look for parallelism. This can be done only for categorical covariates.
+
+A violations of proportional hazards assumption can be resolved by:
+ 
+- Adding covariate*time interaction
+- Stratification
+
+### Testing influential observations
+
+Influential observotation can be visualized with the *deviance residuals* or the *dfbeta values*.
+
+`ggcoxdiagnostics()` permits residuals diagnostic and visualisation
+
+
+argument `type` precises the type of residuals to present on Y axis (`c(“martingale”, “deviance”, “score”, “schoenfeld”, “dfbeta”, “dfbetas”, “scaledsch”, “partial”)`.
+
+`linear.predictions`: a logical value `TRUE` to show linear predictions for observations or `FALSE` just indexed of observations on X axis.
+
+
+`dfbeta` estimates changes in the regression coefficients upon deleting each observation in turn; 
+
+`dfbetas` produces the estimated changes in the coefficients divided by their standard errors.
+
+```{r}
+ggcoxdiagnostics(Coxfit2, type = "dfbetas",
+                 linear.predictions = FALSE, ggtheme = theme_bw())
+
+```
+
+
+To check outliers: The deviance residual is a normalized transform of the martingale residual.
+
+These residuals should be roughtly symmetrically distributed about zero with a standard deviation of 1.
+
+Positive values correspond to events that “occur too soon” compared to expected survival times.
+
+Negative values correspond to states that “are longer”.
+
+Very large or small values are outliers, which are poorly predicted by the model.
+
+
+```{r}
+ggcoxdiagnostics(Coxfit2, type = "deviance",
+                 linear.predictions = FALSE, ggtheme = theme_bw())
+```
+
+
+### Testing non linearity of covariates effects
+
+We asses linear functional form between duration and covariates with Martingale residuals  and partial residuals.
+
+Martingale residuals may present any value in the range $(\infty, +1)$:
+
+A value of martinguale residuals near 1 represents events that occur too soon and large negative values correspond to state lasting too long.
+
+
+
+Graphs of continuous covariates against martingale residuals help to choose the functional form, which is suggested by the approximated line on residuals
+
+Low increase tendancy reveals a functional form like logarithme or square root. Fast increase correspond to power transformation.
+
+```{r}
+ggcoxfunctional(Surv(duration, spell) ~ age + log(age) + sqrt(age), data = Unemployment)
+
+```
+
+## Parametric model - AFT
+
+An accelerated failure-time (AFT) model is a parametric model with covariates and failure times following the survival function of the form $S(x_{jZ}) = S_0 (x \cdot exp \{\theta'Z\})$, where $S_0$ is a function for the baseline survival rate. The term $exp \{\theta'Z\})$ is called the *acceleration factor*. 
+
+The AFT model uses covariates to place individuals on different time scales - scaling by the covariates in $S(t_{jZ})$ via $exp \{\theta'Z\})$. 
+
+The AFT model can be rewritten in a log-linear form, where the log of
+failure time is linearly related to the mean $\mu$ (the acceleration factor), and an error term $\sigma W$:
+$$ln t = \mu - \theta' Z + \sigma \epsilon$$
+
+$\epsilon$ describes the error distribution. The following models for $\epsilon$ are implemented in R `survival` :
+
+| Distribution  | df |  Included in survival? | 
+|------------------|------|:--------------:|
+|exponential |1| yes|
+|Weibull |2| yes|
+|lognormal |2| yes|
+|log logistic |2| yes|
+|generalized gamma |3 |no|
+
+
+The `survreg()` function from the `survival` package is used for AFT modeling. 
+
+The 1rst argument is `formula`, where a survival object is regressed on predictors. 
+
+The argument `dist` has several options to describe the parametric model used `("weibull", "exponential", "gaussian", "logistic",
+"lognormal", or "loglogistic")`.
+
+
+
+
+```{r}
+# srFit <- survreg(Surv(duration, spell) ~ sex + race, dist="weibull", data=Unemployment)
+# Error, likely choking on the zeros.
+Surv_time2 <- with( Unemployment, Surv(duration+1, spell))# weeks starts with one.
+Model0 <-  survreg(Surv_time2~sex,dist='weibull', data=Unemployment)
+summary(Model0)
+
+```
+When $\sigma = 1$, the Weibull model is equivalent to the exponential model. We consider two strategies
+for choosing the final model:
+
+- a likelihood ratio test, which evaluates the null hypothesis $\sigma = 1$ against the two-sided
+alternative, and
+- examination of the significance of the Log(scale) coefficient (see the output to summary(srFit)).
+
+In the example, both approaches result in the same conclusion: there is insuficient evidence to
+reject the hypothesis that $\sigma = 1$ (H0). For this reason, we would likely go with the simpler
+exponential model.
+
+
+
+
+
+## Weibull Model
+
+```{r}
+library( SurvRegCensCov)
+WeibullReg(Surv_time2 ~ sex, data=Unemployment)
+```
+
+### Adequacy of Weibull model
+
+Weibull model with categorical variables can be checked for its adequacy by stratified Kaplan-Meier curves. 
+
+A plot of log survival time versus $log[–log(KM)]$ will show linear and parallel lines if the model is adequate : Weibull regression diagnostic plot showing that the lines for male and female are generally parallel and linear in its scale.
+```{r}
+WeibullDiag(Surv_time2 ~ sex, data=Unemployment)
+```
+
+## Weibull version 2
+
+With `eha`package
+
+The coefficient of covariates in the above output is the HR in log scale. Thus, the exponentiation of coefficient gives the HR.
+
+Hazard, cumulative hazard, density and survivor functions can be plotted from the output of a Weibull regression model.
+
+graphical display of the output of Weibull regression model. The fn argument specifies the functions to be plotted. It receives a vector of string values, choosing from “haz”, “cum”, “den” and “sur”. The newdata argument specifies covariate values at which to plot the function. If covariates are left unspecified, the default value is the mean of the covariate in the training dataset. In the example, four plots were drawn at age of 80, 60, 40 and 20 years old (in the order from left to right and from top to bottom). The sex and ph.ecog variables were set at values of 2 and 3, respectively.
+
+
+```{r}
+library(eha)
+Weib1 <- weibreg(Surv_time2 ~ sex + age, data=Unemployment)
+summary(Weib1)
+par(mfrow=c(2,2))
+plot(Weib1 , fn="sur", new.data = c(0, 40))
+```
+
+### Graphical goodness-of-fit test
+
+The eha package has a function check.dist() to test the goodness-of-fit by graphical visualization. It compares the cumulative hazards functions for non-parametric and parametric model, requiring objects of “coxreg” and “phreg” as the first and second argument.
+
+
+```{r}
+phreg1 <- phreg(Surv_time2 ~ sex + age, data=Unemployment, dist = 'weibull')
+summary(phreg1)
+
+coxreg1 <- coxreg(Surv_time2 ~ sex + age, data=Unemployment)
+summary(coxreg1)
+
+check.dist(phreg1, coxreg1)
+
+```
+
+
+The solid line is the parametric Weibull cumulative hazard function and the dashed line is non-parametric function. 
+
+It appears that the parametric function fits well to the semi-parametric function (Figure 3). Note that non-parametric model is closer to the observed data because no function is assumed for the baseline hazard function.
+
+https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5233524/
+
+
+### Variable selection and model development
+
+Like generalized linear model development (4), it is essential to include statistically important and clinically relevant covariates into the model in fitting parametric regression model. While clinical relevance is judged by clinical expertise, the statistical importance is determined by software. The anova() function tests the statistical importance of a covariate, interaction and non-linear terms. The function reports Chi-square statistics and associated P value. Also, it provides dot charts depicting the importance of variables in the model.
+
+```{r}
+library(rms)
+Weib2 <- psm(Surv_time2 ~ sex + race + age  + pubemp, dist="weibull", data=Unemployment)
+anova(Weib2)
+
+plot(anova(Weib2) , margin = c("chisq", "d.f.", "P"))
+```
+
+In the example, we included all available covariates into the model to rank their statistical importance. This is often the case in real research setting that researchers have no prior knowledge on which variable should be included. The first argument of psm() function is a formula describing the response variable and covariates, as well as interaction between predictors. The output of anova() includes variable names, Chi-square statistics, degree of freedom and p-value. Dot chart is drawn with generic function plot(). It appears that meal.cal is the least important variable and ph.ecog is the most important one (Figure 4). Some pre-specified rules can be applied to inclusion/exclusion of variables (4).
+
+Alternatively, model development can be done with backward elimination on covariates. This method starts with a full model that included all available covariates and then applies Wald test to examine the relative importance of each one. Statistical significance level for a covariate to stay in a model can be specified. R provides a function fastbw() to perform fast backward variable selection.
+
+An external file that holds a picture, illustration, etc. Object name is atm-04-24-484-fig9.jpg
+
+```{r}
+fastbw(Weib2, rule="aic")
+```
+
+
+The first argument of fastbw() receives an object fit by psm(). The rule argument defines stopping rule for backward elimination. The default is Akaike’s information criterion (AIC). If P value is used as the stopping rule (rule=“p”), the significance level for staying in a model can be modified using sls argument (sls =0.1 for example). The output shows that variables meal.cal, sex, pat.karno and wt.loss are eliminated from the model based on AIC. Sometimes if you want to retain a covariate in the model based on clinical judgment, the force argument can be employed. It passes a vector of integers specifying covariates to be retained in the model. Intercept is not counted.
+
+Weibull model can be used to predict outcomes of new subjects, allowing predictors to vary. In Weibull regression model, the outcome is median survival time for a given combination of covariates. We first use Predict() to calculate median survival time in log scale, then use ggplot() function to draw plots.
+
+An external file that holds a picture, illustration, etc. Object name is atm-04-24-484-fig10.jpg
+
+
+```{r}
+#########################################
+```
+
+
+# Exercise inspired from @Allison2010
+
+
+
+The exercise analyses the job duration `jobdur.txt`. The data consist of 100 job durations, measured from the year to entry into hte job until the year that the employee quit. 
+
+Duration after the fifth year are censored. If the employee is fired, the job duration is censored at the end of its last full year.
+
+Survival times have values of `1, 2, 3, 4 or 5`
+
+
+## Import data & Summary statistics
+
+
+```{r}
+jobdur <- read.table("./post/data/jobdur.txt", header = TRUE)
+head(jobdur)
+
+summary(jobdur)
+addmargins( table(jobdur$dur) )
+
+```
+
+## Data Handling
+
+
+```{r}
+jobdur$censored <- jobdur$event != 1
+addmargins(table(jobdur$censored))
+addmargins(table(jobdur$event))
+
+Surv_time <- with(jobdur , Surv(dur, censored))
+```
+
+
+
+## Survival curves & Life Table
+
+
+
+1. Simple survival curve that doesn’t consider any different groupings
+
+```{r}
+fit <- survfit(Surv_time~1, data = jobdur)
+fit
+summary(fit)
+plot(fit)
+```
+
+Or using the package `survminer` and `ggsurvplot()` function:
+
+```{r}
+library(survminer)
+ggsurvplot(fit)
+```
+
+
+2. Curves depending on education level.
+
+Let use the factor depending on education level $>12$ 
+
+```{r}
+ed_level <- factor(jobdur$ed>12, labels=c('Low Educ', 'High Educ') )
+```
+
+
+```{r}
+sfit <- survfit(Surv_time~ed_level, data = jobdur)
+sfit
+summary(sfit)
+plot(sfit)
+ggsurvplot(sfit, conf.int=TRUE, pval=TRUE, risk.table=TRUE, 
+           legend.labs=c("Low Educ", "High Educ"), legend.title="Sex",  
+           palette=c("dodgerblue2", "orchid2"), 
+           title="KM Curve for Jub Duration Survival", 
+           risk.table.height=.15)
+```
+
+
+
+
+
+
+## Exercise inspired from "Chapter 7 of Vinod's \HANDS-ON INTERMEDIATE ECONOMETRICS USING R"
+
+
+Download \strikeDuration.txt" data le from my website:
+http://www.fordham.edu/economics/vinod/strikeDuration.txt It has
+two variables \T" for durations of industrial labor strikes and unanticipated
+production \Prod" which is a residual from a regression of log of industrial
+production on time, time squared, and a set of monthly dummy variables.
+It measures aggregate industrial production less trend and seasonal compo-
+nents. Show the survival curves for these data. [Hint: Use snippet plotting
+Figure 7.3 of the textbook] Since these data have only two variables, note
+that we cannot plot a gure similar to the Figure 7.4 of the textbook. Use
+a random seed of 356 and the `sample(1:62)' command to create a regional
+dummy variable by splitting numbers below 31. Use `region' data and plot
+similar to Figure 7.4 of the textbook. Since there was no censoring, censor
+variable is a vector of all zeros. This choice however leads to non-convergence.
+If we pretend that all data are censored, there is convergence with similar
+coecients.
+#Hints for artificial creation of the region dummy variable:
+da=read.table("c:/data/strikeduration.txt", header=T)
+33
+summary(da)
+n=length(da$T);n; censor=rep(0,n) #$
+set.seed(356)
+sa=sample(1:n)
+region=ifelse( sa<(n/2), 0,1)
+da2=cbind(da, censor, region);summary(da2)
+library(survival); attach(da2)
+survreg(Surv(T,censor)~Prod)
+fit=coxph(Surv(T, rep(1,n)) ~ Prod)
+plot(survfit(fit))
+fit2=coxph(Surv(T, rep(1,n)) ~ Prod+strata(region))
+plot(survfit(fit2)) #2 lines for 2 strata over and above Prod
+library(Design) #new package called
+fitD=survfit(Surv(T, rep(1,n)) ~ region)
+survplot(fitD) #two lines for two strata alone (no Prod here)
+Note that our articially created regions are not statistically signicantly
+dierent from each other since the condence intervals for two survival curves
+overlap.

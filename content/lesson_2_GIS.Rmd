@@ -1,0 +1,65 @@
+---
+title: "Introduction to GIS - Geographic Information System"
+subtitle: "Smart Analytics for Big Data"
+author: "Iragaël Joly"
+date: "Automn 2020"
+categories: ["R"]
+tags: ["R Markdown", "plot", "regression"]
+authorbox: false
+link-citations: yes
+biblio-style: apalike
+bibliography: [post/data/biblio_hdr_v2.bib, post/data/Liste_Publi3.bib, post/data/biblio_SABD.bib]
+nocite: |
+  @Bivand2013, @lovelace2019
+---
+
+**A FINIR**
+
+
+# Introduction
+
+
+Visualisation of geographic information is become one of the major tool of the digital information analytic.
+
+Numerous softwares manage visualization of geographic information from full-scale GIS applications such as ArcGIS and QGIS to web-based tools like Google maps to any number of programing languages. 
+
+Using a command-line interface has the benefits of enabling both steps analysis and visualization in customizable, transparent and reproducible manner.
+
+
+
+
+
+***
+
+ The goal of this post is to introduce the basic landscape of working with spatial data in R from the perspective of a non-specialist. 
+ 
+The use of the `ggmap` package is to geocode data and create maps using the `ggplot2` system.
+
+The `sp` and `sf` packages use different methodologies for integrating spatial data into R. 
+
+The `sp` package introduced a coherent set of classes and methods for handling spatial data in 2005.
+The package remains the backbone of many packages that provide GIS capabilities in R. 
+
+The `sf` package implements the simple features open standard for the representation of geographic vector data in R. 
+
+The package first appeared on CRAN at the end of 2016 and is under very active development. The sf package is meant to supersede sp, implementing ways to store spatial data in R that integrate with the `tidyverse` workflow of the packages developed by Hadley Wickham and others.
+
+
+
+
+
+
+
+
+## References 
+
+http://cartonumerique.blogspot.com/p/cartographie-thematique.html
+
+https://roelandtn.frama.io/post/simple-mapping-with-sf/
+
+https://tender-curie-5b83bc.netlify.app/2019/03/01/mapping-sncf-stations/
+
+https://github.com/oliviergimenez/analysesGeoloup
+
+https://statnmap.com/2018-07-14-introduction-to-mapping-with-sf-and-co/
+https://geocompr.robinlovelace.net/

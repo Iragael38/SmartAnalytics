@@ -1,0 +1,853 @@
+---
+title: "Introduction to Data Vizualisation"
+subtitle: "Smart Analytics for Big Data"
+author: "Iragaël Joly"
+date: "Automn 2020"
+categories: ["R"]
+tags: ["R Markdown", "plot", "regression"]
+authorbox: false
+---
+
+
+
+<hr />
+<p><a href="https://www.statisticshowto.com/misleading-graphs/" class="uri">https://www.statisticshowto.com/misleading-graphs/</a>
+&gt; References</p>
+<ul>
+<li>Huff, D. (1993). How to Lie With Statistics. W. W. Norton &amp; Company</li>
+<li>Gonick, L. (1993). The Cartoon Guide to Statistics. HarperPerennial.
+CITE THIS AS:
+&gt; Stephanie Glen. “Misleading Graphs: Real Life Examples” From StatisticsHowTo.com: Elementary Statistics for the rest of us! <a href="https://www.statisticshowto.com/misleading-graphs/" class="uri">https://www.statisticshowto.com/misleading-graphs/</a></li>
+</ul>
+<hr />
+<p><a href="https://github.com/stoltzmaniac/Data-Visualization-Lesson/blob/master/Data%20Visualization%20-%20Part%203.Rmd" class="uri">https://github.com/stoltzmaniac/Data-Visualization-Lesson/blob/master/Data%20Visualization%20-%20Part%203.Rmd</a></p>
+<p><a href="https://mschermann.github.io/data_viz_reader/" class="uri">https://mschermann.github.io/data_viz_reader/</a></p>
+<p><a href="https://aims.gitbook.io/farm-data-mooc/unit-3-using-data/lesson-3.3-data-analysis-and-visualization" class="uri">https://aims.gitbook.io/farm-data-mooc/unit-3-using-data/lesson-3.3-data-analysis-and-visualization</a></p>
+<hr />
+<div id="grammar-of-graphics-ggplot2" class="section level1">
+<h1>Grammar of Graphics <code>ggplot2()</code></h1>
+</div>
+<div id="grammar-of-ggplot2" class="section level1">
+<h1>Grammar of <code>ggplot2()</code></h1>
+<div id="start-example" class="section level2">
+<h2>Start example</h2>
+<pre class="r"><code>df &lt;- data.frame(x=1:15, y=1:15)
+ggplot(df, aes(x,y)) +
+  geom_point() +
+  labs(
+    title= &quot;Plot example&quot;,
+    subtitle = &quot;Subtitled&quot;,
+    x=&quot;x-values&quot;, y = &quot;y-values&quot;
+    ) +
+  theme(panel.background = element_rect(fill = &quot;white&quot;, color= &quot;grey50&quot;))</code></pre>
+<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+</div>
+<div id="grammar-of-graphic-ggplot" class="section level2">
+<h2>Grammar of graphic: <code>ggplot</code></h2>
+<p>The <code>ggplot2</code> package is loaded to access the <code>ggplot()</code> function.</p>
+<p>The graph is created by stacking together several short phrases, each describing an aspect of the graphic.</p>
+<p>With <code>ggplot</code>, the data need need not to be reshaped for each type of graphical representation (boxplot, histogram, scatter,…).</p>
+<p>Components of a <code>ggplot</code>graph:</p>
+<div id="geometric-object-functions" class="section level3">
+<h3>Geometric object functions</h3>
+<p>Geometric objects that describe the type of graph being created.</p>
+<p>Their names start with <code>geom_</code>: <code>geom_line</code>, <code>geom_boxplot</code>, <code>geom_point</code>, etc.</p>
+</div>
+<div id="aesthetics" class="section level3">
+<h3>Aesthetics</h3>
+<p>Aesthetics mappings communicates to <code>ggplot</code> which variables in the source data get mapped to which visual elements in the graphics.</p>
+</div>
+<div id="stats" class="section level3">
+<h3>Stats</h3>
+<p>Stats are statistical transformations that are done before displaying the data.</p>
+<p>Not all graphs will have stats. Examples are <code>stat_ecdf</code>, <code>stat_identity</code> (which tells to pass the data without doing any stat at all)</p>
+</div>
+<div id="facet-function" class="section level3">
+<h3>Facet function</h3>
+<p>Facets are subplots where each plot represents a subgroup of the data.
+Functions are <code>facet_wrap</code> <code>facet_grid</code>.</p>
+</div>
+<div id="themes" class="section level3">
+<h3>Themes</h3>
+<p>Themes are the visual elements of the graph that are not linked to the data: titles, margins, font, …</p>
+</div>
+<div id="layer" class="section level3">
+<h3>Layer</h3>
+<p>A layer is a combination of data, aesthitics, a geometric object, a stat, and other options to produce a visal layer in the graphic.</p>
+</div>
+</div>
+<div id="long-vs-wide-data-with-ggplot" class="section level2">
+<h2><em>Long</em> vs <em>Wide</em> data with <code>ggplot</code></h2>
+<p><em>Wide</em> means every variable to be ploted is its own column in the underlying dataframe. This is the approach used in Excel.</p>
+<p>R works most easily with <em>Long</em> data, where additional data are added as rows in the dataframe.</p>
+<p>The side effect of adding more measurements as rows is that any properly constructed <code>ggplot</code>graph will automatically update to reflect the new data, without changing the code.</p>
+<div id="additional-references" class="section level3">
+<h3>Additional references</h3>
+<p>See <em>R for Data Science</em> (chap. 28) (<a href="https://r4ds.had.co.nz/graphics-for-communication.html" class="uri">https://r4ds.had.co.nz/graphics-for-communication.html</a>)[<a href="https://r4ds.had.co.nz/graphics-for-communication.html" class="uri">https://r4ds.had.co.nz/graphics-for-communication.html</a>] of H. Wickham and G. Grolemund for additional notes on the graph customisation (labels, position, colours, etc.)</p>
+</div>
+</div>
+<div id="examples-of-graphics" class="section level2">
+<h2>Examples of graphics</h2>
+<div id="creating-a-scatter-plot" class="section level3">
+<h3>Creating a Scatter Plot</h3>
+<p>You want to create a scatter plot of the paired observations: <span class="math inline">\((x_1, y_1), (x_2, y_2), \dots, (x_n, y_n)\)</span></p>
+<pre class="r"><code>ggplot(df, aes(x, y)) +
+  geom_point()</code></pre>
+<p><code>ggplot</code>requires:</p>
+<ul>
+<li>what are the dataframe <code>df</code></li>
+<li>and which is the aesthietic mapping (<code>aes</code>) to use. <code>aes</code> defines which fiels of <code>df</code> goes into which axis of the plot.</li>
+<li>the geometric object: <code>geom_point</code> for a point graph.</li>
+</ul>
+<p>We can easily add title and axis-label</p>
+<pre class="r"><code>p &lt;- ggplot(mtcars, aes(hp, mpg)) +
+  geom_point() +
+  labs(title = &quot;Cars: Horsepower vs. Fuel Economy&quot;,
+       x = &quot;HP&quot;,
+       y = &quot;Economy (miles per gallon)&quot;)
+p</code></pre>
+<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>Some theme options can be used :</p>
+<pre class="r"><code>g1 &lt;- ggplot(df) +
+  geom_point(aes(x, y)) +
+    labs(title = &quot;Cars: Horsepower vs. Fuel Economy&quot;,
+       x = &quot;HP&quot;,
+       y = &quot;Economy (miles per gallon)&quot;) +
+    theme(panel.background = element_rect(fill = &quot;white&quot;, colour = &quot;grey50&quot;))
+g1</code></pre>
+<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<pre class="r"><code>g2 &lt;- g1 + theme(panel.grid.major =
+                   element_line(color = &quot;black&quot;, linetype = 3)) + 
+  # linetype = 3 is dash
+  theme(panel.grid.minor =
+          element_line(color = &quot;darkgrey&quot;, linetype = 4)) 
+  # linetype = 4 is dot dash
+g2</code></pre>
+<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+</div>
+<div id="applying-a-theme" class="section level3">
+<h3>Applying a Theme</h3>
+<p>Use of a preset collection of colors, styles, and formatting</p>
+<pre class="r"><code>theme_bw()
+theme_dark() 
+theme_classic()
+theme_gray()
+theme_linedraw()
+theme_light()
+theme_minimal()
+theme_test()
+theme_void()</code></pre>
+<p>We can apply each of them. For example:</p>
+<pre class="r"><code>p + theme_bw()</code></pre>
+<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>Packages, like <code>ggtheme</code>, that include additional themes with some popular theme like <em>Stata</em> or <em>The Economist</em></p>
+</div>
+<div id="scatter-plot-of-multiple-groups" class="section level3">
+<h3>Scatter Plot of Multiple Groups</h3>
+<p>The dataframe is multiple observations per record: x, y, and a factor f</p>
+<pre class="r"><code>ggplot(data = iris,
+       aes(
+         x = Petal.Length,
+         y = Petal.Width,
+         shape = Species,
+         color = Species
+       )) +
+  geom_point()</code></pre>
+<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><em>About the legend</em></p>
+<p>It is automatic with a factor in <code>aes</code>.</p>
+<p>It can be hiden with <code>+   theme(legend.position = "none")</code></p>
+<p>or added with <code>+ guides(shape=guide_legend(title="My Legend Title"))</code></p>
+<p>Position can be changed with <code>+ theme(legend.position = "bottom")</code> or <code>+ theme(legend.position = c(.8, .2))</code> : center of the legend at 80% to the right and 20% up from the bottom</p>
+</div>
+<div id="a-scatter-plot-for-each-factor-values" class="section level3">
+<h3>A scatter plot for each factor values</h3>
+<pre class="r"><code>data(Cars93, package = &quot;MASS&quot;)
+ggplot(Cars93, aes(MPG.city, Horsepower)) +
+  geom_point() +
+  facet_wrap( ~ Origin)</code></pre>
+<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+</div>
+<div id="regression-line-of-a-scatter-plot" class="section level3">
+<h3>Regression Line of a Scatter Plot</h3>
+<p>Adding the regression line with <code>geom_smooth</code>:</p>
+<pre class="r"><code>ggplot(df, aes(x, y)) +
+  geom_point() +
+  geom_smooth(method = &quot;lm&quot;,
+              formula = y ~ x,
+              se = FALSE)</code></pre>
+<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p><code>se = FALSE</code> parameter tells ggplot not to plot the standard error bands around our regression</p>
+<div id="example" class="section level4">
+<h4>Example</h4>
+<pre class="r"><code>library(faraway)
+data(strongx)
+g &lt;- ggplot(strongx, aes(energy, crossx)) +
+  geom_point()
+
+g + geom_smooth(method = &quot;lm&quot;, 
+                formula = y ~ x)</code></pre>
+<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p>and</p>
+<pre class="r"><code>g + geom_smooth(method = &quot;lm&quot;,
+                formula = y ~ x,
+                se = FALSE)</code></pre>
+<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p>Specific line can be added using <code>intercept</code> and <code>slope</code>. For example, extractiong the values from a regression</p>
+<pre class="r"><code>m &lt;- lm(crossx ~ energy, data = strongx)
+
+ggplot(strongx, aes(energy, crossx)) +
+  geom_point() +
+  geom_abline(
+    intercept = m$coefficients[1],
+    slope = m$coefficients[2]
+  )</code></pre>
+<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+</div>
+</div>
+<div id="plotting-all-variables-against-all-other-variables" class="section level3">
+<h3>Plotting All Variables Against All Other Variables</h3>
+<p>Dataframe contains multiple numeric variables. The scatter plots for all pairs of variables uses the <code>GGally</code> package.</p>
+<pre class="r"><code>library(GGally)</code></pre>
+<pre><code>## Warning: le package &#39;GGally&#39; a été compilé avec la version R 3.6.3</code></pre>
+<pre><code>## Registered S3 method overwritten by &#39;GGally&#39;:
+##   method from   
+##   +.gg   ggplot2</code></pre>
+<pre><code>## 
+## Attachement du package : &#39;GGally&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:faraway&#39;:
+## 
+##     happy</code></pre>
+<pre class="r"><code>ggpairs(iris)</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p>or for simpler and faster graph : <code>plot(iris)</code></p>
+</div>
+<div id="creating-a-bar-chart" class="section level3">
+<h3>Creating a Bar Chart</h3>
+<div id="from-the-count-table-or-equivalent" class="section level4">
+<h4>From the count table (or equivalent)</h4>
+<pre class="r"><code>ford_cars &lt;- Cars93 %&gt;%
+  filter(Manufacturer == &quot;Ford&quot;) 
+
+ggplot(ford_cars, aes(Model, Horsepower)) +
+  geom_bar(stat = &quot;identity&quot;)</code></pre>
+<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p><code>stat = "identity"</code>, which assumes that the heights of your bars are conveniently stored as a value in one field with only one record per column</p>
+</div>
+<div id="from-the-raw-variable" class="section level4">
+<h4>From the ‘raw’ variable</h4>
+<p>From the vector of numeric data and associated factor, you can produce a bar chart of the group means or the group totals</p>
+<pre class="r"><code>ggplot(airquality, aes(month.abb[Month], Temp)) +
+  geom_bar(stat = &quot;summary&quot;, fun.y = &quot;mean&quot;) +
+  labs(title = &quot;Mean Temp by Month&quot;,
+       x = &quot;&quot;,
+       y = &quot;Temp (deg. F)&quot;)</code></pre>
+<pre><code>## Warning: Ignoring unknown parameters: fun.y</code></pre>
+<pre><code>## No summary function supplied, defaulting to `mean_se()`</code></pre>
+<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+</div>
+<div id="sorting-the-factor-in-graph" class="section level4">
+<h4>Sorting the factor in graph</h4>
+<pre class="r"><code>library(forcats)
+
+aq_data &lt;- airquality %&gt;%
+  arrange(Month) %&gt;%
+  mutate(month_abb = fct_inorder(month.abb[Month]))
+
+ggplot(aq_data, aes(month_abb, Temp)) +
+  geom_bar(stat = &quot;summary&quot;, fun.y = &quot;mean&quot;) +
+  labs(title = &quot;Mean Temp by Month&quot;,
+       x = &quot;&quot;,
+       y = &quot;Temp (deg. F)&quot;)</code></pre>
+<pre><code>## Warning: Ignoring unknown parameters: fun.y</code></pre>
+<pre><code>## No summary function supplied, defaulting to `mean_se()`</code></pre>
+<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p>Sorted x-axis with respect to the value in y-axis</p>
+<pre class="r"><code>ggplot(aq_data, aes(reorder(month_abb, -Temp, mean), Temp)) +
+  geom_bar(stat = &quot;summary&quot;,
+           fun.y = &quot;mean&quot;,
+           fill = &quot;tomato&quot;) +
+  stat_summary(fun.data = mean_se, geom = &quot;errorbar&quot;) +
+  labs(title = &quot;Mean Temp by Month&quot;,
+       x = &quot;&quot;,
+       y = &quot;Temp (deg. F)&quot;)</code></pre>
+<pre><code>## Warning: Ignoring unknown parameters: fun.y</code></pre>
+<pre><code>## No summary function supplied, defaulting to `mean_se()`</code></pre>
+<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<p>Modifiying the color and adding standard error bars:</p>
+<pre class="r"><code>ggplot(aq_data, aes(month_abb, Temp)) +
+  geom_bar(stat = &quot;summary&quot;,
+           fun.y = &quot;mean&quot;,
+           fill = &quot;cornflowerblue&quot;) +
+  stat_summary(fun.data = mean_se, geom = &quot;errorbar&quot;) +
+  labs(title = &quot;Mean Temp by Month&quot;,
+       x = &quot;&quot;,
+       y = &quot;Temp (deg. F)&quot;)</code></pre>
+<pre><code>## Warning: Ignoring unknown parameters: fun.y</code></pre>
+<pre><code>## No summary function supplied, defaulting to `mean_se()`</code></pre>
+<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p>Using a palette color:</p>
+<pre class="r"><code>aq_data &lt;- airquality %&gt;%
+  arrange(Month) %&gt;%
+  mutate(month_abb = fct_inorder(month.abb[Month]))
+
+ggplot(data = aq_data, aes(month_abb, Temp, fill = month_abb)) +
+  geom_bar(stat = &quot;summary&quot;, fun.y = &quot;mean&quot;) +
+  labs(title = &quot;Mean Temp by Month&quot;,
+       x = &quot;&quot;,
+       y = &quot;Temp (deg. F)&quot;) +
+  scale_fill_brewer(palette = &quot;Paired&quot;)</code></pre>
+<pre><code>## Warning: Ignoring unknown parameters: fun.y</code></pre>
+<pre><code>## No summary function supplied, defaulting to `mean_se()`</code></pre>
+<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<p>With colors associated to factor : <code>fill=</code></p>
+<pre class="r"><code>ggplot(airquality, aes(month.abb[Month], Temp, fill = ..y..)) +
+  geom_bar(stat = &quot;summary&quot;, fun.y = &quot;mean&quot;) +
+  labs(title = &quot;Mean Temp by Month&quot;,
+       x = &quot;&quot;,
+       y = &quot;Temp (deg. F)&quot;,
+       fill = &quot;Temp&quot;)</code></pre>
+<pre><code>## Warning: Ignoring unknown parameters: fun.y</code></pre>
+<pre><code>## No summary function supplied, defaulting to `mean_se()`</code></pre>
+<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+</div>
+</div>
+<div id="plotting-a-line-from-x-and-y-points" class="section level3">
+<h3>Plotting a Line from x and y Points</h3>
+<p>Add the <code>+ geom_line()</code> to the scater plot</p>
+<pre class="r"><code>ggplot(economics, aes(date , unemploy)) +
+  geom_point() +
+  geom_line()</code></pre>
+<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<div id="changing-the-type-width-or-color-of-a-line" class="section level4">
+<h4>Changing the Type, Width, or Color of a Line</h4>
+<p><code>linetype=""</code> parameter for controlling the appearance of lines:</p>
+<table>
+<thead>
+<tr class="header">
+<th><code>linetype=</code> Character</th>
+<th><code>linetype=</code> Numeric</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>“solid”</td>
+<td>=1 (default)</td>
+</tr>
+<tr class="even">
+<td>“dashed”</td>
+<td>=2</td>
+</tr>
+<tr class="odd">
+<td>“dotted”</td>
+<td>=3</td>
+</tr>
+<tr class="even">
+<td>“dotdash”</td>
+<td>=4</td>
+</tr>
+<tr class="odd">
+<td>“longdash”</td>
+<td>=5</td>
+</tr>
+<tr class="even">
+<td>“twodash”</td>
+<td>=6</td>
+</tr>
+<tr class="odd">
+<td>“blank”</td>
+<td>=0 (inhibits drawing)</td>
+</tr>
+</tbody>
+</table>
+<p>The <code>linetype</code>, <code>col</code>, and <code>size</code> params to <code>geom_line</code>:</p>
+<pre class="r"><code>ggplot(df, aes(x, y)) +
+  geom_line(linetype = 2,
+            size = 2,
+            col = &quot;red&quot;)</code></pre>
+<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+</div>
+<div id="from-wide-to-long-format-in-line-grah" class="section level4">
+<h4>From wide to long format in Line grah</h4>
+<p>A classic case is when you want to draw multiple lines with multiple y-variables and a unique x-variable</p>
+<pre class="r"><code>x &lt;- 1:10
+y1 &lt;- x**1.5
+y2 &lt;- x**2
+y3 &lt;- x**2.5
+df &lt;- data.frame(x, y1, y2, y3)</code></pre>
+<p>Pass wide data to long by using the gather function from the core tidyverse package</p>
+<pre class="r"><code>df_long &lt;- gather(df, bucket, y, -x)</code></pre>
+<pre class="r"><code>ggplot(df_long, aes(x, y, col = bucket)) +
+  geom_line()</code></pre>
+<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+</div>
+<div id="plotting-multiple-datasets" class="section level4">
+<h4>Plotting Multiple Datasets</h4>
+<p>creating an empty plot and then adding two different geoms to the plot:</p>
+<pre class="r"><code>ggplot() +
+  geom_line(data = df1, aes(x1, y1)) +
+  geom_line(data = df2, aes(x2, y2))</code></pre>
+<pre class="r"><code># example data
+n &lt;- 10
+n2 &lt;- 21
+x1 &lt;- 1:n
+y1 &lt;- rnorm(n, 0, .5)
+df1 &lt;- data.frame(x1, y1)
+
+x2 &lt;- (.5 * n2):((1.5 * n2) - 1)
+y2 &lt;- rnorm(n2, 1, .5)
+df2 &lt;- data.frame(x2, y2)</code></pre>
+<pre class="r"><code>ggplot() +
+  geom_line(data = df1, aes(x1, y1), color = &quot;darkblue&quot;) +
+  geom_line(data = df2, aes(x2, y2), linetype = &quot;dashed&quot;)+
+  geom_point(data=df1, aes(x1, y1)) +
+  geom_point(data=df2, aes(x2, y2))</code></pre>
+<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
+<p>Adding vertical and horizontal lines</p>
+<pre class="r"><code>ggplot(df1) +
+  aes(x = x1, y = y1) +
+  geom_point() +
+  geom_vline(
+    xintercept = 10,
+    color = &quot;red&quot;,
+    linetype = &quot;dashed&quot;,
+    size = 1.5
+     ) +
+  geom_hline(yintercept = 0, color = &quot;blue&quot;)</code></pre>
+<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
+</div>
+<div id="exercise" class="section level4">
+<h4>Exercise</h4>
+<pre class="r"><code>samp &lt;- rnorm(1000)
+samp_df &lt;- data.frame(samp, x = 1:length(samp))
+
+mean_line &lt;- mean(samp_df$samp)
+sd_lines &lt;- mean_line + c(-2, -1, +1, +2) * sd(samp_df$samp)
+
+ggplot(samp_df) +
+  aes(x = x, y = samp) +
+  geom_point() +
+  geom_hline(yintercept = mean_line, color = &quot;darkblue&quot;) +
+  geom_hline(yintercept = sd_lines, linetype = &quot;dotted&quot;)</code></pre>
+<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
+</div>
+</div>
+<div id="creating-a-boxplot" class="section level3">
+<h3>Creating a Boxplot</h3>
+<pre class="r"><code>ggplot(samp_df) +
+  aes(y = samp) +
+  geom_boxplot() +
+  coord_flip()</code></pre>
+<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
+<pre class="r"><code>data(UScereal, package = &quot;MASS&quot;)
+
+ggplot(UScereal) +
+  aes(x = as.factor(shelf), y = sugars) +
+  geom_boxplot() +
+  labs(
+    title = &quot;Sugar Content by Shelf&quot;,
+    x = &quot;Shelf&quot;,
+    y = &quot;Sugar (grams per portion)&quot;
+  )</code></pre>
+<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
+<div id="creating-a-histogram" class="section level4">
+<h4>Creating a Histogram</h4>
+<p>The <code>geom_histogram</code> function must decide how many cells (bins) to create for binning the data.</p>
+<p>Automatic bins nunber</p>
+<pre class="r"><code>data(Cars93, package = &quot;MASS&quot;)
+
+ggplot(Cars93) +
+  geom_histogram(aes(x = MPG.city))</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
+<p>Customized bins number</p>
+<pre class="r"><code>ggplot(Cars93) +
+  geom_histogram(aes(x = MPG.city), bins = 13)</code></pre>
+<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
+</div>
+<div id="adding-a-density-estimate-to-a-histogram" class="section level4">
+<h4>Adding a Density Estimate to a Histogram</h4>
+<pre class="r"><code>ggplot(Cars93) +
+  aes(x = MPG.city) +
+  geom_histogram(aes(y = ..density..), bins = 21) +
+  geom_density()</code></pre>
+<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
+</div>
+<div id="creating-a-normal-quantilequantile-plot" class="section level4">
+<h4>Creating a Normal Quantile–Quantile Plot</h4>
+<pre class="r"><code>df &lt;- data.frame(x = rnorm(100))
+
+ggplot(df, aes(sample = x)) +
+  stat_qq() +
+  stat_qq_line()</code></pre>
+<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
+<p>Example:</p>
+<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-41-1.png" width="672" /></p>
+<p>Is the <span class="math inline">\(log(price)\)</span> ‘more normal’?</p>
+</div>
+</div>
+<div id="creating-other-quantilequantile-plots" class="section level3">
+<h3>Creating Other Quantile–Quantile Plots</h3>
+<p>The recipe steps:</p>
+<ol style="list-style-type: decimal">
+<li>Use the ppoints function to generate a sequence of points between 0 and 1.</li>
+<li>Transform those points into quantiles, using the quantile function for the assumed distribution.</li>
+<li>Sort your sample data.</li>
+<li>Plot the sorted data against the computed quantiles.</li>
+<li>Use abline to plot the diagonal line.</li>
+</ol>
+<div id="example-1" class="section level4">
+<h4>Example</h4>
+<p>Testing the Student distribution</p>
+<p>Create the data to be tested</p>
+<pre class="r"><code>df_t &lt;- data.frame(y = rt(100, 5))</code></pre>
+<p>Estimate the parameters of the distribution we’re wanting to plot. Since this is a Student’s t distribution, we only need to estimate one parameter, the degrees of freedom.
+We use <code>MASS::fitdistr</code> function</p>
+<pre class="r"><code>est_df &lt;- as.list(MASS::fitdistr(df_t$y, &quot;t&quot;)$estimate)[[&quot;df&quot;]]
+est_df</code></pre>
+<pre><code>## [1] 9.465126</code></pre>
+<p>There is a match !</p>
+<pre class="r"><code>p2 &lt;- ggplot(df_t) +
+  aes(sample = y) +
+  geom_qq(distribution = qt, dparams = est_df) +
+  stat_qq_line(distribution = qt, dparams = est_df)
+p2</code></pre>
+<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-44-1.png" width="672" /></p>
+</div>
+</div>
+<div id="graphing-a-function" class="section level3">
+<h3>Graphing a Function</h3>
+<p><code>stat_function</code> will graph a function across a range</p>
+<pre class="r"><code>p3 &lt;- ggplot(data.frame(x = c(-3, 3))) +
+  aes(x) +
+  stat_function(fun = sin)
+p3</code></pre>
+<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-45-1.png" width="672" /></p>
+<p>Another example</p>
+<pre class="r"><code>p4 &lt;- ggplot(data.frame(x = c(-3.5, 3.5))) +
+  aes(x) +
+  stat_function(fun = dnorm) +
+  ggtitle(&quot;Standard Normal Density&quot;)
+p4</code></pre>
+<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-46-1.png" width="672" /></p>
+<p>or again</p>
+<pre class="r"><code>f &lt;- function(x) exp(-abs(x)) * sin(2 * pi * x)
+
+ggplot(data.frame(x = c(-3.5, 3.5))) +
+  aes(x) +
+  stat_function(fun = f) +
+  ggtitle(&quot;Dampened Sine Wave&quot;)</code></pre>
+<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
+</div>
+<div id="displaying-several-figures-on-one-page" class="section level3">
+<h3>Displaying Several Figures on One Page</h3>
+<p>With the <code>patchwork</code> by Thomas Lin Pedersen.</p>
+<p>After installing the package, we can use it to plot multiple ggplot objects using a <code>+</code> between the objects, then a call to <code>plot_layout</code> to arrange the images into a grid, as shown in Figure 10.59. Our example code here has four ggplot objects:</p>
+<pre class="r"><code>#install.packages(&quot;patchwork&quot;)
+library(patchwork)</code></pre>
+<pre><code>## Warning: le package &#39;patchwork&#39; a été compilé avec la version R 3.6.3</code></pre>
+<pre class="r"><code>p1 + p2 + p3 + p4</code></pre>
+<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
+<p>Grouping with parentheses and using / to put groupings under other elements</p>
+<pre class="r"><code>p3 / (p1 + p2 + p4)</code></pre>
+<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
+<pre class="r"><code>p1 + p2 + p3 + p4 + plot_layout(ncol = 2, byrow = FALSE)</code></pre>
+<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
+</div>
+<div id="writing-your-plot-to-a-file" class="section level3">
+<h3>Writing Your Plot to a File</h3>
+<p>In the <em>RStudio</em> plot panel, the <code>Export</code> button permits to “Save as Image,” “Save as PDF,” or “Copy to Clipboard.”</p>
+<p>The “Copy to Clipboard” option can be handy if you are manually copying and pasting your graphics into a presentation or word processor.</p>
+<p>A reproducible manner is to use <code>ggsave</code> to save a displayed image to a file. <code>ggsave</code> will make some default assumptions about size and file type for you, allowing you to specify only a filename: <code>ggsave("filename.jpg")</code></p>
+<p>Remember that the file will be written to your current working directory (unless you use an absolute filepath), so be certain you know which directory is your working directory.</p>
+<p>In a noninteractive script using ggplot, you can pass plot objects directly to <code>ggsave</code> so they need not be displayed before saving.</p>
+<pre class="r"><code>ggsave(&quot;g1.png&quot;, plot = g1, units = &quot;in&quot;, width = 5, height = 4)</code></pre>
+<p>Note that <code>in</code> for inches and <code>ggsave</code> also supports <code>mm</code> and <code>cm</code></p>
+<hr />
+</div>
+</div>
+</div>
+<div id="lesson-3.3-data-analysis-and-visualization" class="section level1">
+<h1>Lesson 3.3 Data Analysis and Visualization</h1>
+<div id="learning-outcomes" class="section level2">
+<h2>Learning outcomes</h2>
+<p>At the end of this lesson, learners will <span class="math inline">\(be able to\)</span>:</p>
+<ul>
+<li>Explain why data needs to be analysed</li>
+<li>Prepare data for analysis</li>
+<li>Apply a number of techniques to analyse data</li>
+<li>Analyse the risks with analysing different types of data</li>
+<li>Explain the purpose of data visualisation</li>
+<li>Choose an appropriate visualisation for data</li>
+<li>Evaluate the effectiveness of a number of different data visualisations</li>
+</ul>
+</div>
+<div id="introduction" class="section level2">
+<h2>1. Introduction</h2>
+<p>Lesson 3.1 introduced methods for discovering data both ‘on’ and ‘in’ the web; the objective of that lesson was to introduce techniques for finding source data. Lesson 3.2 followed it with an analysis of the quality and provenance of the data and the steps required to clean and prepare the data for analysis.</p>
+<p>This lesson looks at the next stage of data analysis and visualisation. Like the other lessons, the knowledge required will vary vastly depending on the exact object of the analysis and visualisation. This lesson aims to take a pragmatic approach to both subjects and offer a broad theory of analysis that leads to clear visualisations that generate impact. Practical examples focus on quantitative data in a spreadsheet and feature extraction-based analysis of qualitative data.</p>
+</div>
+<div id="purpose-of-data-analysis" class="section level2">
+<h2>2. Purpose of data analysis</h2>
+<p>Raw, unprocessed data is often messy and potentially still not ready for visualisation. This section looks at a number of techniques that can be used to turn data into information including:</p>
+<ul>
+<li>derivation and feature extraction</li>
+<li>dataset combining</li>
+<li>dataset enrichment.</li>
+</ul>
+<div id="derivation-and-feature-extraction" class="section level3">
+<h3>2.1 Derivation and feature extraction</h3>
+<p>Derivation and feature extraction are similar in that they are designed to add to existing data without requiring external datasets. This results in additional columns <span class="math inline">\(or features\)</span> being added to data which are based upon the existing data only.</p>
+<div id="derivation" class="section level4">
+<h4>2.1.1. Derivation</h4>
+<p>A derived data element is a data element derived from other data elements using a mathematical, logical or other type of transformation, e.g. arithmetic formula, composition, aggregation.</p>
+<p>For example, source data might contain a series of columns of monthly expenditure. A sum total could be made over all months to add another column. This column is thus derived from the others.</p>
+</div>
+<div id="feature-extraction" class="section level4">
+<h4>2.1.2. Feature extraction</h4>
+<p>Feature extraction is very similar to derived data but does not necessarily have to involve a function. For example, the city could be extracted from a list of unstructured address data, making the city a distinct feature of the dataset. Likewise, the colour of the centre pixel of an image could be extracted without the use of a mathematical function. A short tutorial on feature extraction is available for Excel <a href="https://www.extendoffice.com/documents/excel/3639-excel-extract-part-of-string.html">here</a>.</p>
+</div>
+</div>
+<div id="combining-datasets" class="section level3">
+<h3>2.2 Combining datasets</h3>
+<p>Here we are not referring to adding additional data onto the end of an existing dataset <span class="math inline">\(a process known as consolidation\)</span>, but rather the process of adding to the existing data.</p>
+<p>If you are using a spreadsheet, the result of combining two datasets with 10 columns each will be one dataset with 19 columns. Combining data can only be done in this way if there is a column in each dataset with a shared value. This column becomes the key upon which the combination can be performed.</p>
+<p>For example: take a dataset of roads and the numbers of cars during each hour of the day. Each hour period is a column and each road is a row. If there were many sources of the data, e.g. sources with different hours in all individually collected, then you could key on the road name and combine all the data into a single dataset.</p>
+<p>Find out how to combine two datasets in <a href="https://superuser.com/questions/366647/merge-two-excel-files-using-a-common-column">Excel</a> or in <a href="https://blog.ouseful.info/2011/05/06/merging-datesets-with-common-columns-in-google-refine/">Open Refine</a>.</p>
+</div>
+<div id="enriching-geographic-data" class="section level3">
+<h3>2.3 Enriching geographic data</h3>
+<p>Much like combining data, where two datasets can be combined based upon a common feature <span class="math inline">\(e.g. road name\)</span>, the same can be achieved with geographic data. One big difference is that it is possible to combine geographic data based upon location and place a geographic point inside a boundary. This process is known as a spatial join.</p>
+<p>A spatial join can be useful when looking at features of different buildings or services and mapping them onto jurisdiction region to see if any patterns emerge. For example, this could be used to see if schools in different council-controlled areas perform significantly differently.</p>
+<p>Find out more about enriching and joining map data using the excellent guides provided by <a href="https://carto.com/learn/guides">CartoDB</a>.</p>
+<p>Another essential stage in preparing geographic data for analysis is that of geocoding. Geocoding is the process of taking any reference or description of a physical location and adding the actual physical location coordinates to the data. Reverse geocoding is thus the opposite, extracting the description <span class="math inline">\(e.g. London\)</span> from the coordinates. Geocoding can also refer to the process of transforming from one coordinate representation system <span class="math inline">\(e.g. easting–northing\)</span> to another <span class="math inline">\(e.g. latitude–longitude\)</span>. Geocoding is essential when trying to analyse geographic data and perform other operations such as spatial joins.</p>
+</div>
+</div>
+<div id="qualitative-and-quantitative-data-analysis" class="section level2">
+<h2>3. Qualitative and quantitative data analysis</h2>
+<p>There are two main types of statistical analysis talked about in data: qualitative and quantitative. Put simply, qualitative research deals with open-ended, often text-based data, while quantitative research tries to focus on objective, measurable data in the form of numbers or other structured data. Table 1 <span class="math inline">\(from the Open University\)</span> shows some of the main differences between the two types of research.</p>
+<p>Table 1 Qualitative vs quantitative research <span class="math inline">\(Source: Open University\)</span></p>
+<p><img src="../.gitbook/assets/image%20%2837%29.png" /></p>
+<p>Although Table 1 illustrates qualitative and quantitative research as distinct and opposite, in practice they are often combined or draw elements from each other. For example, a survey question could be answered on a scale of 1–10 however the question could be subject to personal bias.</p>
+<p>Even something as simple as counting sheep can be fraught with danger: if your field also contains lambs, are these sheep? When do they become sheep?</p>
+<div id="analysing-quantitative-data" class="section level3">
+<h3>3.1 Analysing quantitative data</h3>
+<p>Good quantitative researchers will seek to maintain a level of control of the different variables and carefully define both the scope and size of the sample being measured. They will also attempt to eliminate or accept the influence of other factors on the sample and outline this clearly in the research.</p>
+<p>One of the most important aspects in research is that of obtaining a statistically significant result. Statistical significance is essentially a measure which states that there is less than a 5% chance that the result of the analysis is down to chance.</p>
+<p>This can be explained best with coin tosses and testing if a coin is biased, which can be tested with a simple null hypothesis test. The null hypothesis is a statement about the world which can plausibly account for the data you observe, for example ‘the coin is fair’. You could then flip the coin 100 times and if heads came up only once, then it is safe to say the null hypothesis can be rejected and that the coin is biased.</p>
+<p>But what if 51 of the 100 tosses come out heads? Or you flip the coin 100,000 times and 51,000 times it comes out heads. Can either of these be random chance, or is the coin biased?</p>
+<p>Calculating whether a result is significant can be done in two ways, either with a statistical significance calculation or a z-score calculation. Either way, what we are trying to calculate is if the result falls outside of the 95% of observations where the null hypothesis is true, thus disproving it. As the majority of quantitative data can be mapped to a normal distribution it is this that dictates whether a result is statistically significant. On the diagram below, it can be seen that 95% of values always fall within 1.98 standard deviations from the mean <span class="math inline">\(x̄\)</span>.</p>
+<div class="figure">
+<img src="../.gitbook/assets/image%20%2811%29.png" alt="Figure 1 Normal distribution and significance measures" />
+<p class="caption">Figure 1 Normal distribution and significance measures</p>
+</div>
+<p>A 95% level of confidence means we reject the null hypothesis if the calculation of statistical significance falls outside of the 95% of the area of the normal curve. The z-score is a calculation of how many standard deviations away from the mean the sample is.</p>
+<p>So, with a toss of a coin with a null hypothesis that the coin is fair, based upon different amounts of flips and results we get the following:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Coin</th>
+<th align="left">Flips</th>
+<th align="left">Percent Heads</th>
+<th align="left">Z-score</th>
+<th align="left">Biased?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">#1</td>
+<td align="left">100</td>
+<td align="left">51%</td>
+<td align="left">0.2</td>
+<td align="left">No</td>
+</tr>
+<tr class="even">
+<td align="left">#2</td>
+<td align="left">100</td>
+<td align="left">60%</td>
+<td align="left">2.00</td>
+<td align="left">Yes</td>
+</tr>
+<tr class="odd">
+<td align="left">#3</td>
+<td align="left">50</td>
+<td align="left">60%</td>
+<td align="left">1.41</td>
+<td align="left">Not significant</td>
+</tr>
+<tr class="even">
+<td align="left">#4</td>
+<td align="left">50</td>
+<td align="left">65%</td>
+<td align="left">2.12</td>
+<td align="left">Yes</td>
+</tr>
+</tbody>
+</table>
+<p>Here it can be seen that as the sample size increases, so the significance can be observed with the same percentage of coin tosses that come out heads.</p>
+<p>Sample size is one key factor and it helps eliminate the chance of other factors having an effect, such as the coin always being tossed the same way, with the same force and from the same position. However, some tests might require this kind of absolute control when the sample size is small, for example comparing the shatter resistance of <a href="http://bgr.com/2017/09/25/iphone-8-plus-vs-galaxy-note-8-drop-test-glass/">expensive phones</a>.</p>
+<p>With the majority of quantitative analysis focusing on averages, sample size is important to get rid of the effect of outliers on the data. Additionally, it is important to pick the most representative average for the dataset, as the mean is not always an accurate reflection of the data if there are outliers in that data. For example, in President Bush’s 2008 State of the Union Address he attacked his opposition, stating that their tax plans would mean an average tax hike of $1800 per person. However, this was the mean value and people’s earnings are not evenly distributed; the proposals actually hit high earners badly, while putting money back in the pockets of those who needed it.</p>
+<p>It is not just sample sizes that affect the significance of a result, however, and there are other factors that need to be eliminated first before a result can be declared significant:</p>
+<p><strong>Fluctuation</strong></p>
+<p>Random events cluster, thus fluctuation is also important to bear in mind. Flipping a whole run of heads on a coin does not mean there will be more to follow <span class="math inline">\(unless the coin is biased\)</span>. The same is the case for road accidents. Installing speed cameras in accident black spots might not necessarily be correlated to the subsequent reduction in accidents.</p>
+<p><strong>Targets</strong></p>
+<p>While most data in normally distributed, targets have a profound effect on people’s behaviour. Once a target is introduced, people will game their outcome to match this target. For example, one US hospital operated only on healthy patients, so they could obtain funding for being the most successful hospital.</p>
+<p><strong>Correlation</strong></p>
+<p>Just because there appears to be a correlation does not mean there is one. A famous example from <a href="http://www.tylervigen.com/spurious-correlations">spurious correlations</a> was that banana pricing strongly correlates with the number of people who died becoming tangled in their bed sheets. Or the 99% correlation between US spending on space, science and technology and suicides by hanging, strangulation and suffocation.</p>
+<p><strong>Percentages</strong></p>
+<p>Percentages can make small numbers look big and are often used this way. For example, last year there was a 100% increase in cancer cases linked to mobile phones: it rose from 1 to 2. The other problem with percentages in that many confuse percentage points and percentages. For example, consider when Value Added Tax in the UK rose 2.5% <span class="math inline">\(i.e. 2.5 percentage points\)</span> from 17.5% to reach 20%; a 2.5% rise would actually have made it 17.9375%.</p>
+<p><strong>Un-normalised data</strong></p>
+<p>Another common pitfall is to not adjust figures for floating variables; thus saying <a href="http://www.cancerresearchuk.org/about-us/cancer-news/news-report/2012-05-31-global-cancer-incidence-predicted-to-increase-by-75-per-cent-by-2030">Global cancer incidence is predicted to increase by 75 per cent by 2030</a> is pretty shocking. That is until you realise this percentage has been calculated from the raw numbers of people and has not been adjusted for population growth. Another common type of headline is saying that spending on a sector or service has risen every year, but not normalising this to inflation and thus revealing that the real value of this spending it is actually falling.</p>
+<p>Whichever technique is used to analyse quantitative data, being truly objective can take a huge amount of effort, even when your data subject is a simple coin.</p>
+</div>
+<div id="analysing-qualitative-data" class="section level3">
+<h3>3.2 Analysing qualitative data</h3>
+<p>Not all data comes in the form of structured tables or accurately located geographic data. Often it can be the qualitative data that can be hardest to analyse and work with. Qualitative data is information that cannot be measured and is very subjective as a result <span class="math inline">\([Even colour can be subjective](https://en.wikipedia.org/wiki/The_dress)\)</span>.</p>
+<p>The main aim of qualitative data analysis is to reduce and make sense of vast amounts of information, often from different sources. The result of such analysis is to offer an explanation, interpretation or thematic summary of the data. Inputs to qualitative analysis can take many forms including interview transcripts, documents, blogs, surveys, pictures, videos, etc.</p>
+<p>Qualitative data analysis is a more natural process for humans who naturally seek to distil inputs into themes and key outcomes, as is especially true of meetings or focus groups. People will often use mind-mapping or ‘Post-it’ based thought maps to help group together and categorise wide-ranging discussion into key themes.</p>
+<p>Qualitative data analysis ought to pay attention to the spoken word context, consistency and contradictions of views, frequency and intensity of comments, and their specificity as well as emerging themes and trends.</p>
+<p>There are two main ways of analysing qualitative data, framework analysis and thematic network analysis.</p>
+<p>Framework analysis involves building a predefined set of criteria that clearly reflect your aims, objectives and interests. Using this set of criteria, the relevant pieces of information can be extracted from the data and compared with other inputs in the framework. Using a framework allows many researchers to do the extraction while minimising the chances of qualitative analysis bias. A bias can still be introduced at framework design stage which may result in key information being missed.</p>
+<p>An alternative approach is to not construct a framework, but rather to apply thematic network analysis. Thematic network analysis is a more exploratory approach which encourages the analysis of all of the input data which can shape the output in unexpected directions. In reality, the majority of qualitative data analysis will involve a combination of the two approaches.</p>
+<p>Whichever approach is chosen, the first step in any qualitative data analysis involves familiarisation with the data; reading and re-reading responses. At the same time, it is a good idea to start codifying the data by writing down keywords and topics which attempt to reduce and interpret the data. The result of the coding process could be the thematic network analysis or a framework by which all responses need to be coded. Either way coding can be a long, slow and repetitive process, however there are a number of tools that can help with thematic network analysis.</p>
+<div id="thematic-network-analysis-tools" class="section level4">
+<h4>3.2.1 Thematic network analysis tools</h4>
+<p>Entity recognition tools provide one such technique that can help analyse and enrich qualitative data. Essentially entity recognition seeks to locate and classify named entities in text into pre-defined categories such as the names of persons, organisations, locations, expressions of times, quantities, monetary values, percentages, etc.</p>
+<div class="figure">
+<img src="../.gitbook/assets/image%20%2838%29.png" alt="Figure 2 Calais tagging of BBC News: “NI farms ‘can expect same support’ post-Brexit – Gove”" />
+<p class="caption">Figure 2 Calais tagging of BBC News: “NI farms ‘can expect same support’ post-Brexit – Gove”</p>
+</div>
+<p><a href="http://www.opencalais.com">Calais</a> <span class="math inline">\(shown in Figure 2\)</span> from Thomson Reuters is one such example of an entity recognition engine. More than just entity recognition, the Calais service links those entities to data records that exist within the Thomson Reuters permID database of entities and financial records.</p>
+<p>More widely such entity recognition is used by services such as <a href="https://www.theyworkforyou.com/">TheyWorkForYou</a> in order to track the activities of politicians and provide this in an easy way to the public.</p>
+<p>Calais is a good example of an online tool that can perform entity recognition and provide links into additional data on each topic. Other techniques can be much simpler but just as effective such as <a href="https://www.jasondavies.com/wordcloud/">word cloud generators</a>.</p>
+<div class="figure">
+<img src="../.gitbook/assets/image%20%2820%29.png" alt="Figure 3 A word cloud" />
+<p class="caption">Figure 3 A word cloud</p>
+</div>
+</div>
+</div>
+</div>
+<div id="data-visualisation" class="section level2">
+<h2>4. Data Visualisation</h2>
+<p>Another way to quickly interpret data is to visualise it. The human brain is much more adept at consuming and understanding data presented in a visualisation than as text.</p>
+<p>Most charts used in modern data visualisation derive from the original designs of William Playfair <span class="math inline">\(1759–1823\)</span>, a political economist. Playfair invented several types of diagrams: in 1786, the line, area and bar chart of economic data; and in 1801, the pie chart and circle graph, used to show part–whole relations.</p>
+<p>The choice of which visualisation technique to use depends on both the objective of the visualisation and the type of data to be visualised. This section explores the different objectives and the types of visualisation suited to each with examples.</p>
+<div id="the-goals-of-visualising-data" class="section level3">
+<h3>4.1 The goals of visualising data</h3>
+<p>The goal of data visualisation is to communicate information clearly and efficiently to users.</p>
+<p>According to Friedman <span class="math inline">\(2008\)</span> the ‘main goal of data visualization is to communicate information clearly and effectively through graphical means. It doesn’t mean that data visualization needs to look boring to be functional or extremely sophisticated to look beautiful. To convey ideas effectively, both aesthetic form and functionality need to go hand in hand, providing insights into a rather sparse and complex data set by communicating its key-aspects in a more intuitive way. Yet designers often fail to achieve a balance between form and function, creating gorgeous data visualizations which fail to serve their main purpose – to communicate information’.</p>
+<p>One of the main problems with data visualisation is that it is a broad topic to cover a wide range of different visualisations that are designed for different purposes. Communication is only one goal of a data visualisation. Data visualisations can also be used during the data analysis stage in order to help make sense of the data and guide analysis.</p>
+<p>If the main goal of a data visualisation is to communicate information, then the visualisation should be able to do this without the need for any explanatory text or additional knowledge by the reader.</p>
+<p>Take the following examples from Wikipedia’s data visualisation page: arguably only the bar charts <span class="math inline">\(top right\)</span> and treemap <span class="math inline">\(bottom left\)</span> are good visualisations for instant communication of data. This is because both of these charts use a visualisation trick called ‘pop out’.</p>
+<div class="figure">
+<img src="../.gitbook/assets/screenshot-2020-02-07-at-10.30.21.png" alt="Figure 4 Examples of data visualisation from Wikipedia" />
+<p class="caption">Figure 4 Examples of data visualisation <span class="math inline">\(from Wikipedia\)</span></p>
+</div>
+<div class="figure">
+<img src="../.gitbook/assets/image%20%283%29.png" alt="Figure 5 Pathways in visual cortex" />
+<p class="caption">Figure 5 Pathways in visual cortex</p>
+</div>
+<p>Pop out helps direct the eye to the correct place, instantly and the human eye is drawn towards brighter colours, larger items and things which stand out through difference. It is a feature that is programmed into our visual cortex. Inside the visual cortex there are two streams, the ventral <span class="math inline">\(what\)</span> stream and the dorsal <span class="math inline">\(where/how\)</span> stream. It is the dorsal stream that processes information from the eye about our surroundings in real time, so we can instantly react in situations of risk <span class="math inline">\(e.g. an object being thrown at you\)</span>.</p>
+<p>It is the dorsal stream which is looking where things are and how they relate to other things that makes pop out work so quickly. Conversely the ventral stream is responsible for working out ‘what’ the thing is. This is a much slower process and is the reason why you might recognise a person’s face but not be able to put a name to it.</p>
+<p>The best data visualisations for communication appeal to the dorsal stream and make information pop. If a visualisation requires use of the ventral stream to help contextualise the information, then there is a high probability that individuals will interpret the information differently to each other.</p>
+<p>Try it for yourself with the pop out game below <span class="math inline">\(Figure 6\)</span>. All you have to do is find the odd one out in the two images below.</p>
+<div class="figure">
+<img src="../.gitbook/assets/screenshot-2020-02-07-at-10.31.45.png" alt="Figure 6 Find the odd one out" />
+<p class="caption">Figure 6 Find the odd one out</p>
+</div>
+<p>Which one were you fastest on?</p>
+<p>Another important aspect of data visualisation is the use of colour. As well as making information ‘pop out’, colour can also convey meaning. For example: red, amber and green represent danger, caution, and safety, as used in traffic lights <span class="math inline">\(Figure 7\)</span>.</p>
+<div class="figure">
+<img src="../.gitbook/assets/image%20%2825%29.png" alt="Figure 7 Traffic-light colours indicating safety" />
+<p class="caption">Figure 7 Traffic-light colours indicating safety</p>
+</div>
+<p>However, not all colours convey easily recognisable meaning, and too much use of colour can be confusing. In this way, try to keep the number of colours used to a minimum.</p>
+<div class="figure">
+<img src="../.gitbook/assets/image%20%2818%29.png" alt="Figure 8 ‘Pop-out’ and other visual cues" />
+<p class="caption">Figure 8 ‘Pop-out’ and other visual cues</p>
+</div>
+<p>Pop-out works best when a combination of different visual cues are used in combination, e.g. colour, size and line thickness.</p>
+<p>In Figure 8 a combination of colour and thickness guides the eye towards the steepest line. This line represents the first high-speed train from Paris to Lyon. The steepness of the line is the speed.</p>
+<p>In any visualisation, it is essential to get rid of any extraneous clutter that detracts from the message being conveyed.</p>
+</div>
+<div id="choosing-the-correct-visualisation-for-data" class="section level3">
+<h3>4.2 Choosing the correct visualisation for data</h3>
+<p>Choosing the correct visualisation for data depends on two key aspects:</p>
+<ul>
+<li>the type of data</li>
+<li>the message to be conveyed.</li>
+</ul>
+<p>There are three main types of data outlined in Table 2 below.</p>
+<table>
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left"><strong>Data type</strong></th>
+<th align="left"><strong>Description</strong></th>
+<th align="left"><strong>Example visualisation</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Time series</td>
+<td align="left">Observations of the same objects over time</td>
+<td align="left">Line chart, motion chart, polar area diagram, Gantt chart, bar chart</td>
+</tr>
+<tr class="even">
+<td align="left">Population</td>
+<td align="left">Observation of different objects at a single point in time</td>
+<td align="left">Bar chart, map, treemap, pie chart</td>
+</tr>
+<tr class="odd">
+<td align="left">Multivariate</td>
+<td align="left">Observations of different objects at different points in time</td>
+<td align="left">Multidimensional motion chart, bar chart, treemap</td>
+</tr>
+</tbody>
+</table>
+<p>Take for example the data about yields of cereal in the East African Community of Tanzania, Rwanda, Uganda, Kenya, Burundi and South Sudan, which is available as open data from the <a href="https://data.worldbank.org/indicator/AG.YLD.CREL.KG%20">World Bank</a>. This data can be visualised in many ways due to its multivariate nature.</p>
+<p>The data available from the World Bank is available for every country dating back to 1961. If the data was only about a single country, then we would have a time series dataset. If the data was only about one year then this would be a population dataset, however both are available, thus the dataset is a multivariate dataset.</p>
+<div class="figure">
+<img src="../.gitbook/assets/image%20%2827%29.png" alt="Figure 9 Time series dataset visualisation of cereal yield in the East African Community since 2000" />
+<p class="caption">Figure 9 Time series dataset visualisation of cereal yield in the East African Community since 2000</p>
+</div>
+<p>The line chart in Figure 9 is naturally suited to show a time series for those who read left to right. It also allows for relatively easy comparison between countries at different points in time. Note how the darker pink line for Rwanda pops out, while the lighter shades of blue blend in. Blue is a very neutral colour, whereas reds and yellows are much more suited to make information pop. Significantly this guides the eye to see that Rwanda has improved in comparison to the other EAC countries since 2000.</p>
+<p>Conversely the bar chart <span class="math inline">\(Figure 10\)</span> compares the countries at a single point in time <span class="math inline">\(2014 in this case\)</span>. Using the same colour here means the eye is not drawn to a single country but is focused on the sizes of the bars. Perhaps what stands out here is the three groupings of Uganda with Rwanda, Tanzania with Kenya, and Burundi with South Sudan. However the time-series line chart tells us that these groupings may not be significant over time.</p>
+<div class="figure">
+<img src="../.gitbook/assets/image%20%2822%29.png" alt="Figure 10 Population bar chart visualisation of cereal yield in the East African Community in 2014" />
+<p class="caption">Figure 10 Population bar chart visualisation of cereal yield in the East African Community in 2014</p>
+</div>
+<p>To explore the groupings further we could look at another population dataset visualisation, this time a map. As we have countries it is perfectly logical to show them on a map <span class="math inline">\(Figure 11\)</span>.</p>
+<div class="figure">
+<img src="../.gitbook/assets/image%20%2839%29.png" alt="Figure 11 Population geographic dataset visualisation of cereal yield in the East African Community in 2014" />
+<p class="caption">Figure 11 Population geographic dataset visualisation of cereal yield in the East African Community in 2014</p>
+</div>
+<p>Unfortunately, the World Bank map visualisation does not filter the countries to just show those you have selected. On a global scale the EAC countries are very similar in crop production, unlike what appears on the bar and time series charts.</p>
+<p>In order to reveal the subtle differences, the data from these countries can be used with a different mapping tool <span class="math inline">\([carto.com](https://carto.com) in this case\)</span> to create your own map <span class="math inline">\(as in Figure 12\)</span>.</p>
+<div class="figure">
+<img src="../.gitbook/assets/image%20%2840%29.png" alt="Figure 12 EAC countries in alternative mapping" />
+<p class="caption">Figure 12 EAC countries in alternative mapping</p>
+</div>
+<p>This last set of visualisations shows how removing data can change the message that is conveyed. Ideally the new visualisation would remove the other countries, as these being white is misleading and you do not need the entire map of the world.</p>
+</div>
+</div>
+<div id="summary" class="section level2">
+<h2>5. Summary</h2>
+<p>Data analysis and visualisation is a difficult and complex topic. This is especially the case given the multivariate nature of data and the fact that many datasets are now ‘Big’, meaning that multivariate problems are multiplied.</p>
+<p>Choosing the right analysis technique is also tied heavily to the data collection technique to ensure that bias is limited wherever possible. Careful consideration should be given to the data collection and how analysis might be influenced by external factors such as policy targets.</p>
+<p>Data visualisation should also avoid introducing bias or any aspects that mislead the viewer. Given that the eye will process the visualisation in a fraction of a second, the visualisation should be designed carefully to ensure that the key message is being conveyed accurately. Because 78 and 103 are much closer together than 71 and 78?</p>
+</div>
+<div id="bibliography" class="section level2">
+<h2>Bibliography</h2>
+<p>Friedman, V. 2008. ‘Data Visualization and Infographics’. Smashing Magazine, 14 January, 2008. Available at: <a href="https://www.smashingmagazine.com/2008/01/monday-inspiration-data-visualization-and-infographics/%23top">https://www.smashingmagazine.com/2008/01/monday-inspiration-data-visualization-and-infographics/#top</a></p>
+<p>Huberman, M. and Miles, M.B., 2002. The Qualitative Researcher’s Companion. Sage, Thousand Oaks, CA, USA., 410 pp.</p>
+</div>
+</div>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>R on Smart Analytics for IEM</title>
+    <link>/categories/r/</link>
+    <description>Recent content in R on Smart Analytics for IEM</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="/categories/r/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Discret Choice Modelling</title>
+      <link>/lessons/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/lessons/</guid>
+      <description>This is the website of the Lesson Discret Choice Modelling taught at Grenoble INP Industrial Engineering and Management School &amp;amp; UGA.
+First Lesson</description>
+    </item>
+    
+    <item>
+      <title>Discret Choice Modelling</title>
+      <link>/otherlessons/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/otherlessons/</guid>
+      <description>Here are links to other lessons I have push online
+Basic Economics for IEM</description>
+    </item>
+    
+    <item>
+      <title>Introduction to Data Science Management project</title>
+      <link>/lesson_1/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/lesson_1/</guid>
+      <description>This is the 1rst Lesson Discrete Choice Modelling
+PDF
+https://www.cdc.gov/coronavirus/2019-ncov/covid-data/forecasting-us.html</description>
+    </item>
+    
+    <item>
+      <title>Introduction to Data Vizualisation</title>
+      <link>/lesson_0.1_introduction_v2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/lesson_0.1_introduction_v2/</guid>
+      <description>Reproducible AnalysisTypical data analysis workflow looks like this:
+collect dataput it in a file or spreadsheet or databaserun some analyses, written in various scripts,perhaps saving some intermediate results along the wayor maybe always working on the raw data.create some plots or tables of relevant summaries of the data,and then
+go and write a report about the results in a text editor or word processor.</description>
+    </item>
+    
+    <item>
+      <title>Introduction to Data Vizualisation</title>
+      <link>/lesson_1.1_vizu/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/lesson_1.1_vizu/</guid>
+      <description>https://www.statisticshowto.com/misleading-graphs/&amp;gt; References
+Huff, D. (1993). How to Lie With Statistics. W. W. Norton &amp;amp; CompanyGonick, L. (1993). The Cartoon Guide to Statistics. HarperPerennial.CITE THIS AS:&amp;gt; Stephanie Glen. “Misleading Graphs: Real Life Examples” From StatisticsHowTo.com: Elementary Statistics for the rest of us! https://www.statisticshowto.com/misleading-graphs/https://github.com/stoltzmaniac/Data-Visualization-Lesson/blob/master/Data%20Visualization%20-%20Part%203.Rmd
+https://mschermann.github.io/data_viz_reader/
+https://aims.gitbook.io/farm-data-mooc/unit-3-using-data/lesson-3.3-data-analysis-and-visualization
+Grammar of Graphics ggplot2()Grammar of ggplot2()Start exampledf &amp;lt;- data.frame(x=1:15, y=1:15)ggplot(df, aes(x,y)) +geom_point() +labs(title= &amp;quot;Plot example&amp;quot;,subtitle = &amp;quot;Subtitled&amp;quot;,x=&amp;quot;x-values&amp;quot;, y = &amp;quot;y-values&amp;quot;) +theme(panel.</description>
+    </item>
+    
+    <item>
+      <title>Introduction to Discret Choice Lesson</title>
+      <link>/post/2020-08_introduction/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2020-08_introduction/</guid>
+      <description>IntroductionThese Introduction slides present:
+Table of contents
+IntroductionProgramMotivationsImportance of DCMCourse ObjectivesGeneral Context of Choice analysisFour broad frameworksSample and MeasurementIssues in Model BuildingR and Tests for Categorical DataInference for a (Single) ProportionTwo-Way Contingency TablesThe Odds-RatioChi-Squared Tests of IndependenceProgram5 steps/lessons :
+• Introduction• Binary Choice• Multinomial Choices• Advanced Models : papers presentation (with application)• Discussion : papers discussion (reversed class)• Guided work sessions</description>
+    </item>
+    
+    <item>
+      <title>Introduction to GIS - Geographic Information System</title>
+      <link>/lesson_2_gis/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/lesson_2_gis/</guid>
+      <description>A FINIR
+IntroductionVisualisation of geographic information is become one of the major tool of the digital information analytic.
+Numerous softwares manage visualization of geographic information from full-scale GIS applications such as ArcGIS and QGIS to web-based tools like Google maps to any number of programing languages.
+Using a command-line interface has the benefits of enabling both steps analysis and visualization in customizable, transparent and reproducible manner.
+The goal of this post is to introduce the basic landscape of working with spatial data in R from the perspective of a non-specialist.</description>
+    </item>
+    
+    <item>
+      <title>Introduction to Survival Analysis</title>
+      <link>/lesson_3-2_survanalyse-application/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/lesson_3-2_survanalyse-application/</guid>
+      <description>A FINIR
+Exercise - Unemployment durationSurvival analysis models covariates that influence time-to-event.
+OLS regression methods are less efficient because the time-to-event is typically not normally distributed (positive, skewed, nearly discret when rounding are present), and the model cannot handle censored observation, without modification.
+library(Ecdat)## Warning: le package &amp;#39;Ecdat&amp;#39; a été compilé avec la version R 3.6.3## Le chargement a nécessité le package : Ecfun## Warning: le package &amp;#39;Ecfun&amp;#39; a été compilé avec la version R 3.</description>
+    </item>
+    
+    <item>
+      <title>Introduction to Survival Analysis</title>
+      <link>/lesson_3_survanalyse/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/lesson_3_survanalyse/</guid>
+      <description>A FINIR
+Introduction corresponds to a set of statistical approaches used to investigate the of interest to occur.
+Medecine, sociology, economyinformatics, engineering,…In basic categorical data analysis for example, we compare proportions (risks, rates, etc) between different groups.
+Such analysis is performed using a chi-square or fisher exact test, or logistic regression.
+We implicitly assume that the rates are constant over the period of the study, and are defined by the different groups studied.</description>
+    </item>
+    
+  </channel>
+</rss>

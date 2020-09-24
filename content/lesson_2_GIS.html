@@ -1,0 +1,49 @@
+---
+title: "Introduction to GIS - Geographic Information System"
+subtitle: "Smart Analytics for Big Data"
+author: "Iragaël Joly"
+date: "Automn 2020"
+categories: ["R"]
+tags: ["R Markdown", "plot", "regression"]
+authorbox: false
+link-citations: yes
+biblio-style: apalike
+bibliography: [post/data/biblio_hdr_v2.bib, post/data/Liste_Publi3.bib, post/data/biblio_SABD.bib]
+nocite: |
+  @Bivand2013, @lovelace2019
+---
+
+
+
+<p><strong>A FINIR</strong></p>
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>Visualisation of geographic information is become one of the major tool of the digital information analytic.</p>
+<p>Numerous softwares manage visualization of geographic information from full-scale GIS applications such as ArcGIS and QGIS to web-based tools like Google maps to any number of programing languages.</p>
+<p>Using a command-line interface has the benefits of enabling both steps analysis and visualization in customizable, transparent and reproducible manner.</p>
+<hr />
+<p>The goal of this post is to introduce the basic landscape of working with spatial data in R from the perspective of a non-specialist.</p>
+<p>The use of the <code>ggmap</code> package is to geocode data and create maps using the <code>ggplot2</code> system.</p>
+<p>The <code>sp</code> and <code>sf</code> packages use different methodologies for integrating spatial data into R.</p>
+<p>The <code>sp</code> package introduced a coherent set of classes and methods for handling spatial data in 2005.
+The package remains the backbone of many packages that provide GIS capabilities in R.</p>
+<p>The <code>sf</code> package implements the simple features open standard for the representation of geographic vector data in R.</p>
+<p>The package first appeared on CRAN at the end of 2016 and is under very active development. The sf package is meant to supersede sp, implementing ways to store spatial data in R that integrate with the <code>tidyverse</code> workflow of the packages developed by Hadley Wickham and others.</p>
+<div id="references" class="section level2">
+<h2>References</h2>
+<p><a href="http://cartonumerique.blogspot.com/p/cartographie-thematique.html" class="uri">http://cartonumerique.blogspot.com/p/cartographie-thematique.html</a></p>
+<p><a href="https://roelandtn.frama.io/post/simple-mapping-with-sf/" class="uri">https://roelandtn.frama.io/post/simple-mapping-with-sf/</a></p>
+<p><a href="https://tender-curie-5b83bc.netlify.app/2019/03/01/mapping-sncf-stations/" class="uri">https://tender-curie-5b83bc.netlify.app/2019/03/01/mapping-sncf-stations/</a></p>
+<p><a href="https://github.com/oliviergimenez/analysesGeoloup" class="uri">https://github.com/oliviergimenez/analysesGeoloup</a></p>
+<p><a href="https://statnmap.com/2018-07-14-introduction-to-mapping-with-sf-and-co/" class="uri">https://statnmap.com/2018-07-14-introduction-to-mapping-with-sf-and-co/</a>
+<a href="https://geocompr.robinlovelace.net/" class="uri">https://geocompr.robinlovelace.net/</a></p>
+<div id="refs" class="references">
+<div id="ref-Bivand2013">
+<p>Bivand, Roger S., Edzer J. Pebesma, and Virgilio. Gómez-Rubio. 2008. <em>Applied Spatial Data Analysis with R</em>. New York; London: Springer.</p>
+</div>
+<div id="ref-lovelace2019">
+<p>Lovelace, R., J. Nowosad, and J. Muenchow. 2019. <em>Geocomputation with R</em>. Chapman &amp; Hall/Crc the R Series. CRC Press. <a href="https://books.google.fr/books?id=0y6ODwAAQBAJ">https://books.google.fr/books?id=0y6ODwAAQBAJ</a>.</p>
+</div>
+</div>
+</div>
+</div>

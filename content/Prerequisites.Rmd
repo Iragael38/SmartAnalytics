@@ -1,0 +1,29 @@
+---
+authorbox: false
+link-citations: yes
+biblio-style: apalike
+bibliography: [post/data/biblio_hdr_v2.bib, post/data/Liste_Publi3.bib, post/data/biblio_SABD.bib]
+nocite: |
+   @MunizagaAlvarez2005,@Greene2008, @McFadden2014,
+   @McFaddenTrain2000,@HensherGreene2003,@Hensheretal2005,@Gujarati2003
+   @Agresti2013, @Millot2012,@Cornillonetal2008,  @Louviereetal2000, @HessDaly2014
+---
+
+# PreRequisites {.tabset}
+
+## R Programming
+
+## Rmarkdown
+
+Scientific workflow and dynamic document programming: RMardown
+
+#### Tuto:
+
+[RMarkdown for Scientists - Nicholas Tierney](https://rmd4sci.njtierney.com/)
+
+## Probability and Statistics
+
+## References 
+
+
+

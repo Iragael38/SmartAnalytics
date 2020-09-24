@@ -1,0 +1,15 @@
+---
+title: "Discret Choice Modelling"
+subtitle: "First Lesson: Introduction"
+author: "Iragaël Joly"
+date: "Automn 2020"
+categories: ["R"]
+tags: ["R Markdown", "plot", "regression"]
+authorbox: false
+---
+
+This is the 1rst Lesson **Discrete Choice Modelling** 
+
+[PDF](/Slides/010_Introduction_E3_v2.pdf)
+
+

@@ -1,0 +1,16 @@
+---
+title: "Introduction to Data Science Management project"
+subtitle: "Smart Analytics for Big Data"
+author: "Iragaël Joly"
+date: "Automn 2020"
+categories: ["R"]
+tags: ["R Markdown", "plot", "regression"]
+authorbox: false
+---
+
+This is the 1rst Lesson **Discrete Choice Modelling** 
+
+[PDF](/Slides/010_Introduction_E3_v2.pdf)
+
+
+https://www.cdc.gov/coronavirus/2019-ncov/covid-data/forecasting-us.html

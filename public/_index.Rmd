@@ -1,0 +1,78 @@
+---
+title: "Discret Choice Modelling"
+authorbox: false
+link-citations: yes
+biblio-style: apalike
+bibliography: [post/data/biblio_hdr_v2.bib, post/data/Liste_Publi3.bib, post/data/biblio_DCM.bib]
+nocite: |
+   @MunizagaAlvarez2005,@Greene2008, @McFadden2014,
+   @McFaddenTrain2000,@HensherGreene2003,@Hensheretal2005,@Gujarati2003
+   @Agresti2013, @Millot2012,@Cornillonetal2008,  @Louviereetal2000, @HessDaly2014
+---
+
+# Welcome {.tabset}
+
+This is the welcome page
+
+You find here
+
+- lesson materials description and abstract
+- links to the *Caseine Platform*
+- use of the *posts*
+- description of the evaluation 
+- references
+- and other things...
+
+## Lessons planning
+
+Each lesson is described as follows
+
+| Lesson      |  Duration | Topic  |   Activities |
+|:------|:------:|:--------------------|:---------------------------|
+| Lesson 1  | 3 hours | Introduction: DCM with R   |   **Lesson**: DCM overview <br>  **Exercise**: reminder of R and Rmarkdown applied to Categorical variables statistical tests |
+|  |  |  |  |
+| Lesson 2  | 3 hours | Binary logistic Regression   |   **Lesson**: Linear Probability model <br> Logistic regression specification <br> Estimation and inference <br>   **Exercise**: Effect of PSI |
+|  |  |  |  |
+| Lesson 3  | 3 hours | Guided work: Binary Logistic Regression   |   **Exercise**:  Death Penalty ; Binary Women role ; Titanic survival rate |
+|  |  |  |  |
+| Lesson 4  | 3 hours | Project Presentation |  Discussion on the project and the raised difficulties |
+|  |  |  |  |
+| Lesson 5  | 3 hours | Discret Choice Model (RUM)|  **Lesson**: Discret Choice in Microeconomics <br> Probabilistic Discret choice <br>  Binary choice Model <br> Economic Outputs in DCM <br> **Exercise**: Transport mode choice |
+|  |  |  |  |
+| Lesson 6  | 3 hours | Multiple choice Model |  **Lesson**: Multinomial Logit model ; Specification and estimation ; IIA assumption  <br> **Exercise**: Transport mode choice |
+|  |  |  |  |
+| Lesson 7  | 3 hours | Discrete Choice Model Extensions |  **Lesson**: <br> **Exercise**: Ordered Logit on Wallet data ; Nested logit in transport |
+|  |  |  |  |
+| Lesson 8  | 3 hours | Project Defense |  Student defense of their final project |
+
+## Posts
+
+Posts will be used to manage the contact (prof $\rightarrow$ student), as notification during the semester
+
+## Caseine 
+
+The *Moodle* based platform **Caseine** is used for this lesson to interact and to exchange document and to perform some online test.
+
+
+
+## Evaluation
+
+- *individual grade* Exam at the end of the semester
+- *group grade* Project grade: defense + report
+
+## Final Project
+
+The final project is a long project managed during almost a month.
+
+It is based on real and complex data. 
+
+Each group of students has to study one research question based on 
+- a search for specific litterature on this question
+- the proposed data (common to the class)
+- to build their own analysis (drawing hypothesis from the litterature to be tested with the data using DCM)
+
+
+## References 
+
+
+
