@@ -1,148 +1,55 @@
 ---
-title: "Discret Choice Modelling"
+title: ""
 authorbox: false
 link-citations: yes
 biblio-style: apalike
-bibliography: [post/data/biblio_hdr_v2.bib, post/data/Liste_Publi3.bib, post/data/biblio_DCM.bib]
+bibliography: [post/data/biblio_hdr_v2.bib, post/data/Liste_Publi3.bib, post/data/biblio_SABD.bib]
 nocite: |
-   @MunizagaAlvarez2005,@Greene2008, @McFadden2014,
-   @McFaddenTrain2000,@HensherGreene2003,@Hensheretal2005,@Gujarati2003
-   @Agresti2013, @Millot2012,@Cornillonetal2008,  @Louviereetal2000, @HessDaly2014
+   @Greene2008, @Gujarati2003
+   @Agresti2013, @Millot2012,@Cornillonetal2008
 ---
 
 
 
 <div id="welcome" class="section level1 tabset">
 <h1>Welcome</h1>
-<p>This is the welcome page</p>
+<p>This is the welcome page of the SABD Class</p>
 <p>You find here</p>
 <ul>
 <li>lesson materials description and abstract</li>
-<li>links to the <em>Caseine Platform</em></li>
+<li>links to the <em>Caseine Platform</em> and <em>Chamilo Platform</em></li>
 <li>use of the <em>posts</em></li>
 <li>description of the evaluation</li>
 <li>references</li>
 <li>and other things…</li>
 </ul>
+<p><strong>Keywords:</strong></p>
+<p>Data Architecture, Data exploration, Data Analysis, Artificial Intelligence, Machine Learning, Big Data, Reproducible analysis, Data Science</p>
+<div id="motivation" class="section level2">
+<h2>Motivation</h2>
+<p>Industry 4.0, Digital Factory, Internet of Things, Digital Economy: they all name the fusion of the physical and virtual and digital worlds. Data has become a key asset in the global and digital economy; the amount of collectible, collected and available data keeps growing at a tremendous pace, whereas data sources and dimensions (temporal/spatial, numerical/textual) become more and more complex.
+Future industrial practices will rely more deeply on information and data management and analytics. Digitization spreading, new communication tools, measure and observation tools (sensor, camera, smartphones, …) increase needs to collect, stock, organize, secure, consult, extract and analyze data. These new data are characterized by their volume, variety and velocity.</p>
+<p>Assessing the relevance of data and selecting the <strong>right data for business decisions</strong> is a key strategic capability.</p>
+<p>Analysis of complex and big data, temporal and spatial data needs specific skills to search and to extract the relevant information and to analyze them accordingly with their specific dimensions.</p>
+</div>
 <div id="lessons-planning" class="section level2">
 <h2>Lessons planning</h2>
 <p>Each lesson is described as follows</p>
-<table>
-<colgroup>
-<col width="10%" />
-<col width="12%" />
-<col width="32%" />
-<col width="43%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="left">Lesson</th>
-<th align="center">Duration</th>
-<th align="left">Topic</th>
-<th align="left">Activities</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">Lesson 1</td>
-<td align="center">3 hours</td>
-<td align="left">Introduction: DCM with R</td>
-<td align="left"><strong>Lesson</strong>: DCM overview <br> <strong>Exercise</strong>: reminder of R and Rmarkdown applied to Categorical variables statistical tests</td>
-</tr>
-<tr class="even">
-<td align="left"></td>
-<td align="center"></td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">Lesson 2</td>
-<td align="center">3 hours</td>
-<td align="left">Binary logistic Regression</td>
-<td align="left"><strong>Lesson</strong>: Linear Probability model <br> Logistic regression specification <br> Estimation and inference <br> <strong>Exercise</strong>: Effect of PSI</td>
-</tr>
-<tr class="even">
-<td align="left"></td>
-<td align="center"></td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">Lesson 3</td>
-<td align="center">3 hours</td>
-<td align="left">Guided work: Binary Logistic Regression</td>
-<td align="left"><strong>Exercise</strong>: Death Penalty ; Binary Women role ; Titanic survival rate</td>
-</tr>
-<tr class="even">
-<td align="left"></td>
-<td align="center"></td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">Lesson 4</td>
-<td align="center">3 hours</td>
-<td align="left">Project Presentation</td>
-<td align="left">Discussion on the project and the raised difficulties</td>
-</tr>
-<tr class="even">
-<td align="left"></td>
-<td align="center"></td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">Lesson 5</td>
-<td align="center">3 hours</td>
-<td align="left">Discret Choice Model (RUM)</td>
-<td align="left"><strong>Lesson</strong>: Discret Choice in Microeconomics <br> Probabilistic Discret choice <br> Binary choice Model <br> Economic Outputs in DCM <br> <strong>Exercise</strong>: Transport mode choice</td>
-</tr>
-<tr class="even">
-<td align="left"></td>
-<td align="center"></td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">Lesson 6</td>
-<td align="center">3 hours</td>
-<td align="left">Multiple choice Model</td>
-<td align="left"><strong>Lesson</strong>: Multinomial Logit model ; Specification and estimation ; IIA assumption <br> <strong>Exercise</strong>: Transport mode choice</td>
-</tr>
-<tr class="even">
-<td align="left"></td>
-<td align="center"></td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">Lesson 7</td>
-<td align="center">3 hours</td>
-<td align="left">Discrete Choice Model Extensions</td>
-<td align="left"><strong>Lesson</strong>: <br> <strong>Exercise</strong>: Ordered Logit on Wallet data ; Nested logit in transport</td>
-</tr>
-<tr class="even">
-<td align="left"></td>
-<td align="center"></td>
-<td align="left"></td>
-<td align="left"></td>
-</tr>
-<tr class="odd">
-<td align="left">Lesson 8</td>
-<td align="center">3 hours</td>
-<td align="left">Project Defense</td>
-<td align="left">Student defense of their final project</td>
-</tr>
-</tbody>
-</table>
+<div class="figure">
+<img src="post/data/Planning.png" alt="Planning 2020 - Version sept" />
+<p class="caption">Planning 2020 - Version sept</p>
 </div>
-<div id="posts" class="section level2">
-<h2>Posts</h2>
+</div>
+<div id="organisation" class="section level2">
+<h2>Organisation</h2>
+<div id="posts" class="section level3">
+<h3>Posts</h3>
 <p>Posts will be used to manage the contact (prof <span class="math inline">\(\rightarrow\)</span> student), as notification during the semester</p>
 </div>
-<div id="caseine" class="section level2">
-<h2>Caseine</h2>
+<div id="caseine" class="section level3">
+<h3>Caseine</h3>
 <p>The <em>Moodle</em> based platform <strong>Caseine</strong> is used for this lesson to interact and to exchange document and to perform some online test.</p>
+</div>
 </div>
 <div id="evaluation" class="section level2">
 <h2>Evaluation</h2>
@@ -150,15 +57,19 @@ nocite: |
 <li><em>individual grade</em> Exam at the end of the semester</li>
 <li><em>group grade</em> Project grade: defense + report</li>
 </ul>
-</div>
-<div id="final-project" class="section level2">
-<h2>Final Project</h2>
+<div id="final-project" class="section level3">
+<h3>Final Project</h3>
 <p>The final project is a long project managed during almost a month.</p>
 <p>It is based on real and complex data.</p>
 <p>Each group of students has to study one research question based on
 - a search for specific litterature on this question
 - the proposed data (common to the class)
 - to build their own analysis (drawing hypothesis from the litterature to be tested with the data using DCM)</p>
+</div>
+</div>
+<div id="description-of-the-class" class="section level2">
+<h2>Description of the class</h2>
+<p><a href="/about">See section about</a></p>
 </div>
 <div id="references" class="section level2 unnumbered">
 <h2>References</h2>
@@ -175,29 +86,8 @@ nocite: |
 <div id="ref-Gujarati2003">
 <p>Gujarati, D. 2003. <em>Basic Econometrics</em>. McGraw &amp; Hill.</p>
 </div>
-<div id="ref-HensherGreene2003">
-<p>Hensher, D.A., and W.H. Greene. 2003. “The Mixed Logit Model: The State of Practice.” <em>Transportation</em> 30 (2): 133–76.</p>
-</div>
-<div id="ref-Hensheretal2005">
-<p>Hensher, D.A., J.M. Rose, and W.H. Greene. 2005. <em>Applied Choice Analysis: A Primer</em>. New York: Cambridge University Press.</p>
-</div>
-<div id="ref-HessDaly2014">
-<p>Hess, S., and A. Daly. 2014. <em>Handbook of Choice Modelling</em>. Edward Elgar.</p>
-</div>
-<div id="ref-Louviereetal2000">
-<p>Louviere, Jordan J., David A. Hensher, and Joffre D. Swait. 2000. <em>Stated Choice Methods: Analysis and Application</em>. New York, NY, USA: Cambridge University Press.</p>
-</div>
-<div id="ref-McFadden2014">
-<p>McFadden, D. 2014. “The New Science of Pleasure: Consumer Choice Behavior and the Measurement of Well-Being.” In <em>Handbook of Choice Modelling</em>, edited by S. Hess and A. Daly, 7–48. UK: Edward Elgar.</p>
-</div>
-<div id="ref-McFaddenTrain2000">
-<p>McFadden, D., and K.E. Train. 2000. “Mixed Mnl Models for Discrete Response.” <em>Journal of of Applied Econometrics</em> 64: 207–40.</p>
-</div>
 <div id="ref-Millot2012">
 <p>Millot, G. 2012. <em>Comprendre et Réaliser Les Tests Statistiques à L’aide de R</em>. DeBoeck.</p>
-</div>
-<div id="ref-MunizagaAlvarez2005">
-<p>Munizaga, Marcela, and Ricardo Alvarez-Daziano. 2005. “Testing Mixed Logit and Probit Models by Simulation.” <em>Transportation Research Record: Journal of the Transportation Research Board</em> 1921: 53–62.</p>
 </div>
 </div>
 </div>

@@ -1,55 +1,56 @@
 ---
-title: "Discret Choice Modelling"
+title: ""
 authorbox: false
 link-citations: yes
 biblio-style: apalike
-bibliography: [post/data/biblio_hdr_v2.bib, post/data/Liste_Publi3.bib, post/data/biblio_DCM.bib]
+bibliography: [post/data/biblio_hdr_v2.bib, post/data/Liste_Publi3.bib, post/data/biblio_SABD.bib]
 nocite: |
-   @MunizagaAlvarez2005,@Greene2008, @McFadden2014,
-   @McFaddenTrain2000,@HensherGreene2003,@Hensheretal2005,@Gujarati2003
-   @Agresti2013, @Millot2012,@Cornillonetal2008,  @Louviereetal2000, @HessDaly2014
+   @Greene2008, @Gujarati2003
+   @Agresti2013, @Millot2012,@Cornillonetal2008
 ---
 
 # Welcome {.tabset}
 
-This is the welcome page
+This is the welcome page of the SABD Class
 
 You find here
 
 - lesson materials description and abstract
-- links to the *Caseine Platform*
+- links to the *Caseine Platform* and *Chamilo Platform*
 - use of the *posts*
 - description of the evaluation 
 - references
 - and other things...
 
+
+**Keywords:**
+
+Data Architecture, Data exploration, Data Analysis, Artificial Intelligence, Machine Learning, Big Data, Reproducible analysis, Data Science
+
+
+## Motivation
+
+Industry 4.0, Digital Factory, Internet of Things, Digital Economy: they all name the fusion of the physical and virtual and digital worlds. Data has become a key asset in the global and digital economy; the amount of collectible, collected and available data keeps growing at a tremendous pace, whereas data sources and dimensions (temporal/spatial, numerical/textual) become more and more complex. 
+Future industrial practices will rely more deeply on information and data management and analytics. Digitization spreading, new communication tools, measure and observation tools (sensor, camera, smartphones, ...) increase needs to collect, stock, organize, secure, consult, extract and analyze data. These new data are characterized by their volume, variety and velocity.
+
+Assessing the relevance of data and selecting the **right data for business decisions** is a key strategic capability.
+
+Analysis of complex and big data, temporal  and spatial data needs specific skills to search and to extract the relevant information and to analyze them accordingly with their specific dimensions.
+
+
+
 ## Lessons planning
 
 Each lesson is described as follows
 
-| Lesson      |  Duration | Topic  |   Activities |
-|:------|:------:|:--------------------|:---------------------------|
-| Lesson 1  | 3 hours | Introduction: DCM with R   |   **Lesson**: DCM overview <br>  **Exercise**: reminder of R and Rmarkdown applied to Categorical variables statistical tests |
-|  |  |  |  |
-| Lesson 2  | 3 hours | Binary logistic Regression   |   **Lesson**: Linear Probability model <br> Logistic regression specification <br> Estimation and inference <br>   **Exercise**: Effect of PSI |
-|  |  |  |  |
-| Lesson 3  | 3 hours | Guided work: Binary Logistic Regression   |   **Exercise**:  Death Penalty ; Binary Women role ; Titanic survival rate |
-|  |  |  |  |
-| Lesson 4  | 3 hours | Project Presentation |  Discussion on the project and the raised difficulties |
-|  |  |  |  |
-| Lesson 5  | 3 hours | Discret Choice Model (RUM)|  **Lesson**: Discret Choice in Microeconomics <br> Probabilistic Discret choice <br>  Binary choice Model <br> Economic Outputs in DCM <br> **Exercise**: Transport mode choice |
-|  |  |  |  |
-| Lesson 6  | 3 hours | Multiple choice Model |  **Lesson**: Multinomial Logit model ; Specification and estimation ; IIA assumption  <br> **Exercise**: Transport mode choice |
-|  |  |  |  |
-| Lesson 7  | 3 hours | Discrete Choice Model Extensions |  **Lesson**: <br> **Exercise**: Ordered Logit on Wallet data ; Nested logit in transport |
-|  |  |  |  |
-| Lesson 8  | 3 hours | Project Defense |  Student defense of their final project |
+![Planning 2020 - Version sept](post/data/Planning.png)
 
-## Posts
+## Organisation
+### Posts
 
 Posts will be used to manage the contact (prof $\rightarrow$ student), as notification during the semester
 
-## Caseine 
+### Caseine 
 
 The *Moodle* based platform **Caseine** is used for this lesson to interact and to exchange document and to perform some online test.
 
@@ -60,7 +61,7 @@ The *Moodle* based platform **Caseine** is used for this lesson to interact and 
 - *individual grade* Exam at the end of the semester
 - *group grade* Project grade: defense + report
 
-## Final Project
+### Final Project
 
 The final project is a long project managed during almost a month.
 
@@ -71,6 +72,9 @@ Each group of students has to study one research question based on
 - the proposed data (common to the class)
 - to build their own analysis (drawing hypothesis from the litterature to be tested with the data using DCM)
 
+## Description of the class
+
+[See section about](/about)
 
 ## References 
 

@@ -1,0 +1,22 @@
+---
+title: "Vizu & GIS"
+subtitle: "Smart Analytics for Big Data"
+author: "Iragaël Joly"
+date: "Automn 2020"
+categories: ["R"]
+tags: ["R Markdown", "plot", "regression"]
+authorbox: false
+---
+
+# Welcome {.tabset}
+This is the 2nd Lesson of **Smart Analytics for Big Data** 
+
+## Zoom link
+
+
+## Documents
+
+[Lesson Part 1 - Visualization](lesson_1.1_Vizu.Rmd)
+
+[Lesson Part 2 - GIS](lesson_1.2_Grammar.Rmd)
+

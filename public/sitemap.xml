@@ -3,12 +3,12 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/categories/</loc>
+    <loc>/</loc>
     <lastmod>2020-09-24T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/</loc>
+    <loc>/categories/</loc>
     <lastmod>2020-09-24T00:00:00+00:00</lastmod>
   </url>
   
@@ -38,25 +38,47 @@
   </url>
   
   <url>
-    <loc>/lesson_0.3_dynamicdoc/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/lesson_1.2_grammar/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>/prerequisites/</loc>
   </url>
   
   <url>
-    <loc>/welcome/</loc>
+    <loc>/about/</loc>
   </url>
   
   <url>
-    <loc>/about/</loc>
+    <loc>/lessons/lesson_0.3_dynamicdoc/</loc>
+  </url>
+  
+  <url>
+    <loc>/lessons/lesson_1.2_grammar/</loc>
+  </url>
+  
+  <url>
+    <loc>/lessons/lesson_1/</loc>
+  </url>
+  
+  <url>
+    <loc>/lessons/lesson_0.1_introduction_v2/</loc>
+  </url>
+  
+  <url>
+    <loc>/lessons/lesson_1.1_vizu/</loc>
+  </url>
+  
+  <url>
+    <loc>/post/2020-08_introduction/</loc>
+  </url>
+  
+  <url>
+    <loc>/lessons/lesson_2_gis/</loc>
+  </url>
+  
+  <url>
+    <loc>/lessons/lesson_3-2_survanalyse-application/</loc>
+  </url>
+  
+  <url>
+    <loc>/lessons/lesson_3_survanalyse/</loc>
   </url>
   
   <url>
@@ -65,34 +87,6 @@
   
   <url>
     <loc>/otherlessons/</loc>
-  </url>
-  
-  <url>
-    <loc>/lesson_1/</loc>
-  </url>
-  
-  <url>
-    <loc>/lesson_0.1_introduction_v2/</loc>
-  </url>
-  
-  <url>
-    <loc>/lesson_1.1_vizu/</loc>
-  </url>
-  
-  <url>
-    <loc>/post/2020-08_introduction/</loc>
-  </url>
-  
-  <url>
-    <loc>/lesson_2_gis/</loc>
-  </url>
-  
-  <url>
-    <loc>/lesson_3-2_survanalyse-application/</loc>
-  </url>
-  
-  <url>
-    <loc>/lesson_3_survanalyse/</loc>
   </url>
   
   <url>
@@ -112,7 +106,15 @@
   </url>
   
   <url>
+    <loc>/lessons/</loc>
+  </url>
+  
+  <url>
     <loc>/post/sometricks-draft/</loc>
+  </url>
+  
+  <url>
+    <loc>/lessons/lesson_2/</loc>
   </url>
   
 </urlset>

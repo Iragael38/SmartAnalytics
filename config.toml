@@ -1,5 +1,5 @@
-baseurl = "/"
-title = "Smart Analytics for IEM"
+baseurl = "https://sabd-smartanalytics.netlify.app/"
+title = "Smart Analytics for Big Data"
 languageCode = "en-us"
 paginate = "10" # Number of posts per page
 theme = "Mainroad"
@@ -24,7 +24,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
   post_meta = ["date", "categories"] # Order of post meta information
 
 [Params.logo]
-  subtitle = "Lesson at Grenoble Inp" # Logo subtitle
+  subtitle = "Lesson at Grenoble Inp - IEM" # Logo subtitle
 
 [Params.sidebar]
   home = "right"   # Configure layout for home page
@@ -37,27 +37,20 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
   recent_num = 5 # Set the number of articles in the "Recent articles" widget
   tags_counter = false # Enable counter for each tag in "Tags" widget (disabled by default)
 
-[[menu.main]]
-    name = "Organisation"
-    url = "/Organisation/"
-    
+
 [[menu.main]]
     name = "Lessons"
     url = "/lessons/"
+    weight = 3
 
-[[menu.main]]
-    name = "About"
-    url = "/about/"
-
+    
 [[menu.main]]
     name = "PreRequisites"
     url = "/PreRequisites/"
-    
-[[menu.main]]
-    name = "Welcome"
-    url = "/welcome/"
-    
+    weight = 4
+
     
 [[menu.main]]
     name = "Other Lessons"
     url = "/OtherLessons/"
+    weight = 6

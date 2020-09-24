@@ -1,5 +1,5 @@
 ---
-title: "Discret Choice Modelling"
+title: "Smart Analytics for Big Data"
 subtitle: "Lessons list"
 author: "Iragaël Joly"
 date: "Automn 2020"
@@ -8,6 +8,9 @@ tags: ["R Markdown", "plot", "regression"]
 authorbox: false
 ---
 
-This is the website of the Lesson **Discret Choice Modelling** taught at Grenoble INP Industrial Engineering and Management School & UGA.
+This is the website of the Lesson **Smart Analytics for Big Data** taught at Grenoble INP Industrial Engineering and Management School & UGA.
 
-[First Lesson](/lesson_1)
+[First Lesson](content/lessons/lesson_1.Rmd/)
+
+[Second Lesson](content/lessons/lesson_2.Rmd) 
+
