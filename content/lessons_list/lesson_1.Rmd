@@ -10,13 +10,15 @@ authorbox: false
 
 This is the 1rst Lesson of **Smart Analytics for Big Data** 
 
+Modifications
 
 ## Case study
 
 https://www.cdc.gov/coronavirus/2019-ncov/covid-data/forecasting-us.html
 
+https://coronavirus.politologue.com/
 
-[Lesson Part 1 - Introduction](lesson_0.1_Introduction_v2.Rmd)
+[Lesson Part 1 - Introduction](/lessons_list/lesson_0.1_Introduction_v2)
 
-[Lesson Part 2 - Dynamic Document](lesson_0.3_DynamicDoc.Rmd)
+[Lesson Part 2 - Dynamic Document](lesson_0.3_DynamicDoc)
 

@@ -4,16 +4,17 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Introduction to Discret Choice Lesson - Smart Analytics for Big Data</title>
+	<title>Introduction to GIS - Geographic Information System - Smart Analytics for Big Data</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<meta name="description" content="">
-		<meta property="og:title" content="Introduction to Discret Choice Lesson" />
-<meta property="og:description" content="IntroductionThese Introduction slides present:
-Table of contents
-IntroductionProgramMotivationsImportance of DCMCourse ObjectivesGeneral Context of Choice analysisFour broad frameworksSample and MeasurementIssues in Model BuildingR and Tests for Categorical DataInference for a (Single) ProportionTwo-Way Contingency TablesThe Odds-RatioChi-Squared Tests of IndependenceProgram5 steps/lessons :
-• Introduction• Binary Choice• Multinomial Choices• Advanced Models : papers presentation (with application)• Discussion : papers discussion (reversed class)• Guided work sessions" />
+		<meta property="og:title" content="Introduction to GIS - Geographic Information System" />
+<meta property="og:description" content="A FINIR
+IntroductionVisualisation of geographic information is become one of the major tool of the digital information analytic.
+Numerous softwares manage visualization of geographic information from full-scale GIS applications such as ArcGIS and QGIS to web-based tools like Google maps to any number of programing languages.
+Using a command-line interface has the benefits of enabling both steps analysis and visualization in customizable, transparent and reproducible manner.
+The goal of this post is to introduce the basic landscape of working with spatial data in R from the perspective of a non-specialist." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="/post/2020-08_introduction/" />
+<meta property="og:url" content="/lessons_list/lesson_2_gis/" />
 
 
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
@@ -82,7 +83,7 @@ IntroductionProgramMotivationsImportance of DCMCourse ObjectivesGeneral 
 <main class="main" role="main">
 	<article class="post">
 		<header class="post__header">
-			<h1 class="post__title">Introduction to Discret Choice Lesson</h1>
+			<h1 class="post__title">Introduction to GIS - Geographic Information System</h1>
 			<div class="post__meta meta"><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/r/" rel="category">R</a>
 	</span>
 </div></div>
@@ -90,85 +91,35 @@ IntroductionProgramMotivationsImportance of DCMCourse ObjectivesGeneral 
 			
 
 
+<p><strong>A FINIR</strong></p>
 <div id="introduction" class="section level1">
 <h1>Introduction</h1>
-<p>These Introduction slides present:</p>
-<p><em>Table of contents</em></p>
-<ol style="list-style-type: decimal">
-<li>Introduction</li>
-</ol>
-<ul>
-<li>Program</li>
-<li>Motivations</li>
-<li>Importance of DCM</li>
-<li>Course Objectives</li>
-</ul>
-<ol start="2" style="list-style-type: decimal">
-<li>General Context of Choice analysis</li>
-</ol>
-<ul>
-<li>Four broad frameworks</li>
-<li>Sample and Measurement</li>
-<li>Issues in Model Building</li>
-</ul>
-<ol start="3" style="list-style-type: decimal">
-<li>R and Tests for Categorical Data</li>
-</ol>
-<ul>
-<li>Inference for a (Single) Proportion</li>
-<li>Two-Way Contingency Tables</li>
-<li>The Odds-Ratio</li>
-<li>Chi-Squared Tests of Independence</li>
-</ul>
-</div>
-<div id="program" class="section level1">
-<h1>Program</h1>
-<p>5 steps/lessons :</p>
-<p>• Introduction
-• Binary Choice
-• Multinomial Choices
-• Advanced Models : papers presentation (with application)
-• Discussion : papers discussion (reversed class)
-• Guided work sessions</p>
-</div>
-<div id="references" class="section level1 unnumbered">
-<h1>References</h1>
+<p>Visualisation of geographic information is become one of the major tool of the digital information analytic.</p>
+<p>Numerous softwares manage visualization of geographic information from full-scale GIS applications such as ArcGIS and QGIS to web-based tools like Google maps to any number of programing languages.</p>
+<p>Using a command-line interface has the benefits of enabling both steps analysis and visualization in customizable, transparent and reproducible manner.</p>
+<hr />
+<p>The goal of this post is to introduce the basic landscape of working with spatial data in R from the perspective of a non-specialist.</p>
+<p>The use of the <code>ggmap</code> package is to geocode data and create maps using the <code>ggplot2</code> system.</p>
+<p>The <code>sp</code> and <code>sf</code> packages use different methodologies for integrating spatial data into R.</p>
+<p>The <code>sp</code> package introduced a coherent set of classes and methods for handling spatial data in 2005.
+The package remains the backbone of many packages that provide GIS capabilities in R.</p>
+<p>The <code>sf</code> package implements the simple features open standard for the representation of geographic vector data in R.</p>
+<p>The package first appeared on CRAN at the end of 2016 and is under very active development. The sf package is meant to supersede sp, implementing ways to store spatial data in R that integrate with the <code>tidyverse</code> workflow of the packages developed by Hadley Wickham and others.</p>
+<div id="references" class="section level2">
+<h2>References</h2>
+<p><a href="http://cartonumerique.blogspot.com/p/cartographie-thematique.html" class="uri">http://cartonumerique.blogspot.com/p/cartographie-thematique.html</a></p>
+<p><a href="https://roelandtn.frama.io/post/simple-mapping-with-sf/" class="uri">https://roelandtn.frama.io/post/simple-mapping-with-sf/</a></p>
+<p><a href="https://tender-curie-5b83bc.netlify.app/2019/03/01/mapping-sncf-stations/" class="uri">https://tender-curie-5b83bc.netlify.app/2019/03/01/mapping-sncf-stations/</a></p>
+<p><a href="https://github.com/oliviergimenez/analysesGeoloup" class="uri">https://github.com/oliviergimenez/analysesGeoloup</a></p>
+<p><a href="https://statnmap.com/2018-07-14-introduction-to-mapping-with-sf-and-co/" class="uri">https://statnmap.com/2018-07-14-introduction-to-mapping-with-sf-and-co/</a>
+<a href="https://geocompr.robinlovelace.net/" class="uri">https://geocompr.robinlovelace.net/</a></p>
 <div id="refs" class="references">
-<div id="ref-Agresti2013">
-<p>Agresti, A. 2013. <em>Categorical Data Analysis</em>. Wiley.</p>
+<div id="ref-Bivand2013">
+<p>Bivand, Roger S., Edzer J. Pebesma, and Virgilio. Gómez-Rubio. 2008. <em>Applied Spatial Data Analysis with R</em>. New York; London: Springer.</p>
 </div>
-<div id="ref-Cornillonetal2008">
-<p>Cornillon, P.A., A. Guyader, F. Husson, N. Jégou, J. Josse, M. Kloareg, E. Matzer-Lober, and L. Rouvière. 2008. <em>Statistiques Avec R</em>. PUR.</p>
+<div id="ref-lovelace2019">
+<p>Lovelace, R., J. Nowosad, and J. Muenchow. 2019. <em>Geocomputation with R</em>. Chapman &amp; Hall/Crc the R Series. CRC Press. <a href="https://books.google.fr/books?id=0y6ODwAAQBAJ">https://books.google.fr/books?id=0y6ODwAAQBAJ</a>.</p>
 </div>
-<div id="ref-Greene2008">
-<p>Greene, W.H. 2008. <em>Econometric Analysis, 6th</em>. Prentice-HallOxford: Clarendon Press.</p>
-</div>
-<div id="ref-Gujarati2003">
-<p>Gujarati, D. 2003. <em>Basic Econometrics</em>. McGraw &amp; Hill.</p>
-</div>
-<div id="ref-HensherGreene2003">
-<p>Hensher, D.A., and W.H. Greene. 2003. “The Mixed Logit Model: The State of Practice.” <em>Transportation</em> 30 (2): 133–76.</p>
-</div>
-<div id="ref-Hensheretal2005">
-<p>Hensher, D.A., J.M. Rose, and W.H. Greene. 2005. <em>Applied Choice Analysis: A Primer</em>. New York: Cambridge University Press.</p>
-</div>
-<div id="ref-HessDaly2014">
-<p>Hess, S., and A. Daly. 2014. <em>Handbook of Choice Modelling</em>. Edward Elgar.</p>
-</div>
-<div id="ref-Louviereetal2000">
-<p>Louviere, Jordan J., David A. Hensher, and Joffre D. Swait. 2000. <em>Stated Choice Methods: Analysis and Application</em>. New York, NY, USA: Cambridge University Press.</p>
-</div>
-<div id="ref-McFadden2014">
-<p>McFadden, D. 2014. “The New Science of Pleasure: Consumer Choice Behavior and the Measurement of Well-Being.” In <em>Handbook of Choice Modelling</em>, edited by S. Hess and A. Daly, 7–48. UK: Edward Elgar.</p>
-</div>
-<div id="ref-McFaddenTrain2000">
-<p>McFadden, D., and K.E. Train. 2000. “Mixed Mnl Models for Discrete Response.” <em>Journal of of Applied Econometrics</em> 64: 207–40.</p>
-</div>
-<div id="ref-Millot2012">
-<p>Millot, G. 2012. <em>Comprendre et Réaliser Les Tests Statistiques à L’aide de R</em>. DeBoeck.</p>
-</div>
-<div id="ref-MunizagaAlvarez2005">
-<p>Munizaga, Marcela, and Ricardo Alvarez-Daziano. 2005. “Testing Mixed Logit and Probit Models by Simulation.” <em>Transportation Research Record: Journal of the Transportation Research Board</em> 1921: 53–62.</p>
 </div>
 </div>
 </div>
@@ -197,15 +148,15 @@ IntroductionProgramMotivationsImportance of DCMCourse ObjectivesGeneral 
 
 <nav class="pager flex">
 	<div class="pager__item pager__item--prev">
-		<a class="pager__link" href="/post/sometricks-draft/" rel="prev">
+		<a class="pager__link" href="/lessons_list/lesson_3-2_survanalyse-application/" rel="prev">
 			<span class="pager__subtitle">«&thinsp;Previous</span>
-			<p class="pager__title">Some tricks</p>
+			<p class="pager__title">Introduction to Survival Analysis</p>
 		</a>
 	</div>
 	<div class="pager__item pager__item--next">
-		<a class="pager__link" href="/post/first-lesson-october-1rst-2020/" rel="next">
+		<a class="pager__link" href="/lessons_list/lesson_1.1_vizu/" rel="next">
 			<span class="pager__subtitle">Next&thinsp;»</span>
-			<p class="pager__title">First Lesson October 1rst 2020</p>
+			<p class="pager__title">Introduction to Data Vizualisation</p>
 		</a>
 	</div>
 </nav>

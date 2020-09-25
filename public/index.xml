@@ -51,10 +51,10 @@ Tuto:RMarkdown for Scientists - Nicholas Tierney
     
     <item>
       <title>Dynamic Document with R-Markdown</title>
-      <link>/lessons/lesson_0.3_dynamicdoc/</link>
+      <link>/lessons_list/lesson_0.3_dynamicdoc/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/lessons/lesson_0.3_dynamicdoc/</guid>
+      <guid>/lessons_list/lesson_0.3_dynamicdoc/</guid>
       <description>RMarkdown and Dynamic documentAnalyses need to be communicated to others. Publishing papers, blog posts, PowerPoint presentations, books or dashboards are many outputs or documents taht will be connected to the results analysis.
 R Markdown permits to publish documents integrated the analysis and visualization.
 R Markdown is a package, as well as an ecosystem of tools.
@@ -63,10 +63,10 @@ It allows to add R code to a plain-text file with some Markdown formatting.</des
     
     <item>
       <title>Graphics with R</title>
-      <link>/lessons/lesson_1.2_grammar/</link>
+      <link>/lessons_list/lesson_1.2_grammar/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/lessons/lesson_1.2_grammar/</guid>
+      <guid>/lessons_list/lesson_1.2_grammar/</guid>
       <description>Grammar of ggplot2()Start exampledf &amp;lt;- data.frame(x=1:15, y=1:15)ggplot(df, aes(x,y)) +geom_point() +labs(title= &amp;quot;Plot example&amp;quot;,subtitle = &amp;quot;Subtitled&amp;quot;,x=&amp;quot;x-values&amp;quot;, y = &amp;quot;y-values&amp;quot;) +theme(panel.background = element_rect(fill = &amp;quot;white&amp;quot;, color= &amp;quot;grey50&amp;quot;))Grammar of graphic: ggplotThe ggplot2 package is loaded to access the ggplot() function.
 The graph is created by stacking together several short phrases, each describing an aspect of the graphic.
 With ggplot, the data need need not to be reshaped for each type of graphical representation (boxplot, histogram, scatter,…).</description>
@@ -74,12 +74,14 @@ With ggplot, the data need need not to be reshaped for each type of graphical re
     
     <item>
       <title>Introduction to Data Science Management project</title>
-      <link>/lessons/lesson_1/</link>
+      <link>/lessons_list/lesson_1/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/lessons/lesson_1/</guid>
+      <guid>/lessons_list/lesson_1/</guid>
       <description>This is the 1rst Lesson of Smart Analytics for Big Data
+Modifications
 Case studyhttps://www.cdc.gov/coronavirus/2019-ncov/covid-data/forecasting-us.html
+https://coronavirus.politologue.com/
 Lesson Part 1 - Introduction
 Lesson Part 2 - Dynamic Document
 </description>
@@ -87,10 +89,10 @@ Lesson Part 2 - Dynamic Document
     
     <item>
       <title>Introduction to Data Vizualisation</title>
-      <link>/lessons/lesson_0.1_introduction_v2/</link>
+      <link>/lessons_list/lesson_0.1_introduction_v2/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/lessons/lesson_0.1_introduction_v2/</guid>
+      <guid>/lessons_list/lesson_0.1_introduction_v2/</guid>
       <description>Reproducible AnalysisTypical data analysis workflow looks like this:
 collect dataput it in a file or spreadsheet or databaserun some analyses, written in various scripts,perhaps saving some intermediate results along the wayor maybe always working on the raw data.create some plots or tables of relevant summaries of the data,and then
 go and write a report about the results in a text editor or word processor.</description>
@@ -98,10 +100,10 @@ go and write a report about the results in a text editor or word processor.</des
     
     <item>
       <title>Introduction to Data Vizualisation</title>
-      <link>/lessons/lesson_1.1_vizu/</link>
+      <link>/lessons_list/lesson_1.1_vizu/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/lessons/lesson_1.1_vizu/</guid>
+      <guid>/lessons_list/lesson_1.1_vizu/</guid>
       <description>https://www.statisticshowto.com/misleading-graphs/&amp;gt; References
 Huff, D. (1993). How to Lie With Statistics. W. W. Norton &amp;amp; CompanyGonick, L. (1993). The Cartoon Guide to Statistics. HarperPerennial.CITE THIS AS:&amp;gt; Stephanie Glen. “Misleading Graphs: Real Life Examples” From StatisticsHowTo.com: Elementary Statistics for the rest of us! https://www.statisticshowto.com/misleading-graphs/https://github.com/stoltzmaniac/Data-Visualization-Lesson/blob/master/Data%20Visualization%20-%20Part%203.Rmd
 https://mschermann.github.io/data_viz_reader/
@@ -123,10 +125,10 @@ IntroductionProgramMotivationsImportance of DCMCourse ObjectivesGeneral 
     
     <item>
       <title>Introduction to GIS - Geographic Information System</title>
-      <link>/lessons/lesson_2_gis/</link>
+      <link>/lessons_list/lesson_2_gis/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/lessons/lesson_2_gis/</guid>
+      <guid>/lessons_list/lesson_2_gis/</guid>
       <description>A FINIR
 IntroductionVisualisation of geographic information is become one of the major tool of the digital information analytic.
 Numerous softwares manage visualization of geographic information from full-scale GIS applications such as ArcGIS and QGIS to web-based tools like Google maps to any number of programing languages.
@@ -136,10 +138,10 @@ The goal of this post is to introduce the basic landscape of working with spatia
     
     <item>
       <title>Introduction to Survival Analysis</title>
-      <link>/lessons/lesson_3-2_survanalyse-application/</link>
+      <link>/lessons_list/lesson_3-2_survanalyse-application/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/lessons/lesson_3-2_survanalyse-application/</guid>
+      <guid>/lessons_list/lesson_3-2_survanalyse-application/</guid>
       <description>A FINIR
 Exercise - Unemployment durationSurvival analysis models covariates that influence time-to-event.
 OLS regression methods are less efficient because the time-to-event is typically not normally distributed (positive, skewed, nearly discret when rounding are present), and the model cannot handle censored observation, without modification.
@@ -148,10 +150,10 @@ library(Ecdat)## Warning: le package &amp;#39;Ecdat&amp;#39; a été compilé a
     
     <item>
       <title>Introduction to Survival Analysis</title>
-      <link>/lessons/lesson_3_survanalyse/</link>
+      <link>/lessons_list/lesson_3_survanalyse/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/lessons/lesson_3_survanalyse/</guid>
+      <guid>/lessons_list/lesson_3_survanalyse/</guid>
       <description>A FINIR
 Introduction corresponds to a set of statistical approaches used to investigate the of interest to occur.
 Medecine, sociology, economyinformatics, engineering,…In basic categorical data analysis for example, we compare proportions (risks, rates, etc) between different groups.
@@ -176,9 +178,11 @@ Discrete Choice Modelling</description>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/lessons_list/</guid>
-      <description>This is the website of the Lesson Smart Analytics for Big Data taught at Grenoble INP Industrial Engineering and Management School &amp;amp; UGA.
+      <description>Lessons listThis is the website of the Lesson Smart Analytics for Big Data taught at Grenoble INP Industrial Engineering and Management School &amp;amp; UGA.
+First Lesson - 01/10/2020new
 First Lesson
-Second Lesson</description>
+second Lesson - 08/10/2020Second Lesson
+</description>
     </item>
     
     <item>
@@ -195,10 +199,10 @@ you can even blockquote CODE by prefixing with &amp;gt;
     
     <item>
       <title>Vizu &amp; GIS</title>
-      <link>/lessons/lesson_2/</link>
+      <link>/lessons_list/lesson_2/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/lessons/lesson_2/</guid>
+      <guid>/lessons_list/lesson_2/</guid>
       <description>WelcomeThis is the 2nd Lesson of Smart Analytics for Big Data
 Zoom linkDocumentsLesson Part 1 - Visualization
 Lesson Part 2 - GIS

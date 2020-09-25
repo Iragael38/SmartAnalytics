@@ -8,9 +8,17 @@ tags: ["R Markdown", "plot", "regression"]
 authorbox: false
 ---
 
+# Lessons list
+
 This is the website of the Lesson **Smart Analytics for Big Data** taught at Grenoble INP Industrial Engineering and Management School & UGA.
 
-[First Lesson](content/lessons/lesson_1.Rmd/)
+## First Lesson - 01/10/2020
 
-[Second Lesson](content/lessons/lesson_2.Rmd) 
+new
+
+[First Lesson](lesson_1)
+
+## second Lesson - 08/10/2020
+
+[Second Lesson](lesson_2) 
 
