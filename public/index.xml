@@ -60,17 +60,6 @@ With ggplot, the data need need not to be reshaped for each type of graphical re
     </item>
     
     <item>
-      <title>Introduction</title>
-      <link>/lessons_list/lesson_0.0_introduction/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/lessons_list/lesson_0.0_introduction/</guid>
-      <description>Plan and Organisation of the lessonTodayIntroduction (45min)Reproducible research (45min)in-class: introduction &amp;amp; demoout-of-class: readingCase Study (1h30min)Team work on Data VisualizationsDiscussionIntroductionContextIndustry 4.0, Digital Factory, Internet of Things, Digital Economy
-Assessing the relevance of data and selecting the right data for business decisions is a key strategic capability.
-Analysis of complex and big data, temporal and spatial data</description>
-    </item>
-    
-    <item>
       <title>Introduction to Data Vizualisation</title>
       <link>/lessons_list/lesson_1.1_vizu/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
