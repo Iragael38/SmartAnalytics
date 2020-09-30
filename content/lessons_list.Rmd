@@ -12,13 +12,11 @@ authorbox: false
 
 This is the website of the Lesson **Smart Analytics for Big Data** taught at Grenoble INP Industrial Engineering and Management School & UGA.
 
-## First Lesson - 01/10/2020
+## First Lesson - 01/10/2020 - 9:30 - 12:30
 
-new
+Welcome page of [First Lesson](../post/first-lesson-october-1rst-2020)
 
-[First Lesson](lesson_1)
+## Second Lesson - 08/10/2020 - 8:00 - 12:30
 
-## second Lesson - 08/10/2020
-
-[Second Lesson](lesson_2) 
+Material for the [Second Lesson](lesson_2) 
 

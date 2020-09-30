@@ -8,7 +8,7 @@ tags: ["R Markdown", "plot", "regression"]
 authorbox: false
 link-citations: yes
 biblio-style: apalike
-bibliography: [post/data/biblio_hdr_v2.bib, post/data/Liste_Publi3.bib, post/data/biblio_SABD.bib]
+bibliography: [./data/biblio_hdr_v2.bib, ./data/Liste_Publi3.bib, ./data/biblio_SABD.bib]
 nocite: |
   @Bivand2013, @lovelace2019
 ---
@@ -49,12 +49,12 @@ nocite: |
 <em>Right censoring</em> happens when you track the subject through the end of the study and the event never occurs. This could also happen due to the subject dropping out of the study (for other reasons than the event under study)</p>
 <p><em>Left censoring</em> occurs when the “start” is unknown.</p>
 <p>We only know that the data is at least <span class="math inline">\(t\)</span>, we do not know anything about survival time after that.</p>
-<p><img src="post/data/Censure.png" /></p>
+<p><img src="data/Censure.png" /></p>
 <p>The <strong>survival</strong> function, is the probability an event does not occur (an individual survives) up to and including time <span class="math inline">\(t\)</span>.</p>
 <p><span class="math display">\[S(t)=Pr(T&gt;t)\]</span>
 where <span class="math inline">\(T\)</span> is the time-to-event.</p>
 <p><span class="math inline">\(S\)</span> is a probability, so <span class="math inline">\(0\leq S(t) \leq 1\)</span>, since survival times are always positive (<span class="math inline">\(T \geq 0\)</span>)</p>
-<p><img src="/lesson_3_SurvAnalyse_files/figure-html/unnamed-chunk-2-1.png" width="672" /><img src="/lesson_3_SurvAnalyse_files/figure-html/unnamed-chunk-2-2.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_3_SurvAnalyse_files/figure-html/unnamed-chunk-2-1.png" width="672" /><img src="/lessons_list/lesson_3_SurvAnalyse_files/figure-html/unnamed-chunk-2-2.png" width="672" /></p>
 <p>The <strong>hazard</strong> is the instantaneous event rate at a particular time point <span class="math inline">\(t\)</span>.</p>
 <p>Survival analysis doesn’t assume the hazard is constant over time.</p>
 <p><span class="math display">\[h(t) = lim_{\Delta \rightarrow 0} \frac{P( t \leq T &lt; t+ \Delta \quad | \quad  T \geq t)}{\Delta}\]</span></p>
@@ -76,7 +76,7 @@ where <span class="math inline">\(T\)</span> is the time-to-event.</p>
 - <span class="math inline">\(S(t)\)</span> is the probability an individual atteign the date <span class="math inline">\(t\)</span>
 - Median survival, at each data <span class="math inline">\(t\)</span>, gives an estimate of the expected survival time, at each time
 - Shape of <span class="math inline">\(S(t)\)</span> illustrates the temporal dynamic of the process.</p>
-<p><img src="post/data/TimeFunctions.png" /></p>
+<p><img src="data/TimeFunctions.png" /></p>
 </div>
 <div id="estimation" class="section level2">
 <h2>Estimation</h2>
@@ -222,7 +222,7 @@ exp\{  (X_i - X_j) \beta \}\]</span></p>
 <p>Elasticity of the hazard rate with respect to the variable <span class="math inline">\(X_k\)</span> is:</p>
 <p><span class="math display">\[\epsilon_k = \frac{X_k}{h} \times \frac{\partial h}{\partial X_k}= \frac{\partial ln h}{\partial ln X_k}= \beta_k X_k
 \]</span></p>
-<p><img src="post/data/Ph_Graph.png" /></p>
+<p><img src="data/Ph_Graph.png" /></p>
 <p><strong>Cox PH regression</strong></p>
 <p>Cox PH regression models the natural log of the hazard at time <span class="math inline">\(t\)</span>, denoted <span class="math inline">\(h(t)\)</span>
 , as a function of the baseline hazard <span class="math inline">\((h_0(t))\)</span> and multiple covariates (<span class="math inline">\(x_1, \dots x_k\)</span>).</p>
@@ -345,8 +345,8 @@ For quantitative variables <span class="math inline">\(100 \times (e^{\beta_k}-1
 </table>
 <p>Exponential hazard (<span class="math inline">\(h_1(t)\)</span>) is constant over time and caracterises process that are independant with time. Weibull hazard (<span class="math inline">\(h_2(t), h_3(t), h_4(t)\)</span>), is monotonic. If it is positive, then the longer the time-to-event, the higher the probability of event.</p>
 <p>Log-logistic hazard (<span class="math inline">\(h_5(t)\)</span>) admits monotonic and non-monotonic forms, given the variance parameter of the distribution.</p>
-<p><img src="post/data/HasardForms.png" /></p>
-<p>For the mathematics of each of these three models see <a href="Pages_de_Annexe_theorique_MD.pdf">post/data/Pages_de_Annexe_theorique_MD.pdf</a></p>
+<p><img src="data/HasardForms.png" /></p>
+<p>For the mathematics of each of these three models see <a href="Pages_de_Annexe_theorique_MD.pdf">./data/Pages_de_Annexe_theorique_MD.pdf</a></p>
 </div>
 <div id="graphical-diagnostic-of-the-hazard-form" class="section level3">
 <h3>Graphical Diagnostic of the hazard form</h3>

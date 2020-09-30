@@ -18,12 +18,12 @@
   </url>
   
   <url>
-    <loc>/tags/lesson/</loc>
+    <loc>/categories/lesson/</loc>
     <lastmod>2020-09-24T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/lesson/</loc>
+    <loc>/tags/lesson/</loc>
     <lastmod>2020-09-24T00:00:00+00:00</lastmod>
   </url>
   
@@ -46,19 +46,11 @@
   </url>
   
   <url>
-    <loc>/lessons_list/lesson_0.3_dynamicdoc/</loc>
-  </url>
-  
-  <url>
     <loc>/lessons_list/lesson_1.2_grammar/</loc>
   </url>
   
   <url>
-    <loc>/lessons_list/lesson_1/</loc>
-  </url>
-  
-  <url>
-    <loc>/lessons_list/lesson_0.1_introduction_v2/</loc>
+    <loc>/lessons_list/lesson_0.0_introduction/</loc>
   </url>
   
   <url>
@@ -66,11 +58,11 @@
   </url>
   
   <url>
-    <loc>/post/2020-08_introduction/</loc>
+    <loc>/lessons_list/lesson_2_gis/</loc>
   </url>
   
   <url>
-    <loc>/lessons_list/lesson_2_gis/</loc>
+    <loc>/lessons_list/lesson_0.1_reproducibleresearch/</loc>
   </url>
   
   <url>
@@ -79,6 +71,10 @@
   
   <url>
     <loc>/lessons_list/lesson_3_survanalyse/</loc>
+  </url>
+  
+  <url>
+    <loc>/lessons_list/lesson_0.2_casestudy/</loc>
   </url>
   
   <url>

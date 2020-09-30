@@ -169,11 +169,10 @@ If these elements are unknown by the student, teachers may decide to exclude the
 
 # References
 
-Ajouter des réf Architecture
-
-
 ---
 \nocite: |
  @hayter2012, @Greene2008,@Greene2009, @Hougaard2000, @Lawless2003, @ListwonStPierre2013, @MaSeetharaman2004, @MartinussenScheike2006, @xie2015, @xie2016, @McFaddenTrain2000, @Train2009, @Agresti2013, @Kantardzic2011
 
 Thanks for reading!
+
+[Here](https://ijolyresearch.netlify.app/) you find presentation of my activities

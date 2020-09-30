@@ -1,0 +1,84 @@
+---
+title: "Introductory Cases Studies"
+subtitle: "Smart Analytics for Big Data"
+author: "Iragaël Joly"
+date: "Automn 2020"
+categories: ["R"]
+tags: ["R Markdown", "plot", "regression"]
+authorbox: false
+---
+
+
+
+## Case Study
+
+
+**Work group:**
+
+By group of 5 to 6 students:
+
+1. you will explore one of the following links 
+1. you will search for the data type, qualification, etc
+1. you will question the workflow supporting the website
+1. you will question the interpretation, the vizualisation of the results, its strengths and weaknesses
+1. you will present your result using an RMarkdown presentation (HTML IoSlides or Beamer) - No more than 4 slides
+  + First: names, title, link as subtitle
+  + Second: survey of the data elements
+  + Third: workflow [^1]
+  + Fourth: critical analysis
+  
+[^1]: `DiagramR` may be usefull
+
+
+
+### Cases - links
+
+#### CS1 - Coronavirus Data
+
+https://coronavirus.politologue.com/
+
+#### CS2 - Coronavirus Forecast
+
+https://www.cdc.gov/coronavirus/2019-ncov/covid-data/forecasting-us.html
+
+#### CS3 - Estate Market
+
+https://www.immo-data.fr/
+
+#### CS 4 - Metal Map
+
+https://mapofmetal.com/
+
+#### CD 5 - Google Trend ad vizualisation 
+
+https://trends.google.com/trends/?geo=US
+
+and
+
+https://trends.google.com/trends/story/US_cu_6fXtAFIBAABWdM_en
+
+
+#### CS6 - Price of Gold
+
+https://www.visualcapitalist.com/golden-bulls-the-price-of-gold/
+
+#### CS7 - Grades around the world
+
+http://grades.dha.io/
+
+#### CS8 - Payroll in Hockey and migration
+
+http://hockeyimpact.darkhorseanalytics.com/
+
+and 
+
+http://usmigration.dha.io/
+
+#### CS9 - Vizualisation tools - no data case ?
+
+http://mortgage.darkhorseanalytics.com/
+
+and 
+
+http://worldchatclock.com/
+

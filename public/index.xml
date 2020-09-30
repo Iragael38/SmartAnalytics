@@ -50,18 +50,6 @@ Tuto:RMarkdown for Scientists - Nicholas Tierney
     </item>
     
     <item>
-      <title>Dynamic Document with R-Markdown</title>
-      <link>/lessons_list/lesson_0.3_dynamicdoc/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/lessons_list/lesson_0.3_dynamicdoc/</guid>
-      <description>RMarkdown and Dynamic documentAnalyses need to be communicated to others. Publishing papers, blog posts, PowerPoint presentations, books or dashboards are many outputs or documents taht will be connected to the results analysis.
-R Markdown permits to publish documents integrated the analysis and visualization.
-R Markdown is a package, as well as an ecosystem of tools.
-It allows to add R code to a plain-text file with some Markdown formatting.</description>
-    </item>
-    
-    <item>
       <title>Graphics with R</title>
       <link>/lessons_list/lesson_1.2_grammar/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -73,29 +61,14 @@ With ggplot, the data need need not to be reshaped for each type of graphical re
     </item>
     
     <item>
-      <title>Introduction to Data Science Management project</title>
-      <link>/lessons_list/lesson_1/</link>
+      <title>Introduction</title>
+      <link>/lessons_list/lesson_0.0_introduction/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/lessons_list/lesson_1/</guid>
-      <description>This is the 1rst Lesson of Smart Analytics for Big Data
-Modifications
-Case studyhttps://www.cdc.gov/coronavirus/2019-ncov/covid-data/forecasting-us.html
-https://coronavirus.politologue.com/
-Lesson Part 1 - Introduction
-Lesson Part 2 - Dynamic Document
-</description>
-    </item>
-    
-    <item>
-      <title>Introduction to Data Vizualisation</title>
-      <link>/lessons_list/lesson_0.1_introduction_v2/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/lessons_list/lesson_0.1_introduction_v2/</guid>
-      <description>Reproducible AnalysisTypical data analysis workflow looks like this:
-collect dataput it in a file or spreadsheet or databaserun some analyses, written in various scripts,perhaps saving some intermediate results along the wayor maybe always working on the raw data.create some plots or tables of relevant summaries of the data,and then
-go and write a report about the results in a text editor or word processor.</description>
+      <guid>/lessons_list/lesson_0.0_introduction/</guid>
+      <description>Plan and Organisation of the lessonTodayIntroduction (45min)Reproducible research (45min)in-class: introduction &amp;amp; demoout-of-class: readingCase Study (1h30min)Team work on Data VisualizationsDiscussionIntroductionContextIndustry 4.0, Digital Factory, Internet of Things, Digital Economy
+Assessing the relevance of data and selecting the right data for business decisions is a key strategic capability.
+Analysis of complex and big data, temporal and spatial data</description>
     </item>
     
     <item>
@@ -105,22 +78,12 @@ go and write a report about the results in a text editor or word processor.</des
       
       <guid>/lessons_list/lesson_1.1_vizu/</guid>
       <description>https://www.statisticshowto.com/misleading-graphs/&amp;gt; References
-Huff, D. (1993). How to Lie With Statistics. W. W. Norton &amp;amp; CompanyGonick, L. (1993). The Cartoon Guide to Statistics. HarperPerennial.CITE THIS AS:&amp;gt; Stephanie Glen. “Misleading Graphs: Real Life Examples” From StatisticsHowTo.com: Elementary Statistics for the rest of us! https://www.statisticshowto.com/misleading-graphs/https://github.com/stoltzmaniac/Data-Visualization-Lesson/blob/master/Data%20Visualization%20-%20Part%203.Rmd
+Huff, D. (1993). How to Lie With Statistics. W. W. Norton &amp;amp; CompanyGonick, L. (1993). The Cartoon Guide to Statistics. HarperPerennial.CITE THIS AS:&amp;gt; Stephanie Glen. “Misleading Graphs: Real Life Examples” From StatisticsHowTo.com: Elementary Statistics for the rest of us! https://www.statisticshowto.com/misleading-graphs/
+https://datavizcatalogue.com/resources.html***
+https://github.com/stoltzmaniac/Data-Visualization-Lesson/blob/master/Data%20Visualization%20-%20Part%203.Rmd
 https://mschermann.github.io/data_viz_reader/
 https://aims.gitbook.io/farm-data-mooc/unit-3-using-data/lesson-3.3-data-analysis-and-visualization
 Grammar of Graphics ggplot2()Grammar of ggplot2()Start exampledf &amp;lt;- data.frame(x=1:15, y=1:15)ggplot(df, aes(x,y)) +geom_point() +labs(title= &amp;quot;Plot example&amp;quot;,subtitle = &amp;quot;Subtitled&amp;quot;,x=&amp;quot;x-values&amp;quot;, y = &amp;quot;y-values&amp;quot;) +theme(panel.</description>
-    </item>
-    
-    <item>
-      <title>Introduction to Discret Choice Lesson</title>
-      <link>/post/2020-08_introduction/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2020-08_introduction/</guid>
-      <description>IntroductionThese Introduction slides present:
-Table of contents
-IntroductionProgramMotivationsImportance of DCMCourse ObjectivesGeneral Context of Choice analysisFour broad frameworksSample and MeasurementIssues in Model BuildingR and Tests for Categorical DataInference for a (Single) ProportionTwo-Way Contingency TablesThe Odds-RatioChi-Squared Tests of IndependenceProgram5 steps/lessons :
-• Introduction• Binary Choice• Multinomial Choices• Advanced Models : papers presentation (with application)• Discussion : papers discussion (reversed class)• Guided work sessions</description>
     </item>
     
     <item>
@@ -134,6 +97,17 @@ IntroductionVisualisation of geographic information is become one of the major 
 Numerous softwares manage visualization of geographic information from full-scale GIS applications such as ArcGIS and QGIS to web-based tools like Google maps to any number of programing languages.
 Using a command-line interface has the benefits of enabling both steps analysis and visualization in customizable, transparent and reproducible manner.
 The goal of this post is to introduce the basic landscape of working with spatial data in R from the perspective of a non-specialist.</description>
+    </item>
+    
+    <item>
+      <title>Introduction to Reproducible Analysis</title>
+      <link>/lessons_list/lesson_0.1_reproducibleresearch/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/lessons_list/lesson_0.1_reproducibleresearch/</guid>
+      <description>Reproducible AnalysisTypical data analysis workflow looks like this:
+collect dataput it in a file or spreadsheet or databaserun some analyses, written in various scripts,perhaps saving some intermediate results along the wayor maybe always working on the raw data.create some plots or tables of relevant summaries of the data,and then
+go and write a report about the results in a text editor or word processor.</description>
     </item>
     
     <item>
@@ -162,6 +136,17 @@ We implicitly assume that the rates are constant over the period of the study, a
     </item>
     
     <item>
+      <title>Introductory Cases Studies</title>
+      <link>/lessons_list/lesson_0.2_casestudy/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/lessons_list/lesson_0.2_casestudy/</guid>
+      <description>Case StudyWork group:
+By group of 5 to 6 students:
+you will explore one of the following linksyou will search for the data type, qualification, etcyou will question the workflow supporting the websiteyou will question the interpretation, the vizualisation of the results, its strengths and weaknessesyou will present your result using an RMarkdown presentation (HTML IoSlides or Beamer) - No more than 4 slidesFirst: names, title, link as subtitleSecond: survey of the data elementsThird: workflow 1Fourth: critical analysisCases - linksCS1 - Coronavirus Datahttps://coronavirus.</description>
+    </item>
+    
+    <item>
       <title>Other Lessons list</title>
       <link>/otherlessons/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -169,7 +154,8 @@ We implicitly assume that the rates are constant over the period of the study, a
       <guid>/otherlessons/</guid>
       <description>Here are links to other lessons I have pushed online
 Basic Economics for IEM
-Discrete Choice Modelling</description>
+Discrete Choice Modelling
+Smart Analytics for Big Data</description>
     </item>
     
     <item>
@@ -179,9 +165,8 @@ Discrete Choice Modelling</description>
       
       <guid>/lessons_list/</guid>
       <description>Lessons listThis is the website of the Lesson Smart Analytics for Big Data taught at Grenoble INP Industrial Engineering and Management School &amp;amp; UGA.
-First Lesson - 01/10/2020new
-First Lesson
-second Lesson - 08/10/2020Second Lesson
+First Lesson - 01/10/2020 - 9:30 - 12:30Welcome page of First Lesson
+Second Lesson - 08/10/2020 - 8:00 - 12:30Material for the Second Lesson
 </description>
     </item>
     

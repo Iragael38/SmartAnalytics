@@ -43,7 +43,10 @@ Analysis of complex and big data, temporal  and spatial data needs specific skil
 
 Each lesson is described as follows
 
-![Planning 2020 - Version sept](post/data/Planning.png)
+![Planning 2020 - Version sept](/Data-pdf/Planning_v2.png)
+
+[Planning](/Data-pdf/Planning_v2.png) downloadable format
+
 
 ## Organisation
 ### Posts

@@ -19,6 +19,8 @@ https://www.statisticshowto.com/misleading-graphs/
 CITE THIS AS:
 > Stephanie Glen. "Misleading Graphs: Real Life Examples" From StatisticsHowTo.com: Elementary Statistics for the rest of us! https://www.statisticshowto.com/misleading-graphs/
 
+
+- https://datavizcatalogue.com/resources.html
 ***
 
 

@@ -9,7 +9,9 @@
 	<meta name="description" content="">
 		<meta property="og:title" content="Introduction to Data Vizualisation" />
 <meta property="og:description" content="https://www.statisticshowto.com/misleading-graphs/&gt; References
-Huff, D. (1993). How to Lie With Statistics. W. W. Norton &amp; CompanyGonick, L. (1993). The Cartoon Guide to Statistics. HarperPerennial.CITE THIS AS:&gt; Stephanie Glen. “Misleading Graphs: Real Life Examples” From StatisticsHowTo.com: Elementary Statistics for the rest of us! https://www.statisticshowto.com/misleading-graphs/https://github.com/stoltzmaniac/Data-Visualization-Lesson/blob/master/Data%20Visualization%20-%20Part%203.Rmd
+Huff, D. (1993). How to Lie With Statistics. W. W. Norton &amp; CompanyGonick, L. (1993). The Cartoon Guide to Statistics. HarperPerennial.CITE THIS AS:&gt; Stephanie Glen. “Misleading Graphs: Real Life Examples” From StatisticsHowTo.com: Elementary Statistics for the rest of us! https://www.statisticshowto.com/misleading-graphs/
+https://datavizcatalogue.com/resources.html***
+https://github.com/stoltzmaniac/Data-Visualization-Lesson/blob/master/Data%20Visualization%20-%20Part%203.Rmd
 https://mschermann.github.io/data_viz_reader/
 https://aims.gitbook.io/farm-data-mooc/unit-3-using-data/lesson-3.3-data-analysis-and-visualization
 Grammar of Graphics ggplot2()Grammar of ggplot2()Start exampledf &lt;- data.frame(x=1:15, y=1:15)ggplot(df, aes(x,y)) &#43;geom_point() &#43;labs(title= &quot;Plot example&quot;,subtitle = &quot;Subtitled&quot;,x=&quot;x-values&quot;, y = &quot;y-values&quot;) &#43;theme(panel." />
@@ -96,11 +98,12 @@ Grammar of Graphics ggplot2()Grammar of ggplot2()Start exampledf &lt;- data.
 &gt; References</p>
 <ul>
 <li>Huff, D. (1993). How to Lie With Statistics. W. W. Norton &amp; Company</li>
-<li>Gonick, L. (1993). The Cartoon Guide to Statistics. HarperPerennial.
+<li><p>Gonick, L. (1993). The Cartoon Guide to Statistics. HarperPerennial.
 CITE THIS AS:
-&gt; Stephanie Glen. “Misleading Graphs: Real Life Examples” From StatisticsHowTo.com: Elementary Statistics for the rest of us! <a href="https://www.statisticshowto.com/misleading-graphs/" class="uri">https://www.statisticshowto.com/misleading-graphs/</a></li>
+&gt; Stephanie Glen. “Misleading Graphs: Real Life Examples” From StatisticsHowTo.com: Elementary Statistics for the rest of us! <a href="https://www.statisticshowto.com/misleading-graphs/" class="uri">https://www.statisticshowto.com/misleading-graphs/</a></p></li>
+<li><p><a href="https://datavizcatalogue.com/resources.html" class="uri">https://datavizcatalogue.com/resources.html</a>
+***</p></li>
 </ul>
-<hr />
 <p><a href="https://github.com/stoltzmaniac/Data-Visualization-Lesson/blob/master/Data%20Visualization%20-%20Part%203.Rmd" class="uri">https://github.com/stoltzmaniac/Data-Visualization-Lesson/blob/master/Data%20Visualization%20-%20Part%203.Rmd</a></p>
 <p><a href="https://mschermann.github.io/data_viz_reader/" class="uri">https://mschermann.github.io/data_viz_reader/</a></p>
 <p><a href="https://aims.gitbook.io/farm-data-mooc/unit-3-using-data/lesson-3.3-data-analysis-and-visualization" class="uri">https://aims.gitbook.io/farm-data-mooc/unit-3-using-data/lesson-3.3-data-analysis-and-visualization</a></p>
@@ -121,7 +124,7 @@ ggplot(df, aes(x,y)) +
     x=&quot;x-values&quot;, y = &quot;y-values&quot;
     ) +
   theme(panel.background = element_rect(fill = &quot;white&quot;, color= &quot;grey50&quot;))</code></pre>
-<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 </div>
 <div id="grammar-of-graphic-ggplot" class="section level2">
 <h2>Grammar of graphic: <code>ggplot</code></h2>
@@ -187,7 +190,7 @@ Functions are <code>facet_wrap</code> <code>facet_grid</code>.</p>
        x = &quot;HP&quot;,
        y = &quot;Economy (miles per gallon)&quot;)
 p</code></pre>
-<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>Some theme options can be used :</p>
 <pre class="r"><code>g1 &lt;- ggplot(df) +
   geom_point(aes(x, y)) +
@@ -196,7 +199,7 @@ p</code></pre>
        y = &quot;Economy (miles per gallon)&quot;) +
     theme(panel.background = element_rect(fill = &quot;white&quot;, colour = &quot;grey50&quot;))
 g1</code></pre>
-<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <pre class="r"><code>g2 &lt;- g1 + theme(panel.grid.major =
                    element_line(color = &quot;black&quot;, linetype = 3)) + 
   # linetype = 3 is dash
@@ -204,7 +207,7 @@ g1</code></pre>
           element_line(color = &quot;darkgrey&quot;, linetype = 4)) 
   # linetype = 4 is dot dash
 g2</code></pre>
-<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 </div>
 <div id="applying-a-theme" class="section level3">
 <h3>Applying a Theme</h3>
@@ -220,7 +223,7 @@ theme_test()
 theme_void()</code></pre>
 <p>We can apply each of them. For example:</p>
 <pre class="r"><code>p + theme_bw()</code></pre>
-<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>Packages, like <code>ggtheme</code>, that include additional themes with some popular theme like <em>Stata</em> or <em>The Economist</em></p>
 </div>
 <div id="scatter-plot-of-multiple-groups" class="section level3">
@@ -234,7 +237,7 @@ theme_void()</code></pre>
          color = Species
        )) +
   geom_point()</code></pre>
-<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p><em>About the legend</em></p>
 <p>It is automatic with a factor in <code>aes</code>.</p>
 <p>It can be hiden with <code>+   theme(legend.position = "none")</code></p>
@@ -247,7 +250,7 @@ theme_void()</code></pre>
 ggplot(Cars93, aes(MPG.city, Horsepower)) +
   geom_point() +
   facet_wrap( ~ Origin)</code></pre>
-<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 </div>
 <div id="regression-line-of-a-scatter-plot" class="section level3">
 <h3>Regression Line of a Scatter Plot</h3>
@@ -257,7 +260,7 @@ ggplot(Cars93, aes(MPG.city, Horsepower)) +
   geom_smooth(method = &quot;lm&quot;,
               formula = y ~ x,
               se = FALSE)</code></pre>
-<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p><code>se = FALSE</code> parameter tells ggplot not to plot the standard error bands around our regression</p>
 <div id="example" class="section level4">
 <h4>Example</h4>
@@ -268,12 +271,12 @@ g &lt;- ggplot(strongx, aes(energy, crossx)) +
 
 g + geom_smooth(method = &quot;lm&quot;, 
                 formula = y ~ x)</code></pre>
-<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 <p>and</p>
 <pre class="r"><code>g + geom_smooth(method = &quot;lm&quot;,
                 formula = y ~ x,
                 se = FALSE)</code></pre>
-<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 <p>Specific line can be added using <code>intercept</code> and <code>slope</code>. For example, extractiong the values from a regression</p>
 <pre class="r"><code>m &lt;- lm(crossx ~ energy, data = strongx)
 
@@ -283,7 +286,7 @@ ggplot(strongx, aes(energy, crossx)) +
     intercept = m$coefficients[1],
     slope = m$coefficients[2]
   )</code></pre>
-<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 </div>
 </div>
 <div id="plotting-all-variables-against-all-other-variables" class="section level3">
@@ -304,7 +307,7 @@ ggplot(strongx, aes(energy, crossx)) +
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
-<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <p>or for simpler and faster graph : <code>plot(iris)</code></p>
 </div>
 <div id="creating-a-bar-chart" class="section level3">
@@ -316,7 +319,7 @@ ggplot(strongx, aes(energy, crossx)) +
 
 ggplot(ford_cars, aes(Model, Horsepower)) +
   geom_bar(stat = &quot;identity&quot;)</code></pre>
-<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 <p><code>stat = "identity"</code>, which assumes that the heights of your bars are conveniently stored as a value in one field with only one record per column</p>
 </div>
 <div id="from-the-raw-variable" class="section level4">
@@ -329,7 +332,7 @@ ggplot(ford_cars, aes(Model, Horsepower)) +
        y = &quot;Temp (deg. F)&quot;)</code></pre>
 <pre><code>## Warning: Ignoring unknown parameters: fun.y</code></pre>
 <pre><code>## No summary function supplied, defaulting to `mean_se()`</code></pre>
-<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 </div>
 <div id="sorting-the-factor-in-graph" class="section level4">
 <h4>Sorting the factor in graph</h4>
@@ -346,7 +349,7 @@ ggplot(aq_data, aes(month_abb, Temp)) +
        y = &quot;Temp (deg. F)&quot;)</code></pre>
 <pre><code>## Warning: Ignoring unknown parameters: fun.y</code></pre>
 <pre><code>## No summary function supplied, defaulting to `mean_se()`</code></pre>
-<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
 <p>Sorted x-axis with respect to the value in y-axis</p>
 <pre class="r"><code>ggplot(aq_data, aes(reorder(month_abb, -Temp, mean), Temp)) +
   geom_bar(stat = &quot;summary&quot;,
@@ -358,7 +361,7 @@ ggplot(aq_data, aes(month_abb, Temp)) +
        y = &quot;Temp (deg. F)&quot;)</code></pre>
 <pre><code>## Warning: Ignoring unknown parameters: fun.y</code></pre>
 <pre><code>## No summary function supplied, defaulting to `mean_se()`</code></pre>
-<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 <p>Modifiying the color and adding standard error bars:</p>
 <pre class="r"><code>ggplot(aq_data, aes(month_abb, Temp)) +
   geom_bar(stat = &quot;summary&quot;,
@@ -370,7 +373,7 @@ ggplot(aq_data, aes(month_abb, Temp)) +
        y = &quot;Temp (deg. F)&quot;)</code></pre>
 <pre><code>## Warning: Ignoring unknown parameters: fun.y</code></pre>
 <pre><code>## No summary function supplied, defaulting to `mean_se()`</code></pre>
-<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
 <p>Using a palette color:</p>
 <pre class="r"><code>aq_data &lt;- airquality %&gt;%
   arrange(Month) %&gt;%
@@ -384,7 +387,7 @@ ggplot(data = aq_data, aes(month_abb, Temp, fill = month_abb)) +
   scale_fill_brewer(palette = &quot;Paired&quot;)</code></pre>
 <pre><code>## Warning: Ignoring unknown parameters: fun.y</code></pre>
 <pre><code>## No summary function supplied, defaulting to `mean_se()`</code></pre>
-<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
 <p>With colors associated to factor : <code>fill=</code></p>
 <pre class="r"><code>ggplot(airquality, aes(month.abb[Month], Temp, fill = ..y..)) +
   geom_bar(stat = &quot;summary&quot;, fun.y = &quot;mean&quot;) +
@@ -394,7 +397,7 @@ ggplot(data = aq_data, aes(month_abb, Temp, fill = month_abb)) +
        fill = &quot;Temp&quot;)</code></pre>
 <pre><code>## Warning: Ignoring unknown parameters: fun.y</code></pre>
 <pre><code>## No summary function supplied, defaulting to `mean_se()`</code></pre>
-<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
 </div>
 </div>
 <div id="plotting-a-line-from-x-and-y-points" class="section level3">
@@ -403,7 +406,7 @@ ggplot(data = aq_data, aes(month_abb, Temp, fill = month_abb)) +
 <pre class="r"><code>ggplot(economics, aes(date , unemploy)) +
   geom_point() +
   geom_line()</code></pre>
-<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
 <div id="changing-the-type-width-or-color-of-a-line" class="section level4">
 <h4>Changing the Type, Width, or Color of a Line</h4>
 <p><code>linetype=""</code> parameter for controlling the appearance of lines:</p>
@@ -450,7 +453,7 @@ ggplot(data = aq_data, aes(month_abb, Temp, fill = month_abb)) +
   geom_line(linetype = 2,
             size = 2,
             col = &quot;red&quot;)</code></pre>
-<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
 </div>
 <div id="from-wide-to-long-format-in-line-grah" class="section level4">
 <h4>From wide to long format in Line grah</h4>
@@ -464,7 +467,7 @@ df &lt;- data.frame(x, y1, y2, y3)</code></pre>
 <pre class="r"><code>df_long &lt;- gather(df, bucket, y, -x)</code></pre>
 <pre class="r"><code>ggplot(df_long, aes(x, y, col = bucket)) +
   geom_line()</code></pre>
-<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
 </div>
 <div id="plotting-multiple-datasets" class="section level4">
 <h4>Plotting Multiple Datasets</h4>
@@ -487,7 +490,7 @@ df2 &lt;- data.frame(x2, y2)</code></pre>
   geom_line(data = df2, aes(x2, y2), linetype = &quot;dashed&quot;)+
   geom_point(data=df1, aes(x1, y1)) +
   geom_point(data=df2, aes(x2, y2))</code></pre>
-<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
 <p>Adding vertical and horizontal lines</p>
 <pre class="r"><code>ggplot(df1) +
   aes(x = x1, y = y1) +
@@ -499,7 +502,7 @@ df2 &lt;- data.frame(x2, y2)</code></pre>
     size = 1.5
      ) +
   geom_hline(yintercept = 0, color = &quot;blue&quot;)</code></pre>
-<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
 </div>
 <div id="exercise" class="section level4">
 <h4>Exercise</h4>
@@ -514,7 +517,7 @@ ggplot(samp_df) +
   geom_point() +
   geom_hline(yintercept = mean_line, color = &quot;darkblue&quot;) +
   geom_hline(yintercept = sd_lines, linetype = &quot;dotted&quot;)</code></pre>
-<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
 </div>
 </div>
 <div id="creating-a-boxplot" class="section level3">
@@ -523,7 +526,7 @@ ggplot(samp_df) +
   aes(y = samp) +
   geom_boxplot() +
   coord_flip()</code></pre>
-<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
 <pre class="r"><code>data(UScereal, package = &quot;MASS&quot;)
 
 ggplot(UScereal) +
@@ -534,7 +537,7 @@ ggplot(UScereal) +
     x = &quot;Shelf&quot;,
     y = &quot;Sugar (grams per portion)&quot;
   )</code></pre>
-<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
 <div id="creating-a-histogram" class="section level4">
 <h4>Creating a Histogram</h4>
 <p>The <code>geom_histogram</code> function must decide how many cells (bins) to create for binning the data.</p>
@@ -544,11 +547,11 @@ ggplot(UScereal) +
 ggplot(Cars93) +
   geom_histogram(aes(x = MPG.city))</code></pre>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
-<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
 <p>Customized bins number</p>
 <pre class="r"><code>ggplot(Cars93) +
   geom_histogram(aes(x = MPG.city), bins = 13)</code></pre>
-<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
 </div>
 <div id="adding-a-density-estimate-to-a-histogram" class="section level4">
 <h4>Adding a Density Estimate to a Histogram</h4>
@@ -556,7 +559,7 @@ ggplot(Cars93) +
   aes(x = MPG.city) +
   geom_histogram(aes(y = ..density..), bins = 21) +
   geom_density()</code></pre>
-<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
 </div>
 <div id="creating-a-normal-quantilequantile-plot" class="section level4">
 <h4>Creating a Normal Quantile–Quantile Plot</h4>
@@ -565,9 +568,9 @@ ggplot(Cars93) +
 ggplot(df, aes(sample = x)) +
   stat_qq() +
   stat_qq_line()</code></pre>
-<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
 <p>Example:</p>
-<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-41-1.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-41-1.png" width="672" /></p>
 <p>Is the <span class="math inline">\(log(price)\)</span> ‘more normal’?</p>
 </div>
 </div>
@@ -588,16 +591,17 @@ ggplot(df, aes(sample = x)) +
 <pre class="r"><code>df_t &lt;- data.frame(y = rt(100, 5))</code></pre>
 <p>Estimate the parameters of the distribution we’re wanting to plot. Since this is a Student’s t distribution, we only need to estimate one parameter, the degrees of freedom.
 We use <code>MASS::fitdistr</code> function</p>
-<pre class="r"><code>est_df &lt;- as.list(MASS::fitdistr(df_t$y, &quot;t&quot;)$estimate)[[&quot;df&quot;]]
-est_df</code></pre>
-<pre><code>## [1] 9.465126</code></pre>
+<pre class="r"><code>est_df &lt;- as.list(MASS::fitdistr(df_t$y, &quot;t&quot;)$estimate)[[&quot;df&quot;]]</code></pre>
+<pre><code>## Warning in log(s): production de NaN</code></pre>
+<pre class="r"><code>est_df</code></pre>
+<pre><code>## [1] 4.815569</code></pre>
 <p>There is a match !</p>
 <pre class="r"><code>p2 &lt;- ggplot(df_t) +
   aes(sample = y) +
   geom_qq(distribution = qt, dparams = est_df) +
   stat_qq_line(distribution = qt, dparams = est_df)
 p2</code></pre>
-<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-44-1.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-44-1.png" width="672" /></p>
 </div>
 </div>
 <div id="graphing-a-function" class="section level3">
@@ -607,14 +611,14 @@ p2</code></pre>
   aes(x) +
   stat_function(fun = sin)
 p3</code></pre>
-<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-45-1.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-45-1.png" width="672" /></p>
 <p>Another example</p>
 <pre class="r"><code>p4 &lt;- ggplot(data.frame(x = c(-3.5, 3.5))) +
   aes(x) +
   stat_function(fun = dnorm) +
   ggtitle(&quot;Standard Normal Density&quot;)
 p4</code></pre>
-<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-46-1.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-46-1.png" width="672" /></p>
 <p>or again</p>
 <pre class="r"><code>f &lt;- function(x) exp(-abs(x)) * sin(2 * pi * x)
 
@@ -622,7 +626,7 @@ ggplot(data.frame(x = c(-3.5, 3.5))) +
   aes(x) +
   stat_function(fun = f) +
   ggtitle(&quot;Dampened Sine Wave&quot;)</code></pre>
-<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
 </div>
 <div id="displaying-several-figures-on-one-page" class="section level3">
 <h3>Displaying Several Figures on One Page</h3>
@@ -632,12 +636,12 @@ ggplot(data.frame(x = c(-3.5, 3.5))) +
 library(patchwork)</code></pre>
 <pre><code>## Warning: le package &#39;patchwork&#39; a été compilé avec la version R 3.6.3</code></pre>
 <pre class="r"><code>p1 + p2 + p3 + p4</code></pre>
-<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
 <p>Grouping with parentheses and using / to put groupings under other elements</p>
 <pre class="r"><code>p3 / (p1 + p2 + p4)</code></pre>
-<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
 <pre class="r"><code>p1 + p2 + p3 + p4 + plot_layout(ncol = 2, byrow = FALSE)</code></pre>
-<p><img src="/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_1.1_Vizu_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
 </div>
 <div id="writing-your-plot-to-a-file" class="section level3">
 <h3>Writing Your Plot to a File</h3>
@@ -963,9 +967,9 @@ library(patchwork)</code></pre>
 		</a>
 	</div>
 	<div class="pager__item pager__item--next">
-		<a class="pager__link" href="/lessons_list/lesson_0.1_introduction_v2/" rel="next">
+		<a class="pager__link" href="/lessons_list/lesson_0.0_introduction/" rel="next">
 			<span class="pager__subtitle">Next&thinsp;»</span>
-			<p class="pager__title">Introduction to Data Vizualisation</p>
+			<p class="pager__title">Introduction</p>
 		</a>
 	</div>
 </nav>
@@ -985,11 +989,11 @@ library(patchwork)</code></pre>
 	<h4 class="widget__title">Recent Posts</h4>
 	<div class="widget__content">
 		<ul class="widget__list">
-			<li class="widget__item"><a class="widget__link" href="/lessons_list/lesson_0.3_dynamicdoc/">Dynamic Document with R-Markdown</a></li>
 			<li class="widget__item"><a class="widget__link" href="/lessons_list/lesson_1.2_grammar/">Graphics with R</a></li>
-			<li class="widget__item"><a class="widget__link" href="/lessons_list/lesson_1/">Introduction to Data Science Management project</a></li>
-			<li class="widget__item"><a class="widget__link" href="/lessons_list/lesson_0.1_introduction_v2/">Introduction to Data Vizualisation</a></li>
+			<li class="widget__item"><a class="widget__link" href="/lessons_list/lesson_0.0_introduction/">Introduction</a></li>
 			<li class="widget__item"><a class="widget__link" href="/lessons_list/lesson_1.1_vizu/">Introduction to Data Vizualisation</a></li>
+			<li class="widget__item"><a class="widget__link" href="/lessons_list/lesson_2_gis/">Introduction to GIS - Geographic Information System</a></li>
+			<li class="widget__item"><a class="widget__link" href="/lessons_list/lesson_0.1_reproducibleresearch/">Introduction to Reproducible Analysis</a></li>
 		</ul>
 	</div>
 </div>

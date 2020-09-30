@@ -38,6 +38,24 @@ I (Iragaël Joly) will try to maintain this blog as a plateform to merge all inf
 - Caseine page is: (https://moodle.caseine.org/course/view.php?id=644)
 
 
+## Class material
+
+### Introduction & class presentation
+
+#### Introduction
+
+[Introductory Lesson](/Data-pdf/lesson_0.0_Introduction.pdf)
+
+#### Reproducible research
+
+[Lesson - Reproducible Research](../../lessons_list/lesson_0.1_ReproducibleResearch)
+
+
+### Case study
+
+[Page](/lessons_list/lesson_0.2_CaseStudy) describing the case study exercise
+
+
 
 
 

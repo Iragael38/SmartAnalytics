@@ -8,7 +8,7 @@ tags: ["R Markdown", "plot", "regression"]
 authorbox: false
 link-citations: yes
 biblio-style: apalike
-bibliography: [post/data/biblio_hdr_v2.bib, post/data/Liste_Publi3.bib, post/data/biblio_SABD.bib]
+bibliography: [./data/biblio_hdr_v2.bib, ./data/Liste_Publi3.bib, ./data/biblio_SABD.bib]
 nocite: |
   @Bivand2013, @lovelace2019
 ---
@@ -72,7 +72,7 @@ Censoring is a type of missing data, unique to the survival analysis.
 
 We only know that the data is at least $t$, we do not know anything about survival time after that.
 
-![](post/data/Censure.png)
+![](./data/Censure.png)
 
 The **survival** function, is the probability an event does not occur (an individual survives) up to and including time $t$.
 
@@ -121,7 +121,7 @@ Survival function:
 - Shape of $S(t)$ illustrates the temporal dynamic of the process.
 
 
-![](post/data/TimeFunctions.png)
+![](./data/TimeFunctions.png)
 
 
 ## Estimation 
@@ -294,7 +294,7 @@ $$\epsilon_k = \frac{X_k}{h} \times \frac{\partial h}{\partial X_k}= \frac{\part
 $$
 
 
-![](post/data/Ph_Graph.png)
+![](./data/Ph_Graph.png)
 
 **Cox PH regression**
 
@@ -439,9 +439,9 @@ Exponential hazard ($h_1(t)$) is constant over time and caracterises process tha
 
 Log-logistic hazard ($h_5(t)$) admits monotonic and non-monotonic forms, given the variance parameter of the distribution. 
 
-![](post/data/HasardForms.png)
+![](./data/HasardForms.png)
 
-For the mathematics of each of these three models see [post/data/Pages_de_Annexe_theorique_MD.pdf](Pages_de_Annexe_theorique_MD.pdf)
+For the mathematics of each of these three models see [./data/Pages_de_Annexe_theorique_MD.pdf](Pages_de_Annexe_theorique_MD.pdf)
 
 ### Graphical Diagnostic of the hazard form
 

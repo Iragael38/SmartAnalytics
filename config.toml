@@ -10,7 +10,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
 [Author]
   name = "Iragaël Joly"
-  bio = "Iragaël Joly true identity is unknown. Maybe he is a successful blogger or writer. Nobody knows it."
+  bio = "Iragaël Joly"
   avatar = "img/avatar.png"
 
 
