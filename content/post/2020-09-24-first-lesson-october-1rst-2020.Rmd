@@ -56,7 +56,7 @@ I (Iragaël Joly) will try to maintain this blog as a plateform to merge all inf
 
 [Page](/lessons_list/lesson_0.2_CaseStudy) describing the case study exercise
 
-
+[Googlesheet](https://docs.google.com/spreadsheets/d/1igoYB9DS2F5gcWfAVFhr2AYqBclT6g4ovbPsMoeV0Yc/edit#gid=22998934) of the students teams for team works
 
 
 
