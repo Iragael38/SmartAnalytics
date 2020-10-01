@@ -8,9 +8,10 @@ tags: ["R Markdown", "plot", "regression"]
 authorbox: false
 link-citations: yes
 biblio-style: apalike
-bibliography: [post/data/biblio_hdr_v2.bib, post/data/Liste_Publi3.bib, post/data/biblio_SABD.bib]
+bibliography: [./data/biblio_hdr_v2.bib, ./data/Liste_Publi3.bib, ./data/biblio_SABD.bib]
 nocite: |
   @Bivand2013, @lovelace2019
+draft: True
 ---
 
 
@@ -956,13 +957,13 @@ Unemployment # Necessary to obtain the DF !</code></pre>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
 ##    0.00    4.00   10.00   18.51   22.25  117.00</code></pre>
 <pre class="r"><code>plot(Unemployment$duration)</code></pre>
-<p><img src="/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <pre class="r"><code>boxplot(Unemployment$duration)</code></pre>
-<p><img src="/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-3-2.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-3-2.png" width="672" /></p>
 <pre class="r"><code>plot(Unemployment$duration ~ Unemployment$sex)</code></pre>
-<p><img src="/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-3-3.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-3-3.png" width="672" /></p>
 <pre class="r"><code>plot(Unemployment$duration ~ Unemployment$race)</code></pre>
-<p><img src="/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-3-4.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-3-4.png" width="672" /></p>
 <pre class="r"><code>t.test(Unemployment$duration ~ Unemployment$sex)</code></pre>
 <pre><code>## 
 ##  Welch Two Sample t-test
@@ -1033,7 +1034,7 @@ summary(OLS1)</code></pre>
 ## Multiple R-squared:  0.02777,    Adjusted R-squared:  0.02344 
 ## F-statistic: 6.412 on 2 and 449 DF,  p-value: 0.001796</code></pre>
 <pre class="r"><code>plot(OLS1)</code></pre>
-<p><img src="/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-3-5.png" width="672" /><img src="/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-3-6.png" width="672" /><img src="/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-3-7.png" width="672" /><img src="/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-3-8.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-3-5.png" width="672" /><img src="/lessons_list/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-3-6.png" width="672" /><img src="/lessons_list/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-3-7.png" width="672" /><img src="/lessons_list/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-3-8.png" width="672" /></p>
 </div>
 <div id="survival-analysis" class="section level2">
 <h2>Survival analysis</h2>
@@ -1149,7 +1150,7 @@ ggsurvplot(sfit1, conf.int=TRUE, pval=TRUE, risk.table=TRUE,
            risk.table.height=.15)</code></pre>
 <pre><code>## Warning in .pvalue(fit, data = data, method = method, pval = pval, pval.coord = pval.coord, : There are no survival curves to be compared. 
 ##  This is a null model.</code></pre>
-<p><img src="/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-6-1.png" width="672" /><img src="/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-6-2.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-6-1.png" width="672" /><img src="/lessons_list/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-6-2.png" width="672" /></p>
 </div>
 </div>
 <div id="different-survival-curves-depending-on-sex" class="section level2">
@@ -1358,7 +1359,7 @@ sfit2</code></pre>
 ## sex=male        35
 ## sex=female      22</code></pre>
 <pre class="r"><code>plot(sfit2)</code></pre>
-<p><img src="/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+<p><img src="/lessons_list/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-7-1.png" width="672" />
 More complete and complex plot function:</p>
 <pre class="r"><code>ggsurvplot(sfit2, conf.int=TRUE, pval=TRUE, risk.table=TRUE, 
            legend.labs=c(&quot;male&quot;, &quot;female&quot;), legend.title=&quot;Sex&quot;,  
@@ -1367,7 +1368,7 @@ More complete and complex plot function:</p>
            risk.table.height=.15)</code></pre>
 <pre><code>## Warning: Vectorized input to `element_text()` is not officially supported.
 ## Results may be unexpected or may change in future versions of ggplot2.</code></pre>
-<p><img src="/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <pre class="r"><code>ggsurvplot(
    sfit2,                     # survfit object with calculated statistics.
    pval = TRUE,             # show p-value of log-rank test.
@@ -1390,7 +1391,7 @@ More complete and complex plot function:</p>
 )</code></pre>
 <pre><code>## Warning: Vectorized input to `element_text()` is not officially supported.
 ## Results may be unexpected or may change in future versions of ggplot2.</code></pre>
-<p><img src="/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-8-2.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-8-2.png" width="672" /></p>
 </div>
 <div id="cox-regression" class="section level2">
 <h2>Cox Regression</h2>
@@ -1493,33 +1494,33 @@ summary(Coxfit2)</code></pre>
 ## 
 ##   n= 452, number of events= 256 
 ## 
-##                coef exp(coef)  se(coef)      z Pr(&gt;|z|)   
-## sexfemale  0.041126  1.041983  0.127941  0.321  0.74787   
-## racewhite  0.026201  1.026547  0.145521  0.180  0.85711   
-## searchyes  0.240703  1.272143  0.131890  1.825  0.06800 . 
-## pubempyes -0.506049  0.602873  0.165799 -3.052  0.00227 **
-## age        0.004598  1.004608  0.003384  1.359  0.17426   
+##                 coef  exp(coef)   se(coef)      z Pr(&gt;|z|)   
+## sexfemale  0.0392404  1.0400205  0.1283678  0.306  0.75984   
+## racewhite  0.0384013  1.0391481  0.1453514  0.264  0.79163   
+## searchyes  0.2388795  1.2698255  0.1323358  1.805  0.07106 . 
+## pubempyes -0.5147452  0.5976529  0.1655592 -3.109  0.00188 **
+## age       -0.0002203  0.9997797  0.0034132 -0.065  0.94853   
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ##           exp(coef) exp(-coef) lower .95 upper .95
-## sexfemale    1.0420     0.9597    0.8109    1.3390
-## racewhite    1.0265     0.9741    0.7718    1.3654
-## searchyes    1.2721     0.7861    0.9824    1.6474
-## pubempyes    0.6029     1.6587    0.4356    0.8344
-## age          1.0046     0.9954    0.9980    1.0113
+## sexfemale    1.0400     0.9615    0.8087    1.3375
+## racewhite    1.0391     0.9623    0.7815    1.3817
+## searchyes    1.2698     0.7875    0.9797    1.6458
+## pubempyes    0.5977     1.6732    0.4320    0.8267
+## age          0.9998     1.0002    0.9931    1.0065
 ## 
-## Concordance= 0.566  (se = 0.02 )
-## Likelihood ratio test= 15.82  on 5 df,   p=0.007
-## Wald test            = 14.89  on 5 df,   p=0.01
-## Score (logrank) test = 15.11  on 5 df,   p=0.01</code></pre>
+## Concordance= 0.561  (se = 0.019 )
+## Likelihood ratio test= 13.99  on 5 df,   p=0.02
+## Wald test            = 13.03  on 5 df,   p=0.02
+## Score (logrank) test = 13.24  on 5 df,   p=0.02</code></pre>
 <p>The p-value for all three overall tests (likelihood, Wald, and score) are significant, indicating that the model is significant.</p>
 <p>The three tests (likelihood, Wald, and score tests) evaluate the omnibus null hypothesis that all of the <span class="math inline">\(\beta\)</span> are 0 simultaneously.</p>
 <p>In the above example, the test statistics are in close agreement, and the omnibus null hypothesis is soundly rejected.</p>
 <p>In the multivariate Cox analysis, the covariates sex and ph.ecog remain significant (p &lt; 0.05). However, the covariate age fails to be significant (p = 0.23, which is grater than 0.05).</p>
-<p>The p-value for <code>pubempyes</code> is , with a hazard ratio HR = 0.6028726 indicating a strong relationship between the public private status and return to employment.</p>
-<p>The hazard ratios of covariates are interpretable as multiplicative effects on the hazard. For example, holding the other covariates constant, being public status reduces the hazard by a factor of = 0.6028726 , or -59.2872596 %. We conclude that, being public employee is associated with longer unemployment period.</p>
-<p>By contrast, the p-value for <code>searchyes</code> covariates is now 0.0679966. The hazard ratio HR = 1.2721434. Holding the other covariates constant, an effective search induces weekly hazard of finding a job by a factor of 1.2721434, or `27.2143451%, which is a significant contribution.</p>
+<p>The p-value for <code>pubempyes</code> is , with a hazard ratio HR = 0.5976529 indicating a strong relationship between the public private status and return to employment.</p>
+<p>The hazard ratios of covariates are interpretable as multiplicative effects on the hazard. For example, holding the other covariates constant, being public status reduces the hazard by a factor of = 0.5976529 , or -58.7652872 %. We conclude that, being public employee is associated with longer unemployment period.</p>
+<p>By contrast, the p-value for <code>searchyes</code> covariates is now 0.0710588. The hazard ratio HR = 1.2698255. Holding the other covariates constant, an effective search induces weekly hazard of finding a job by a factor of 1.2698255, or `26.98254841%, which is a significant contribution.</p>
 <div id="visualizing-the-estimated-distribution-of-survival-times" class="section level3">
 <h3>Visualizing the estimated distribution of survival times</h3>
 <p><strong>Plot the baseline survival function</strong></p>
@@ -1529,45 +1530,45 @@ summary(Coxfit2)</code></pre>
 fit &lt;- survfit(Coxfit2,  data = Unemployment)
 ggsurvplot(fit, conf.int = TRUE, palette = &quot;Dark2&quot;, 
            censor = FALSE, surv.median.line = &quot;hv&quot;)</code></pre>
-<p><img src="/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-12-1.png" width="672" /><img src="/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-12-2.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-12-1.png" width="672" /><img src="/lessons_list/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-12-2.png" width="672" /></p>
 </div>
 <div id="continuing-with-categorical-age" class="section level3">
 <h3>Continuing with categorical <code>age</code></h3>
 <p>Finally, let’s try creating a categorical variable on <code>age</code>: upper or lower to the average age</p>
 <pre class="r"><code>hist(Unemployment$age)</code></pre>
-<p><img src="/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 <pre class="r"><code>ggplot(Unemployment, aes(age)) + geom_histogram(bins=20)</code></pre>
-<p><img src="/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-13-2.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-13-2.png" width="672" /></p>
 <pre class="r"><code>Unemployment$cl_age &lt;-  cut(Unemployment$age, breaks=c(0, mean(Unemployment$age), Inf), labels=c(&quot;young&quot;, &quot;old&quot;))
 
 ggsurvplot(survfit(Surv_time~cl_age, data=Unemployment), pval=TRUE)</code></pre>
-<p><img src="/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-13-3.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-13-3.png" width="672" /></p>
 <p>The <code>survminer</code> package determines the optimal cutpoint for one or multiple continuous variables at once, using the maximally selected rank statistics from the <code>maxstat</code> R package.</p>
 <pre class="r"><code>res.cut &lt;- surv_cutpoint(Unemployment, time = &quot;duration&quot;, event = &quot;spell&quot;,    variables = c(&quot;age&quot;))
 summary(res.cut)</code></pre>
 <pre><code>##     cutpoint statistic
-## age 13.05465   2.75027</code></pre>
+## age 19.64392  1.530619</code></pre>
 <pre class="r"><code># 2. Plot cutpoint for DEPDC1
 # palette = &quot;npg&quot; (nature publishing group), see ?ggpubr::ggpar
 plot(res.cut, &quot;age&quot;, palette = &quot;npg&quot;)</code></pre>
 <pre><code>## $age</code></pre>
-<p><img src="/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 <p>Categorize the variable</p>
 <pre class="r"><code>res.cat &lt;- surv_categorize(res.cut)
 head(res.cat)</code></pre>
 <pre><code>##   duration spell  age
 ## 1        4     1 high
 ## 2        7     0 high
-## 3        1     0 high
+## 3        1     0  low
 ## 4        1     1 high
 ## 5        3     1 high
-## 6        1     1 high</code></pre>
+## 6        1     1  low</code></pre>
 <p>Fit survival curves and visualize</p>
 <pre class="r"><code>sfit3 &lt;- survfit(Surv_time ~age, data = res.cat)
 ggsurvplot(sfit3, risk.table = TRUE, conf.int = TRUE)</code></pre>
 <pre><code>## Warning: Vectorized input to `element_text()` is not officially supported.
 ## Results may be unexpected or may change in future versions of ggplot2.</code></pre>
-<p><img src="/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 <p>Facet the output crossing categorical covariates</p>
 <pre class="r"><code>sfit4 &lt;- survfit( Surv_time ~ sex + pubemp + race,
                 data = Unemployment )
@@ -1578,14 +1579,14 @@ ggsurv &lt;- ggsurvplot(sfit4, fun = &quot;event&quot;, conf.int = TRUE,
 <pre><code>## Warning: Vectorized input to `element_text()` is not officially supported.
 ## Results may be unexpected or may change in future versions of ggplot2.</code></pre>
 <pre class="r"><code>ggsurv</code></pre>
-<p><img src="/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 <pre class="r"><code>curv_facet &lt;- ggsurv$plot + facet_grid(race~sex)
 curv_facet</code></pre>
-<p><img src="/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
 <p>Facetting risk tables: Generate risk table for each facet plot item</p>
 <pre class="r"><code>ggsurv$table + facet_grid(race ~sex, scales = &quot;free&quot;)+
  theme(legend.position = &quot;none&quot;)</code></pre>
-<p><img src="/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 <p>(New in survminer 0.2.4: the survminer package can now determine the optimal cutpoint for one or multiple continuous variables at once, using the surv_cutpoint() and surv_categorize() functions. Refer to this blog post for more information.)
 TCGA</p>
 <p>Remember, the Cox regression analyzes the continuous variable over the whole range of its distribution, where the log-rank test on the Kaplan-Meier plot can change depending on how you categorize your continuous variable. They’re answering a similar question in a different way: the regression model is asking, “what is the effect of age on survival?”, while the log-rank test and the KM plot is asking, “are there differences in survival between those less than 70 and those greater than 70 years old?”.</p>
@@ -1626,17 +1627,17 @@ for (n in sample(c(2:dim(Unemployment)[1]), 20)){
 }
 lines(death_times, avg_prob, lwd = 2)
 legend((range(Unemployment$duration)[2]-range(Unemployment$duration)[1])/2, 0.8, legend = c(&#39;Average = black&#39;))</code></pre>
-<p><img src="/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
 <p>Ranks of variable importance</p>
 <pre class="r"><code>vi &lt;- data.frame(sort(round(r_fit$variable.importance, 4), decreasing = TRUE))
 names(vi) &lt;- &quot;importance&quot;
 head(vi)</code></pre>
 <pre><code>##        importance
-## pubemp     0.0291
-## sex        0.0015
-## search    -0.0016
-## race      -0.0045
-## age       -0.0065</code></pre>
+## pubemp     0.0344
+## sex        0.0183
+## age        0.0056
+## search     0.0028
+## race      -0.0006</code></pre>
 <p>Finally, ploting the three baseloine survival curves (KM, Cox, RF)</p>
 <pre class="r"><code># Time, survival prob and model label for KM
 kmi &lt;- rep(&quot;KM&quot;,length(sfit1$time))
@@ -1657,7 +1658,7 @@ plot_df &lt;- rbind(km_df,cox_df,rf_df)
 
 p &lt;- ggplot(plot_df, aes(x = Time, y = Surv, color = Model))
 p + geom_line()</code></pre>
-<p><img src="/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
 </div>
 <div id="diagnostic-of-cox-ph-model" class="section level2">
 <h2>Diagnostic of Cox PH model</h2>
@@ -1686,18 +1687,18 @@ test.ph</code></pre>
 ## sex    0.151  1 0.7
 ## GLOBAL 0.151  1 0.7</code></pre>
 <pre class="r"><code>ggcoxzph(test.ph)</code></pre>
-<p><img src="/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
 <pre class="r"><code>test.ph &lt;- cox.zph(Coxfit2)
 test.ph</code></pre>
-<pre><code>##          chisq df     p
-## sex    0.27604  1 0.599
-## race   1.99146  1 0.158
-## search 3.38156  1 0.066
-## pubemp 2.27143  1 0.132
-## age    0.00037  1 0.985
-## GLOBAL 7.30390  5 0.199</code></pre>
+<pre><code>##        chisq df     p
+## sex    0.324  1 0.569
+## race   1.850  1 0.174
+## search 3.318  1 0.069
+## pubemp 2.554  1 0.110
+## age    0.829  1 0.363
+## GLOBAL 8.250  5 0.143</code></pre>
 <pre class="r"><code>ggcoxzph(test.ph)</code></pre>
-<p><img src="/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-24-2.png" width="672" />
+<p><img src="/lessons_list/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-24-2.png" width="672" />
 In the figure above, the solid line is a smoothing spline fit to the plot, with the dashed lines representing a <span class="math inline">\(\pm 2 \sigma\)</span> band around the fit.</p>
 <p>Systematic departures from a horizontal line are indicative of <strong>non-proportional</strong> hazards, since proportional hazards assumes that estimates <span class="math inline">\(\beta_1, \beta_2,\dots \beta_k\)</span> do not vary much over time.</p>
 <p>Another graphical methods for checking proportional hazards is to plot <span class="math inline">\(\ln (-\ln (S(t)))\)</span> vs. <span class="math inline">\(t\)</span> or <span class="math inline">\(\ln(t)\)</span> and look for parallelism. This can be done only for categorical covariates.</p>
@@ -1718,7 +1719,7 @@ In the figure above, the solid line is a smoothing spline fit to the plot, with 
 <pre class="r"><code>ggcoxdiagnostics(Coxfit2, type = &quot;dfbetas&quot;,
                  linear.predictions = FALSE, ggtheme = theme_bw())</code></pre>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
-<p><img src="/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
 <p>To check outliers: The deviance residual is a normalized transform of the martingale residual.</p>
 <p>These residuals should be roughtly symmetrically distributed about zero with a standard deviation of 1.</p>
 <p>Positive values correspond to events that “occur too soon” compared to expected survival times.</p>
@@ -1727,7 +1728,7 @@ In the figure above, the solid line is a smoothing spline fit to the plot, with 
 <pre class="r"><code>ggcoxdiagnostics(Coxfit2, type = &quot;deviance&quot;,
                  linear.predictions = FALSE, ggtheme = theme_bw())</code></pre>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
-<p><img src="/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
 </div>
 <div id="testing-non-linearity-of-covariates-effects" class="section level3">
 <h3>Testing non linearity of covariates effects</h3>
@@ -1739,7 +1740,7 @@ In the figure above, the solid line is a smoothing spline fit to the plot, with 
 <pre class="r"><code>ggcoxfunctional(Surv(duration, spell) ~ age + log(age) + sqrt(age), data = Unemployment)</code></pre>
 <pre><code>## Warning: arguments formula is deprecated; will be removed in the next version;
 ## please use fit instead.</code></pre>
-<p><img src="/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
 </div>
 </div>
 <div id="parametric-model---aft" class="section level2">
@@ -1866,7 +1867,7 @@ exponential model.</p>
 <p>Weibull model with categorical variables can be checked for its adequacy by stratified Kaplan-Meier curves.</p>
 <p>A plot of log survival time versus <span class="math inline">\(log[–log(KM)]\)</span> will show linear and parallel lines if the model is adequate : Weibull regression diagnostic plot showing that the lines for male and female are generally parallel and linear in its scale.</p>
 <pre class="r"><code>WeibullDiag(Surv_time2 ~ sex, data=Unemployment)</code></pre>
-<p><img src="/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
 </div>
 </div>
 <div id="weibull-version-2" class="section level2">
@@ -1885,21 +1886,21 @@ summary(Weib1)</code></pre>
 ## Covariate           Mean       Coef Exp(Coef)  se(Coef)    Wald p
 ## sex 
 ##             male    0.553     0         1           (reference)
-##           female    0.447     0.118     1.125     0.125     0.345 
-## age                33.929     0.005     1.005     0.003     0.115 
+##           female    0.447     0.111     1.118     0.125     0.374 
+## age                34.175     0.001     1.001     0.003     0.767 
 ## 
-## log(scale)                    3.833    46.220     0.173     0.000 
-## log(shape)                   -0.154     0.857     0.048     0.001 
+## log(scale)                    3.659    38.835     0.168     0.000 
+## log(shape)                   -0.158     0.854     0.048     0.001 
 ## 
 ## Events                    256 
 ## Total time at risk          8819 
-## Max. log. likelihood      -1154.5 
-## LR test statistic         3.3 
+## Max. log. likelihood      -1155.7 
+## LR test statistic         0.92 
 ## Degrees of freedom        2 
-## Overall p-value           0.192477</code></pre>
+## Overall p-value           0.63266</code></pre>
 <pre class="r"><code>par(mfrow=c(2,2))
 plot(Weib1 , fn=&quot;sur&quot;, new.data = c(0, 40))</code></pre>
-<p><img src="/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
 <div id="graphical-goodness-of-fit-test" class="section level3">
 <h3>Graphical goodness-of-fit test</h3>
 <p>The eha package has a function check.dist() to test the goodness-of-fit by graphical visualization. It compares the cumulative hazards functions for non-parametric and parametric model, requiring objects of “coxreg” and “phreg” as the first and second argument.</p>
@@ -1912,18 +1913,18 @@ summary(phreg1)</code></pre>
 ## Covariate          W.mean      Coef Exp(Coef)  se(Coef)    Wald p
 ## sex 
 ##             male    0.553     0         1           (reference)
-##           female    0.447     0.118     1.125     0.125     0.345 
-## age                33.929     0.005     1.005     0.003     0.115 
+##           female    0.447     0.111     1.118     0.125     0.374 
+## age                34.175     0.001     1.001     0.003     0.767 
 ## 
-## log(scale)                    3.833               0.173     0.000 
-## log(shape)                   -0.154               0.048     0.001 
+## log(scale)                    3.659               0.168     0.000 
+## log(shape)                   -0.158               0.048     0.001 
 ## 
 ## Events                    256 
 ## Total time at risk          8819 
-## Max. log. likelihood      -1154.5 
-## LR test statistic         3.29 
+## Max. log. likelihood      -1155.7 
+## LR test statistic         0.92 
 ## Degrees of freedom        2 
-## Overall p-value           0.192536</code></pre>
+## Overall p-value           0.632855</code></pre>
 <pre class="r"><code>coxreg1 &lt;- coxreg(Surv_time2 ~ sex + age, data=Unemployment)
 summary(coxreg1)</code></pre>
 <pre><code>## Call:
@@ -1932,17 +1933,17 @@ summary(coxreg1)</code></pre>
 ## Covariate           Mean       Coef     Rel.Risk   S.E.    Wald p
 ## sex 
 ##             male    0.553     0         1 (reference)
-##           female    0.447     0.090     1.094     0.125     0.472 
-## age                33.929     0.005     1.005     0.003     0.138 
+##           female    0.447     0.085     1.088     0.126     0.501 
+## age                34.175     0.001     1.001     0.003     0.882 
 ## 
 ## Events                    256 
 ## Total time at risk          8819 
-## Max. log. likelihood       -1352 
-## LR test statistic         2.65 
+## Max. log. likelihood      -1353.1 
+## LR test statistic         0.49 
 ## Degrees of freedom        2 
-## Overall p-value           0.265669</code></pre>
+## Overall p-value           0.784074</code></pre>
 <pre class="r"><code>check.dist(phreg1, coxreg1)</code></pre>
-<p><img src="/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
 <p>The solid line is the parametric Weibull cumulative hazard function and the dashed line is non-parametric function.</p>
 <p>It appears that the parametric function fits well to the semi-parametric function (Figure 3). Note that non-parametric model is closer to the observed data because no function is assumed for the baseline hazard function.</p>
 <p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5233524/" class="uri">https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5233524/</a></p>
@@ -1977,28 +1978,28 @@ anova(Weib2)</code></pre>
 <pre><code>##                 Wald Statistics          Response: Surv_time2 
 ## 
 ##  Factor     Chi-Square d.f. P     
-##  sex         0.15      1    0.6954
-##  race        0.04      1    0.8455
-##  age         1.87      1    0.1719
-##  pubemp     10.04      1    0.0015
-##  TOTAL      13.26      4    0.0101</code></pre>
+##  sex         0.12      1    0.7281
+##  race        0.08      1    0.7807
+##  age         0.05      1    0.8258
+##  pubemp     10.45      1    0.0012
+##  TOTAL      11.40      4    0.0224</code></pre>
 <pre class="r"><code>plot(anova(Weib2) , margin = c(&quot;chisq&quot;, &quot;d.f.&quot;, &quot;P&quot;))</code></pre>
-<p><img src="/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
 <p>In the example, we included all available covariates into the model to rank their statistical importance. This is often the case in real research setting that researchers have no prior knowledge on which variable should be included. The first argument of psm() function is a formula describing the response variable and covariates, as well as interaction between predictors. The output of anova() includes variable names, Chi-square statistics, degree of freedom and p-value. Dot chart is drawn with generic function plot(). It appears that meal.cal is the least important variable and ph.ecog is the most important one (Figure 4). Some pre-specified rules can be applied to inclusion/exclusion of variables (4).</p>
 <p>Alternatively, model development can be done with backward elimination on covariates. This method starts with a full model that included all available covariates and then applies Wald test to examine the relative importance of each one. Statistical significance level for a covariate to stay in a model can be specified. R provides a function fastbw() to perform fast backward variable selection.</p>
 <p>An external file that holds a picture, illustration, etc. Object name is atm-04-24-484-fig9.jpg</p>
 <pre class="r"><code>fastbw(Weib2, rule=&quot;aic&quot;)</code></pre>
 <pre><code>## 
 ##  Deleted Chi-Sq d.f. P      Residual d.f. P      AIC  
-##  race    0.04   1    0.8455 0.04     1    0.8455 -1.96
-##  sex     0.14   1    0.7109 0.18     2    0.9161 -3.82
-##  age     1.89   1    0.1694 2.06     3    0.5594 -3.94
+##  age     0.05   1    0.8258 0.05     1    0.8258 -1.95
+##  race    0.08   1    0.7712 0.13     2    0.9357 -3.87
+##  sex     0.11   1    0.7380 0.24     3    0.9700 -5.76
 ## 
 ## Approximate Estimates after Deleting Factors
 ## 
-##               Coef    S.E. Wald Z         P
-## (Intercept) 3.4086 0.07959 42.828 0.0000000
-## pubemp=yes  0.6282 0.18773  3.347 0.0008184
+##               Coef   S.E. Wald Z         P
+## (Intercept) 3.4132 0.0799  42.72 0.0000000
+## pubemp=yes  0.6297 0.1885   3.34 0.0008379
 ## 
 ## Factors in Final Model
 ## 
@@ -2017,7 +2018,7 @@ anova(Weib2)</code></pre>
 <p>Survival times have values of <code>1, 2, 3, 4 or 5</code></p>
 <div id="import-data-summary-statistics" class="section level2">
 <h2>Import data &amp; Summary statistics</h2>
-<pre class="r"><code>jobdur &lt;- read.table(&quot;./post/data/jobdur.txt&quot;, header = TRUE)
+<pre class="r"><code>jobdur &lt;- read.table(&quot;./data/jobdur.txt&quot;, header = TRUE)
 head(jobdur)</code></pre>
 <pre><code>##   dur event ed prestige salary
 ## 1   1     1  7        3     19
@@ -2080,11 +2081,11 @@ fit</code></pre>
 ##     4     30       1    0.792  0.0517       0.6970        0.900
 ##     5     21      17    0.151  0.0686       0.0619        0.368</code></pre>
 <pre class="r"><code>plot(fit)</code></pre>
-<p><img src="/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
 <p>Or using the package <code>survminer</code> and <code>ggsurvplot()</code> function:</p>
 <pre class="r"><code>library(survminer)
 ggsurvplot(fit)</code></pre>
-<p><img src="/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
 <ol start="2" style="list-style-type: decimal">
 <li>Curves depending on education level.</li>
 </ol>
@@ -2121,32 +2122,34 @@ ggsurvplot(sfit, conf.int=TRUE, pval=TRUE, risk.table=TRUE,
            risk.table.height=.15)</code></pre>
 <pre><code>## Warning: Vectorized input to `element_text()` is not officially supported.
 ## Results may be unexpected or may change in future versions of ggplot2.</code></pre>
-<p><img src="/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-41-1.png" width="672" /><img src="/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-41-2.png" width="672" /></p>
+<p><img src="/lessons_list/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-41-1.png" width="672" /><img src="/lessons_list/lesson_3-2_SurvAnalyse-APPLICATION_files/figure-html/unnamed-chunk-41-2.png" width="672" /></p>
 </div>
 <div id="exercise-inspired-from-chapter-7-of-vinods--on-intermediate-econometrics-using-r" class="section level2">
 <h2>Exercise inspired from “Chapter 7 of Vinod’s -ON INTERMEDIATE ECONOMETRICS USING R”</h2>
-<p>Download .txt" data le from my website:
-<a href="http://www.fordham.edu/economics/vinod/strikeDuration.txt" class="uri">http://www.fordham.edu/economics/vinod/strikeDuration.txt</a> It has
-two variables " for durations of industrial labor strikes and unanticipated
-production " which is a residual from a regression of log of industrial
+<!--
+Download \strikeDuration.txt" data le from my website:
+http://www.fordham.edu/economics/vinod/strikeDuration.txt It has
+two variables \T" for durations of industrial labor strikes and unanticipated
+production \Prod" which is a residual from a regression of log of industrial
 production on time, time squared, and a set of monthly dummy variables.
 It measures aggregate industrial production less trend and seasonal compo-
 nents. Show the survival curves for these data. [Hint: Use snippet plotting
 Figure 7.3 of the textbook] Since these data have only two variables, note
 that we cannot plot a gure similar to the Figure 7.4 of the textbook. Use
-a random seed of 356 and the <code>sample(1:62)' command to create a regional dummy variable by splitting numbers below 31. Use</code>region’ data and plot
+a random seed of 356 and the `sample(1:62)' command to create a regional
+dummy variable by splitting numbers below 31. Use `region' data and plot
 similar to Figure 7.4 of the textbook. Since there was no censoring, censor
 variable is a vector of all zeros. This choice however leads to non-convergence.
 If we pretend that all data are censored, there is convergence with similar
 coecients.
 #Hints for artificial creation of the region dummy variable:
-da=read.table(“c:/data/strikeduration.txt”, header=T)
+da=read.table("c:/data/strikeduration.txt", header=T)
 33
 summary(da)
-n=length(da<span class="math inline">\(T);n; censor=rep(0,n) #\)</span>
+n=length(da$T);n; censor=rep(0,n) #$
 set.seed(356)
 sa=sample(1:n)
-region=ifelse( sa&lt;(n/2), 0,1)
+region=ifelse( sa<(n/2), 0,1)
 da2=cbind(da, censor, region);summary(da2)
 library(survival); attach(da2)
 survreg(Surv(T,censor)~Prod)
@@ -2159,7 +2162,8 @@ fitD=survfit(Surv(T, rep(1,n)) ~ region)
 survplot(fitD) #two lines for two strata alone (no Prod here)
 Note that our articially created regions are not statistically signicantly
 dierent from each other since the condence intervals for two survival curves
-overlap.</p>
+overlap.
+-->
 <div id="refs" class="references">
 <div id="ref-Allison2010">
 <p>Allison, Paul D. 2010. <em>Survival Analysis Using Sas: A Practical Guide, Second Edition</em>. 2nd ed. SAS Publishing.</p>

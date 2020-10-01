@@ -8,9 +8,10 @@ tags: ["R Markdown", "plot", "regression"]
 authorbox: false
 link-citations: yes
 biblio-style: apalike
-bibliography: [post/data/biblio_hdr_v2.bib, post/data/Liste_Publi3.bib, post/data/biblio_SABD.bib]
+bibliography: [./data/biblio_hdr_v2.bib, ./data/Liste_Publi3.bib, ./data/biblio_SABD.bib]
 nocite: |
   @Bivand2013, @lovelace2019
+draft: True
 ---
 
 **A FINIR**
@@ -696,7 +697,7 @@ Survival times have values of `1, 2, 3, 4 or 5`
 
 
 ```{r}
-jobdur <- read.table("./post/data/jobdur.txt", header = TRUE)
+jobdur <- read.table("./data/jobdur.txt", header = TRUE)
 head(jobdur)
 
 summary(jobdur)
@@ -766,7 +767,7 @@ ggsurvplot(sfit, conf.int=TRUE, pval=TRUE, risk.table=TRUE,
 
 ## Exercise inspired from "Chapter 7 of Vinod's \HANDS-ON INTERMEDIATE ECONOMETRICS USING R"
 
-
+<!--
 Download \strikeDuration.txt" data le from my website:
 http://www.fordham.edu/economics/vinod/strikeDuration.txt It has
 two variables \T" for durations of industrial labor strikes and unanticipated
@@ -803,3 +804,4 @@ survplot(fitD) #two lines for two strata alone (no Prod here)
 Note that our articially created regions are not statistically signicantly
 dierent from each other since the condence intervals for two survival curves
 overlap.
+-->

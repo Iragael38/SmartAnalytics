@@ -8,9 +8,10 @@ tags: ["R Markdown", "plot", "regression"]
 authorbox: false
 link-citations: yes
 biblio-style: apalike
-bibliography: [post/data/biblio_hdr_v2.bib, post/data/Liste_Publi3.bib, post/data/biblio_SABD.bib]
+bibliography: [./data/biblio_hdr_v2.bib, ./data/Liste_Publi3.bib, ./data/biblio_SABD.bib]
 nocite: |
   @Bivand2013, @lovelace2019
+draft: True  
 ---
 
 **A FINIR**

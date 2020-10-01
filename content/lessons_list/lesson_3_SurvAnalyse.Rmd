@@ -11,6 +11,7 @@ biblio-style: apalike
 bibliography: [./data/biblio_hdr_v2.bib, ./data/Liste_Publi3.bib, ./data/biblio_SABD.bib]
 nocite: |
   @Bivand2013, @lovelace2019
+draft: True
 ---
 
 **A FINIR**

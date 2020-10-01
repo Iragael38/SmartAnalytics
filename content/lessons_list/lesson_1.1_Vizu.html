@@ -511,7 +511,7 @@ We use <code>MASS::fitdistr</code> function</p>
 <pre class="r"><code>est_df &lt;- as.list(MASS::fitdistr(df_t$y, &quot;t&quot;)$estimate)[[&quot;df&quot;]]</code></pre>
 <pre><code>## Warning in log(s): production de NaN</code></pre>
 <pre class="r"><code>est_df</code></pre>
-<pre><code>## [1] 4.815569</code></pre>
+<pre><code>## [1] 2.732854</code></pre>
 <p>There is a match !</p>
 <pre class="r"><code>p2 &lt;- ggplot(df_t) +
   aes(sample = y) +
