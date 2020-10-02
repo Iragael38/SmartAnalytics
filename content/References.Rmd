@@ -1,0 +1,25 @@
+---
+title: "References"
+subtitle: "Some advised litterature and webography"
+author: "Iragaël Joly"
+date: "Automn 2020"
+authorbox: false
+---
+
+## Softwares Installation
+
+- [R](https://cran.r-project.org/) and [RStudio](https://rstudio.com/products/rstudio/download/)
+- LateX edition: [MikteX](https://miktex.org/download)
+
+## Introduction to R and Statistics
+
+- *Introductory Statistics with R*, Peter Dalgaard, [Caseine Link](https://moodle.caseine.org/mod/resource/view.php?id=30653)
+
+
+- *Introduction to Statistical Learning with Applications in R*, Gareth James, Daniela Witten, Trevor Hastie and Robert, Tibshirani [website](http://faculty.marshall.usc.edu/gareth-james/ISL/)
+
+
+## Introduction to RMarkdown
+
+- RMarkdown Cheatsheet [pdf](/Data-pdf/rmarkdown-cheatsheet-2.0.pdf)
+- *R Markdown: The Definitive Guide, Yihui Xie, J. J. Allaire, Garrett Grolemund* (access the bookdown)[https://bookdown.org/yihui/rmarkdown/]

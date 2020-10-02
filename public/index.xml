@@ -147,6 +147,17 @@ Smart Analytics for Big Data</description>
     </item>
     
     <item>
+      <title>References</title>
+      <link>/references/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/references/</guid>
+      <description>Softwares InstallationR and RStudioLateX edition: MikteXIntroduction to R and StatisticsIntroductory Statistics with R, Peter Dalgaard, Caseine Link
+Introduction to Statistical Learning with Applications in R, Gareth James, Daniela Witten, Trevor Hastie and Robert, Tibshirani website
+Introduction to RMarkdownRMarkdown Cheatsheet pdfR Markdown: The Definitive Guide, Yihui Xie, J. J. Allaire, Garrett Grolemund (access the bookdown)[https://bookdown.org/yihui/rmarkdown/]</description>
+    </item>
+    
+    <item>
       <title>Smart Analytics for Big Data</title>
       <link>/lessons_list/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>

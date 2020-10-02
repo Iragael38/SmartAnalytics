@@ -214,17 +214,17 @@ will print `r round(sqrt(pi),4)`... and `r sqrt(1:5)`
 
 #### In-line R instruction
 
-Using  XXX adds the result of the instruction inline  the text.
+Using  `` ` `` adds the result of the instruction inline  the text.
 
 For example:
 
 
-`The square root of pi is`  `` `r "\u0060r sqrt(pi)\u0060"` `` 
+`The square root of $\pi$ is`  `` `r "\u0060r sqrt(pi)\u0060"` `` 
 
 
 will print. 
 
-The square root of pi is `r sqrt(pi)`. 
+The square root of  $\pi$  is `r sqrt(pi)`. 
 
 ### Chunck options
 
