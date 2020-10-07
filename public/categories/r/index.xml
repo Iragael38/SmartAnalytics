@@ -23,15 +23,6 @@ With ggplot, the data need need not to be reshaped for each type of graphical re
     
     <item>
       <title>Introduction to Data Vizualisation</title>
-      <link>/lessons_list/lesson_1.1_vizu/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/lessons_list/lesson_1.1_vizu/</guid>
-      <description>MunznerWhat can be visualized: data, datasets, and attributesWhy people are using vis in terms of actions and targetsHow to design vis idioms: encode, manipulate, facet, and reduce.The four nested levels of vis design have different threats to validity at each level, and validation approaches should be chosen accordinglyThe effectiveness of channels that modify the appearance of marks depends on matching the expressiveness of channels with the attributes being encodedEight rules of thumb.</description>
-    </item>
-    
-    <item>
-      <title>Introduction to Data Vizualisation</title>
       <link>/lessons_list/lesson_1.3_application/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       

@@ -43,7 +43,7 @@ You can connect to zoom:
 
 #### Introduction to Vizu
 
-[Introduction to Vizu](/Data-pdf/lesson_1.1_Vizu.pdf)
+[Introduction to Vizu](/Data-pdf/lesson_1.1_01_Vizu_V1.pdf)
 
 #### Grammar of graphics with R
 
