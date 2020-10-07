@@ -14,43 +14,265 @@ nocite: |
 draft: True  
 ---
 
-**A FINIR**
+# 2 Examples of GIS with R
 
+Following examples are to be readed after the lesson slides.
 
-# Introduction
-
-
-Visualisation of geographic information is become one of the major tool of the digital information analytic.
-
-Numerous softwares manage visualization of geographic information from full-scale GIS applications such as ArcGIS and QGIS to web-based tools like Google maps to any number of programing languages. 
-
-Using a command-line interface has the benefits of enabling both steps analysis and visualization in customizable, transparent and reproducible manner.
+## First example (suite of the slides example)
 
 
 
+```{r , eval=T, echo=FALSE, message=F, warning=F}
+library(dplyr)
+library(sf)
+library(ggplot2)
+library(tmap)
+library(leaflet)
+library(tidyverse)
+theme_set(theme_minimal()) # set ggplot theme 
+```
 
+
+
+```{r echo=FALSE, size="tiny"}
+path <- 'G:/Ira_Lessons_with_Rmd/SABD_SmartAnalytics/GIS/data'
+
+departements_L93 <- st_read(dsn   = path, 
+                            layer = "DEPARTEMENT",
+                            quiet = TRUE) %>% 
+  st_transform(2154)
+
+```
+
+
+```{r echo = FALSE, eval = FALSE}
+############################################################################
+#############################   First  Example Suite  ##################
+############################################################################
+```
+
+```{r}
+# url.france_pop <- url("https://vrzkj25a871bpq7t1ugcgmn9-wpengine.netdna-ssl.com/wp-content/datasets/france_population_data_2016.RData")
+# save(df.france, file = "df.france.RData")
+#load(url.france_pop)
+load("data/gis/df.france.RData")
+glimpse(df.france)
+
+# Transform into lower case
+colnames(df.france) <- colnames(df.france) %>% 
+  str_to_lower()
+colnames(df.france)
+# Summary
+df.france$population %>% 
+  summary()
+# Calculate density
+df.france <- df.france %>% 
+  mutate(density = population/superficie*100)
+#as.tibble(df.france)
+
+#head(df.france)
+```
+
+
+```{r}
+# Sum population over dept
+
+df.dept <- df.france %>% 
+ # st_transform(crs = st_crs(forest)) %>%
+ # st_crop(st_bbox(covariates)) %>%
+ # st_intersection(covariates) %>%
+  group_by(code_dept) %>%
+  summarise(pop_dept = sum(population) ,
+            surface_dept= sum(superficie))  %>%
+  as_tibble()
+#head(df.dept)
+
+
+# Calculate area of each site
+
+departements_L93 <- departements_L93 %>% 
+  mutate(area = st_area(.),
+         areakm2 = units::set_units(area, km^2),
+         bigsites = ifelse(as.numeric(areakm2) > 200, areakm2, NA))
+```
+
+
+## Comparing surfaces in the 2 DF
+
+```{r}
+head(df.dept[,c(1,3)])
+head(arrange(departements_L93, departements_L93$CODE_DEPT)[,c(2,14)])
+```
+
+```{r}
+# Join, then calculate density
+
+#head(departements_L93)
+departements <- departements_L93 %>%
+  select('Nom_DEPT' = NOM_DEPT,
+           'code_dept' = CODE_DEPT, area, areakm2) 
+
+departements_2 <- departements %>% 
+  inner_join(df.dept,by='code_dept')
+
+#head(departements_2)
+departements_2 <- departements_2 %>% 
+  mutate(dens_dept = pop_dept / (surface_dept/1000000),
+         dens_dept2 = pop_dept / areakm2)
+
+#head(departements_2)
+
+
+```
+
+
+```{r, eval=F}
+departements_2 %>%
+  ggplot() +
+  aes(fill = as.numeric(dens_dept)) +
+  geom_sf(lwd = 0.1) +
+  scale_fill_viridis_c(
+    name = bquote('Density\n(people per km'^2*')'),
+    alpha = 0.7) + 
+  labs(title = 'Human population density',
+       subtitle = 'par la somme des surfaces communales')
+```
+
+<!-- ![](Fig/Densite1.png)  -->
+
+```{r, eval=F}
+departements_2 %>%
+  ggplot() +
+  aes(fill = as.numeric(dens_dept2)) +
+  geom_sf(lwd = 0.1) +
+  scale_fill_viridis_c(
+    name = bquote('Density\n(people per km'^2*')'),
+    alpha = 0.7) + 
+  labs(title = 'Human population density',
+       subtitle = 'par le calcul des surfaces')
+```
+
+
+![](data/Fig/Densite2.png)
+
+
+```{r}
+summary(departements_2$dens_dept2)
+```
+
+
+```{r echo = FALSE, eval = FALSE}
+############################################################################
+#############################   Second Example   ##################
+############################################################################
+```
+
+
+
+## Second example [^3]
+
+[^3]: from (https://roelandtn.frama.io/post/simple-mapping-with-sf/)
+
+
+```{r}
+library(spData) # for the SIDs dataframe
+
+sids <- st_read(dsn = system.file("shapes/sids.shp", package = "spData"), crs = 4326 )
+```
+
+
+### The geometry
+
+```{r}
+head(sids)
+```
+***
+
+## Mapping the shapefile
+
+Mapping the polygons...
+
+### Without Transformation of projection
+
+```{r, eval=FALSE}
+ggplot(sids)+
+  geom_sf()
+```
+
+![](data/Fig/NorthCal.png)
+***
+
+### With transformed projection
+
+Let’s change the projection for a more fitted one of North Carolina: `code: 2264`
+
+
+```{r, eval=FALSE}
+sids <- sids %>% st_transform(2264)
+ggplot(sids)+
+  geom_sf() 
+```
+
+![](data/Fig/NorthCal2.png)
+
+
+## Mapping information
+
+The rate of sids for the 1000 birth in the 1974 and 1978 period, we will use the data from the `BIR74` and `SID74` columns.
+
+```{r}
+sids['sids_rate74'] <- (sids['SID74'] * 1000)/ sids['BIR74']
+head(sids[,c(1,5,24)])
+```
 
 ***
 
- The goal of this post is to introduce the basic landscape of working with spatial data in R from the perspective of a non-specialist. 
- 
-The use of the `ggmap` package is to geocode data and create maps using the `ggplot2` system.
+Functions and parameters:
 
-The `sp` and `sf` packages use different methodologies for integrating spatial data into R. 
+- `ggplot(sids)`: Plot the data (without specifying te type of plot for now) 
+- `geom_sf(aes(fill = sids_rate74)) `: aesthetics to be applyed: filling of the geometry using the data from `sids_rate74` column
+- `scale_fill_viridis_c()`: with the `viridis` [^5] color scale dedicated to filling for continuous data
 
-The `sp` package introduced a coherent set of classes and methods for handling spatial data in 2005.
-The package remains the backbone of many packages that provide GIS capabilities in R. 
+[^5]: The viridis scales provide colour maps that are perceptually uniform in both colour and black-and-white. They are also designed to be perceived by viewers with common forms of colour blindness. See also (https://bids.github.io/colormap/).
 
-The `sf` package implements the simple features open standard for the representation of geographic vector data in R. 
+***
 
-The package first appeared on CRAN at the end of 2016 and is under very active development. The sf package is meant to supersede sp, implementing ways to store spatial data in R that integrate with the `tidyverse` workflow of the packages developed by Hadley Wickham and others.
+```{r, eval=F}
+map <- ggplot(sids)+
+  geom_sf(aes(fill = sids_rate74))
+map2 <- map +
+  scale_fill_viridis_c()
+map2
+```
 
+![](data/Fig/NorthCal3.png)
+***
 
+### A better map
 
+```{r, eval=F}
+map3  <- map + ggtitle(
+  "Sudden Infant Death Syndrom in North Carolina (USA)", # title
+  "1974 -1978" # subtitle
+  )   + 
+  scale_fill_viridis_c(name = "SIDS cases \nfor 1000 births") +  # legend title
+    theme(legend.position = "bottom" # legend position
+    ) +
+  theme(
+    axis.title.x = element_blank(),
+    axis.text.x = element_blank(), 
+    axis.ticks.x = element_blank()  # Remove labels on axis
+  ) +
+  theme(
+    axis.title.y = element_blank(),
+    axis.text.y = element_blank(), 
+    axis.ticks.y = element_blank())
+map3
+```
 
-
-
-
+![](data/Fig/NorthCal4.png)  
+  
+  
 
 ## References 
 

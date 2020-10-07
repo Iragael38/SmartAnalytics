@@ -8,11 +8,8 @@
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<meta name="description" content="">
 		<meta property="og:title" content="Introduction to GIS - Geographic Information System" />
-<meta property="og:description" content="A FINIR
-IntroductionVisualisation of geographic information is become one of the major tool of the digital information analytic.
-Numerous softwares manage visualization of geographic information from full-scale GIS applications such as ArcGIS and QGIS to web-based tools like Google maps to any number of programing languages.
-Using a command-line interface has the benefits of enabling both steps analysis and visualization in customizable, transparent and reproducible manner.
-The goal of this post is to introduce the basic landscape of working with spatial data in R from the perspective of a non-specialist." />
+<meta property="og:description" content="2 Examples of GIS with RFollowing examples are to be readed after the lesson slides.
+First example (suite of the slides example)# url.france_pop &lt;- url(&quot;https://vrzkj25a871bpq7t1ugcgmn9-wpengine.netdna-ssl.com/wp-content/datasets/france_population_data_2016.RData&quot;)# save(df.france, file = &quot;df.france.RData&quot;)#load(url.france_pop)load(&quot;data/gis/df.france.RData&quot;)glimpse(df.france)## Rows: 35,798## Columns: 18## $ ID_GEOFLA &lt;fct&gt; COMMUNE00000000000000001, COMMUNE00000000000000002, COMM...## $ CODE_COM &lt;fct&gt; 216, 033, 009, 225, 890, 018, 113, 319, 097, 070, 046, 5...## $ INSEE_COM &lt;fct&gt; 32216, 47033, 32009, 38225, 62890, 08018, 32113, 10319, ." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="/lessons_list/lesson_2_gis/" />
 
@@ -105,20 +102,261 @@ The goal of this post is to introduce the basic landscape of working with spatia
 			
 
 
-<p><strong>A FINIR</strong></p>
-<div id="introduction" class="section level1">
-<h1>Introduction</h1>
-<p>Visualisation of geographic information is become one of the major tool of the digital information analytic.</p>
-<p>Numerous softwares manage visualization of geographic information from full-scale GIS applications such as ArcGIS and QGIS to web-based tools like Google maps to any number of programing languages.</p>
-<p>Using a command-line interface has the benefits of enabling both steps analysis and visualization in customizable, transparent and reproducible manner.</p>
+<div id="examples-of-gis-with-r" class="section level1">
+<h1>2 Examples of GIS with R</h1>
+<p>Following examples are to be readed after the lesson slides.</p>
+<div id="first-example-suite-of-the-slides-example" class="section level2">
+<h2>First example (suite of the slides example)</h2>
+<pre class="r"><code># url.france_pop &lt;- url(&quot;https://vrzkj25a871bpq7t1ugcgmn9-wpengine.netdna-ssl.com/wp-content/datasets/france_population_data_2016.RData&quot;)
+# save(df.france, file = &quot;df.france.RData&quot;)
+#load(url.france_pop)
+load(&quot;data/gis/df.france.RData&quot;)
+glimpse(df.france)</code></pre>
+<pre><code>## Rows: 35,798
+## Columns: 18
+## $ ID_GEOFLA  &lt;fct&gt; COMMUNE00000000000000001, COMMUNE00000000000000002, COMM...
+## $ CODE_COM   &lt;fct&gt; 216, 033, 009, 225, 890, 018, 113, 319, 097, 070, 046, 5...
+## $ INSEE_COM  &lt;fct&gt; 32216, 47033, 32009, 38225, 62890, 08018, 32113, 10319, ...
+## $ NOM_COM    &lt;fct&gt; LOURTIES-MONBRUN, BOUDY-DE-BEAUREGARD, ARMOUS-ET-CAU, AU...
+## $ STATUT     &lt;fct&gt; Commune simple, Commune simple, Commune simple, Commune ...
+## $ X_CHF_LIEU &lt;int&gt; 500820, 516424, 472979, 898640, 640049, 824246, 461332, ...
+## $ Y_CHF_LIEU &lt;int&gt; 6264958, 6384852, 6278963, 6450689, 7028672, 6908952, 63...
+## $ X_CENTROID &lt;int&gt; 500515, 515575, 473004, 898625, 640115, 824391, 460721, ...
+## $ Y_CENTROID &lt;int&gt; 6265413, 6385938, 6278937, 6451597, 7029900, 6908954, 63...
+## $ Z_MOYEN    &lt;int&gt; 252, 112, 221, 1234, 79, 125, 134, 167, 752, 438, 1276, ...
+## $ SUPERFICIE &lt;dbl&gt; 966, 1019, 932, 3371, 1023, 438, 919, 1904, 2217, 2667, ...
+## $ POPULATION &lt;dbl&gt; 139, 414, 95, 2973, 178, 80, 97, 362, 296, 901, 10, 166,...
+## $ CODE_ARR   &lt;fct&gt; 3, 3, 3, 1, 4, 4, 2, 3, 2, 2, 2, 3, 2, 1, 1, 3, 2, 1, 3,...
+## $ CODE_DEPT  &lt;fct&gt; 32, 47, 32, 38, 62, 08, 32, 10, 06, 42, 31, 71, 53, 16, ...
+## $ NOM_DEPT   &lt;fct&gt; GERS, LOT-ET-GARONNE, GERS, ISERE, PAS-DE-CALAIS, ARDENN...
+## $ CODE_REG   &lt;fct&gt; 76, 75, 76, 84, 32, 44, 76, 44, 93, 84, 76, 27, 52, 75, ...
+## $ NOM_REG    &lt;fct&gt; LANGUEDOC-ROUSSILLON-MIDI-PYRENEES, AQUITAINE-LIMOUSIN-P...
+## $ geometry   &lt;MULTIPOLYGON [m]&gt; MULTIPOLYGON (((499484.6 62..., MULTIPOLYGO...</code></pre>
+<pre class="r"><code># Transform into lower case
+colnames(df.france) &lt;- colnames(df.france) %&gt;% 
+  str_to_lower()
+colnames(df.france)</code></pre>
+<pre><code>##  [1] &quot;id_geofla&quot;  &quot;code_com&quot;   &quot;insee_com&quot;  &quot;nom_com&quot;    &quot;statut&quot;    
+##  [6] &quot;x_chf_lieu&quot; &quot;y_chf_lieu&quot; &quot;x_centroid&quot; &quot;y_centroid&quot; &quot;z_moyen&quot;   
+## [11] &quot;superficie&quot; &quot;population&quot; &quot;code_arr&quot;   &quot;code_dept&quot;  &quot;nom_dept&quot;  
+## [16] &quot;code_reg&quot;   &quot;nom_reg&quot;    &quot;geometry&quot;</code></pre>
+<pre class="r"><code># Summary
+df.france$population %&gt;% 
+  summary()</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##       0     197     442    1779    1100  458298</code></pre>
+<pre class="r"><code># Calculate density
+df.france &lt;- df.france %&gt;% 
+  mutate(density = population/superficie*100)
+#as.tibble(df.france)
+
+#head(df.france)</code></pre>
+<pre class="r"><code># Sum population over dept
+
+df.dept &lt;- df.france %&gt;% 
+ # st_transform(crs = st_crs(forest)) %&gt;%
+ # st_crop(st_bbox(covariates)) %&gt;%
+ # st_intersection(covariates) %&gt;%
+  group_by(code_dept) %&gt;%
+  summarise(pop_dept = sum(population) ,
+            surface_dept= sum(superficie))  %&gt;%
+  as_tibble()</code></pre>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
+<pre class="r"><code>#head(df.dept)
+
+
+# Calculate area of each site
+
+departements_L93 &lt;- departements_L93 %&gt;% 
+  mutate(area = st_area(.),
+         areakm2 = units::set_units(area, km^2),
+         bigsites = ifelse(as.numeric(areakm2) &gt; 200, areakm2, NA))</code></pre>
+</div>
+<div id="comparing-surfaces-in-the-2-df" class="section level2">
+<h2>Comparing surfaces in the 2 DF</h2>
+<pre class="r"><code>head(df.dept[,c(1,3)])</code></pre>
+<pre><code>## # A tibble: 6 x 2
+##   code_dept surface_dept
+##   &lt;fct&gt;            &lt;dbl&gt;
+## 1 01              563065
+## 2 02              734630
+## 3 03              732174
+## 4 04              692413
+## 5 05              562775
+## 6 06              429505</code></pre>
+<pre class="r"><code>head(arrange(departements_L93, departements_L93$CODE_DEPT)[,c(2,14)])</code></pre>
+<pre><code>## Simple feature collection with 6 features and 2 fields
+## geometry type:  MULTIPOLYGON
+## dimension:      XY
+## bbox:           xmin: 644724.2 ymin: 6272482 xmax: 1077560 ymax: 6997000
+## projected CRS:  RGF93_Lambert_93
+##   CODE_DEPT bigsites                       geometry
+## 1        01 5774.007 MULTIPOLYGON (((838243.6 65...
+## 2        02 7427.176 MULTIPOLYGON (((708719 6956...
+## 3        03 7363.692 MULTIPOLYGON (((664479.2 66...
+## 4        04 6994.099 MULTIPOLYGON (((910437.3 63...
+## 5        05 5685.919 MULTIPOLYGON (((933490 6411...
+## 6        06 4292.680 MULTIPOLYGON (((1028846 627...</code></pre>
+<pre class="r"><code># Join, then calculate density
+
+#head(departements_L93)
+departements &lt;- departements_L93 %&gt;%
+  select(&#39;Nom_DEPT&#39; = NOM_DEPT,
+           &#39;code_dept&#39; = CODE_DEPT, area, areakm2) 
+
+departements_2 &lt;- departements %&gt;% 
+  inner_join(df.dept,by=&#39;code_dept&#39;)
+
+#head(departements_2)
+departements_2 &lt;- departements_2 %&gt;% 
+  mutate(dens_dept = pop_dept / (surface_dept/1000000),
+         dens_dept2 = pop_dept / areakm2)
+
+#head(departements_2)</code></pre>
+<pre class="r"><code>departements_2 %&gt;%
+  ggplot() +
+  aes(fill = as.numeric(dens_dept)) +
+  geom_sf(lwd = 0.1) +
+  scale_fill_viridis_c(
+    name = bquote(&#39;Density\n(people per km&#39;^2*&#39;)&#39;),
+    alpha = 0.7) + 
+  labs(title = &#39;Human population density&#39;,
+       subtitle = &#39;par la somme des surfaces communales&#39;)</code></pre>
+<!-- ![](Fig/Densite1.png)  -->
+<pre class="r"><code>departements_2 %&gt;%
+  ggplot() +
+  aes(fill = as.numeric(dens_dept2)) +
+  geom_sf(lwd = 0.1) +
+  scale_fill_viridis_c(
+    name = bquote(&#39;Density\n(people per km&#39;^2*&#39;)&#39;),
+    alpha = 0.7) + 
+  labs(title = &#39;Human population density&#39;,
+       subtitle = &#39;par le calcul des surfaces&#39;)</code></pre>
+<p><img src="data/fig/Densite2.png" /></p>
+<pre class="r"><code>summary(departements_2$dens_dept2)</code></pre>
+<pre><code>##     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+##    14.81    49.65    81.66   559.63   157.21 21044.16</code></pre>
+</div>
+<div id="second-example-3" class="section level2">
+<h2>Second example<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></h2>
+<pre class="r"><code>library(spData) # for the SIDs dataframe</code></pre>
+<pre><code>## To access larger datasets in this package, install the spDataLarge
+## package with: `install.packages(&#39;spDataLarge&#39;,
+## repos=&#39;https://nowosad.github.io/drat/&#39;, type=&#39;source&#39;)`</code></pre>
+<pre class="r"><code>sids &lt;- st_read(dsn = system.file(&quot;shapes/sids.shp&quot;, package = &quot;spData&quot;), crs = 4326 )</code></pre>
+<pre><code>## Reading layer `sids&#39; from data source `C:\Users\joly.GAEL\Documents\R\win-library\3.6\spData\shapes\sids.shp&#39; using driver `ESRI Shapefile&#39;
+## Simple feature collection with 100 features and 22 fields
+## geometry type:  MULTIPOLYGON
+## dimension:      XY
+## bbox:           xmin: -84.32385 ymin: 33.88199 xmax: -75.45698 ymax: 36.58965
+## geographic CRS: WGS 84</code></pre>
+<div id="the-geometry" class="section level3">
+<h3>The geometry</h3>
+<pre class="r"><code>head(sids)</code></pre>
+<pre><code>## Simple feature collection with 6 features and 22 fields
+## geometry type:  MULTIPOLYGON
+## dimension:      XY
+## bbox:           xmin: -81.74107 ymin: 36.07282 xmax: -75.77316 ymax: 36.58965
+## geographic CRS: WGS 84
+##   CNTY_ID  AREA PERIMETER CNTY_        NAME  FIPS FIPSNO CRESS_ID BIR74 SID74
+## 1    1825 0.114     1.442  1825        Ashe 37009  37009        5  1091     1
+## 2    1827 0.061     1.231  1827   Alleghany 37005  37005        3   487     0
+## 3    1828 0.143     1.630  1828       Surry 37171  37171       86  3188     5
+## 4    1831 0.070     2.968  1831   Currituck 37053  37053       27   508     1
+## 5    1832 0.153     2.206  1832 Northampton 37131  37131       66  1421     9
+## 6    1833 0.097     1.670  1833    Hertford 37091  37091       46  1452     7
+##   NWBIR74 BIR79 SID79 NWBIR79 east north      x       y       lon      lat L_id
+## 1      10  1364     0      19  164   176 -81.67 4052.29 -81.48594 36.43940    1
+## 2      10   542     3      12  183   182 -50.06 4059.70 -81.14061 36.52443    1
+## 3     208  3616     6     260  204   174 -16.14 4043.76 -80.75312 36.40033    1
+## 4     123   830     2     145  461   182 406.01 4035.10 -76.04892 36.45655    1
+## 5    1066  1606     3    1197  385   176 281.10 4029.75 -77.44057 36.38799    1
+## 6     954  1838     5    1237  411   176 323.77 4028.10 -76.96474 36.38189    1
+##   M_id                       geometry
+## 1    2 MULTIPOLYGON (((-81.47276 3...
+## 2    2 MULTIPOLYGON (((-81.23989 3...
+## 3    2 MULTIPOLYGON (((-80.45634 3...
+## 4    4 MULTIPOLYGON (((-76.00897 3...
+## 5    4 MULTIPOLYGON (((-77.21767 3...
+## 6    4 MULTIPOLYGON (((-76.74506 3...</code></pre>
 <hr />
-<p>The goal of this post is to introduce the basic landscape of working with spatial data in R from the perspective of a non-specialist.</p>
-<p>The use of the <code>ggmap</code> package is to geocode data and create maps using the <code>ggplot2</code> system.</p>
-<p>The <code>sp</code> and <code>sf</code> packages use different methodologies for integrating spatial data into R.</p>
-<p>The <code>sp</code> package introduced a coherent set of classes and methods for handling spatial data in 2005.
-The package remains the backbone of many packages that provide GIS capabilities in R.</p>
-<p>The <code>sf</code> package implements the simple features open standard for the representation of geographic vector data in R.</p>
-<p>The package first appeared on CRAN at the end of 2016 and is under very active development. The sf package is meant to supersede sp, implementing ways to store spatial data in R that integrate with the <code>tidyverse</code> workflow of the packages developed by Hadley Wickham and others.</p>
+</div>
+</div>
+<div id="mapping-the-shapefile" class="section level2">
+<h2>Mapping the shapefile</h2>
+<p>Mapping the polygons…</p>
+<div id="without-transformation-of-projection" class="section level3">
+<h3>Without Transformation of projection</h3>
+<pre class="r"><code>ggplot(sids)+
+  geom_sf()</code></pre>
+<p><img src="data/fig/NorthCal.png" />
+***</p>
+</div>
+<div id="with-transformed-projection" class="section level3">
+<h3>With transformed projection</h3>
+<p>Let’s change the projection for a more fitted one of North Carolina: <code>code: 2264</code></p>
+<pre class="r"><code>sids &lt;- sids %&gt;% st_transform(2264)
+ggplot(sids)+
+  geom_sf() </code></pre>
+<p><img src="data/fig/NorthCal2.png" /></p>
+</div>
+</div>
+<div id="mapping-information" class="section level2">
+<h2>Mapping information</h2>
+<p>The rate of sids for the 1000 birth in the 1974 and 1978 period, we will use the data from the <code>BIR74</code> and <code>SID74</code> columns.</p>
+<pre class="r"><code>sids[&#39;sids_rate74&#39;] &lt;- (sids[&#39;SID74&#39;] * 1000)/ sids[&#39;BIR74&#39;]</code></pre>
+<pre><code>## Warning in `[&lt;-.data.frame`(`*tmp*`, &quot;sids_rate74&quot;, value = structure(list(: 2
+## variables sont fournies pour remplacer 1 variables</code></pre>
+<pre class="r"><code>head(sids[,c(1,5,24)])</code></pre>
+<pre><code>## Simple feature collection with 6 features and 3 fields
+## geometry type:  MULTIPOLYGON
+## dimension:      XY
+## bbox:           xmin: -81.74107 ymin: 36.07282 xmax: -75.77316 ymax: 36.58965
+## geographic CRS: WGS 84
+##   CNTY_ID        NAME sids_rate74                       geometry
+## 1    1825        Ashe   0.9165903 MULTIPOLYGON (((-81.47276 3...
+## 2    1827   Alleghany   0.0000000 MULTIPOLYGON (((-81.23989 3...
+## 3    1828       Surry   1.5683814 MULTIPOLYGON (((-80.45634 3...
+## 4    1831   Currituck   1.9685039 MULTIPOLYGON (((-76.00897 3...
+## 5    1832 Northampton   6.3335679 MULTIPOLYGON (((-77.21767 3...
+## 6    1833    Hertford   4.8209366 MULTIPOLYGON (((-76.74506 3...</code></pre>
+<hr />
+<p>Functions and parameters:</p>
+<ul>
+<li><code>ggplot(sids)</code>: Plot the data (without specifying te type of plot for now)</li>
+<li><code>geom_sf(aes(fill = sids_rate74))</code>: aesthetics to be applyed: filling of the geometry using the data from <code>sids_rate74</code> column</li>
+<li><code>scale_fill_viridis_c()</code>: with the <code>viridis</code><a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> color scale dedicated to filling for continuous data</li>
+</ul>
+<hr />
+<pre class="r"><code>map &lt;- ggplot(sids)+
+  geom_sf(aes(fill = sids_rate74))
+map2 &lt;- map +
+  scale_fill_viridis_c()
+map2</code></pre>
+<p><img src="data/fig/NorthCal3.png" />
+***</p>
+<div id="a-better-map" class="section level3">
+<h3>A better map</h3>
+<pre class="r"><code>map3  &lt;- map + ggtitle(
+  &quot;Sudden Infant Death Syndrom in North Carolina (USA)&quot;, # title
+  &quot;1974 -1978&quot; # subtitle
+  )   + 
+  scale_fill_viridis_c(name = &quot;SIDS cases \nfor 1000 births&quot;) +  # legend title
+    theme(legend.position = &quot;bottom&quot; # legend position
+    ) +
+  theme(
+    axis.title.x = element_blank(),
+    axis.text.x = element_blank(), 
+    axis.ticks.x = element_blank()  # Remove labels on axis
+  ) +
+  theme(
+    axis.title.y = element_blank(),
+    axis.text.y = element_blank(), 
+    axis.ticks.y = element_blank())
+map3</code></pre>
+<p><img src="data/fig/NorthCal4.png" /></p>
+</div>
+</div>
 <div id="references" class="section level2">
 <h2>References</h2>
 <p><a href="http://cartonumerique.blogspot.com/p/cartographie-thematique.html" class="uri">http://cartonumerique.blogspot.com/p/cartographie-thematique.html</a></p>
@@ -136,6 +374,13 @@ The package remains the backbone of many packages that provide GIS capabilities 
 </div>
 </div>
 </div>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>from (<a href="https://roelandtn.frama.io/post/simple-mapping-with-sf/" class="uri">https://roelandtn.frama.io/post/simple-mapping-with-sf/</a>)<a href="#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn2"><p>The viridis scales provide colour maps that are perceptually uniform in both colour and black-and-white. They are also designed to be perceived by viewers with common forms of colour blindness. See also (<a href="https://bids.github.io/colormap/" class="uri">https://bids.github.io/colormap/</a>).<a href="#fnref2" class="footnote-back">↩</a></p></li>
+</ol>
 </div>
 
 		</div>
