@@ -4,20 +4,18 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Smart Analytics for Big Data - Smart Analytics for Big Data</title>
+	<title>Lessons_lists - Smart Analytics for Big Data</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<meta name="description" content="">
-		<meta property="og:title" content="Smart Analytics for Big Data" />
-<meta property="og:description" content="Lessons listThis is the website of the Lesson Smart Analytics for Big Data taught at Grenoble INP Industrial Engineering and Management School &amp; UGA.
-First Lesson - 01/10/2020 - 9:30 - 12:30Welcome page of First Lesson
-Second Lesson - 08/10/2020 - 8:00 - 12:30Material for the Second Lesson
-" />
-<meta property="og:type" content="article" />
+		<meta property="og:title" content="Lessons_lists" />
+<meta property="og:description" content="Smart Analytics for Big Data" />
+<meta property="og:type" content="website" />
 <meta property="og:url" content="/lessons_list/" />
 
 
 	<link rel="dns-prefetch" href="//fonts.googleapis.com">
 	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="alternate" type="application/rss+xml" href="/lessons_list/index.xml" title="Smart Analytics for Big Data">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
 	<link rel="stylesheet" href="/css/style.css">
 	
@@ -44,7 +42,7 @@ First Lesson - 01/10/2020 - 9:30 - 12:30Welcome page of First Lesson
 	</button>
 	<ul class="menu__list">
 		<li class="menu__item">
-			<a class="menu__link" href="/lessons_list/">
+			<a class="menu__link" href="/lessons-list/">
 				
 				<span class="menu__text">Lessons</span>
 				
@@ -93,64 +91,165 @@ First Lesson - 01/10/2020 - 9:30 - 12:30Welcome page of First Lesson
 		<div class="wrapper flex">
 			<div class="primary">
 			
-<main class="main" role="main">
-	<article class="post">
-		<header class="post__header">
-			<h1 class="post__title">Smart Analytics for Big Data</h1>
-			<div class="post__meta meta"><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/r/" rel="category">R</a>
+<main class="main list" role="main">
+	<header class="main__header">
+		<h1 class="main__title">Lessons_lists</h1>
+	</header><article class="list__item post">
+	<header class="list__header">
+		<h3 class="list__title post__title ">
+			<a href="/lessons_list/lesson_1.2_grammar/" rel="bookmark">
+			Graphics with R
+			</a>
+		</h3>
+		<div class="list__meta meta"><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/r/" rel="category">R</a>
 	</span>
 </div></div>
-		</header><div class="content post__content clearfix">
-			
-
-
-<div id="lessons-list" class="section level1">
-<h1>Lessons list</h1>
-<p>This is the website of the Lesson <strong>Smart Analytics for Big Data</strong> taught at Grenoble INP Industrial Engineering and Management School &amp; UGA.</p>
-<div id="first-lesson---01102020---930---1230" class="section level2">
-<h2>First Lesson - 01/10/2020 - 9:30 - 12:30</h2>
-<p>Welcome page of <a href="../post/first-lesson-october-1rst-2020">First Lesson</a></p>
-</div>
-<div id="second-lesson---08102020---800---1230" class="section level2">
-<h2>Second Lesson - 08/10/2020 - 8:00 - 12:30</h2>
-<p>Material for the <a href="../post/second-lesson-october-8th-2020">Second Lesson</a></p>
-</div>
-</div>
-
-		</div>
-		<footer class="post__footer">
-			
-<div class="post__tags tags clearfix">
-	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
-	<ul class="tags__list">
-		<li class="tags__item">
-			<a class="tags__link btn" href="/tags/r-markdown/" rel="tag">R Markdown</a>
-		</li>
-		<li class="tags__item">
-			<a class="tags__link btn" href="/tags/plot/" rel="tag">plot</a>
-		</li>
-		<li class="tags__item">
-			<a class="tags__link btn" href="/tags/regression/" rel="tag">regression</a>
-		</li>
-	</ul>
-</div>
-		</footer>
-	</article>
-</main>
-
-
-<nav class="pager flex">
-	<div class="pager__item pager__item--next">
-		<a class="pager__link" href="/references/" rel="next">
-			<span class="pager__subtitle">Next&thinsp;»</span>
-			<p class="pager__title">References</p>
-		</a>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		Grammar of ggplot2()Start exampledf &lt;- data.frame(x=1:15, y=1:15)ggplot(df, aes(x,y)) +geom_point() +labs(title= &quot;Plot example&quot;,subtitle = &quot;Subtitled&quot;,x=&quot;x-values&quot;, y = &quot;y-values&quot;) +theme(panel.background = element_rect(fill = &quot;white&quot;, color= &quot;grey50&quot;))Grammar of graphic: ggplotThe ggplot2 package is loaded to access the ggplot() function.
+The graph is created by stacking together several short phrases, each describing an aspect of the graphic.
+With ggplot, the data need need not to be reshaped for each type of graphical representation (boxplot, histogram, scatter,…).
 	</div>
-</nav>
+</article><article class="list__item post">
+	<header class="list__header">
+		<h3 class="list__title post__title ">
+			<a href="/lessons_list/lesson_1.1_vizu/" rel="bookmark">
+			Introduction to Data Vizualisation
+			</a>
+		</h3>
+		<div class="list__meta meta"><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/r/" rel="category">R</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		MunznerWhat can be visualized: data, datasets, and attributesWhy people are using vis in terms of actions and targetsHow to design vis idioms: encode, manipulate, facet, and reduce.The four nested levels of vis design have different threats to validity at each level, and validation approaches should be chosen accordinglyThe effectiveness of channels that modify the appearance of marks depends on matching the expressiveness of channels with the attributes being encodedEight rules of thumb.
+	</div>
+</article><article class="list__item post">
+	<header class="list__header">
+		<h3 class="list__title post__title ">
+			<a href="/lessons_list/lesson_1.3_application/" rel="bookmark">
+			Introduction to Data Vizualisation
+			</a>
+		</h3>
+		<div class="list__meta meta"><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/r/" rel="category">R</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		ApplicationDesigning a visualizationThe use of visualization is pervasive in the scientific production and communication: explanatory diagrams, graphs describing statistics, new experimental data plotted against theoretical expectations, etc.
+In each case, the author of the visualization tries to lead readers to a specific point of view, by emphasizing some aspects of the data while toning down other aspects.
+Results may be informative, decisive or misleading.
+Can you apply the design principles we talked about in class?
+	</div>
+</article><article class="list__item post">
+	<header class="list__header">
+		<h3 class="list__title post__title ">
+			<a href="/lessons_list/lesson_2_gis/" rel="bookmark">
+			Introduction to GIS - Geographic Information System
+			</a>
+		</h3>
+		<div class="list__meta meta"><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/r/" rel="category">R</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		A FINIR
+IntroductionVisualisation of geographic information is become one of the major tool of the digital information analytic.
+Numerous softwares manage visualization of geographic information from full-scale GIS applications such as ArcGIS and QGIS to web-based tools like Google maps to any number of programing languages.
+Using a command-line interface has the benefits of enabling both steps analysis and visualization in customizable, transparent and reproducible manner.
+The goal of this post is to introduce the basic landscape of working with spatial data in R from the perspective of a non-specialist.
+	</div>
+</article><article class="list__item post">
+	<header class="list__header">
+		<h3 class="list__title post__title ">
+			<a href="/lessons_list/lesson_0.1_reproducibleresearch/" rel="bookmark">
+			Introduction to Reproducible Analysis
+			</a>
+		</h3>
+		<div class="list__meta meta"><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/r/" rel="category">R</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		Reproducible AnalysisTypical data analysis workflow looks like this:
+collect dataput it in a file or spreadsheet or databaserun some analyses, written in various scripts,perhaps saving some intermediate results along the wayor maybe always working on the raw data.create some plots or tables of relevant summaries of the data,and then
+go and write a report about the results in a text editor or word processor.
+	</div>
+</article><article class="list__item post">
+	<header class="list__header">
+		<h3 class="list__title post__title ">
+			<a href="/lessons_list/lesson_3-2_survanalyse-application/" rel="bookmark">
+			Introduction to Survival Analysis
+			</a>
+		</h3>
+		<div class="list__meta meta"><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/r/" rel="category">R</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		A FINIR
+Exercise - Unemployment durationSurvival analysis models covariates that influence time-to-event.
+OLS regression methods are less efficient because the time-to-event is typically not normally distributed (positive, skewed, nearly discret when rounding are present), and the model cannot handle censored observation, without modification.
+library(Ecdat)## Warning: le package &#39;Ecdat&#39; a été compilé avec la version R 3.6.3## Le chargement a nécessité le package : Ecfun## Warning: le package &#39;Ecfun&#39; a été compilé avec la version R 3.
+	</div>
+</article><article class="list__item post">
+	<header class="list__header">
+		<h3 class="list__title post__title ">
+			<a href="/lessons_list/lesson_3_survanalyse/" rel="bookmark">
+			Introduction to Survival Analysis
+			</a>
+		</h3>
+		<div class="list__meta meta"><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/r/" rel="category">R</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		A FINIR
+Introduction corresponds to a set of statistical approaches used to investigate the of interest to occur.
+Medecine, sociology, economyinformatics, engineering,…In basic categorical data analysis for example, we compare proportions (risks, rates, etc) between different groups.
+Such analysis is performed using a chi-square or fisher exact test, or logistic regression.
+We implicitly assume that the rates are constant over the period of the study, and are defined by the different groups studied.
+	</div>
+</article><article class="list__item post">
+	<header class="list__header">
+		<h3 class="list__title post__title ">
+			<a href="/lessons_list/lesson_0.2_casestudy/" rel="bookmark">
+			Introductory Cases Studies
+			</a>
+		</h3>
+		<div class="list__meta meta"><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/r/" rel="category">R</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		Case StudyWork group:
+By group of 5 to 6 students:
+you will explore one of the following linksyou will search for the data type, qualification, etcyou will question the workflow supporting the websiteyou will question the interpretation, the vizualisation of the results, its strengths and weaknessesyou will present your result using an RMarkdown presentation (HTML IoSlides or Beamer) - No more than 4 slidesFirst: names, title, link as subtitleSecond: survey of the data elementsThird: workflow 1Fourth: critical analysisCases - linksCS1 - Coronavirus Datahttps://coronavirus.
+	</div>
+</article><article class="list__item post">
+	<header class="list__header">
+		<h3 class="list__title post__title ">
+			<a href="/lessons_list/lesson_2/" rel="bookmark">
+			Vizu &amp; GIS
+			</a>
+		</h3>
+		<div class="list__meta meta"><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/r/" rel="category">R</a>
+	</span>
+</div></div>
+	</header>
+	<div class="content list__excerpt post__content clearfix">
+		WelcomeThis is the 2nd Lesson of Smart Analytics for Big Data
+Zoom linkDocumentsLesson Part 1 - Visualization
+Lesson Part 2 - GIS
+
+	</div>
+</article>
+</main>
 
 
 			</div>
 			
+
 		</div>
 		<footer class="footer">
 	<div class="container footer__container flex">
