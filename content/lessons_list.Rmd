@@ -18,5 +18,5 @@ Welcome page of [First Lesson](../post/first-lesson-october-1rst-2020)
 
 ## Second Lesson - 08/10/2020 - 8:00 - 12:30
 
-Material for the [Second Lesson](lesson_2) 
+Material for the [Second Lesson](../post/second-lesson-october-8th-2020)
 

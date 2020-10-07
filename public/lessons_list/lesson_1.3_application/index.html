@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Introduction to Data Vizualisation - Smart Analytics for Big Data</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+		<meta property="og:title" content="Introduction to Data Vizualisation" />
+<meta property="og:description" content="ApplicationDesigning a visualizationThe use of visualization is pervasive in the scientific production and communication: explanatory diagrams, graphs describing statistics, new experimental data plotted against theoretical expectations, etc.
+In each case, the author of the visualization tries to lead readers to a specific point of view, by emphasizing some aspects of the data while toning down other aspects.
+Results may be informative, decisive or misleading.
+Can you apply the design principles we talked about in class?" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/lessons_list/lesson_1.3_application/" />
+
+
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	
+	<link rel="shortcut icon" href="/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container header__container">
+		
+	<div class="logo">
+		<a class="logo__link" href="/" title="Smart Analytics for Big Data" rel="home">
+			<div class="logo__item logo__text">
+					<div class="logo__title">Smart Analytics for Big Data</div>
+					<div class="logo__tagline">Lesson at Grenoble Inp - IEM</div>
+				</div>
+		</a>
+	</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/lessons_list/">
+				
+				<span class="menu__text">Lessons</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/recordings/">
+				
+				<span class="menu__text">Recordings</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/prerequisites/">
+				
+				<span class="menu__text">PreRequisites</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/otherlessons/">
+				
+				<span class="menu__text">Other Lessons</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/references/">
+				
+				<span class="menu__text">References</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/about/">
+				
+				<span class="menu__text">About</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">Introduction to Data Vizualisation</h1>
+			<div class="post__meta meta"><div class="meta__item-categories meta__item"><svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg><span class="meta__text"><a class="meta__link" href="/categories/r/" rel="category">R</a>
+	</span>
+</div></div>
+		</header><div class="content post__content clearfix">
+			
+
+
+<div id="application" class="section level1 tabset">
+<h1>Application</h1>
+<div id="designing-a-visualization" class="section level2">
+<h2>Designing a visualization</h2>
+<p>The use of visualization is pervasive in the scientific production and communication: explanatory diagrams, graphs describing statistics, new experimental data plotted against theoretical expectations, etc.</p>
+<p>In each case, the author of the visualization tries to lead readers to a specific point of view, by emphasizing some aspects of the data while toning down other aspects.</p>
+<p>Results may be informative, decisive or misleading.</p>
+<p>Can you apply the design principles we talked about in class?</p>
+<p>Objectives:</p>
+<ol style="list-style-type: decimal">
+<li>design a visualization for a data set</li>
+<li>and provide a rigorous rationale for your design choices.</li>
+</ol>
+</div>
+<div id="datasets" class="section level2 tabset">
+<h2>Datasets</h2>
+<p>Two datasets are accessible:</p>
+<ol style="list-style-type: decimal">
+<li>Movies Data Set: <a href="/Data-pdf/movie_metadata.csv">Movies</a></li>
+<li>IEM Students internships: <a href="/Data-pdf/IEMStudents.csv">IEMStudents</a></li>
+</ol>
+<div id="internships-of-iem-students-in-grenoble" class="section level3">
+<h3>internships of IEM Students in Grenoble</h3>
+<p>The data set concern IEM Students internship</p>
+<div id="loading-the-dataset-in-rstudio-with-packages" class="section level4">
+<h4>Loading the dataset in RStudio (with packages)</h4>
+<p>First load packages</p>
+<pre class="r"><code>#Before loading packages, check that they are installed on your local RStudio !
+library(dplyr)  ;  library(ggplot2)
+library(ggrepel)  ;  library(scales)
+library(knitr)  ; library(corrplot)</code></pre>
+<p>Second load the dataset. <strong>Change the path folder if necessary</strong></p>
+<pre class="r"><code>#Load data
+IEMStudents &lt;- read.csv(&quot;./data/IEMStudents.csv&quot;, header = TRUE, stringsAsFactors = FALSE)</code></pre>
+</div>
+<div id="saving-the-dataset" class="section level4">
+<h4>Saving the dataset</h4>
+<pre class="r"><code>save(IEMStudents, file = &quot;./data/IEMStudents.RData&quot;)</code></pre>
+</div>
+<div id="dataset-attibutes" class="section level4">
+<h4>Dataset attibutes</h4>
+<pre class="r"><code># DS dimensions
+dim(IEMStudents)</code></pre>
+<pre><code>## [1] 588  21</code></pre>
+<pre class="r"><code># 10 first rows
+kable( head(IEMStudents[,1:10], n=10))</code></pre>
+<table>
+<colgroup>
+<col width="0%" />
+<col width="2%" />
+<col width="3%" />
+<col width="8%" />
+<col width="8%" />
+<col width="10%" />
+<col width="6%" />
+<col width="4%" />
+<col width="4%" />
+<col width="50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="right">id</th>
+<th align="left">civilite</th>
+<th align="left">date_naissance</th>
+<th align="left">campagne_stageid</th>
+<th align="left">entreprise_siege</th>
+<th align="left">entreprises.adresse1</th>
+<th align="left">entreprises.cp</th>
+<th align="left">entreprises.ville</th>
+<th align="left">entreprises.pays</th>
+<th align="left">sujet</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">M.</td>
+<td align="left">1994-07-27</td>
+<td align="left">2017-2018 _ PFE Référent G. Thomann</td>
+<td align="left">ALTRAN</td>
+<td align="left">251, boulevard Pereire</td>
+<td align="left">78457 Vélizy Villacoublay</td>
+<td align="left">PARIS</td>
+<td align="left">FRANCE</td>
+<td align="left">Conception de pièces en composite pour un prototype de véhicule autonome</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="left">Mme</td>
+<td align="left">1995-11-13</td>
+<td align="left">2017-2018 _ PFE Référent G. Thomann</td>
+<td align="left">Tune GmbH</td>
+<td align="left">Im Mittelfeld 18</td>
+<td align="left">79426 Buggingen</td>
+<td align="left">BUGGINGEN</td>
+<td align="left">ALLEMAGNE</td>
+<td align="left">Mise en place d’une machine à enroulement filamentaire et développement d’un nouveau moyeu de vélo</td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="left">M.</td>
+<td align="left">1993-02-14</td>
+<td align="left">2017-2018 _ PFE Référent G. Thomann</td>
+<td align="left">Airbus Helicopters</td>
+<td align="left">Aeroport International Marseille Provence</td>
+<td align="left">13725 Marignane</td>
+<td align="left">MARIGNANE</td>
+<td align="left">FRANCE</td>
+<td align="left">Assistant chef de projet terrain en lean manufacturing</td>
+</tr>
+<tr class="even">
+<td align="right">4</td>
+<td align="left">M.</td>
+<td align="left">1993-06-26</td>
+<td align="left">2017-2018 _ PFE Référent G. Thomann</td>
+<td align="left">Stiplastics Healthcaring</td>
+<td align="left">62, chemin des Plantées</td>
+<td align="left">38160 Saint Marcellin</td>
+<td align="left">SAINT-MARCELLIN</td>
+<td align="left">FRANCE</td>
+<td align="left">Participation à la conception d’une solution de sécurisation de l’administration de médicaments et de monitoring des protocoles en oncologie par voie orale.</td>
+</tr>
+<tr class="odd">
+<td align="right">5</td>
+<td align="left">Mme</td>
+<td align="left">1994-07-28</td>
+<td align="left">2017-2018 _ PFE Référent G. Thomann</td>
+<td align="left">LOUIS VUITTON</td>
+<td align="left">2 rue du Pont Neuf</td>
+<td align="left">75001 Paris</td>
+<td align="left">PARIS CEDEX 01</td>
+<td align="left">FRANCE</td>
+<td align="left">Assistante Supply Chain Planification Industrielle</td>
+</tr>
+<tr class="even">
+<td align="right">6</td>
+<td align="left">Mme</td>
+<td align="left">1994-01-05</td>
+<td align="left">2017-2018 _ PFE Référent G. Thomann</td>
+<td align="left">Paprec</td>
+<td align="left">7 rue du Docteur Lancereaux</td>
+<td align="left">93120 La Courneuve</td>
+<td align="left">PARIS</td>
+<td align="left">FRANCE</td>
+<td align="left">Ingénieur bureau d’études grands comptes</td>
+</tr>
+<tr class="odd">
+<td align="right">7</td>
+<td align="left">Mme</td>
+<td align="left">1993-08-08</td>
+<td align="left">2017-2018 _ PFE Référent G. Thomann</td>
+<td align="left">Zurflüh-Feller</td>
+<td align="left">11 rue des Herbiers</td>
+<td align="left">25190 NOIREFONTAINE</td>
+<td align="left">NOIREFONTAINE</td>
+<td align="left">FRANCE</td>
+<td align="left">Optimisation des magasins et augmentation de la productivité en logistique opérationnelle</td>
+</tr>
+<tr class="even">
+<td align="right">8</td>
+<td align="left">Mme</td>
+<td align="left">1996-10-03</td>
+<td align="left">2017-2018 _ PFE Référent G. Thomann</td>
+<td align="left">FNAC Siège Social - Ivry Sur Seine</td>
+<td align="left">9 Rue des Bateaux-Lavoirs, 94200 Ivry</td>
+<td align="left">94200 IVRY SUR SEINE</td>
+<td align="left">IVRY SUR SEINE</td>
+<td align="left">FRANCE</td>
+<td align="left">Stagiaire Chef de Projet Approvisionnement : intégrer le périmètre des approvisionnements au sein de la Direction Commerciale afin de participer activement à la recherche de solutions, et à leur déploiement.</td>
+</tr>
+<tr class="odd">
+<td align="right">9</td>
+<td align="left">Mme</td>
+<td align="left">1996-08-24</td>
+<td align="left">2017-2018 _ PFE Référent G. Thomann</td>
+<td align="left">HP France SAS</td>
+<td align="left">5 Avenue Raymond Chanas</td>
+<td align="left">38320 EYBENS</td>
+<td align="left">EYBENS</td>
+<td align="left">FRANCE</td>
+<td align="left">Stagiaire Business Analyst Supply Chain h/f</td>
+</tr>
+<tr class="even">
+<td align="right">10</td>
+<td align="left">M.</td>
+<td align="left">1993-08-09</td>
+<td align="left">2017-2018 _ PFE Référent G. Thomann</td>
+<td align="left">IMeBIO</td>
+<td align="left">11 rue du Drac</td>
+<td align="left">38180 SEYSSINS</td>
+<td align="left">SEYSSINS</td>
+<td align="left">FRANCE</td>
+<td align="left">Formalisation des processus de conception en vue de l’implantation d’un ERP</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="movies-data-set-5000-movies" class="section level3">
+<h3>Movies Data Set: 5000 movies</h3>
+<p>The data set <a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> describes 5000 movies: director, producer, actors, number of seats, facebook likes, etc.</p>
+<div id="loading-the-dataset-in-rstudio-with-packages-1" class="section level4">
+<h4>Loading the dataset in RStudio (with packages)</h4>
+<p>First load packages</p>
+<pre class="r"><code>#Before loading packages, check that they are installed on your local RStudio !
+library(dplyr)  ;  library(ggplot2)
+library(ggrepel)  ;  library(scales)
+library(knitr)  ; library(corrplot)</code></pre>
+<p>Second load the dataset. <strong>Change the path folder if necessary</strong></p>
+<pre class="r"><code>#Load data
+Movie.Data &lt;- read.csv(&quot;./data/movie_metadata.csv&quot;, header = TRUE, stringsAsFactors = FALSE)</code></pre>
+</div>
+<div id="cleaning-the-dataset" class="section level4">
+<h4>Cleaning the dataset</h4>
+<p>Some movies are recorded twice in the dataset. Let remove duplicates.
+In some cases information rows for duplicates are not identical. We can not favor one or another.</p>
+<pre class="r"><code>Movie.Data &lt;- Movie.Data[!duplicated(Movie.Data$movie_title),]</code></pre>
+</div>
+<div id="example-calculations-profit-and-roi" class="section level4">
+<h4>Example calculations: profit and ROI</h4>
+<pre class="r"><code>Movie.Data$profit &lt;- Movie.Data$gross - Movie.Data$budget
+Movie.Data$ROI_perc &lt;-  (Movie.Data$profit/Movie.Data$budget)*100</code></pre>
+</div>
+<div id="saving-the-dataset-1" class="section level4">
+<h4>Saving the dataset</h4>
+<pre class="r"><code>save(Movie.Data, file = &quot;./data/Movie_2020.RData&quot;)</code></pre>
+</div>
+<div id="dataset-attibutes-1" class="section level4">
+<h4>Dataset attibutes</h4>
+<pre class="r"><code># DS dimensions
+dim(Movie.Data)</code></pre>
+<pre><code>## [1] 4917   30</code></pre>
+<pre class="r"><code># 10 first rows
+kable( head(Movie.Data[,1:10], n=10))</code></pre>
+<table>
+<colgroup>
+<col width="2%" />
+<col width="7%" />
+<col width="9%" />
+<col width="3%" />
+<col width="9%" />
+<col width="9%" />
+<col width="7%" />
+<col width="9%" />
+<col width="4%" />
+<col width="36%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">color</th>
+<th align="left">director_name</th>
+<th align="right">num_critic_for_reviews</th>
+<th align="right">duration</th>
+<th align="right">director_facebook_likes</th>
+<th align="right">actor_3_facebook_likes</th>
+<th align="left">actor_2_name</th>
+<th align="right">actor_1_facebook_likes</th>
+<th align="right">gross</th>
+<th align="left">genres</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Color</td>
+<td align="left">James Cameron</td>
+<td align="right">723</td>
+<td align="right">178</td>
+<td align="right">0</td>
+<td align="right">855</td>
+<td align="left">Joel David Moore</td>
+<td align="right">1000</td>
+<td align="right">760505847</td>
+<td align="left">Action|Adventure|Fantasy|Sci-Fi</td>
+</tr>
+<tr class="even">
+<td align="left">Color</td>
+<td align="left">Gore Verbinski</td>
+<td align="right">302</td>
+<td align="right">169</td>
+<td align="right">563</td>
+<td align="right">1000</td>
+<td align="left">Orlando Bloom</td>
+<td align="right">40000</td>
+<td align="right">309404152</td>
+<td align="left">Action|Adventure|Fantasy</td>
+</tr>
+<tr class="odd">
+<td align="left">Color</td>
+<td align="left">Sam Mendes</td>
+<td align="right">602</td>
+<td align="right">148</td>
+<td align="right">0</td>
+<td align="right">161</td>
+<td align="left">Rory Kinnear</td>
+<td align="right">11000</td>
+<td align="right">200074175</td>
+<td align="left">Action|Adventure|Thriller</td>
+</tr>
+<tr class="even">
+<td align="left">Color</td>
+<td align="left">Christopher Nolan</td>
+<td align="right">813</td>
+<td align="right">164</td>
+<td align="right">22000</td>
+<td align="right">23000</td>
+<td align="left">Christian Bale</td>
+<td align="right">27000</td>
+<td align="right">448130642</td>
+<td align="left">Action|Thriller</td>
+</tr>
+<tr class="odd">
+<td align="left"></td>
+<td align="left">Doug Walker</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">131</td>
+<td align="right">NA</td>
+<td align="left">Rob Walker</td>
+<td align="right">131</td>
+<td align="right">NA</td>
+<td align="left">Documentary</td>
+</tr>
+<tr class="even">
+<td align="left">Color</td>
+<td align="left">Andrew Stanton</td>
+<td align="right">462</td>
+<td align="right">132</td>
+<td align="right">475</td>
+<td align="right">530</td>
+<td align="left">Samantha Morton</td>
+<td align="right">640</td>
+<td align="right">73058679</td>
+<td align="left">Action|Adventure|Sci-Fi</td>
+</tr>
+<tr class="odd">
+<td align="left">Color</td>
+<td align="left">Sam Raimi</td>
+<td align="right">392</td>
+<td align="right">156</td>
+<td align="right">0</td>
+<td align="right">4000</td>
+<td align="left">James Franco</td>
+<td align="right">24000</td>
+<td align="right">336530303</td>
+<td align="left">Action|Adventure|Romance</td>
+</tr>
+<tr class="even">
+<td align="left">Color</td>
+<td align="left">Nathan Greno</td>
+<td align="right">324</td>
+<td align="right">100</td>
+<td align="right">15</td>
+<td align="right">284</td>
+<td align="left">Donna Murphy</td>
+<td align="right">799</td>
+<td align="right">200807262</td>
+<td align="left">Adventure|Animation|Comedy|Family|Fantasy|Musical|Romance</td>
+</tr>
+<tr class="odd">
+<td align="left">Color</td>
+<td align="left">Joss Whedon</td>
+<td align="right">635</td>
+<td align="right">141</td>
+<td align="right">0</td>
+<td align="right">19000</td>
+<td align="left">Robert Downey Jr.</td>
+<td align="right">26000</td>
+<td align="right">458991599</td>
+<td align="left">Action|Adventure|Sci-Fi</td>
+</tr>
+<tr class="even">
+<td align="left">Color</td>
+<td align="left">David Yates</td>
+<td align="right">375</td>
+<td align="right">153</td>
+<td align="right">282</td>
+<td align="right">10000</td>
+<td align="left">Daniel Radcliffe</td>
+<td align="right">25000</td>
+<td align="right">301956980</td>
+<td align="left">Adventure|Family|Fantasy|Mystery</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div id="assignment" class="section level2">
+<h2>Assignment</h2>
+<p>Your task is</p>
+<ol style="list-style-type: decimal">
+<li>to design and produce 2 visualizations that you believe effectively supports an argument you found based on the data or that communicates a specific dimension of the data.</li>
+<li>to describre your design (one paragraph)</li>
+<li>to describe (one paragraph) the process you used to do the exploration and analysis.</li>
+<li>to state your graphs limits or yours or the encountered difficulties.</li>
+</ol>
+<p>As different visualizations can emphasize different aspects of a data set, you should document what aspects of the data you are attempting to most effectively communicate. <strong>What story are you trying to tell?</strong></p>
+<p>Also note which aspects of the data might be obscured or toning down due to your design choices.</p>
+<p>In your write-up, you should justify your design decisions. Argument the visual encodings you used and why they are appropriate for the data (visualization type, size, color, scale, and other visual elements, as well as the use of sorting or other data transformations). <strong>How do these decisions facilitate effective communication?</strong></p>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Dataset is accessible freely on : <a href="https://www.kaggle.com/tmdb/tmdb-movie-metadata">Kaggle</a><a href="#fnref1" class="footnote-back">↩</a></p></li>
+</ol>
+</div>
+
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/r-markdown/" rel="tag">R Markdown</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/plot/" rel="tag">plot</a>
+		</li>
+		<li class="tags__item">
+			<a class="tags__link btn" href="/tags/regression/" rel="tag">regression</a>
+		</li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+
+<nav class="pager flex">
+	<div class="pager__item pager__item--prev">
+		<a class="pager__link" href="/lessons_list/lesson_2_gis/" rel="prev">
+			<span class="pager__subtitle">«&thinsp;Previous</span>
+			<p class="pager__title">Introduction to GIS - Geographic Information System</p>
+		</a>
+	</div>
+	<div class="pager__item pager__item--next">
+		<a class="pager__link" href="/lessons_list/lesson_1.1_vizu/" rel="next">
+			<span class="pager__subtitle">Next&thinsp;»</span>
+			<p class="pager__title">Introduction to Data Vizualisation</p>
+		</a>
+	</div>
+</nav>
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 Smart Analytics for Big Data.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
+</body>
+</html>

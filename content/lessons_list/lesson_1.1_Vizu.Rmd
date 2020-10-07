@@ -9,6 +9,35 @@ authorbox: false
 ---
 
 
+## Munzner
+
+### What can be visualized: data, datasets, and attributes
+
+### Why people are using vis in terms of actions and targets
+
+### How to design vis idioms: encode, manipulate, facet, and reduce.
+
+### The four nested levels of vis design have different threats to validity at each level, and validation approaches should be chosen accordingly
+
+### The effectiveness of channels that modify the appearance of marks depends on matching the expressiveness of channels with the attributes being encoded
+
+### Eight rules of thumb.
+
+• No Unjustified 3D
+   – The Power of the Plane
+   – The Disparity of Depth
+   – Occlusion Hides Information
+   – Perspective Distortion Dangers
+   – Tilted Text Isn’t Legible
+• No Unjustified 2D
+• Eyes Beat Memory
+• Resolution over Immersion
+• Overview First, Zoom and Filter, Detail on Demand
+• Responsiveness Is Required
+• Get It Right in Black and White
+• Function First, Form Next
+
+
 ***
 
 https://www.statisticshowto.com/misleading-graphs/
@@ -17,6 +46,8 @@ https://www.statisticshowto.com/misleading-graphs/
 - Huff, D. (1993). How to Lie With Statistics. W. W. Norton & Company
 - Gonick, L. (1993). The Cartoon Guide to Statistics. HarperPerennial.
 CITE THIS AS:
+
+
 > Stephanie Glen. "Misleading Graphs: Real Life Examples" From StatisticsHowTo.com: Elementary Statistics for the rest of us! https://www.statisticshowto.com/misleading-graphs/
 
 

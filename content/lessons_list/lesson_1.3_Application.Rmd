@@ -1,0 +1,150 @@
+---
+title: "Introduction to Data Vizualisation"
+subtitle: "Smart Analytics for Big Data"
+author: "Iragaël Joly"
+date: "Automn 2020"
+categories: ["R"]
+tags: ["R Markdown", "plot", "regression"]
+authorbox: false
+---
+
+
+# Application {.tabset}
+## Designing a visualization
+
+The use of visualization is pervasive in the scientific production and communication: explanatory diagrams, graphs describing statistics, new experimental data plotted against theoretical expectations, etc. 
+
+In each case, the author of the visualization tries to lead readers to a specific point of view, by emphasizing some aspects of the data while toning down other aspects. 
+
+Results may be informative, decisive or misleading. 
+
+Can you apply the design principles we talked about in class? 
+
+Objectives:
+
+1. design a visualization for a data set 
+1. and provide a rigorous rationale for your design choices. 
+
+
+## Datasets {.tabset}
+
+Two datasets are accessible: 
+
+1. Movies Data Set: [Movies](/Data-pdf/movie_metadata.csv)
+1. IEM Students internships: [IEMStudents](/Data-pdf/IEMStudents.csv)
+
+### internships of IEM Students in Grenoble
+
+The data set concern IEM Students internship
+
+#### Loading the dataset in RStudio (with packages)
+
+First load packages
+
+```{r packages, message=FALSE, warning=FALSE, eval=TRUE}
+#Before loading packages, check that they are installed on your local RStudio !
+library(dplyr)  ;  library(ggplot2)
+library(ggrepel)  ;  library(scales)
+library(knitr)  ; library(corrplot)
+```
+
+Second load the dataset. **Change the path folder if necessary**
+
+```{r Loading}
+#Load data
+IEMStudents <- read.csv("./data/IEMStudents.csv", header = TRUE, stringsAsFactors = FALSE)
+```
+
+
+#### Saving the dataset
+
+```{r saving, eval=FALSE}
+save(IEMStudents, file = "./data/IEMStudents.RData")
+```
+
+#### Dataset attibutes
+
+```{r Attributes}
+# DS dimensions
+dim(IEMStudents)
+# 10 first rows
+kable( head(IEMStudents[,1:10], n=10))
+```
+
+
+
+
+### Movies Data Set: 5000 movies
+
+The data set [^1] describes 5000 movies: director, producer, actors, number of seats, facebook likes, etc.
+
+[^1]: Dataset is accessible freely on : [Kaggle](https://www.kaggle.com/tmdb/tmdb-movie-metadata)
+
+
+#### Loading the dataset in RStudio (with packages)
+
+First load packages
+
+```{r packages2, message=FALSE, warning=FALSE, eval=TRUE}
+#Before loading packages, check that they are installed on your local RStudio !
+library(dplyr)  ;  library(ggplot2)
+library(ggrepel)  ;  library(scales)
+library(knitr)  ; library(corrplot)
+```
+
+Second load the dataset. **Change the path folder if necessary**
+
+```{r Loading2}
+#Load data
+Movie.Data <- read.csv("./data/movie_metadata.csv", header = TRUE, stringsAsFactors = FALSE)
+```
+
+#### Cleaning the dataset 
+
+Some movies are recorded twice in the dataset. Let remove duplicates.
+In some cases information rows for duplicates are not identical. We can not favor one or another.
+
+```{r cleaning}
+Movie.Data <- Movie.Data[!duplicated(Movie.Data$movie_title),]
+```
+
+#### Example calculations: profit and ROI
+
+```{r calculations}
+Movie.Data$profit <- Movie.Data$gross - Movie.Data$budget
+Movie.Data$ROI_perc <-  (Movie.Data$profit/Movie.Data$budget)*100
+```
+
+#### Saving the dataset
+
+```{r saving2, eval=FALSE}
+save(Movie.Data, file = "./data/Movie_2020.RData")
+```
+
+#### Dataset attibutes
+
+```{r Attributes2}
+# DS dimensions
+dim(Movie.Data)
+# 10 first rows
+kable( head(Movie.Data[,1:10], n=10))
+```
+
+
+
+## Assignment
+
+Your task is
+
+1. to design and produce 2 visualizations that you believe effectively supports an argument you found based on the data or that communicates a specific dimension of the data.
+1. to describre your design (one paragraph) 
+1. to describe (one paragraph) the process you used to do the exploration and analysis. 
+1. to state your graphs limits or yours or the encountered difficulties.
+
+
+As different visualizations can emphasize different aspects of a data set, you should document what aspects of the data you are attempting to most effectively communicate. **What story are you trying to tell?** 
+
+Also note which aspects of the data might be obscured or toning down due to your design choices.
+
+In your write-up, you should justify your design decisions. Argument the visual encodings you used and why they are appropriate for the data (visualization type, size, color, scale, and other visual elements, as well as the use of sorting or other data transformations). **How do these decisions facilitate effective communication?**
+

@@ -35,10 +35,14 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
     
 [[menu.main]]
-    name = "PreRequisites"
-    url = "/PreRequisites/"
+    name = "Recordings"
+    url = "/Recordings/"
     weight = 4
 
+[[menu.main]]
+    name = "PreRequisites"
+    url = "/PreRequisites/"
+    weight = 5
     
 [[menu.main]]
     name = "Other Lessons"

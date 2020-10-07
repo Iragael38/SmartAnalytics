@@ -27,13 +27,19 @@ With ggplot, the data need need not to be reshaped for each type of graphical re
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>/lessons_list/lesson_1.1_vizu/</guid>
-      <description>https://www.statisticshowto.com/misleading-graphs/&amp;gt; References
-Huff, D. (1993). How to Lie With Statistics. W. W. Norton &amp;amp; CompanyGonick, L. (1993). The Cartoon Guide to Statistics. HarperPerennial.CITE THIS AS:&amp;gt; Stephanie Glen. “Misleading Graphs: Real Life Examples” From StatisticsHowTo.com: Elementary Statistics for the rest of us! https://www.statisticshowto.com/misleading-graphs/
-https://datavizcatalogue.com/resources.html***
-https://github.com/stoltzmaniac/Data-Visualization-Lesson/blob/master/Data%20Visualization%20-%20Part%203.Rmd
-https://mschermann.github.io/data_viz_reader/
-https://aims.gitbook.io/farm-data-mooc/unit-3-using-data/lesson-3.3-data-analysis-and-visualization
-Grammar of Graphics ggplot2()Grammar of ggplot2()Start exampledf &amp;lt;- data.frame(x=1:15, y=1:15)ggplot(df, aes(x,y)) +geom_point() +labs(title= &amp;quot;Plot example&amp;quot;,subtitle = &amp;quot;Subtitled&amp;quot;,x=&amp;quot;x-values&amp;quot;, y = &amp;quot;y-values&amp;quot;) +theme(panel.</description>
+      <description>MunznerWhat can be visualized: data, datasets, and attributesWhy people are using vis in terms of actions and targetsHow to design vis idioms: encode, manipulate, facet, and reduce.The four nested levels of vis design have different threats to validity at each level, and validation approaches should be chosen accordinglyThe effectiveness of channels that modify the appearance of marks depends on matching the expressiveness of channels with the attributes being encodedEight rules of thumb.</description>
+    </item>
+    
+    <item>
+      <title>Introduction to Data Vizualisation</title>
+      <link>/lessons_list/lesson_1.3_application/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/lessons_list/lesson_1.3_application/</guid>
+      <description>ApplicationDesigning a visualizationThe use of visualization is pervasive in the scientific production and communication: explanatory diagrams, graphs describing statistics, new experimental data plotted against theoretical expectations, etc.
+In each case, the author of the visualization tries to lead readers to a specific point of view, by emphasizing some aspects of the data while toning down other aspects.
+Results may be informative, decisive or misleading.
+Can you apply the design principles we talked about in class?</description>
     </item>
     
     <item>
