@@ -68,5 +68,22 @@ You can connect to zoom:
 
 [Application GIS with R](../../lessons_list/lesson_2_GIS)
 
+#### Data files
+
+[df.France.RData](/Data-pdf/GIS/df.France.RData)
+
+[Maternite_2004-2016.csv](/Data-pdf/GIS/Maternite_2004-2016.csv)
+
+[Commune.cpg](/Data-pdf/GIS/COMMUNE.cpg)
+[Commune.dbf](/Data-pdf/GIS/COMMUNE.dbf)
+[Commune.prj](/Data-pdf/GIS/COMMUNE.prj)
+[Commune.shp](/Data-pdf/GIS/COMMUNE.shp)
+[Commune.shx](/Data-pdf/GIS/COMMUNE.shx)
+
+
+[departement.dbf](/Data-pdf/GIS/DEPARTEMENT.dbf)
+[departement.prj](/Data-pdf/GIS/DEPARTEMENT.prj)
+[departement.shp](/Data-pdf/GIS/DEPARTEMENT.shp)
+[departement.shx](/Data-pdf/GIS/DEPARTEMENT.shx)
 
 ### References
