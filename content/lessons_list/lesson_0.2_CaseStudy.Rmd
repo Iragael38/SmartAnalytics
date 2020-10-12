@@ -33,6 +33,10 @@ By group of 5 to 6 students:
 
 ### Cases - links
 
+#### CS0 - Mobility and Covid19
+https://ivtmobis.ethz.ch/mobis/covid19/en/
+
+
 #### CS1 - Coronavirus Data
 
 https://coronavirus.politologue.com/

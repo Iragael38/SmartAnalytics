@@ -20,3 +20,7 @@ Welcome page of [First Lesson](../post/first-lesson-october-1rst-2020)
 
 Material for the [Second Lesson](../post/second-lesson-october-8th-2020)
 
+## Third Lesson - 15/10/2020 - 9:30 - 12:30
+
+Material for the [Third Lesson](../post/third-lesson-october-15th-2020)
+
