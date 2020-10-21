@@ -3,14 +3,23 @@ title: ""
 authorbox: false
 link-citations: yes
 biblio-style: apalike
-bibliography: [post/data/biblio_hdr_v2.bib, post/data/Liste_Publi3.bib, post/data/biblio_SABD.bib]
+bibliography: [ post/data/Liste_Publi3.bib, post/data/biblio_SABD.bib]
 nocite: |
    @Greene2008, @Gujarati2003
    @Agresti2013, @Millot2012,@Cornillonetal2008
 ---
 
+
 # Welcome {.tabset}
 
+## What's New
+
+- Planning update ! [Lessons Planning](#Lessons-planning)
+- `16/10/2020`: Recordings of the lessons are [here](https://drive.google.com/drive/folders/133lYBiC2gB-L66lwU7t4ec5NwS96k2aj)
+- `16/10/2020`: all lessons materials and usefull information are in the **Lesson** menu
+
+
+## Introduction
 This is the welcome page of the SABD Class
 
 You find here
@@ -39,13 +48,13 @@ Analysis of complex and big data, temporal  and spatial data needs specific skil
 
 
 
-## Lessons planning
+## Lessons planning {#Lessons-planning}
 
 Each lesson is described as follows
 
-![Planning 2020 - Version sept](/Data-pdf/Planning_v2.png)
+![Planning 2020 - Version sept - Red hours are to be validated](/Data-pdf/Planning_v3.png)
 
-[Planning](/Data-pdf/Planning_v2.png) downloadable format
+[Planning](/Data-pdf/Planning_v3.png) downloadable format
 
 
 ## Organisation

@@ -1,0 +1,59 @@
+---
+title: Fourth Lesson October 22th 2020
+author: IJ
+date: '2020-10-22'
+slug: Fourth-lesson-october-22th-2020
+categories:
+  - Lesson
+tags:
+  - Lesson
+description: ''
+thumbnail: ''
+link-citations: yes
+biblio-style: apalike
+bibliography: [../lessons_list/data/biblio_hdr_v2.bib, ../lessons_list/data/Liste_Publi3.bib, ../lessons_list/data/biblio_SABD.bib]
+---
+
+# Fourth Lesson
+
+Welcome to the Fourth lesson - 22/10/2020 **8:00** - 12:30
+
+**Big Data for Industry 4.0**
+
+Teachers: Genoveva Vargas Solar & Christophe Bobineau
+
+
+## Zoom meeting
+
+**From 8:00 to 11:00**
+
+1. following this link: (https://grenoble-inp.zoom.us/j/96430556810)
+
+(and, if needed, install the zoom app).
+
+1. or you can start the Zoom app with the following information
+  + meeting ID:  96430556810
+  + Password:  620122
+  
+**From 11:00 to 12:30**
+
+1. following this link: (https://grenoble-inp.zoom.us/j/91030692601?pwd=aVgzM0hPWEtqR2tBVFVBQjBTYWY1Zz09)
+
+(and, if needed, install the zoom app).
+
+1. or you can start the Zoom app with the following information
+  + meeting ID: 910 3069 2601
+  + Password: 549314
+
+
+## Collaborative work:
+
+[Slack channel](https://join.slack.com/t/grenobleinpgn-eu88686/shared_invite/zt-hfx5moad-TVv1JsL6coPWuLbJZe~v3g)
+
+
+## Class platforms
+
+- GoogleClassroom page is: (https://classroom.google.com/c/MTQ1Mjk3OTUzMTE3?cjc=wb6xksu)
+
+
+
