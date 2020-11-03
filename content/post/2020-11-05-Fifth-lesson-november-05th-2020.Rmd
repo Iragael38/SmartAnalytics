@@ -27,13 +27,15 @@ Teachers: Genoveva Vargas Solar & Christophe Bobineau
 
 **From 8:00 to 09:30**
 
-1. following this link: ( )
+Topic: Smart Analytics for Big Data - Fifth Lesson - Hands on MongoDB
+
+1. following this link: (https://grenoble-inp.zoom.us/j/93371240624?pwd=QkN0ZXA5aHQ1dlpndVgwdkRFQ2RHQT09)
 
 (and, if needed, install the zoom app).
 
 1. or you can start the Zoom app with the following information
-  + meeting ID:  
-  + Password:  
+  + meeting ID:  933 7124 0624
+  + Password:  503925
   
 **From 09:30 to 12:30**
 
