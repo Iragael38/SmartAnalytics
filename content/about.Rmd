@@ -4,6 +4,11 @@ date: "2020-08"
 menu: main
 sidebar: false
 authorbox: false
+link-citations: yes
+biblio-style: apalike
+bibliography: [post/data/biblio_SABD.bib]
+\nocite: |
+ @hayter2012, @Greene2008,@Greene2009, @Hougaard2000, @Lawless2003, @ListwonStPierre2013, @MaSeetharaman2004, @MartinussenScheike2006, @xie2015, @xie2016, @McFaddenTrain2000, @Train2009, @Agresti2013, @Kantardzic2011
 ---
 
 # Description of the course

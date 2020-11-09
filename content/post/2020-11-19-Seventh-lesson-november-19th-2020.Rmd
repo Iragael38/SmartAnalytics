@@ -1,0 +1,58 @@
+---
+title: Seventh Lesson November 19th 2020
+author: IJ
+date: '2020-11-19'
+slug: Seventh-lesson-november-19th-2020
+categories:
+  - Lesson
+tags:
+  - Lesson
+description: ''
+thumbnail: ''
+link-citations: yes
+biblio-style: apalike
+bibliography: [../lessons_list/data/biblio_hdr_v2.bib, ../lessons_list/data/Liste_Publi3.bib, ../lessons_list/data/biblio_SABD.bib]
+---
+
+# Seventh Lesson
+
+Welcome to the Seventh lesson - 19/11/2020 9:30 - 12:30 **and 13:30 - 15:00**
+
+**Big Data for Industry 4.0**
+
+Teachers: I Joly 
+
+## Zoom meeting
+
+**From 09:30 to 12:30**
+
+1. following this link: (https://grenoble-inp.zoom.us/j/93438334161?pwd=dC9EemxIWmJlY3dqa2d3OWZpcHZ2QT09)
+
+(and, if needed, install the zoom app).
+
+1. or you can start the Zoom app with the following information
+  + meeting ID: 934 3833 4161
+  + Password: SABD2020
+
+
+**From 13:30 to 15:00**
+
+1. following this link: (https://grenoble-inp.zoom.us/j/98780829655?pwd=VDdod2xJODMvQ3cxWnA4M1FxTFFqdz09)
+
+(and, if needed, install the zoom app).
+
+1. or you can start the Zoom app with the following information
+  + meeting ID: 987 8082 9655
+  + Password: SABD2020
+
+
+## Project page:
+
+On [Caseine](https://moodle.caseine.org/course/view.php?id=644&sectionid=5661)
+
+
+
+
+
+
+

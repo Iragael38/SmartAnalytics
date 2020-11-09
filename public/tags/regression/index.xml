@@ -1,21 +1,17 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>regression on Smart Analytics for Big Data</title>
-    <link>/tags/regression/</link>
+    <link>https://sabd-smartanalytics.netlify.app/tags/regression/</link>
     <description>Recent content in regression on Smart Analytics for Big Data</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    
-	<atom:link href="/tags/regression/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <language>en-us</language><atom:link href="https://sabd-smartanalytics.netlify.app/tags/regression/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Graphics with R</title>
-      <link>/lessons_list/lesson_1.2_grammar/</link>
+      <link>https://sabd-smartanalytics.netlify.app/lessons_list/lesson_1.2_grammar/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/lessons_list/lesson_1.2_grammar/</guid>
+      <guid>https://sabd-smartanalytics.netlify.app/lessons_list/lesson_1.2_grammar/</guid>
       <description>Grammar of ggplot2()Start exampledf &amp;lt;- data.frame(x=1:15, y=1:15)ggplot(df, aes(x,y)) +geom_point() +labs(title= &amp;quot;Plot example&amp;quot;,subtitle = &amp;quot;Subtitled&amp;quot;,x=&amp;quot;x-values&amp;quot;, y = &amp;quot;y-values&amp;quot;) +theme(panel.background = element_rect(fill = &amp;quot;white&amp;quot;, color= &amp;quot;grey50&amp;quot;))Grammar of graphic: ggplotThe ggplot2 package is loaded to access the ggplot() function.
 The graph is created by stacking together several short phrases, each describing an aspect of the graphic.
 With ggplot, the data need need not to be reshaped for each type of graphical representation (boxplot, histogram, scatter,…).</description>
@@ -23,10 +19,10 @@ With ggplot, the data need need not to be reshaped for each type of graphical re
     
     <item>
       <title>Introduction to Data Vizualisation</title>
-      <link>/lessons_list/lesson_1.3_application/</link>
+      <link>https://sabd-smartanalytics.netlify.app/lessons_list/lesson_1.3_application/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/lessons_list/lesson_1.3_application/</guid>
+      <guid>https://sabd-smartanalytics.netlify.app/lessons_list/lesson_1.3_application/</guid>
       <description>ApplicationDesigning a visualizationThe use of visualization is pervasive in the scientific production and communication: explanatory diagrams, graphs describing statistics, new experimental data plotted against theoretical expectations, etc.
 In each case, the author of the visualization tries to lead readers to a specific point of view, by emphasizing some aspects of the data while toning down other aspects.
 Results may be informative, decisive or misleading.
@@ -34,57 +30,22 @@ Can you apply the design principles we talked about in class?</description>
     </item>
     
     <item>
-      <title>Introduction to GIS - Geographic Information System</title>
-      <link>/lessons_list/lesson_2_gis/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/lessons_list/lesson_2_gis/</guid>
-      <description>2 Examples of GIS with RFollowing examples are to be readed after the lesson slides.
-First example (suite of the slides example)# url.france_pop &amp;lt;- url(&amp;quot;https://vrzkj25a871bpq7t1ugcgmn9-wpengine.netdna-ssl.com/wp-content/datasets/france_population_data_2016.RData&amp;quot;)# save(df.france, file = &amp;quot;df.france.RData&amp;quot;)#load(url.france_pop)load(&amp;quot;data/gis/df.france.RData&amp;quot;)glimpse(df.france)## Rows: 35,798## Columns: 18## $ ID_GEOFLA &amp;lt;fct&amp;gt; COMMUNE00000000000000001, COMMUNE00000000000000002, COMM...## $ CODE_COM &amp;lt;fct&amp;gt; 216, 033, 009, 225, 890, 018, 113, 319, 097, 070, 046, 5...## $ INSEE_COM &amp;lt;fct&amp;gt; 32216, 47033, 32009, 38225, 62890, 08018, 32113, 10319, .</description>
-    </item>
-    
-    <item>
       <title>Introduction to Reproducible Analysis</title>
-      <link>/lessons_list/lesson_0.1_reproducibleresearch/</link>
+      <link>https://sabd-smartanalytics.netlify.app/lessons_list/lesson_0.1_reproducibleresearch/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/lessons_list/lesson_0.1_reproducibleresearch/</guid>
+      <guid>https://sabd-smartanalytics.netlify.app/lessons_list/lesson_0.1_reproducibleresearch/</guid>
       <description>Reproducible AnalysisTypical data analysis workflow looks like this:
 collect dataput it in a file or spreadsheet or databaserun some analyses, written in various scripts,perhaps saving some intermediate results along the wayor maybe always working on the raw data.create some plots or tables of relevant summaries of the data,and then
 go and write a report about the results in a text editor or word processor.</description>
     </item>
     
     <item>
-      <title>Introduction to Survival Analysis</title>
-      <link>/lessons_list/lesson_3-2_survanalyse-application/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/lessons_list/lesson_3-2_survanalyse-application/</guid>
-      <description>A FINIR
-Exercise - Unemployment durationSurvival analysis models covariates that influence time-to-event.
-OLS regression methods are less efficient because the time-to-event is typically not normally distributed (positive, skewed, nearly discret when rounding are present), and the model cannot handle censored observation, without modification.
-library(Ecdat)## Warning: le package &amp;#39;Ecdat&amp;#39; a été compilé avec la version R 3.6.3## Le chargement a nécessité le package : Ecfun## Warning: le package &amp;#39;Ecfun&amp;#39; a été compilé avec la version R 3.</description>
-    </item>
-    
-    <item>
-      <title>Introduction to Survival Analysis</title>
-      <link>/lessons_list/lesson_3_survanalyse/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/lessons_list/lesson_3_survanalyse/</guid>
-      <description>A FINIR
-Introduction corresponds to a set of statistical approaches used to investigate the of interest to occur.
-Medecine, sociology, economyinformatics, engineering,…In basic categorical data analysis for example, we compare proportions (risks, rates, etc) between different groups.
-Such analysis is performed using a chi-square or fisher exact test, or logistic regression.
-We implicitly assume that the rates are constant over the period of the study, and are defined by the different groups studied.</description>
-    </item>
-    
-    <item>
       <title>Introductory Cases Studies</title>
-      <link>/lessons_list/lesson_0.2_casestudy/</link>
+      <link>https://sabd-smartanalytics.netlify.app/lessons_list/lesson_0.2_casestudy/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/lessons_list/lesson_0.2_casestudy/</guid>
+      <guid>https://sabd-smartanalytics.netlify.app/lessons_list/lesson_0.2_casestudy/</guid>
       <description>Case StudyWork group:
 By group of 5 to 6 students:
 you will explore one of the following linksyou will search for the data type, qualification, etcyou will question the workflow supporting the websiteyou will question the interpretation, the vizualisation of the results, its strengths and weaknessesyou will present your result using an RMarkdown presentation (HTML IoSlides or Beamer) - No more than 4 slidesFirst: names, title, link as subtitleSecond: survey of the data elementsThird: workflow 1Fourth: critical analysisCases - linksCS0 - Mobility and Covid19https://ivtmobis.</description>
@@ -92,10 +53,10 @@ you will explore one of the following linksyou will search for the data type, q
     
     <item>
       <title>Smart Analytics for Big Data</title>
-      <link>/lessons-list/</link>
+      <link>https://sabd-smartanalytics.netlify.app/lessons-list/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/lessons-list/</guid>
+      <guid>https://sabd-smartanalytics.netlify.app/lessons-list/</guid>
       <description>Lessons listThis is the website of the Lesson Smart Analytics for Big Data taught at Grenoble INP Industrial Engineering and Management School &amp;amp; UGA.
 First Lesson - 01/10/2020 - 9:30 - 12:30Welcome page of First Lesson
 Second Lesson - 08/10/2020 - 8:00 - 12:30Material for the Second Lesson
@@ -105,10 +66,10 @@ First Lesson - 01/10/2020 - 9:30 - 12:30Welcome page of First Lesson
     
     <item>
       <title>Vizu &amp; GIS</title>
-      <link>/lessons_list/lesson_2/</link>
+      <link>https://sabd-smartanalytics.netlify.app/lessons_list/lesson_2/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/lessons_list/lesson_2/</guid>
+      <guid>https://sabd-smartanalytics.netlify.app/lessons_list/lesson_2/</guid>
       <description>WelcomeThis is the 2nd Lesson of Smart Analytics for Big Data
 Zoom linkDocumentsLesson Part 1 - Visualization
 Lesson Part 2 - GIS

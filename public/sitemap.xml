@@ -1,145 +1,129 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/</loc>
+    <loc>https://sabd-smartanalytics.netlify.app/</loc>
     <lastmod>2020-10-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/</loc>
+    <loc>https://sabd-smartanalytics.netlify.app/categories/</loc>
     <lastmod>2020-10-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/fifth-lesson-november-05th-2020/</loc>
+    <loc>https://sabd-smartanalytics.netlify.app/post/fifth-lesson-november-05th-2020/</loc>
     <lastmod>2020-10-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/fourth-lesson-october-22th-2020/</loc>
+    <loc>https://sabd-smartanalytics.netlify.app/post/fourth-lesson-october-22th-2020/</loc>
     <lastmod>2020-10-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/lesson/</loc>
+    <loc>https://sabd-smartanalytics.netlify.app/tags/lesson/</loc>
     <lastmod>2020-10-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/lesson/</loc>
+    <loc>https://sabd-smartanalytics.netlify.app/categories/lesson/</loc>
     <lastmod>2020-10-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/</loc>
+    <loc>https://sabd-smartanalytics.netlify.app/post/</loc>
     <lastmod>2020-10-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/sixth-lesson-november-12th-2020/</loc>
+    <loc>https://sabd-smartanalytics.netlify.app/post/sixth-lesson-november-12th-2020/</loc>
     <lastmod>2020-10-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/</loc>
+    <loc>https://sabd-smartanalytics.netlify.app/tags/</loc>
     <lastmod>2020-10-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/third-lesson-october-15th-2020/</loc>
+    <loc>https://sabd-smartanalytics.netlify.app/post/third-lesson-october-15th-2020/</loc>
     <lastmod>2020-10-15T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/second-lesson-october-8th-2020/</loc>
+    <loc>https://sabd-smartanalytics.netlify.app/post/second-lesson-october-8th-2020/</loc>
     <lastmod>2020-10-08T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/first-lesson-october-1rst-2020/</loc>
+    <loc>https://sabd-smartanalytics.netlify.app/post/first-lesson-october-1rst-2020/</loc>
     <lastmod>2020-09-24T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/prerequisites/</loc>
+    <loc>https://sabd-smartanalytics.netlify.app/prerequisites/</loc>
   </url>
   
   <url>
-    <loc>/recordings/</loc>
+    <loc>https://sabd-smartanalytics.netlify.app/recordings/</loc>
   </url>
   
   <url>
-    <loc>/about/</loc>
+    <loc>https://sabd-smartanalytics.netlify.app/about/</loc>
   </url>
   
   <url>
-    <loc>/lessons_list/lesson_1.2_grammar/</loc>
+    <loc>https://sabd-smartanalytics.netlify.app/lessons_list/lesson_1.2_grammar/</loc>
   </url>
   
   <url>
-    <loc>/lessons_list/lesson_1.3_application/</loc>
+    <loc>https://sabd-smartanalytics.netlify.app/lessons_list/lesson_1.3_application/</loc>
   </url>
   
   <url>
-    <loc>/lessons_list/lesson_2_gis/</loc>
+    <loc>https://sabd-smartanalytics.netlify.app/lessons_list/lesson_0.1_reproducibleresearch/</loc>
   </url>
   
   <url>
-    <loc>/lessons_list/lesson_0.1_reproducibleresearch/</loc>
+    <loc>https://sabd-smartanalytics.netlify.app/lessons_list/lesson_0.2_casestudy/</loc>
   </url>
   
   <url>
-    <loc>/lessons_list/lesson_3-2_survanalyse-application/</loc>
+    <loc>https://sabd-smartanalytics.netlify.app/lessons_list/</loc>
   </url>
   
   <url>
-    <loc>/lessons_list/lesson_3_survanalyse/</loc>
+    <loc>https://sabd-smartanalytics.netlify.app/otherlessons/</loc>
   </url>
   
   <url>
-    <loc>/lessons_list/lesson_0.2_casestudy/</loc>
+    <loc>https://sabd-smartanalytics.netlify.app/tags/plot/</loc>
   </url>
   
   <url>
-    <loc>/lessons_list/</loc>
+    <loc>https://sabd-smartanalytics.netlify.app/categories/r/</loc>
   </url>
   
   <url>
-    <loc>/otherlessons/</loc>
+    <loc>https://sabd-smartanalytics.netlify.app/tags/r-markdown/</loc>
   </url>
   
   <url>
-    <loc>/tags/plot/</loc>
+    <loc>https://sabd-smartanalytics.netlify.app/references/</loc>
   </url>
   
   <url>
-    <loc>/categories/r/</loc>
+    <loc>https://sabd-smartanalytics.netlify.app/tags/regression/</loc>
   </url>
   
   <url>
-    <loc>/tags/r-markdown/</loc>
+    <loc>https://sabd-smartanalytics.netlify.app/lessons-list/</loc>
   </url>
   
   <url>
-    <loc>/references/</loc>
-  </url>
-  
-  <url>
-    <loc>/tags/regression/</loc>
-  </url>
-  
-  <url>
-    <loc>/lessons-list/</loc>
-  </url>
-  
-  <url>
-    <loc>/post/sometricks-draft/</loc>
-  </url>
-  
-  <url>
-    <loc>/lessons_list/lesson_2/</loc>
+    <loc>https://sabd-smartanalytics.netlify.app/lessons_list/lesson_2/</loc>
   </url>
   
 </urlset>

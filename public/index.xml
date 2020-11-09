@@ -1,22 +1,18 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Smart Analytics for Big Data</title>
-    <link>/</link>
+    <link>https://sabd-smartanalytics.netlify.app/</link>
     <description>Recent content on Smart Analytics for Big Data</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 22 Oct 2020 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Thu, 22 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://sabd-smartanalytics.netlify.app/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Fifth Lesson November 05th 2020</title>
-      <link>/post/fifth-lesson-november-05th-2020/</link>
+      <link>https://sabd-smartanalytics.netlify.app/post/fifth-lesson-november-05th-2020/</link>
       <pubDate>Thu, 22 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>/post/fifth-lesson-november-05th-2020/</guid>
+      <guid>https://sabd-smartanalytics.netlify.app/post/fifth-lesson-november-05th-2020/</guid>
       <description>Fifth LessonWelcome to the Fifth lesson - 05/11/2020 8:00 - 12:30
 Big Data for Industry 4.0
 Teachers: Genoveva Vargas Solar &amp;amp; Christophe Bobineau
@@ -28,10 +24,10 @@ or you can start the Zoom app with the following informationmeeting ID: 933 7
     
     <item>
       <title>Fourth Lesson October 22th 2020</title>
-      <link>/post/fourth-lesson-october-22th-2020/</link>
+      <link>https://sabd-smartanalytics.netlify.app/post/fourth-lesson-october-22th-2020/</link>
       <pubDate>Thu, 22 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>/post/fourth-lesson-october-22th-2020/</guid>
+      <guid>https://sabd-smartanalytics.netlify.app/post/fourth-lesson-october-22th-2020/</guid>
       <description>Fourth LessonWelcome to the Fourth lesson - 22/10/2020 8:00 - 12:30
 Big Data for Industry 4.0
 Teachers: Genoveva Vargas Solar &amp;amp; Christophe Bobineau
@@ -43,10 +39,10 @@ following this link: (https://grenoble-inp.zoom.us/j/91030692601?pwd=aVgzM0hPWEt
     
     <item>
       <title>Sixth Lesson November 12th 2020</title>
-      <link>/post/sixth-lesson-november-12th-2020/</link>
+      <link>https://sabd-smartanalytics.netlify.app/post/sixth-lesson-november-12th-2020/</link>
       <pubDate>Thu, 22 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>/post/sixth-lesson-november-12th-2020/</guid>
+      <guid>https://sabd-smartanalytics.netlify.app/post/sixth-lesson-november-12th-2020/</guid>
       <description>Sixth LessonWelcome to the Sixth lesson - 12/11/2020 9:30 - 12:30
 Big Data for Industry 4.0
 Teachers: Genoveva Vargas Solar
@@ -58,10 +54,10 @@ or you can start the Zoom app with the following informationmeeting ID: 963 5
     
     <item>
       <title>Third Lesson October 15th 2020</title>
-      <link>/post/third-lesson-october-15th-2020/</link>
+      <link>https://sabd-smartanalytics.netlify.app/post/third-lesson-october-15th-2020/</link>
       <pubDate>Thu, 15 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>/post/third-lesson-october-15th-2020/</guid>
+      <guid>https://sabd-smartanalytics.netlify.app/post/third-lesson-october-15th-2020/</guid>
       <description>Third LessonWelcome to the third lesson - 15/10/2020 9:30 - 12:30
 Big Data for Industry 4.0
 Teacher: Christophe Bobineau
@@ -73,10 +69,10 @@ or you can start the Zoom app with the following informationmeeting ID: 913 1
     
     <item>
       <title>Second Lesson October 8th 2020</title>
-      <link>/post/second-lesson-october-8th-2020/</link>
+      <link>https://sabd-smartanalytics.netlify.app/post/second-lesson-october-8th-2020/</link>
       <pubDate>Thu, 08 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>/post/second-lesson-october-8th-2020/</guid>
+      <guid>https://sabd-smartanalytics.netlify.app/post/second-lesson-october-8th-2020/</guid>
       <description>Second LessonWelcome to the second lesson - 08/10/2020 8:00 - 12:30
 Zoom meetingWe will use Zoom.
 You can connect to zoom:
@@ -86,10 +82,10 @@ or you can start the Zoom app with the following informationmeeting ID: 965 2
     
     <item>
       <title>First Lesson October 1rst 2020</title>
-      <link>/post/first-lesson-october-1rst-2020/</link>
+      <link>https://sabd-smartanalytics.netlify.app/post/first-lesson-october-1rst-2020/</link>
       <pubDate>Thu, 24 Sep 2020 00:00:00 +0000</pubDate>
       
-      <guid>/post/first-lesson-october-1rst-2020/</guid>
+      <guid>https://sabd-smartanalytics.netlify.app/post/first-lesson-october-1rst-2020/</guid>
       <description>First LessonWelcome to the first lesson - 01/10/2020 9:30 - 12:30
 Zoom meetingWe will use Zoom.
 You can connect to zoom:
@@ -99,10 +95,10 @@ or you can start the Zoom app with the following informationmeeting ID: 810 0
     
     <item>
       <title></title>
-      <link>/prerequisites/</link>
+      <link>https://sabd-smartanalytics.netlify.app/prerequisites/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/prerequisites/</guid>
+      <guid>https://sabd-smartanalytics.netlify.app/prerequisites/</guid>
       <description>PreRequisitesR ProgrammingRmarkdownScientific workflow and dynamic document programming: RMardown
 Tuto:RMarkdown for Scientists - Nicholas Tierney
 Probability and StatisticsReferencesAgresti, A. 2013. Categorical Data Analysis. Wiley.
@@ -113,30 +109,30 @@ Tuto:RMarkdown for Scientists - Nicholas Tierney
     
     <item>
       <title></title>
-      <link>/recordings/</link>
+      <link>https://sabd-smartanalytics.netlify.app/recordings/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/recordings/</guid>
+      <guid>https://sabd-smartanalytics.netlify.app/recordings/</guid>
       <description>RecordingsRecordings of the lessons are accessible on GoogleDrive
 </description>
     </item>
     
     <item>
       <title>About</title>
-      <link>/about/</link>
+      <link>https://sabd-smartanalytics.netlify.app/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/about/</guid>
+      <guid>https://sabd-smartanalytics.netlify.app/about/</guid>
       <description>Description of the courseSkills of the learning programTo acquire overview of the supply-chain of the data management (from production to analysis and results communication) and be able to manage a data science project form end-to-endTo know methods and to apply tools for data handling, cleaning and requesting
 To know methods and to apply tools to explore and analyze dataTo know methods and to apply tools specific to data characterized by two specific dimensions of the industrial big data: spatial data and temporal dataOrganisation of the courseThe course covers the whole issues of the data supply-chain: from data collection and production, storage and organization, management, exploitation and analysis, and communication.</description>
     </item>
     
     <item>
       <title>Graphics with R</title>
-      <link>/lessons_list/lesson_1.2_grammar/</link>
+      <link>https://sabd-smartanalytics.netlify.app/lessons_list/lesson_1.2_grammar/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/lessons_list/lesson_1.2_grammar/</guid>
+      <guid>https://sabd-smartanalytics.netlify.app/lessons_list/lesson_1.2_grammar/</guid>
       <description>Grammar of ggplot2()Start exampledf &amp;lt;- data.frame(x=1:15, y=1:15)ggplot(df, aes(x,y)) +geom_point() +labs(title= &amp;quot;Plot example&amp;quot;,subtitle = &amp;quot;Subtitled&amp;quot;,x=&amp;quot;x-values&amp;quot;, y = &amp;quot;y-values&amp;quot;) +theme(panel.background = element_rect(fill = &amp;quot;white&amp;quot;, color= &amp;quot;grey50&amp;quot;))Grammar of graphic: ggplotThe ggplot2 package is loaded to access the ggplot() function.
 The graph is created by stacking together several short phrases, each describing an aspect of the graphic.
 With ggplot, the data need need not to be reshaped for each type of graphical representation (boxplot, histogram, scatter,…).</description>
@@ -144,10 +140,10 @@ With ggplot, the data need need not to be reshaped for each type of graphical re
     
     <item>
       <title>Introduction to Data Vizualisation</title>
-      <link>/lessons_list/lesson_1.3_application/</link>
+      <link>https://sabd-smartanalytics.netlify.app/lessons_list/lesson_1.3_application/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/lessons_list/lesson_1.3_application/</guid>
+      <guid>https://sabd-smartanalytics.netlify.app/lessons_list/lesson_1.3_application/</guid>
       <description>ApplicationDesigning a visualizationThe use of visualization is pervasive in the scientific production and communication: explanatory diagrams, graphs describing statistics, new experimental data plotted against theoretical expectations, etc.
 In each case, the author of the visualization tries to lead readers to a specific point of view, by emphasizing some aspects of the data while toning down other aspects.
 Results may be informative, decisive or misleading.
@@ -155,57 +151,22 @@ Can you apply the design principles we talked about in class?</description>
     </item>
     
     <item>
-      <title>Introduction to GIS - Geographic Information System</title>
-      <link>/lessons_list/lesson_2_gis/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/lessons_list/lesson_2_gis/</guid>
-      <description>2 Examples of GIS with RFollowing examples are to be readed after the lesson slides.
-First example (suite of the slides example)# url.france_pop &amp;lt;- url(&amp;quot;https://vrzkj25a871bpq7t1ugcgmn9-wpengine.netdna-ssl.com/wp-content/datasets/france_population_data_2016.RData&amp;quot;)# save(df.france, file = &amp;quot;df.france.RData&amp;quot;)#load(url.france_pop)load(&amp;quot;data/gis/df.france.RData&amp;quot;)glimpse(df.france)## Rows: 35,798## Columns: 18## $ ID_GEOFLA &amp;lt;fct&amp;gt; COMMUNE00000000000000001, COMMUNE00000000000000002, COMM...## $ CODE_COM &amp;lt;fct&amp;gt; 216, 033, 009, 225, 890, 018, 113, 319, 097, 070, 046, 5...## $ INSEE_COM &amp;lt;fct&amp;gt; 32216, 47033, 32009, 38225, 62890, 08018, 32113, 10319, .</description>
-    </item>
-    
-    <item>
       <title>Introduction to Reproducible Analysis</title>
-      <link>/lessons_list/lesson_0.1_reproducibleresearch/</link>
+      <link>https://sabd-smartanalytics.netlify.app/lessons_list/lesson_0.1_reproducibleresearch/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/lessons_list/lesson_0.1_reproducibleresearch/</guid>
+      <guid>https://sabd-smartanalytics.netlify.app/lessons_list/lesson_0.1_reproducibleresearch/</guid>
       <description>Reproducible AnalysisTypical data analysis workflow looks like this:
 collect dataput it in a file or spreadsheet or databaserun some analyses, written in various scripts,perhaps saving some intermediate results along the wayor maybe always working on the raw data.create some plots or tables of relevant summaries of the data,and then
 go and write a report about the results in a text editor or word processor.</description>
     </item>
     
     <item>
-      <title>Introduction to Survival Analysis</title>
-      <link>/lessons_list/lesson_3-2_survanalyse-application/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/lessons_list/lesson_3-2_survanalyse-application/</guid>
-      <description>A FINIR
-Exercise - Unemployment durationSurvival analysis models covariates that influence time-to-event.
-OLS regression methods are less efficient because the time-to-event is typically not normally distributed (positive, skewed, nearly discret when rounding are present), and the model cannot handle censored observation, without modification.
-library(Ecdat)## Warning: le package &amp;#39;Ecdat&amp;#39; a été compilé avec la version R 3.6.3## Le chargement a nécessité le package : Ecfun## Warning: le package &amp;#39;Ecfun&amp;#39; a été compilé avec la version R 3.</description>
-    </item>
-    
-    <item>
-      <title>Introduction to Survival Analysis</title>
-      <link>/lessons_list/lesson_3_survanalyse/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/lessons_list/lesson_3_survanalyse/</guid>
-      <description>A FINIR
-Introduction corresponds to a set of statistical approaches used to investigate the of interest to occur.
-Medecine, sociology, economyinformatics, engineering,…In basic categorical data analysis for example, we compare proportions (risks, rates, etc) between different groups.
-Such analysis is performed using a chi-square or fisher exact test, or logistic regression.
-We implicitly assume that the rates are constant over the period of the study, and are defined by the different groups studied.</description>
-    </item>
-    
-    <item>
       <title>Introductory Cases Studies</title>
-      <link>/lessons_list/lesson_0.2_casestudy/</link>
+      <link>https://sabd-smartanalytics.netlify.app/lessons_list/lesson_0.2_casestudy/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/lessons_list/lesson_0.2_casestudy/</guid>
+      <guid>https://sabd-smartanalytics.netlify.app/lessons_list/lesson_0.2_casestudy/</guid>
       <description>Case StudyWork group:
 By group of 5 to 6 students:
 you will explore one of the following linksyou will search for the data type, qualification, etcyou will question the workflow supporting the websiteyou will question the interpretation, the vizualisation of the results, its strengths and weaknessesyou will present your result using an RMarkdown presentation (HTML IoSlides or Beamer) - No more than 4 slidesFirst: names, title, link as subtitleSecond: survey of the data elementsThird: workflow 1Fourth: critical analysisCases - linksCS0 - Mobility and Covid19https://ivtmobis.</description>
@@ -213,10 +174,10 @@ you will explore one of the following linksyou will search for the data type, q
     
     <item>
       <title>Other Lessons list</title>
-      <link>/otherlessons/</link>
+      <link>https://sabd-smartanalytics.netlify.app/otherlessons/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/otherlessons/</guid>
+      <guid>https://sabd-smartanalytics.netlify.app/otherlessons/</guid>
       <description>Here are links to other lessons I have pushed online
 Basic Economics for IEM
 Discrete Choice Modelling
@@ -225,10 +186,10 @@ Smart Analytics for Big Data</description>
     
     <item>
       <title>References</title>
-      <link>/references/</link>
+      <link>https://sabd-smartanalytics.netlify.app/references/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/references/</guid>
+      <guid>https://sabd-smartanalytics.netlify.app/references/</guid>
       <description>Softwares InstallationR and RStudioLateX edition: MikteXIntroduction to R and StatisticsIntroductory Statistics with R, Peter Dalgaard, Caseine Link
 Introduction to Statistical Learning with Applications in R, Gareth James, Daniela Witten, Trevor Hastie and Robert, Tibshirani website
 Introduction to RMarkdownRMarkdown Cheatsheet pdfR Markdown: The Definitive Guide, Yihui Xie, J. J. Allaire, Garrett Grolemund (access the bookdown)[https://bookdown.org/yihui/rmarkdown/]</description>
@@ -236,10 +197,10 @@ Smart Analytics for Big Data</description>
     
     <item>
       <title>Smart Analytics for Big Data</title>
-      <link>/lessons-list/</link>
+      <link>https://sabd-smartanalytics.netlify.app/lessons-list/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/lessons-list/</guid>
+      <guid>https://sabd-smartanalytics.netlify.app/lessons-list/</guid>
       <description>Lessons listThis is the website of the Lesson Smart Analytics for Big Data taught at Grenoble INP Industrial Engineering and Management School &amp;amp; UGA.
 First Lesson - 01/10/2020 - 9:30 - 12:30Welcome page of First Lesson
 Second Lesson - 08/10/2020 - 8:00 - 12:30Material for the Second Lesson
@@ -248,23 +209,11 @@ First Lesson - 01/10/2020 - 9:30 - 12:30Welcome page of First Lesson
     </item>
     
     <item>
-      <title>Some tricks</title>
-      <link>/post/sometricks-draft/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/post/sometricks-draft/</guid>
-      <description>In Yalmmenu: mainsidebar: falseauthorbox: falseBlockquoteUse previos line.
-for empty newlines
-you can even blockquote CODE by prefixing with &amp;gt;
-</description>
-    </item>
-    
-    <item>
       <title>Vizu &amp; GIS</title>
-      <link>/lessons_list/lesson_2/</link>
+      <link>https://sabd-smartanalytics.netlify.app/lessons_list/lesson_2/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>/lessons_list/lesson_2/</guid>
+      <guid>https://sabd-smartanalytics.netlify.app/lessons_list/lesson_2/</guid>
       <description>WelcomeThis is the 2nd Lesson of Smart Analytics for Big Data
 Zoom linkDocumentsLesson Part 1 - Visualization
 Lesson Part 2 - GIS
