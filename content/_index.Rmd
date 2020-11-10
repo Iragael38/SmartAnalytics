@@ -14,7 +14,8 @@ nocite: |
 
 ## What's New
 
-- `09/11/2020`: [Sixth Lesson](../post/sixth-lesson)
+- [test Lesson](../post/2020-11-10-test-post)
+- `09/11/2020`: [Sixth Lesson](../post/2020-11-12-sixth-lesson)
 - `03/11/2020`: 
   + Thursday 05/11/2020 [Fifth Lesson](../post/fifth-lesson)
   + New planning update [Lessons Planning](#Lessons-planning)

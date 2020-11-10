@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://sabd-smartanalytics.netlify.app/</loc>
+    <lastmod>2020-11-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sabd-smartanalytics.netlify.app/post/</loc>
+    <lastmod>2020-11-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sabd-smartanalytics.netlify.app/post/2020-11-10-test-post/</loc>
+    <lastmod>2020-11-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sabd-smartanalytics.netlify.app/prerequisites/</loc>
+  </url>
+  
+  <url>
+    <loc>https://sabd-smartanalytics.netlify.app/recordings/</loc>
+  </url>
+  
+  <url>
+    <loc>https://sabd-smartanalytics.netlify.app/about/</loc>
+  </url>
+  
+  <url>
+    <loc>https://sabd-smartanalytics.netlify.app/categories/</loc>
+  </url>
+  
+  <url>
+    <loc>https://sabd-smartanalytics.netlify.app/lessons_list/lesson_1.2_grammar/</loc>
+  </url>
+  
+  <url>
+    <loc>https://sabd-smartanalytics.netlify.app/lessons_list/lesson_1.3_application/</loc>
+  </url>
+  
+  <url>
+    <loc>https://sabd-smartanalytics.netlify.app/lessons_list/lesson_0.1_reproducibleresearch/</loc>
+  </url>
+  
+  <url>
+    <loc>https://sabd-smartanalytics.netlify.app/lessons_list/lesson_0.2_casestudy/</loc>
+  </url>
+  
+  <url>
+    <loc>https://sabd-smartanalytics.netlify.app/lessons_list/</loc>
+  </url>
+  
+  <url>
+    <loc>https://sabd-smartanalytics.netlify.app/otherlessons/</loc>
+  </url>
+  
+  <url>
+    <loc>https://sabd-smartanalytics.netlify.app/tags/plot/</loc>
+  </url>
+  
+  <url>
+    <loc>https://sabd-smartanalytics.netlify.app/categories/r/</loc>
+  </url>
+  
+  <url>
+    <loc>https://sabd-smartanalytics.netlify.app/tags/r-markdown/</loc>
+  </url>
+  
+  <url>
+    <loc>https://sabd-smartanalytics.netlify.app/references/</loc>
+  </url>
+  
+  <url>
+    <loc>https://sabd-smartanalytics.netlify.app/tags/regression/</loc>
+  </url>
+  
+  <url>
+    <loc>https://sabd-smartanalytics.netlify.app/lessons-index/</loc>
+  </url>
+  
+  <url>
+    <loc>https://sabd-smartanalytics.netlify.app/tags/</loc>
+  </url>
+  
+  <url>
+    <loc>https://sabd-smartanalytics.netlify.app/lessons_list/lesson_2/</loc>
+  </url>
+  
+</urlset>
