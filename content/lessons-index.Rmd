@@ -50,13 +50,18 @@ Material for the [Seventh Lesson](../post/seventh-lesson)
 
 Material for the [Eighth Lesson](../post/eighth-lesson)
 
-### Nineth Lesson - 03/12/2020 - **13:30 - 18:00**
+### Ninth Lesson - 03/12/2020 - **13:30 - 18:00**
 
-Material for the [Nineth Lesson](../post/nineth-lesson)
+Material for the [Ninth Lesson](../post/ninth-lesson)
 
 
 ### Tenth Lesson - 10/12/2020 - **13:30 - 18:00**
 
+Material for the [Tenth Lesson](../post/tenth-lesson)
+
 ### Eleventh Lesson - 17/12/2020 - **08:00 - 12:30**
 
+Material for the [Eleventh Lesson](../post/eleventh-lesson)
+
 ### Twelveth Lesson - 17/12/2020 - **08:00 - 12:30**
+
