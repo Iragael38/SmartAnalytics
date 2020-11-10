@@ -14,14 +14,13 @@ nocite: |
 
 ## What's New
 
-- [fu test](../post/2020-11-10-fu-test)
-- `09/11/2020`: [Sixth Lesson](../post/2020-11-12-Sixth-lesson-november-12th-2020)
+- `09/11/2020`: [Sixth Lesson](../post/sixth-lesson)
 - `03/11/2020`: 
-  + Thursday 05/11/2020 [Fifth Lesson](../post/Fifth-lesson-november-05th-2020)
+  + Thursday 05/11/2020 [Fifth Lesson](../post/fifth-lesson)
   + New planning update [Lessons Planning](#Lessons-planning)
 - Planning update ! [Lessons Planning](#Lessons-planning)
 - `16/10/2020`: Recordings of the lessons are [here](https://drive.google.com/drive/folders/133lYBiC2gB-L66lwU7t4ec5NwS96k2aj)
-- `16/10/2020`: all lessons materials and usefull information are in the **Lesson** menu
+- `16/10/2020`: all lessons materials and useful information are in the **Lesson** menu
 
 
 ## Introduction
