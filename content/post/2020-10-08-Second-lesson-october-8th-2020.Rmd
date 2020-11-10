@@ -1,5 +1,5 @@
 ---
-title: Second Lesson October 8th 2020
+title: "Second Lesson October 8th 2020"
 author: IJ
 date: '2020-10-08'
 slug: second-lesson-october-8th-2020
