@@ -1,7 +1,7 @@
 ---
 title: "Sixth Lesson November 12th 2020"
 author: IJ
-date: '2020-10-22'
+date: '2020-11-12'
 slug: sixth-lesson
 categories:
   - Lesson
