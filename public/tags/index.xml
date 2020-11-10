@@ -5,7 +5,17 @@
     <link>https://sabd-smartanalytics.netlify.app/tags/</link>
     <description>Recent content in Tags on Smart Analytics for Big Data</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language><atom:link href="https://sabd-smartanalytics.netlify.app/tags/index.xml" rel="self" type="application/rss+xml" />
+    <language>en-us</language>
+    <lastBuildDate>Tue, 10 Nov 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://sabd-smartanalytics.netlify.app/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Lesson</title>
+      <link>https://sabd-smartanalytics.netlify.app/tags/lesson/</link>
+      <pubDate>Tue, 10 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://sabd-smartanalytics.netlify.app/tags/lesson/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>plot</title>
       <link>https://sabd-smartanalytics.netlify.app/tags/plot/</link>

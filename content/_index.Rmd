@@ -15,9 +15,9 @@ nocite: |
 ## What's New
 
 - [test Lesson](../post/2020-11-10-test-post)
-- `09/11/2020`: [Sixth Lesson](../post/2020-11-12-end-post)
+- `09/11/2020`: [Sixth Lesson](../post/2020-11-10-lesson-6)
 - `03/11/2020`: 
-  + Thursday 05/11/2020 [Fifth Lesson](../post/fifth-lesson)
+  + Thursday 05/11/2020 [Fifth Lesson](../post/2020-11-10-lesson-1)
   + New planning update [Lessons Planning](#Lessons-planning)
 - Planning update ! [Lessons Planning](#Lessons-planning)
 - `16/10/2020`: Recordings of the lessons are [here](https://drive.google.com/drive/folders/133lYBiC2gB-L66lwU7t4ec5NwS96k2aj)

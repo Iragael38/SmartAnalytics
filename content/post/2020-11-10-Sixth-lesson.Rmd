@@ -1,8 +1,8 @@
 ---
 title: Sixth Lesson
 author: IJ
-date: '2020-11-12'
-slug: []
+date: '2020-11-10'
+slug: sixth-lesson
 categories:
   - Lesson
 tags:

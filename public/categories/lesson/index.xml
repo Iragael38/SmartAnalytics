@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Smart Analytics for Big Data</title>
-    <link>https://sabd-smartanalytics.netlify.app/post/</link>
-    <description>Recent content in Posts on Smart Analytics for Big Data</description>
+    <title>Lesson on Smart Analytics for Big Data</title>
+    <link>https://sabd-smartanalytics.netlify.app/categories/lesson/</link>
+    <description>Recent content in Lesson on Smart Analytics for Big Data</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 10 Nov 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://sabd-smartanalytics.netlify.app/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 10 Nov 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://sabd-smartanalytics.netlify.app/categories/lesson/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Lesson 6</title>
       <link>https://sabd-smartanalytics.netlify.app/post/2020-11-10-lesson-6/</link>
@@ -35,15 +35,6 @@ Zoom meetingFrom 09:30 to 12:30
 following this link: (https://grenoble-inp.zoom.us/j/96355699624)(and, if needed, install the zoom app).
 or you can start the Zoom app with the following informationmeeting ID: 963 5569 9624Password: 022868Collaborative work:Slack channel
 Class platformsGoogleClassroom page is: (https://classroom.</description>
-    </item>
-    
-    <item>
-      <title>test post</title>
-      <link>https://sabd-smartanalytics.netlify.app/post/2020-11-10-test-post/</link>
-      <pubDate>Tue, 10 Nov 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://sabd-smartanalytics.netlify.app/post/2020-11-10-test-post/</guid>
-      <description>blabla</description>
     </item>
     
   </channel>
