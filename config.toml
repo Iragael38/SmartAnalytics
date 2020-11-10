@@ -34,7 +34,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_cache$", "\\.knit\\.md$", "\\.utf8\
 
 [[menu.main]]
     name = "Lessons"
-    url = "/lessons-list/"
+    url = "/lessons-index/"
     weight = 3
 
     

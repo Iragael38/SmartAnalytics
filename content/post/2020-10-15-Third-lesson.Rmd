@@ -1,0 +1,51 @@
+---
+title: "Third Lesson"
+author: IJ
+date: '2020-10-15'
+slug: third-lesson
+categories:
+  - Lesson
+tags:
+  - Lesson
+description: ''
+thumbnail: ''
+link-citations: yes
+biblio-style: apalike
+bibliography: [../lessons_list/data/biblio_hdr_v2.bib, ../lessons_list/data/Liste_Publi3.bib, ../lessons_list/data/biblio_SABD.bib]
+---
+
+# Third Lesson
+
+Welcome to the third lesson - 15/10/2020 **9:30** - 12:30
+
+**Big Data for Industry 4.0**
+
+Teacher: Christophe Bobineau
+
+
+## Zoom meeting
+
+We will use Zoom.
+
+You can connect to zoom:
+
+1. following this link: (https://grenoble-inp.zoom.us/j/91314622354?pwd=SkYyNVVKaS9OdGQxSTJaeUFpSU5yUT09)
+
+(and, if needed, install the zoom app).
+
+1. or you can start the Zoom app with the following information
+  + meeting ID: 913 1462 2354
+  + Password: 437904
+
+
+## Collaborative work:
+
+[Slack channel](https://join.slack.com/t/grenobleinpgn-eu88686/shared_invite/zt-hfx5moad-TVv1JsL6coPWuLbJZe~v3g)
+
+
+## Class platforms
+
+- GoogleClassroom page is: (https://classroom.google.com/c/MTQ1Mjk3OTUzMTE3?cjc=wb6xksu)
+
+
+

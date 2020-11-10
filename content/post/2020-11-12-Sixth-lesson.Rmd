@@ -1,0 +1,49 @@
+---
+title: "Sixth Lesson November 12th 2020"
+author: IJ
+date: '2020-10-22'
+slug: sixth-lesson
+categories:
+  - Lesson
+tags:
+  - Lesson
+description: ''
+thumbnail: ''
+link-citations: yes
+biblio-style: apalike
+bibliography: [../lessons_list/data/biblio_hdr_v2.bib, ../lessons_list/data/Liste_Publi3.bib, ../lessons_list/data/biblio_SABD.bib]
+---
+
+# Sixth Lesson
+
+Welcome to the Sixth lesson - 12/11/2020 **9:30** - 12:30
+
+**Big Data for Industry 4.0**
+
+Teachers: Genoveva Vargas Solar 
+
+## Zoom meeting
+
+
+**From 09:30 to 12:30**
+
+1. following this link: (https://grenoble-inp.zoom.us/j/96355699624)
+
+(and, if needed, install the zoom app).
+
+1. or you can start the Zoom app with the following information
+  + meeting ID: 963 5569 9624
+  + Password: 022868
+
+
+## Collaborative work:
+
+[Slack channel](https://join.slack.com/t/grenobleinpgn-eu88686/shared_invite/zt-hfx5moad-TVv1JsL6coPWuLbJZe~v3g)
+
+
+## Class platforms
+
+- GoogleClassroom page is: (https://classroom.google.com/c/MTQ1Mjk3OTUzMTE3?cjc=wb6xksu)
+
+
+
