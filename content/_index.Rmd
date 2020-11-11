@@ -14,7 +14,6 @@ nocite: |
 
 ## What's New
 
-- [test Lesson](../post/2020-11-10-test-post)
 - `09/11/2020`: [Sixth Lesson](../post/2020-11-10-lesson-6)
 - `03/11/2020`: 
   + Thursday 05/11/2020 [Fifth Lesson](../post/2020-11-10-lesson-1)
