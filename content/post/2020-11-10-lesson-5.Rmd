@@ -1,5 +1,5 @@
 ---
-title: Lesson 6
+title: Lesson 5
 author: ''
 date: '2020-11-10'
 slug: []
@@ -14,25 +14,38 @@ biblio-style: apalike
 bibliography: [../lessons_list/data/biblio_hdr_v2.bib, ../lessons_list/data/Liste_Publi3.bib, ../lessons_list/data/biblio_SABD.bib]
 ---
 
+# Fifth Lesson
 
-Welcome to the Sixth lesson - 12/11/2020 **9:30** - 12:30
+Welcome to the Fifth lesson - 05/11/2020 **8:00** - 12:30
 
 **Big Data for Industry 4.0**
 
-Teachers: Genoveva Vargas Solar 
+Teachers: Genoveva Vargas Solar & Christophe Bobineau
+
 
 ## Zoom meeting
 
+**From 8:00 to 09:30**
 
-**From 09:30 to 12:30**
+Topic: Smart Analytics for Big Data - Fifth Lesson - Hands on MongoDB
 
-1. following this link: (https://grenoble-inp.zoom.us/j/96355699624)
+1. following this link: (https://grenoble-inp.zoom.us/j/93371240624?pwd=QkN0ZXA5aHQ1dlpndVgwdkRFQ2RHQT09)
 
 (and, if needed, install the zoom app).
 
 1. or you can start the Zoom app with the following information
-  + meeting ID: 963 5569 9624
-  + Password: 022868
+  + meeting ID:  933 7124 0624
+  + Password:  503925
+  
+**From 09:30 to 12:30**
+
+1. following this link: (https://grenoble-inp.zoom.us/j/99857368827)
+
+(and, if needed, install the zoom app).
+
+1. or you can start the Zoom app with the following information
+  + meeting ID: 998 5736 8827
+  + Password: 685010
 
 
 ## Collaborative work:
@@ -43,6 +56,4 @@ Teachers: Genoveva Vargas Solar
 ## Class platforms
 
 - GoogleClassroom page is: (https://classroom.google.com/c/MTQ1Mjk3OTUzMTE3?cjc=wb6xksu)
-
-
 

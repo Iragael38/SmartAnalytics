@@ -1,0 +1,39 @@
+---
+title: Lesson 8
+author: ''
+date: '2020-11-10'
+slug: []
+categories:
+  - Lesson
+tags:
+  - Lesson
+description: ''
+thumbnail: ''
+---
+
+# Eighth Lesson
+
+Welcome to the Eighth lesson - 26/11/2020 **13:30 - 18:00**
+
+**Big Data for Industry 4.0**
+
+Teachers: B Agard
+
+## Zoom meeting
+
+**From 13:30 - 18:00**
+
+1. following this link: (https://us02web.zoom.us/j/85033520907?pwd=Z1hYNDNqOXJ2WWs5SmwzRlJ6VlJ3QT09)
+
+(and, if needed, install the zoom app).
+
+1. or you can start the Zoom app with the following information
+  + meeting ID: 850 3352 0907
+  + Password: 856705
+
+
+## Collaborative work:
+
+On [Caseine](https://moodle.caseine.org/course/view.php?id=644&section=0#section-11)
+
+
