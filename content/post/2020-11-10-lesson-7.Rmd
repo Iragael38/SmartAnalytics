@@ -36,13 +36,17 @@ Teacher: I Joly
 
 ## Material
 
-- **Lesson Material**[Slides](/Data-pdf/SABD_Project_2020_V2.pdf)
+- **Lesson Material**: [Slides](/Data-pdf/lesson_7.1_Logistic_Reg.pdf)
 - files used in the lesson 
   + [tab151.txt](/Data-pdf/logistic/Tab151.txt)
   + [oddsratio.R](/Data-pdf/logistic/oddsratio.R)
 - Exercise: **Death Penalty**
   + **Statement** in Rmd format: [lesson_7.2_Allison_Penalty_STATEMENT_SABD.Rmd](/Data-pdf/lesson_7.2_Allison_Penalty_STATEMENT_SABD.Rmd)
   + **Data**: [02_Penalty.txt](/Data-pdf/logistic/02_Penalty.txt)
+- Exercise: **Titanic**
+  + **Statement** in Rmd format: [2020-11-16_02-5_Titanic_Case_Logistic_Fit.Rmd](/Data-pdf/2020-11-16_02-5_Titanic_Case_Logistic_Fit.Rmd)
+  + **Data**: [titanic4.RData](/Data-pdf/logistic/titanic4.RData)
+
 
 ***
 
@@ -61,6 +65,11 @@ Teacher: I Joly
 
 
 ## Project page:
+
+### Material
+
+- **Project Statement**: [pdf](/Data-pdf/SABD_Project_2020_V2.pdf)
+
 
 All documents, data, etc are on [Caseine](https://moodle.caseine.org/course/view.php?id=644&sectionid=5661)
 

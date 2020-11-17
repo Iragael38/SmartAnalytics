@@ -116,6 +116,10 @@
   </url>
   
   <url>
+    <loc>https://sabd-smartanalytics.netlify.app/lessons-index/</loc>
+  </url>
+  
+  <url>
     <loc>https://sabd-smartanalytics.netlify.app/lessons_list/</loc>
   </url>
   
@@ -141,10 +145,6 @@
   
   <url>
     <loc>https://sabd-smartanalytics.netlify.app/tags/regression/</loc>
-  </url>
-  
-  <url>
-    <loc>https://sabd-smartanalytics.netlify.app/lessons-index/</loc>
   </url>
   
   <url>

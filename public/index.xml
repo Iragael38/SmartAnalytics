@@ -133,7 +133,7 @@ or you can start the Zoom app with the following informationmeeting ID: 963 5
 9:30 - 12:30: Regression Modeling: Categorical Outcome13:30 - 15:00: Project: Mobility analysisRegression Modelling: Categorical OutcomeTeacher: I Joly
 Zoom meetingFrom 09:30 to 12:30
 following this link: (https://grenoble-inp.zoom.us/j/93438334161?pwd=dC9EemxIWmJlY3dqa2d3OWZpcHZ2QT09)(and, if needed, install the zoom app).
-or you can start the Zoom app with the following informationmeeting ID: 934 3833 4161Password: SABD2020MaterialLesson MaterialSlidesfiles used in the lessontab151.</description>
+or you can start the Zoom app with the following informationmeeting ID: 934 3833 4161Password: SABD2020MaterialLesson Material: Slidesfiles used in the lessontab151.</description>
     </item>
     
     <item>
@@ -246,6 +246,19 @@ you will explore one of the following linksyou will search for the data type, q
     </item>
     
     <item>
+      <title>Lessons index</title>
+      <link>https://sabd-smartanalytics.netlify.app/lessons-index/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://sabd-smartanalytics.netlify.app/lessons-index/</guid>
+      <description>This is the website of the Lesson Smart Analytics for Big Data taught at Grenoble INP Industrial Engineering and Management School &amp;amp; UGA.
+Lessons list in reverse order
+Seventh Lesson - 19/11/2020 - 9:30 - 12:30 and 13:30 - 15:00Material for the Seventh Lesson
+Sixth Lesson - 12/11/2020 - 9:30 - 12:30Material for the Sixth Lesson
+Fifth Lesson - 05/11/2020 - 8:00 - 12:30Material for the Fifth Lesson</description>
+    </item>
+    
+    <item>
       <title>Other Lessons list</title>
       <link>https://sabd-smartanalytics.netlify.app/otherlessons/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -266,19 +279,6 @@ Smart Analytics for Big Data</description>
       <description>Softwares InstallationR and RStudioLateX edition: MikteXIntroduction to R and StatisticsIntroductory Statistics with R, Peter Dalgaard, Caseine Link
 Introduction to Statistical Learning with Applications in R, Gareth James, Daniela Witten, Trevor Hastie and Robert, Tibshirani website
 Introduction to RMarkdownRMarkdown Cheatsheet pdfR Markdown: The Definitive Guide, Yihui Xie, J. J. Allaire, Garrett Grolemund (access the bookdown)[https://bookdown.org/yihui/rmarkdown/]</description>
-    </item>
-    
-    <item>
-      <title>Smart Analytics for Big Data</title>
-      <link>https://sabd-smartanalytics.netlify.app/lessons-index/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://sabd-smartanalytics.netlify.app/lessons-index/</guid>
-      <description>Lessons indexThis is the website of the Lesson Smart Analytics for Big Data taught at Grenoble INP Industrial Engineering and Management School &amp;amp; UGA.
-First Lesson - 01/10/2020 - 9:30 - 12:30Welcome page of First Lesson
-Second Lesson - 08/10/2020 - 8:00 - 12:30Material for the Second Lesson
-Third Lesson - 15/10/2020 - 9:30 - 12:30Material for the Third Lesson
-Fourth Lesson - 22/10/2020 - 8:00 - 12:30Material for the Fourth Lesson</description>
     </item>
     
     <item>

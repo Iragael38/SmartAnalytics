@@ -1,6 +1,5 @@
 ---
-title: "Smart Analytics for Big Data"
-subtitle: "Lessons Index"
+title: "Lessons index"
 author: "Iragaël Joly"
 date: "Automn 2020"
 categories: ["R"]
@@ -8,43 +7,45 @@ tags: ["R Markdown", "plot", "regression"]
 authorbox: false
 ---
 
-# Lessons index
 
 This is the website of the Lesson **Smart Analytics for Big Data** taught at Grenoble INP Industrial Engineering and Management School & UGA.
 
-## First Lesson - 01/10/2020 - 9:30 - 12:30
 
-Welcome page of [First Lesson](../post/2020-11-10-lesson-1)
+Lessons list **in reverse order**
 
-## Second Lesson - 08/10/2020 - 8:00 - 12:30
+## Seventh Lesson - 19/11/2020 - 9:30 - 12:30 **and 13:30 - 15:00**
 
-Material for the [Second Lesson](../post/2020-11-10-lesson-2)
-
-## Third Lesson - 15/10/2020 - 9:30 - 12:30
-
-Material for the [Third Lesson](../post/2020-11-10-lesson-3)
-
-## Fourth Lesson - 22/10/2020 - 8:00 - 12:30
-
-Material for the [Fourth Lesson](../post/2020-11-10-lesson-4)
-
-
-## Fifth Lesson - 05/11/2020 - 8:00 - 12:30
-
-Material for the [Fifth Lesson](../post/2020-11-10-lesson-5)
-
+Material for the [Seventh Lesson](../post/2020-11-10-lesson-7)
 
 ## Sixth Lesson - 12/11/2020 - 9:30 - 12:30
 
 Material for the [Sixth Lesson](../post/2020-11-10-lesson-6)
 
+## Fifth Lesson - 05/11/2020 - 8:00 - 12:30
+
+Material for the [Fifth Lesson](../post/2020-11-10-lesson-5)
+
+## Fourth Lesson - 22/10/2020 - 8:00 - 12:30
+
+Material for the [Fourth Lesson](../post/2020-11-10-lesson-4)
+
+## Third Lesson - 15/10/2020 - 9:30 - 12:30
+
+Material for the [Third Lesson](../post/2020-11-10-lesson-3)
+
+## Second Lesson - 08/10/2020 - 8:00 - 12:30
+
+Material for the [Second Lesson](../post/2020-11-10-lesson-2)
+
+## First Lesson - 01/10/2020 - 9:30 - 12:30
+
+Welcome page of [First Lesson](../post/2020-11-10-lesson-1)
+
 ***
 
 **to come...**
 
-## Seventh Lesson - 19/11/2020 - 9:30 - 12:30 **and 13:30 - 15:00**
 
-Material for the [Seventh Lesson](../post/2020-11-10-lesson-7)
 
 ## Eighth Lesson - 26/11/2020 - 13:30 - 18:00
 
