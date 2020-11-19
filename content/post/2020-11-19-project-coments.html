@@ -1,0 +1,35 @@
+---
+title: Project Coments
+author: ''
+date: '2020-11-19'
+slug: []
+categories: []
+tags: []
+description: ''
+thumbnail: ''
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
+
+
+<p>Here you find summary of the remakrs, questions/answers about the project</p>
+<div id="first-project-session---19-nov." class="section level3">
+<h3>First project session - 19 nov.</h3>
+<p>Objectives of the 1rst project session was to be able to create a short report in pdf or html using the data of the project</p>
+<p>Some advises discussed during the session (19/11)</p>
+<p>With the Rmd file try to reproduce the statement :</p>
+<p>Be sure that you have miktex installed on your pc if you wnt pdf output. The doc with maps can be knit in html format - but we prefere-want pdf format for the report !!</p>
+<p>After extracting the 2 archives in the same place / folder. You will have data and rmd file in the folder + FOND_MAP and bilbio subfolders</p>
+<ul>
+<li><p>First : Install packages -&gt; search for library() in the rmd file and install missing packages on your RStudio session</p></li>
+<li><p>Second: Delete part One from line 184 - 508 : the text use some calculus from the pre-processing chunk based on original data that you cannot run</p></li>
+<li><p>Third : For the GIS part</p>
+<ol style="list-style-type: decimal">
+<li><p>Correction in the ogr() function the layer should be modified from ‘newESRI’ to layer=“Sectir2010”</p></li>
+<li><p>turn each chunck of the gis part to ‘eval=FALSE’ or delete all chuncks related to map generation =&gt; hence you can knit the document without the map, just to be sure you can knit the doc with the data</p></li>
+<li><p>turn eval=TRUE each chunck one by one to be sure that every step is ok and controled</p></li>
+</ol></li>
+</ul>
+</div>

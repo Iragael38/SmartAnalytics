@@ -1,0 +1,37 @@
+---
+title: Project Coments
+author: ''
+date: '2020-11-19'
+slug: []
+categories: []
+tags: []
+description: ''
+thumbnail: ''
+---
+
+
+Here you find summary of the remakrs, questions/answers about the project
+
+### First project session - 19 nov.
+
+Objectives of the 1rst project session was to be able to create a short report in pdf or html using the data of the project
+
+
+Some advises discussed during the session (19/11)
+
+With the Rmd file try to reproduce the statement :
+
+Be sure that you have miktex installed on your pc if you wnt pdf output. The doc with maps can be knit in html format - but we prefere-want pdf format for the report !!
+
+After extracting the 2 archives in the same place / folder. You will have data and rmd file in the folder + FOND_MAP and bilbio subfolders
+
+- First : Install packages -> search for library() in the rmd file and install missing packages on your RStudio session
+- Second:  Delete part One from line 184 - 508 : the text use some calculus from the pre-processing chunk based on original data that you cannot run
+
+- Third : For the GIS part 
+
+  1) Correction in the ogr() function the layer should be modified from 'newESRI' to layer="Sectir2010"
+
+  2)  turn each chunck of the gis part to 'eval=FALSE' or delete all chuncks related to map generation => hence you can knit the document without the map, just to be sure you can knit the doc with the data
+
+   3) turn eval=TRUE each chunck one by one to be sure that every step is ok and controled

@@ -14,6 +14,11 @@ nocite: |
 
 ## What's New
 
+- `19/11/2020`:
+   + **Project launch**: you find [here](../post/2020-11-19-project-coments) some comments on this first project session
+   + **Office hours**: Bruno and Iragaël can be contacted to **take appointment** for meeting **1/12 afternoon and 16/12 afternoon**. All questions are accepted (project, lessons, etc) !
+   + **Forum**: On caseine, a new section [forum](https://moodle.caseine.org/mod/forum/view.php?id=33506) has been added to gather all your questions about the project. Everyone can ask and answer
+
 - `17/11/2020`: [Seventh Lesson](../post/2020-11-10-lesson-7)
 - `09/11/2020`: [Sixth Lesson](../post/2020-11-10-lesson-6)
 - `03/11/2020`: 

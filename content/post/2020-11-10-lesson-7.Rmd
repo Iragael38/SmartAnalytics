@@ -41,10 +41,10 @@ Teacher: I Joly
   + [tab151.txt](/Data-pdf/logistic/Tab151.txt)
   + [oddsratio.R](/Data-pdf/logistic/oddsratio.R)
 - Exercise: **Death Penalty**
-  + **Statement** in Rmd format: [lesson_7.2_Allison_Penalty_STATEMENT_SABD.Rmd](/Data-pdf/lesson_7.2_Allison_Penalty_STATEMENT_SABD.Rmd)
+  + **Statement** in Rmd format: [lesson_7.2_Allison_Penalty_STATEMENT_SABD.Rmd](/Data-pdf/logistic/lesson_7.2_Allison_Penalty_STATEMENT_SABD.Rmd)
   + **Data**: [02_Penalty.txt](/Data-pdf/logistic/02_Penalty.txt)
 - Exercise: **Titanic**
-  + **Statement** in Rmd format: [2020-11-16_02-5_Titanic_Case_Logistic_Fit.Rmd](/Data-pdf/2020-11-16_02-5_Titanic_Case_Logistic_Fit.Rmd)
+  + **Statement** in Rmd format: [2020-11-16_02-5_Titanic_Case_Logistic_Fit.Rmd](/Data-pdf/logistic/2020-11-16_02-5_Titanic_Case_Logistic_Fit.Rmd)
   + **Data**: [titanic4.RData](/Data-pdf/logistic/titanic4.RData)
 
 
