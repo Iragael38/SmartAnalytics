@@ -35,7 +35,6 @@ library(gmodels)  # for xtable
 library(DescTools)  # for VIF multicolineartity
 library(arm)  # for bayesian estimation
 library(knitr)   # for outpout in kable
-library(arm)  # for bayesian estimation
 library(ResourceSelection)  # FOR hosmer&Lemeshow test
 
 # dataframe has to be present in the rmd folder

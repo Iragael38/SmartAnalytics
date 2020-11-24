@@ -6,7 +6,20 @@
     <description>Recent content on Smart Analytics for Big Data</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 10 Nov 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://sabd-smartanalytics.netlify.app/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 19 Nov 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://sabd-smartanalytics.netlify.app/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Project Coments</title>
+      <link>https://sabd-smartanalytics.netlify.app/post/2020-11-19-project-coments/</link>
+      <pubDate>Thu, 19 Nov 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://sabd-smartanalytics.netlify.app/post/2020-11-19-project-coments/</guid>
+      <description>Here you find summary of the remakrs, questions/answers about the project
+First project session - 19 nov.Objectives of the 1rst project session was to be able to create a short report in pdf or html using the data of the project
+Some advises discussed during the session (19/11)
+With the Rmd file try to reproduce the statement :
+Be sure that you have miktex installed on your pc if you wnt pdf output.</description>
+    </item>
+    
     <item>
       <title>Lesson 1</title>
       <link>https://sabd-smartanalytics.netlify.app/post/2020-11-10-lesson-1/</link>
