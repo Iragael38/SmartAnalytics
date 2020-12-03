@@ -14,7 +14,8 @@ nocite: |
 
 ## What's New
 
-- `03/12/2020`: [Nineth Lesson](../post/2020-11-10-lesson-9)
+- `03/12/2020`: December 10th [Tenth Lesson](../post/2020-11-10-lesson-10)
+- `03/12/2020`: December 3rd [Nineth Lesson](../post/2020-11-10-lesson-9)
 - `24/11/2020`: [Eighth Lesson](../post/2020-11-10-lesson-8)
 - `19/11/2020`:
    + **Project launch**: you find [here](../post/2020-11-19-project-coments) some comments on this first project session
