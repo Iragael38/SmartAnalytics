@@ -32,6 +32,6 @@ Teachers: B Agard
   + Password: 287243
 
 
-## Collaborative work:
+## Materials:
 
 On [Caseine](https://moodle.caseine.org/course/view.php?id=644&section=0#section-11)
