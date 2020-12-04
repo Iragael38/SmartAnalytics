@@ -14,6 +14,12 @@ nocite: |
 
 ## What's New
 
+
+- `04/12/2020`: Help to build slides with RMarkdown: [post](../post/2020-12-01-dynamic-documents-with-rmarkdown)
+- `04/12/2020`: Correction of
+    + [Exercise Penalty](../post/2020-12-03-exercice-penalty-allison)  [Rmd](/Data-pdf/Logistic/2020-12-03-exercice-penalty-allison.Rmd)   [Data](/Data-pdf/Logistic/02_Penalty.txt)
+    + [Exercise Binary regression with crossvalidation](../post/2020-12-03-binary-regression-with-cross-validation)  [Rmd](/Data-pdf/Logistic/2020-12-03-binary-regression-with-cross-validation.Rmd)   [Data](/Data-pdf/Logistic/adult.csv)
+    + [Exercise Titanic](../post/2020-12-03-exercice-penalty-allison) [Rmd](/Data-pdf/Logistic/2020-11-16_02-5_Titanic_Case_Logistic_Fit.Rmd)    [Data](/Data-pdf/Logistic/titanic4.RData)
 - `03/12/2020`: December 10th [Tenth Lesson](../post/2020-11-10-lesson-10)
 - `03/12/2020`: December 3rd [Nineth Lesson](../post/2020-11-10-lesson-9)
 - `24/11/2020`: [Eighth Lesson](../post/2020-11-10-lesson-8)

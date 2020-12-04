@@ -6,7 +6,17 @@
     <description>Recent content on Smart Analytics for Big Data</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 19 Nov 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://sabd-smartanalytics.netlify.app/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 01 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://sabd-smartanalytics.netlify.app/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Dynamic Documents with RMarkdown</title>
+      <link>https://sabd-smartanalytics.netlify.app/post/2020-12-01-dynamic-documents-with-rmarkdown/</link>
+      <pubDate>Tue, 01 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://sabd-smartanalytics.netlify.app/post/2020-12-01-dynamic-documents-with-rmarkdown/</guid>
+      <description>You will find on this post:
+Access to a survey of commands useful in dynamic documents generation with RStudio (these commands are compatible with html, pdf, presentation, … output formats)Example of pdf Beamer slides generated with RStudio : pdfTo generate these slides locally, you can download and extract this archive zipDescription of the archive and explanation can be found in the following sectionsProject StructureProduction of the slides is managed by a master Rmd file.</description>
+    </item>
+    
     <item>
       <title>Project Coments</title>
       <link>https://sabd-smartanalytics.netlify.app/post/2020-11-19-project-coments/</link>
@@ -44,7 +54,7 @@ Big Data for Industry 4.0
 Teachers: B Agard
 Zoom meetingFrom 13:30 - 18:00
 following this link: (https://us02web.zoom.us/j/89030085456?pwd=TmNwUnJqMTZmODdLQ1pFS2sxQlZKQT09)(and, if needed, install the zoom app).
-or you can start the Zoom app with the following informationmeeting ID: 890 3008 5456Password: 287243Collaborative work:On Caseine
+or you can start the Zoom app with the following informationmeeting ID: 890 3008 5456Password: 287243Materials:On Caseine
 </description>
     </item>
     
@@ -59,7 +69,7 @@ Big Data for Industry 4.0
 Teachers: B Agard
 Zoom meetingFrom 13:30 - 18:00
 following this link: (https://us02web.zoom.us/j/89030085456?pwd=TmNwUnJqMTZmODdLQ1pFS2sxQlZKQT09)(and, if needed, install the zoom app).
-or you can start the Zoom app with the following informationmeeting ID: 890 3008 5456Password: 287243Collaborative work:On Caseine
+or you can start the Zoom app with the following informationmeeting ID: 890 3008 5456Password: 287243Materials:On Caseine
 </description>
     </item>
     
@@ -160,7 +170,7 @@ Big Data for Industry 4.0
 Teachers: B Agard
 Zoom meetingFrom 13:30 - 18:00
 following this link: (https://us02web.zoom.us/j/85033520907?pwd=Z1hYNDNqOXJ2WWs5SmwzRlJ6VlJ3QT09)(and, if needed, install the zoom app).
-or you can start the Zoom app with the following informationmeeting ID: 850 3352 0907Password: 856705Collaborative work:On Caseine
+or you can start the Zoom app with the following informationmeeting ID: 850 3352 0907Password: 856705Materials:On Caseine
 </description>
     </item>
     
@@ -175,7 +185,7 @@ Big Data for Industry 4.0
 Teachers: B Agard
 Zoom meetingFrom 13:30 - 18:00
 following this link: (https://us02web.zoom.us/j/89030085456?pwd=TmNwUnJqMTZmODdLQ1pFS2sxQlZKQT09)(and, if needed, install the zoom app).
-or you can start the Zoom app with the following informationmeeting ID: 890 3008 5456Password: 287243Collaborative work:On Caseine
+or you can start the Zoom app with the following informationmeeting ID: 890 3008 5456Password: 287243Materials:On Caseine
 </description>
     </item>
     
@@ -266,9 +276,9 @@ you will explore one of the following linksyou will search for the data type, q
       <guid>https://sabd-smartanalytics.netlify.app/lessons-index/</guid>
       <description>This is the website of the Lesson Smart Analytics for Big Data taught at Grenoble INP Industrial Engineering and Management School &amp;amp; UGA.
 Lessons list in reverse order
-Seventh Lesson - 19/11/2020 - 9:30 - 12:30 and 13:30 - 15:00Material for the Seventh Lesson
-Sixth Lesson - 12/11/2020 - 9:30 - 12:30Material for the Sixth Lesson
-Fifth Lesson - 05/11/2020 - 8:00 - 12:30Material for the Fifth Lesson</description>
+Tenth Lesson - 10/12/2020 - 13:30 - 18:00Material for the Tenth Lesson
+Ninth Lesson - 03/12/2020 - 13:30 - 18:00Material for the Ninth Lesson
+Eighth Lesson - 26/11/2020 - 13:30 - 18:00Material for the Eighth Lesson</description>
     </item>
     
     <item>

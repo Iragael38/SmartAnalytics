@@ -1,0 +1,757 @@
+---
+title: "Exercise Penalty ALLISON"
+author: "I. Joly"
+date:  "2020-12-04"
+fontsize: 11pt
+link-citations: yes
+biblio-style: apalike
+bibliography: ["data/02_biblio.bib"]
+categories: []
+tags: []
+description: ''
+thumbnail: ''
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
+
+
+<div id="exercise-inspired-from-paul-allison-logistic-regression-using-sas-2nd-ed." class="section level1">
+<h1>EXERCISE inspired from Paul Allison : logistic regression using SAS, 2nd Ed.</h1>
+<p>In this exercise particular attention is given to misinterpretations. For this reason, the subject matter is deliberately heavy and sensitive, forcing precautions to be taken before conclusions are drawn.</p>
+<p>The data are described in <span class="citation"><a href="#ref-allison2010survival" role="doc-biblioref">Allison</a> (<a href="#ref-allison2010survival" role="doc-biblioref">2010</a>)</span></p>
+<blockquote>
+<p>Data set consists of 147 death penalty cases in the state of New Jersey.
+The defendant was convicted of first-degree murder with a recommendation by the prosecutor that a death sentence be imposed.</p>
+</blockquote>
+<blockquote>
+<p>Then a penalty trial was conducted to determine whether the defendant would receive a sentence of death or life imprisonment.</p>
+</blockquote>
+<blockquote>
+<p>Our dependent variable DEATH is coded 1 for a death sentence, and 0 for a life sentence.</p>
+</blockquote>
+<blockquote>
+<p>The aim is to determine how this outcome was influenced by various characteristics of the defendant and the crime.</p>
+</blockquote>
+<p>The objective here is to study the quality or the equity of the judgments rendered and in particular the severity of judgments according to ethnicity.</p>
+<div id="packages-and-data-loading" class="section level2">
+<h2>Packages and data loading</h2>
+<pre class="r"><code>library(psych)  # for summary stat
+library(gmodels)  # for xtable
+library(DescTools)  # for VIF multicolineartity
+library(arm)  # for bayesian estimation
+library(knitr)   # for outpout in kable
+library(arm)  # for bayesian estimation
+library(ResourceSelection)  # FOR hosmer&amp;Lemeshow test
+
+# dataframe has to be present in the rmd folder
+DF &lt;- read.csv(file = &quot;data/02_Penalty.txt&quot;, sep = &quot; &quot;, dec = &#39;.&#39;, header = T)</code></pre>
+<p>Variables are:</p>
+<ul>
+<li><code>DEATH</code> : 1 for death sentence / 0 for a life sentence</li>
+<li><code>BLACKD</code>: 1 if the defendant was black, otherwise 0</li>
+<li><code>WHITVIC</code>: 1 if the victim was white, otherwise 0</li>
+<li><code>SERIOUS</code>: a rating of the seriousness of the crime, as evaluated by a panel of four to six judges. (average rankings between 1(least serious)-15(most serious))<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a></li>
+</ul>
+<ul>
+<li><code>CULP</code>: 5 denotes high culpability and 1 denotes low culpability, based on aggravating and mitigating circumstances)</li>
+<li><code>SERIOUS2</code>: a 5 points rating scale of the seriousness of the crime</li>
+</ul>
+<div id="descriptive-analysis" class="section level3">
+<h3>Descriptive analysis</h3>
+<pre class="r"><code>psych::describe(DF)</code></pre>
+<pre><code>##          vars   n mean   sd median trimmed  mad min  max range  skew kurtosis
+## death       1 147 0.34 0.48    0.0    0.30 0.00 0.0  1.0   1.0  0.67    -1.56
+## blackd      2 147 0.50 0.50    0.0    0.50 0.00 0.0  1.0   1.0  0.01    -2.01
+## whitvic     3 147 0.60 0.49    1.0    0.62 0.00 0.0  1.0   1.0 -0.40    -1.85
+## serious     4 147 7.88 3.19    8.0    7.91 3.56 1.4 13.8  12.4 -0.08    -0.83
+## culp        5 147 2.30 1.54    2.0    2.13 1.48 1.0  5.0   4.0  0.76    -1.02
+## serious2    6 147 3.35 0.94    3.4    3.39 0.89 1.0  5.0   4.0 -0.42    -0.43
+##            se
+## death    0.04
+## blackd   0.04
+## whitvic  0.04
+## serious  0.26
+## culp     0.13
+## serious2 0.08</code></pre>
+<p>We note that the variables do not contain unexpected values (negative or out of bounds). For binary qualitative variables (dummies variables), the averages give proportions of 1 (for <code>death</code>, <code>blackd</code>, etc.).</p>
+<p>The proportion of cases according to skin colour is a priori the same.</p>
+<p>The cross-table is :</p>
+<pre class="r"><code># Objectives: model death
+CrossTable(DF$death, DF$blackd) </code></pre>
+<pre><code>## 
+##  
+##    Cell Contents
+## |-------------------------|
+## |                       N |
+## | Chi-square contribution |
+## |           N / Row Total |
+## |           N / Col Total |
+## |         N / Table Total |
+## |-------------------------|
+## 
+##  
+## Total Observations in Table:  147 
+## 
+##  
+##              | DF$blackd 
+##     DF$death |         0 |         1 | Row Total | 
+## -------------|-----------|-----------|-----------|
+##            0 |        52 |        45 |        97 | 
+##              |     0.206 |     0.209 |           | 
+##              |     0.536 |     0.464 |     0.660 | 
+##              |     0.703 |     0.616 |           | 
+##              |     0.354 |     0.306 |           | 
+## -------------|-----------|-----------|-----------|
+##            1 |        22 |        28 |        50 | 
+##              |     0.399 |     0.405 |           | 
+##              |     0.440 |     0.560 |     0.340 | 
+##              |     0.297 |     0.384 |           | 
+##              |     0.150 |     0.190 |           | 
+## -------------|-----------|-----------|-----------|
+## Column Total |        74 |        73 |       147 | 
+##              |     0.503 |     0.497 |           | 
+## -------------|-----------|-----------|-----------|
+## 
+## </code></pre>
+<p>There is a difference in the proportion of fatal sentences according to skin colour (44% versus 56%).</p>
+<p>Observation of the proportions indicate <span class="math inline">\(\frac{22}{52+22}=\)</span> 0.3 versus <span class="math inline">\(\frac{28}{45+28}=\)</span> 0.38. Indicating a higher proportion of the death sentence for black people.</p>
+<p>The ratio of the proportions of the fatal sentence according to skin colour is :<span class="math inline">\(\frac{\frac{28}{45+28} }{ \frac{22}{52+22}}=\)</span> 1.29</p>
+<p>The proportion of fatal sentences is 29% higher for black people.</p>
+<p>The odds are, for all cases: <span class="math inline">\(\frac{50}{97}=\)</span> -0.515; for blacks, <span class="math inline">\(\frac{28}{45}=\)</span> -0.622; for whites, <span class="math inline">\(\frac{22}{52}=\)</span> 0.423.</p>
+<p>The Odd Ratio indicates a higher odd of the fatal sentence 47.1 for black people.</p>
+<p>Note: The OR in a 2x2 table can be obtained for the cross product ratio of diagonals $(52 × 28)/(22 × 45) = $1.47.</p>
+</div>
+<div id="chi2-test" class="section level3">
+<h3><span class="math inline">\(\chi^2\)</span> test</h3>
+<p>Dependence can be tested: the idea that the independence between race and sentence is not respected.</p>
+<pre class="r"><code>tab &lt;- matrix(c(22,52,28,45),nrow=2,byrow=TRUE)
+prop.test(tab)</code></pre>
+<pre><code>## 
+##  2-sample test for equality of proportions with continuity correction
+## 
+## data:  tab
+## X-squared = 0.86437, df = 1, p-value = 0.3525
+## alternative hypothesis: two.sided
+## 95 percent confidence interval:
+##  -0.25247175  0.07994305
+## sample estimates:
+##    prop 1    prop 2 
+## 0.2972973 0.3835616</code></pre>
+<p>Independence is not rejected at the 10% risk threshold.</p>
+<p>The confidence interval of the OR is then:</p>
+<pre class="r"><code>C.test &lt;- prop.test(tab)
+odds &lt;- C.test$estimate/(1-C.test$estimate)
+names(odds) &lt;- c(&quot;Odd W&quot;, &quot;Odd B&quot;)
+# OR
+theta &lt;- odds[2]/odds[1]
+names(theta) &lt;- c(&quot;Odd Ratio&quot;)
+ASE &lt;- sqrt(sum(1/tab))
+# ASE
+ASE</code></pre>
+<pre><code>## [1] 0.350174</code></pre>
+<pre class="r"><code>logtheta.CI &lt;- log(theta) + c(-1,1)*1.96*ASE
+# IC log(theta)
+logtheta.CI</code></pre>
+<pre><code>## [1] -0.3005977  1.0720843</code></pre>
+<pre class="r"><code># IC(OR)
+exp(logtheta.CI)</code></pre>
+<pre><code>## [1] 0.7403755 2.9214624</code></pre>
+<pre class="r"><code># theta: OR
+theta</code></pre>
+<pre><code>## Odd Ratio 
+##  1.470707</code></pre>
+<p>The OR of the death sentence is 47% higher for black people, but given the confidence interval, this OR is insignificant.</p>
+</div>
+<div id="case-study-according-to-the-ethnicity-of-the-perpetrator-and-the-ethnicity-of-the-victim" class="section level3">
+<h3>Case study according to the ethnicity of the perpetrator and the ethnicity of the victim</h3>
+<pre class="r"><code>mytable &lt;- xtabs(~death+blackd+whitvic, data=DF)
+ftable(mytable) # print table</code></pre>
+<pre><code>##              whitvic  0  1
+## death blackd              
+## 0     0              13 39
+##       1              27 18
+## 1     0               3 19
+##       1              16 12</code></pre>
+<pre class="r"><code>summary(mytable) # chi-square test of indepedence </code></pre>
+<pre><code>## Call: xtabs(formula = ~death + blackd + whitvic, data = DF)
+## Number of cases in table: 147 
+## Number of factors: 3 
+## Test for independence of all factors:
+##  Chisq = 22.823, df = 4, p-value = 0.0001374</code></pre>
+<p>The sentence seems to be associated with ethnicity.</p>
+<p>A more detailed study must be carried out with an adapted regression.
+Here the logistic binomial regression.</p>
+</div>
+<div id="linear-regression---lpm" class="section level3">
+<h3>Linear regression - LPM</h3>
+<p>First of all, we can do a linear regression…</p>
+<pre class="r"><code>summary(OLS1 &lt;- lm(death ~ blackd + whitvic, data=DF))</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = death ~ blackd + whitvic, data = DF)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -0.4274 -0.3530 -0.3134  0.6470  0.7611 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)   
+## (Intercept)  0.23893    0.08747   2.731  0.00709 **
+## blackd       0.11403    0.08480   1.345  0.18086   
+## whitvic      0.07447    0.08650   0.861  0.39071   
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.4755 on 144 degrees of freedom
+## Multiple R-squared:  0.01337,    Adjusted R-squared:  -0.0003363 
+## F-statistic: 0.9755 on 2 and 144 DF,  p-value: 0.3795</code></pre>
+<pre class="r"><code>plot(OLS1)</code></pre>
+<p><img src="/post/2020-12-03-exercice-titanic_files/figure-html/unnamed-chunk-7-1.png" width="672" /><img src="/post/2020-12-03-exercice-titanic_files/figure-html/unnamed-chunk-7-2.png" width="672" /><img src="/post/2020-12-03-exercice-titanic_files/figure-html/unnamed-chunk-7-3.png" width="672" /><img src="/post/2020-12-03-exercice-titanic_files/figure-html/unnamed-chunk-7-4.png" width="672" /></p>
+<p>All the signs of a defective linear regression are present: low significance, low <span class="math inline">\(R²\)</span>, regression diagnostic graphs (heteroskedasticity, non-normality, etc.).</p>
+</div>
+<div id="ethnicity-based-regression" class="section level3">
+<h3>Ethnicity-based regression</h3>
+<pre class="r"><code>#1rst model with blackd + whitvic 
+glm1 &lt;- glm(  death ~ blackd + whitvic, 
+            data=DF, x = TRUE, 
+    family = binomial(link = &quot;logit&quot;))
+summary(glm1)</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = death ~ blackd + whitvic, family = binomial(link = &quot;logit&quot;), 
+##     data = DF, x = TRUE)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -1.0611  -0.9296  -0.8645   1.4474   1.6780  
+## 
+## Coefficients:
+##             Estimate Std. Error z value Pr(&gt;|z|)   
+## (Intercept)  -1.1272     0.4050  -2.783  0.00538 **
+## blackd        0.5118     0.3809   1.344  0.17900   
+## whitvic       0.3356     0.3896   0.861  0.38898   
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 188.49  on 146  degrees of freedom
+## Residual deviance: 186.52  on 144  degrees of freedom
+## AIC: 192.52
+## 
+## Number of Fisher Scoring iterations: 4</code></pre>
+<p>Estimates are not significant. Fit appears poor in terms of deviance.</p>
+<div id="quality-of-fit" class="section level4">
+<h4>Quality of fit</h4>
+<p>We can calculate the usual indicators of logistic regression</p>
+<pre class="r"><code>n &lt;- length(DF$death)
+#LogLikelihood
+logL_glm1 &lt;- as.numeric(  logLik(glm1) )
+# LRI
+LRI_glm1&lt;- 1-with(glm1,deviance/null.deviance)
+# AIC : −2log L + 2k
+AIC_glm1 &lt;- -2*logL_glm1+2*length(coef(glm1))
+# BIC : −2log L + k log n
+BIC_glm1 &lt;- -2*logL_glm1 + length(coef(glm1))+log(n)</code></pre>
+<p>the LRI: 0.0104602.
+The model is not efficient. The LRI is at least 0.</p>
+<p>The AIC: 192.5192934.</p>
+<p>We can also study the quality of fit following the introduction of each variable.</p>
+<pre class="r"><code>anova(glm1,test=&quot;Chisq&quot;)</code></pre>
+<pre><code>## Analysis of Deviance Table
+## 
+## Model: binomial, link: logit
+## 
+## Response: death
+## 
+## Terms added sequentially (first to last)
+## 
+## 
+##         Df Deviance Resid. Df Resid. Dev Pr(&gt;Chi)
+## NULL                      146     188.49         
+## blackd   1  1.22053       145     187.27   0.2693
+## whitvic  1  0.75113       144     186.52   0.3861</code></pre>
+<p>The model does not improve with the introduction of these 2 variables.</p>
+</div>
+</div>
+<div id="regression-with-ethnicity-and-crime-severity" class="section level3">
+<h3>Regression with ethnicity and crime severity</h3>
+<pre class="r"><code>glm2 &lt;- glm(  death ~ blackd + whitvic + serious, 
+            data=DF, x = TRUE, 
+    family = binomial(link = &quot;logit&quot;))
+summary(glm2)</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = death ~ blackd + whitvic + serious, family = binomial(link = &quot;logit&quot;), 
+##     data = DF, x = TRUE)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -1.5108  -0.9360  -0.6628   1.1706   2.1639  
+## 
+## Coefficients:
+##             Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept) -2.65165    0.67477  -3.930 8.51e-05 ***
+## blackd       0.59518    0.39394   1.511  0.13083    
+## whitvic      0.25647    0.40019   0.641  0.52161    
+## serious      0.18705    0.06122   3.055  0.00225 ** 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 188.49  on 146  degrees of freedom
+## Residual deviance: 176.28  on 143  degrees of freedom
+## AIC: 184.28
+## 
+## Number of Fisher Scoring iterations: 4</code></pre>
+<p>There is a small gain in the quality of adjustment (resid. deviance - Null dev.) consistent with the fact that only one variable is significant.</p>
+<div id="goodness-of-fit" class="section level4">
+<h4>Goodness of fit</h4>
+<pre class="r"><code>#LogLikelihood
+logL_glm2 &lt;- as.numeric(  logLik(glm2) )
+# LRI
+LRI_glm2&lt;- 1-with(glm2,deviance/null.deviance)
+# AIC : −2log L + 2k
+AIC_glm2 &lt;- -2*logL_glm2+2*length(coef(glm2))
+# BIC : −2log L + k log n
+BIC_glm2 &lt;- -2*logL_glm2 + length(coef(glm2))+log(n)</code></pre>
+<pre class="r"><code>Fit_M1 &lt;- c( logL_glm1 , LRI_glm1, AIC_glm1, BIC_glm1)
+Fit_M2 &lt;- c( logL_glm2 , LRI_glm2, AIC_glm2, BIC_glm2)
+tableau_fit &lt;- data.frame(rbind( Fit_M1, Fit_M2))
+names(tableau_fit) &lt;- c( &quot;Log_Lik&quot;, &quot;LRI&quot;, &quot;AIC&quot;, &quot;BIC&quot;)
+kable(tableau_fit)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="right">Log_Lik</th>
+<th align="right">LRI</th>
+<th align="right">AIC</th>
+<th align="right">BIC</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Fit_M1</td>
+<td align="right">-93.25965</td>
+<td align="right">0.0104602</td>
+<td align="right">192.5193</td>
+<td align="right">194.5097</td>
+</tr>
+<tr class="even">
+<td align="left">Fit_M2</td>
+<td align="right">-88.14249</td>
+<td align="right">0.0647563</td>
+<td align="right">184.2850</td>
+<td align="right">185.2754</td>
+</tr>
+</tbody>
+</table>
+<p>There is a slight improvement in all indicators of the quality of adjustment. It should be tested whether this difference is sufficient to be significant.</p>
+<p>The following test confirms the significance of <code>Serious</code> and therefore the improvement of the fit.</p>
+<pre class="r"><code>anova(glm2, test=&quot;Chisq&quot;)</code></pre>
+<pre><code>## Analysis of Deviance Table
+## 
+## Model: binomial, link: logit
+## 
+## Response: death
+## 
+## Terms added sequentially (first to last)
+## 
+## 
+##         Df Deviance Resid. Df Resid. Dev Pr(&gt;Chi)   
+## NULL                      146     188.49            
+## blackd   1   1.2205       145     187.27 0.269257   
+## whitvic  1   0.7511       144     186.52 0.386120   
+## serious  1  10.2343       143     176.28 0.001379 **
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+</div>
+<div id="interpretation" class="section level4">
+<h4>Interpretation</h4>
+<ul>
+<li>the seriousness of the crimes is preponderant and significant</li>
+<li>all estimated coefficients are positive (as expected), but only <code>Serious</code> is significant</li>
+<li>The effect of <code>Serious</code> is 0.1870516 on the logit transformation of the probability of a fatal sentence.</li>
+<li>A quantified interpretation of the effect of <code>Serious</code> can be given by the exponential: $exp(_{Serious})=$1.2056895. This is the effect on the Odd ratio for a unit variation of <code>Serious</code>.</li>
+<li>Marginal effects can be calculated</li>
+</ul>
+</div>
+<div id="marginal-effects-at-the-midpoint" class="section level4">
+<h4>Marginal effects at the midpoint</h4>
+<p>Note: <span class="citation"><a href="#ref-allison2010survival" role="doc-biblioref">Allison</a> (<a href="#ref-allison2010survival" role="doc-biblioref">2010</a>)</span> calculates marginal effects from the product of the general <span class="math inline">\(P \times (1-P)\)</span> proportions.</p>
+<pre class="r"><code># dp/dx = beta p(1-p)
+addmargins(table(DF$death,DF$blackd))</code></pre>
+<pre><code>##      
+##         0   1 Sum
+##   0    52  45  97
+##   1    22  28  50
+##   Sum  74  73 147</code></pre>
+<pre class="r"><code>p &lt;- sum(DF$death==1)/length(DF$death)
+Mef &lt;- p*(1-p) * coefficients(glm2)[-1]
+round(Mef , 3)</code></pre>
+<pre><code>##  blackd whitvic serious 
+##   0.134   0.058   0.042</code></pre>
+<p>This differs from the method of calculating marginal effects at the average point we have seen, i.e. with a predicted probability for the average point.</p>
+<pre class="r"><code># marginal effects at mean
+# Logit # xb*:
+betas&lt;-t(data.frame(coef(glm2))) ; betas</code></pre>
+<pre><code>##            (Intercept)    blackd  whitvic   serious
+## coef.glm2.   -2.651649 0.5951849 0.256472 0.1870516</code></pre>
+<pre class="r"><code>xmean &lt;- c(1, mean(DF$blackd), mean(DF$whitvic), mean(DF$serious))
+print(&quot;XBetas:&quot;)</code></pre>
+<pre><code>## [1] &quot;XBetas:&quot;</code></pre>
+<pre class="r"><code>xb_logit &lt;- sum(xmean*betas) ; xb_logit</code></pre>
+<pre><code>## [1] -0.7287835</code></pre>
+<pre class="r"><code># Slopes (at mean): Lambda(mean(xb))*(b)
+print(&quot;Slopes:&quot;)</code></pre>
+<pre><code>## [1] &quot;Slopes:&quot;</code></pre>
+<pre class="r"><code>logit_slopes &lt;- dlogis(xb_logit)*betas
+logit_slopes</code></pre>
+<pre><code>##            (Intercept)    blackd    whitvic    serious
+## coef.glm2.  -0.5821334 0.1306647 0.05630495 0.04106463</code></pre>
+<p>The differences between the two methods are reduced</p>
+<p>Marginal effects for binary variables are insignificant.</p>
+<p>For <code>Serious</code> the probability of the lethal sentence increases by 0.04 -0.5821334, 0.1306647, 0.0563049, 0.0410646 per unit variation.</p>
+<p>Note: Please note that `Serious’ is treated here as a quantitative variable! although it is an average rank assigned. Treating this variable as a qualitative (or categorical) - as a factor under R - will be more consistent and accurate.</p>
+</div>
+</div>
+</div>
+<div id="model-with-the-factor-culp-and-reference-level-reflevel5." class="section level2">
+<h2>Model with the factor: <code>culp</code> and reference level: <code>reflevel:5</code>.</h2>
+<pre class="r"><code>DF$culp &lt;- factor(DF$culp)
+DF$culp = relevel(DF$culp, ref=5)
+
+glm3 &lt;- glm(death ~ blackd + whitvic + culp, data=DF, x = TRUE, 
+            family = binomial(link = &quot;logit&quot;))
+summary(glm3)</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = death ~ blackd + whitvic + culp, family = binomial(link = &quot;logit&quot;), 
+##     data = DF, x = TRUE)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -2.1797  -0.5659  -0.2469   0.5239   2.3072  
+## 
+## Coefficients:
+##             Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)   0.5533     0.7030   0.787   0.4313    
+## blackd        1.7246     0.6130   2.813   0.0049 ** 
+## whitvic       0.8385     0.5694   1.473   0.1408    
+## culp1        -4.8670     0.8251  -5.899 3.66e-09 ***
+## culp2        -3.0547     0.7754  -3.939 8.17e-05 ***
+## culp3        -1.5294     0.8399  -1.821   0.0686 .  
+## culp4        -0.3610     0.8857  -0.408   0.6835    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 188.49  on 146  degrees of freedom
+## Residual deviance: 108.22  on 140  degrees of freedom
+## AIC: 122.22
+## 
+## Number of Fisher Scoring iterations: 5</code></pre>
+<div id="fit-quality" class="section level4">
+<h4>Fit quality</h4>
+<pre class="r"><code>#LogLikelihood
+logL_glm3 &lt;- as.numeric(  logLik(glm3) )
+# LRI
+LRI_glm3&lt;- 1-with(glm3,deviance/null.deviance)
+# AIC : −2log L + 2k
+AIC_glm3 &lt;- -2*logL_glm3+2*length(coef(glm3))
+# BIC : −2log L + k log n
+BIC_glm3 &lt;- -2*logL_glm3 + length(coef(glm3))+log(n)</code></pre>
+<pre class="r"><code>Fit_M3 &lt;- c( logL_glm3 , LRI_glm3, AIC_glm3, BIC_glm3)
+tableau_fit &lt;- data.frame(rbind( Fit_M1, Fit_M2, Fit_M3))
+names(tableau_fit) &lt;- c( &quot;Log_Lik&quot;, &quot;LRI&quot;, &quot;AIC&quot;, &quot;BIC&quot;)
+kable(tableau_fit)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="right">Log_Lik</th>
+<th align="right">LRI</th>
+<th align="right">AIC</th>
+<th align="right">BIC</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Fit_M1</td>
+<td align="right">-93.25965</td>
+<td align="right">0.0104602</td>
+<td align="right">192.5193</td>
+<td align="right">194.5097</td>
+</tr>
+<tr class="even">
+<td align="left">Fit_M2</td>
+<td align="right">-88.14249</td>
+<td align="right">0.0647563</td>
+<td align="right">184.2850</td>
+<td align="right">185.2754</td>
+</tr>
+<tr class="odd">
+<td align="left">Fit_M3</td>
+<td align="right">-54.11190</td>
+<td align="right">0.4258409</td>
+<td align="right">122.2238</td>
+<td align="right">120.2142</td>
+</tr>
+</tbody>
+</table>
+<p>There has been a clear improvement in the model.</p>
+</div>
+<div id="interpretation-1" class="section level4">
+<h4>Interpretation</h4>
+<ul>
+<li><p><em>Significance</em>: good for explanatory variables: <code>blackd</code> and <code>cupl</code> with a <span class="math inline">\(&lt; 4\)</span> level</p></li>
+<li><p><code>blackd</code> increases the likelihood (or risk) of the death penalty (positive sign of the estimated coefficient).</p></li>
+<li><p><code>culp</code>: the lower the level of guilt (level 1 of <code>culp</code>) the lower the risk of the death penalty.</p></li>
+<li><p>note: the changing significance of <code>blackd</code> is suspect. It is often the clue of low robustness of the result associated with this variable.</p></li>
+</ul>
+</div>
+<div id="model-with-culp-alone" class="section level3">
+<h3>Model with <code>culp</code> alone</h3>
+<p>The regression is simplified here to better understand how to interpret the effect of this categorical variable.</p>
+<pre class="r"><code>glm3.2 &lt;- glm(death ~ culp, data=DF, x = TRUE, 
+            family = binomial(link = &quot;logit&quot;))
+summary(glm3.2)</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = death ~ culp, family = binomial(link = &quot;logit&quot;), 
+##     data = DF, x = TRUE)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -1.9145  -0.3850  -0.3850   0.5905   2.2974  
+## 
+## Coefficients:
+##             Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)   1.6582     0.5455   3.040  0.00237 ** 
+## culp1        -4.2232     0.7162  -5.896 3.72e-09 ***
+## culp2        -2.8622     0.7171  -3.991 6.58e-05 ***
+## culp3        -1.1882     0.7891  -1.506  0.13210    
+## culp4        -0.4543     0.8550  -0.531  0.59520    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 188.49  on 146  degrees of freedom
+## Residual deviance: 117.47  on 142  degrees of freedom
+## AIC: 127.47
+## 
+## Number of Fisher Scoring iterations: 5</code></pre>
+<p>The estimation is made according to the reference modality: <code>culp</code>=5. The logit transformation of the probability of the sentence is given by the <code>intercept</code>.</p>
+<p>The probabilities estimated for each modality of <code>pulp</code> are thus as follows:</p>
+<pre class="r"><code>exp(glm3.2$coefficients[1])</code></pre>
+<pre><code>## (Intercept) 
+##        5.25</code></pre>
+<pre class="r"><code>p5 &lt;- 1/( 1+ exp( - glm3.2$coefficients[1]) )
+p1 &lt;- 1/( 1+ exp(- (glm3.2$coefficients[1] + glm3.2$coefficients[2])) )
+p2 &lt;- 1/( 1+ exp(- (glm3.2$coefficients[1] + glm3.2$coefficients[3])) )
+p3 &lt;- 1/( 1+ exp(- (glm3.2$coefficients[1] + glm3.2$coefficients[4])) )
+p4 &lt;- 1/( 1+ exp(- (glm3.2$coefficients[1] + glm3.2$coefficients[5])) )
+prob &lt;- c( p1:p5)
+
+tableau_prob &lt;- data.frame(cbind( p1,p2,p3,p4,p5))
+names(tableau_prob) &lt;- c( &quot;culp1&quot;,&quot;culp2&quot;,&quot;culp3&quot;,&quot;culp4&quot; , &quot;culp5&quot;  )
+kable( tableau_prob)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="right">culp1</th>
+<th align="right">culp2</th>
+<th align="right">culp3</th>
+<th align="right">culp4</th>
+<th align="right">culp5</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">(Intercept)</td>
+<td align="right">0.0714286</td>
+<td align="right">0.2307692</td>
+<td align="right">0.6153846</td>
+<td align="right">0.7692308</td>
+<td align="right">0.84</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="model-with-cross-variable" class="section level2">
+<h2>Model with cross variable</h2>
+<p>A model is now estimated by introducing the variable <code>blackd * whitvic</code> in order to point out cases where the victim is white and the perpetrator black. A significant and positive coefficient would indicate cases where the sentence is harsher according to the ethnicity of the individuals.</p>
+<pre class="r"><code>glm4 &lt;- glm(death ~ blackd * whitvic + culp, data=DF, x = TRUE, 
+            family = binomial(link = &quot;logit&quot;))
+summary(glm4)</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = death ~ blackd * whitvic + culp, family = binomial(link = &quot;logit&quot;), 
+##     data = DF, x = TRUE)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -2.1782  -0.5667  -0.2465   0.5243   2.3087  
+## 
+## Coefficients:
+##                Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)      0.5624     0.9057   0.621   0.5346    
+## blackd           1.7121     0.9963   1.718   0.0857 .  
+## whitvic          0.8265     0.9414   0.878   0.3799    
+## culp1           -4.8673     0.8253  -5.898 3.69e-09 ***
+## culp2           -3.0545     0.7753  -3.940 8.16e-05 ***
+## culp3           -1.5273     0.8499  -1.797   0.0723 .  
+## culp4           -0.3596     0.8899  -0.404   0.6861    
+## blackd:whitvic   0.0188     1.1744   0.016   0.9872    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 188.49  on 146  degrees of freedom
+## Residual deviance: 108.22  on 139  degrees of freedom
+## AIC: 124.22
+## 
+## Number of Fisher Scoring iterations: 5</code></pre>
+<p>This cross variable is not significant. This particular configuration does not appear to be associated with a higher or lower risk of sentencing.</p>
+</div>
+<div id="extensions" class="section level2">
+<h2>Extensions</h2>
+<div id="multicollinearity-diag" class="section level3">
+<h3>Multicollinearity Diag</h3>
+<p>Multicollinearity can be detected by calculating the inflation factor of the variance of the estimators (VIF).</p>
+<p>A value of <span class="math inline">\(VIF &gt;5\)</span> is a sign of strong multicollinearity.</p>
+<pre class="r"><code>library(DescTools)
+VIF(glm(death ~ blackd + whitvic + culp + serious, data=DF, x = TRUE, 
+        family = binomial(link = &quot;logit&quot;)))</code></pre>
+<pre><code>##             GVIF Df GVIF^(1/(2*Df))
+## blackd  1.563989  1        1.250595
+## whitvic 1.251005  1        1.118483
+## culp    1.617713  4        1.061971
+## serious 1.238066  1        1.112684</code></pre>
+</div>
+<div id="extrem-s.e." class="section level3">
+<h3>Extrem s.e.</h3>
+<p>The small sample size can lead to problems of convergence and quality of estimation of “extreme” standard deviations.</p>
+<p>See discussion (<a href="https://stats.stackexchange.com/questions/11109/how-to-deal-with-perfect-separation-in-logistic-regression" class="uri">https://stats.stackexchange.com/questions/11109/how-to-deal-with-perfect-separation-in-logistic-regression</a>)</p>
+<p>To see this, the database is reduced to only the white defendants.</p>
+<pre class="r"><code>glm5 &lt;- glm(death ~ culp + serious, data=DF[DF$blackd==0,], x = TRUE, family = binomial(link = &quot;logit&quot;))
+summary(glm5)</code></pre>
+<pre><code>## 
+## Call:
+## glm(formula = death ~ culp + serious, family = binomial(link = &quot;logit&quot;), 
+##     data = DF[DF$blackd == 0, ], x = TRUE)
+## 
+## Deviance Residuals: 
+##      Min        1Q    Median        3Q       Max  
+## -1.82543  -0.39561  -0.00008   0.60956   2.00998  
+## 
+## Coefficients:
+##              Estimate Std. Error z value Pr(&gt;|z|)   
+## (Intercept)    3.1273     1.7545   1.782  0.07467 . 
+## culp1        -21.6728  1928.0747  -0.011  0.99103   
+## culp2         -3.8366     1.2267  -3.128  0.00176 **
+## culp3         -0.7645     1.1312  -0.676  0.49914   
+## culp4         -0.9595     1.0587  -0.906  0.36481   
+## serious       -0.1693     0.1385  -1.223  0.22144   
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 90.066  on 73  degrees of freedom
+## Residual deviance: 43.599  on 68  degrees of freedom
+## AIC: 55.599
+## 
+## Number of Fisher Scoring iterations: 18</code></pre>
+<p>The standard error of the <code>culp</code> explodes because there is a separation problem. Some modalities of <code>culp</code> do not have a fatal sentence case.</p>
+<pre class="r"><code>addmargins(table(DF[DF$blackd==0,]$death,DF[DF$blackd==0,]$culp))</code></pre>
+<pre><code>##      
+##        5  1  2  3  4 Sum
+##   0    3 30 14  2  3  52
+##   1   10  0  2  4  6  22
+##   Sum 13 30 16  6  9  74</code></pre>
+<p>One solution to this is Bayesian estimation:</p>
+<pre class="r"><code>fit &lt;- bayesglm(death ~ culp + serious, data=DF, family=&quot;binomial&quot;, prior.df=5)
+display(fit)</code></pre>
+<pre><code>## bayesglm(formula = death ~ culp + serious, family = &quot;binomial&quot;, 
+##     data = DF, prior.df = 5)
+##             coef.est coef.se
+## (Intercept)  1.40     0.90  
+## culp1       -3.84     0.68  
+## culp2       -2.49     0.65  
+## culp3       -0.85     0.71  
+## culp4       -0.16     0.78  
+## serious      0.00     0.08  
+## ---
+## n = 147, k = 6
+## residual deviance = 117.8, null deviance = 188.5 (difference = 70.6)</code></pre>
+<p>In an estimation, the distribution of the estimated coefficients is assumed a priori, then adjusted and the distribution is deduced a posteriori.
+The law of coefficients can be chosen as a normal law. Here the specification of the number of degrees of freedom of the law leads to a normal law (<code>prior.df=Inf</code>) or a Student (<code>prior.df=7</code>) or Cauchy (<code>prior.df=1</code>).</p>
+<pre class="r"><code>fit.2 &lt;- bayesglm(death ~ culp + serious, data=DF, family=&quot;binomial&quot;, prior.scale=2.5, prior.df=Inf)  # normal prior with scale 2.5 : prior.df=Inf for normal
+display(fit.2)</code></pre>
+<pre><code>## bayesglm(formula = death ~ culp + serious, family = &quot;binomial&quot;, 
+##     data = DF, prior.scale = 2.5, prior.df = Inf)
+##             coef.est coef.se
+## (Intercept)  1.35     0.90  
+## culp1       -3.79     0.67  
+## culp2       -2.47     0.65  
+## culp3       -0.83     0.71  
+## culp4       -0.14     0.78  
+## serious      0.00     0.08  
+## ---
+## n = 147, k = 6
+## residual deviance = 117.9, null deviance = 188.5 (difference = 70.6)</code></pre>
+</div>
+<div id="testing-the-fit-quality" class="section level3">
+<h3>Testing the fit quality</h3>
+<p>The Hosmer and Lemeshow test can be used to determine whether there is a significant difference between predicted and observed proportions.</p>
+<p>It is a test of the overall quality of the model. We want to know if it “reproduces” the observation.</p>
+<p>For this calculation the test predicts the probabilities for each observation and builds the proportions table.</p>
+<p>The assumptions are:
+<span class="math inline">\(H_0\)</span>: the predicted and observed event rates are similar between 10 deciles.
+<span class="math inline">\(H_1\)</span>: They are not identical.</p>
+<p>Note there is an improved version of this test: Hosmer et al have proposed a better one d.f. omnibus test of fit, implemented in the R <code>rms</code> package <code>residuals.lrm</code> function.</p>
+<pre class="r"><code>glm5 &lt;- glm(death ~ blackd+ culp + serious, data=DF, x = TRUE, family = binomial(link = &quot;logit&quot;))
+
+hl &lt;- hoslem.test(glm3$y, fitted(glm3), g=5) # choose: g&gt;p+1
+hl</code></pre>
+<pre><code>## 
+##  Hosmer and Lemeshow goodness of fit (GOF) test
+## 
+## data:  glm3$y, fitted(glm3)
+## X-squared = 1.3473, df = 3, p-value = 0.7179</code></pre>
+<p>The hypothesis of similarity between the vectors of compared proportions is rejected: the model does not sufficiently reproduce the observations.</p>
+</div>
+<div id="automatic-calculation-of-fit-quality-indicators" class="section level3">
+<h3>Automatic calculation of fit quality indicators</h3>
+<p>The function <code>PseudoR2()</code> produces many indicators we have just determined.</p>
+<pre class="r"><code>PseudoR2(glm5, which=&quot;all&quot;)</code></pre>
+<pre><code>##        McFadden     McFaddenAdj        CoxSnell      Nagelkerke   AldrichNelson 
+##       0.4140055       0.3397314       0.4119005       0.5700351       0.3467720 
+## VeallZimmermann           Efron McKelveyZavoina            Tjur             AIC 
+##       0.6172120       0.4727028       0.5444459       0.4795824     124.4546527 
+##             BIC          logLik         logLik0              G2 
+##     145.3876809     -55.2273264     -94.2454751      78.0362974</code></pre>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-allison2010survival" class="csl-entry">
+Allison, P. D. 2010. <em>Survival Analysis Using SAS: A Practical Guide</em>. SAS Institute. <a href="https://books.google.fr/books?id=nhtpmAEACAAJ">https://books.google.fr/books?id=nhtpmAEACAAJ</a>.
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p><code>SERIOUS</code> was developed in an auxiliary study in which panels of trial judges were given written descriptions of each of the crimes. These descriptions did not mention the race of the defendant or the victim<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>

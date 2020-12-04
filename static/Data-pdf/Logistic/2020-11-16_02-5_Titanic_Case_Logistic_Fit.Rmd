@@ -11,8 +11,7 @@ knitr::opts_chunk$set(echo = TRUE, message=FALSE, warning=FALSE)
 library(knitr)
 ```
 
-
-Cet exercice a été adapté durant le cours du 16 nov. 2020 pour discuter de l'inférence et de la qualité des ajustements dans la régression logistique.
+This exercise was adapted  to discuss inference and quality of adjustments in logistic regression.
 
 # Titanic Case Study - (source: F.E. Harrel, (2015), Regression Modeling Strategies, 2nd Ed., Springer, chap. 12)
 
@@ -42,18 +41,18 @@ Missing values are noticeable for `age`.
 ```{r fig.height=10}
 dd <-  datadist(titanic4)    # describe distributions of variables to rms
 options(datadist = 'dd' )
-s <-  summary(survived ∼ age + sex + pclass + cut2(sibsp ,0:3) + cut2(parch ,0:3), data =titanic4)
+s <-  summary(survived ~ age + sex + pclass + cut2(sibsp ,0:3) + cut2(parch ,0:3), data =titanic4)
 plot(s, main = ' ' , subtitles =FALSE ) # Figure 12.1
 ```
 
 
-Nous pouvons dresser quelques **hypothèses** à partir de ce graphique.
+We can make some **assumptions** from this graph.
 
-+ L'âge a été découpé en classes (pour faciliter la représentation). Aucune tendance forte n'apparaît (hausse ou baisse du taux de survie). Les écarts de taux de survie en tre classe sont faibles. La variable ne devrait pas être significative.
-+ les femmes survivent nettement mieux que les hommes. 
-+ Les passagers en  classe (au premier niveau du bateau) peuvent plus survivent mieux que les classes inférieures
-+ Nombre d'enfants: pas d'effet monotone sur le taux de survie. mais des taux de survie différents. 
-+ Nombre de parents par enfant: aucun effet monotone mais là encore des taux nettement différents.
++ Age has been broken down into classes (for ease of representation). No strong trend appears (increase or decrease in survival rate). The differences in survival rates between classes are small. The variable should not be significant.
++ women survive significantly better than men. 
++ Passengers in first class (at the first level of the boat) may survive better than those in lower classes
++ Number of children: no monotonous effect on survival rate. but different survival rates. 
++ Number of parents per child: no monotonous effect, but here again the rates are significantly different.
 
 ***
 
@@ -65,9 +64,10 @@ We suppress proportions based on less than 25 passengers.
 
 ## Non parametric exploration
 
-Nous créons ici 2 variables `sibsp` et `parch` comme des variables binaires: parents sans enfant et enfants sans parent.
 
-Cela constitue la nouvelle base `tn`
+Here we create 2 variables `sibsp` and `parch` as binary variables: parents without children and children without parents.
+
+This is the new `tn`base.
 
 ```{r}
 tn <-  transform (titanic4 ,
@@ -80,7 +80,7 @@ s <-  with(tn , summarize (survived , llist(agec , sex , pclass , sibsp , parch 
 # Figure 12.2:
 ggplot(subset(s, agec != ' NA ' ),
 aes(x=survived , y=pclass , shape =sex)) +
-geom_point() + facet_grid(agec ∼ sibsp * parch ) +
+geom_point() + facet_grid(agec ~ sibsp * parch ) +
 xlab( ' Proportion Surviving ' ) + ylab( ' Passenger Class ') +
 scale_x_continuous(breaks =c(0, .5 , 1))
 ```
@@ -92,16 +92,16 @@ scale_x_continuous(breaks =c(0, .5 , 1))
 b <-  scale_size_discrete(range =c(.1 , .85))
 yl <-  ylab(NULL)
 p1 <-  ggplot(titanic4 , aes(x=age , y=survived )) +
-  histSpikeg(survived ∼ age , lowess =TRUE , data =titanic4) + 
+  histSpikeg(survived ~ age , lowess =TRUE , data =titanic4) + 
   ylim (0,1) + yl
 p2 <-  ggplot(titanic4 , aes(x=age , y=survived , color =sex)) +
-  histSpikeg (survived ∼ age + sex , lowess =TRUE ,data =titanic4) + ylim (0,1) +
+  histSpikeg (survived ~ age + sex , lowess =TRUE ,data =titanic4) + ylim (0,1) +
   yl
 p3 <-  ggplot(titanic4 , aes(x=age , y=survived , size =pclass )) + 
-  histSpikeg (survived ∼ age + pclass , lowess =TRUE, data =titanic4) + 
+  histSpikeg (survived ~ age + pclass , lowess =TRUE, data =titanic4) + 
   b + ylim (0,1) + yl
 p4 <-  ggplot(titanic4) +
-  histSpikeg (survived ∼ age + sex + pclass, lowess =TRUE , data =titanic4) + 
+  histSpikeg (survived ~ age + sex + pclass, lowess =TRUE , data =titanic4) + 
   b + ylim (0,1) + yl
 gridExtra::grid.arrange(p1 , p2 , p3 , p4 , ncol =2) # combine 4
 ```
@@ -129,30 +129,30 @@ gridExtra::grid.arrange(p1 , p2 , ncol =2)
 
 ## Logistic regression with `glm()`
 
-Nous réalisons la régression `survived ∼ sex+pclass +age +sibsp + parch`, sur les deux versions des données:
 
-1. `tn`: où les deux variables `sibsp` et `parch` sont binaires (avec ou sans enfants (ou parents))
-1. `titanic4` où les variables `sibsp` et `parch` sont les variables numériques d'origine: le nombre d'enfants ou de parents
+We perform the regression `survived ~ sex+pclass + age +sibsp + parch`, on both versions of the data:
 
-Ainsi, nous testons et comparons les deux modèles qui ne diffèrent que pas la façon dont `sibsp` et `parch` sont intégrées dans le modèle (binaire ou numérique).
+1. `tn`: where both variables `sibsp` and `parch` are binary (with or without children (or parents))
+1. `titanic4` where the `sibsp` and `parch` variables are the original numeric variables: the number of children or parents
+
+Thus, we test and compare the two models which differ only in the way `sibsp` and `parch` are integrated in the model (binary or numerical).
 
 ```{r}
-logit_tn <- glm(data=tn, survived ∼ sex+pclass +age +sibsp + parch, x = TRUE,
+logit_tn <- glm(data=tn, survived ~ sex+pclass +age +sibsp + parch, x = TRUE,
              family = binomial(link = "logit"))
 summary(logit_tn)
 exp(coefficients(logit_tn))
 
-logit_t4 <- glm(data=titanic4, survived ∼ sex+pclass +age +sibsp + parch, x = TRUE,
+logit_t4 <- glm(data=titanic4, survived ~ sex+pclass +age +sibsp + parch, x = TRUE,
              family = binomial(link = "logit"))
 summary(logit_t4)
 ```
 
-Les deux modèles donnent des résultats stables pour toutes les variables sauf `sibsp` et `parch`. Pour ces deux variables le format de variable impacte la significativité et la valeur des coefficients estimés. 
+Both models give stable results for all variables except `sibsp` and `parch`. For these two variables the variable format affects the significance and the value of the estimated coefficients. 
 
-Mais pour les autres coefficients les coefficients estimés et les écart-types sont similaires.
+But for the other coefficients the estimated coefficients and standard errors are similar.
 
-On voit que l'AIC est plus faible - meilleur - pour le second modèle. Il s'agit donc du meilleur des deux modèles au sens de l'AIC. Mais l'écart d'AIC n'est pas très élevé. On pourra réfléchir à l'intérêt de cette version du modèle par rapport à la précédente plus simple à interpréter. La transformation en variables binaires réduit l'information diosponible mais facilité l'interprétation. Notamment le fait d'introduire les deux variables `sibsp` et `parch`de façon numérique n'est pas cohérent avec l'observation d'un effet non monotone sur le taux de survie.
-
+We see that the AIC is lower - better - for the second model. It is therefore the best of the two models in the sense of the AIC. But the AIC gap is not very high. We can reflect on the interest of this version of the model compared to the previous one, which is simpler to interpret. The transformation into binary variables reduces the information available but facilitates interpretation. In particular, the introduction of the two variables `sibsp` and `parch` in a numerical way is not consistent with the observation of a non-monotonic effect on the survival rate.
 
 ```{r}
 LR_tn<-with(logit_tn,deviance/null.deviance) # -2 cancels out
@@ -162,10 +162,6 @@ LR_t4<-with(logit_t4,deviance/null.deviance) # -2 cancels out
 LRI_t4<-1-LR_t4    ;   LRI_t4
 ```
 
-En étudiant les déviances et les $R^2$ de McFadden (ou LRI), nous avons la même interprétation: le second modèle est meilleur: le $R^2$ de McFadden est plus élevé `r LRI_t4`.
+Looking at deviances and McFadden's $R^2$ (or LRI), we have the same interpretation: the second model is better: McFadden's $R^2$ is higher `r LRI_t4`.
 
-On note notamment le niveau de $-2 \times log(L_0)$ du modèle *null* commun aux deux modèles. En effet il s'agit pour ces deux modèles de la version où seule l'intercept est présente. Ce niveau de déviance sert de référence dans le calcul des qualités d'ajustement (dont le LRI, au dénominateur).
-
-
-
-
+We note in particular the level of $-2 \times log(L_0)$ of the *null* model common to both models. Indeed, for these two models it is the version where only the intercept is present. This level of deviance is used as a reference in the calculation of goodness of fit (including the LRI, in the denominator).
