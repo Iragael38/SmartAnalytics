@@ -6,7 +6,42 @@
     <description>Recent content in Posts on Smart Analytics for Big Data</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 01 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://sabd-smartanalytics.netlify.app/post/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 04 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://sabd-smartanalytics.netlify.app/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Exercise Penalty ALLISON</title>
+      <link>https://sabd-smartanalytics.netlify.app/post/2020-12-03-exercice-penalty-allison/</link>
+      <pubDate>Fri, 04 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://sabd-smartanalytics.netlify.app/post/2020-12-03-exercice-penalty-allison/</guid>
+      <description>EXERCISE inspired from Paul Allison : logistic regression using SAS, 2nd Ed.In this exercise particular attention is given to misinterpretations. For this reason, the subject matter is deliberately heavy and sensitive, forcing precautions to be taken before conclusions are drawn.
+The data are described in Allison (2010)
+Data set consists of 147 death penalty cases in the state of New Jersey.The defendant was convicted of first-degree murder with a recommendation by the prosecutor that a death sentence be imposed.</description>
+    </item>
+    
+    <item>
+      <title>Exercise Penalty ALLISON</title>
+      <link>https://sabd-smartanalytics.netlify.app/post/2020-12-03-exercice-titanic/</link>
+      <pubDate>Fri, 04 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://sabd-smartanalytics.netlify.app/post/2020-12-03-exercice-titanic/</guid>
+      <description>EXERCISE inspired from Paul Allison : logistic regression using SAS, 2nd Ed.In this exercise particular attention is given to misinterpretations. For this reason, the subject matter is deliberately heavy and sensitive, forcing precautions to be taken before conclusions are drawn.
+The data are described in Allison (2010)
+Data set consists of 147 death penalty cases in the state of New Jersey.The defendant was convicted of first-degree murder with a recommendation by the prosecutor that a death sentence be imposed.</description>
+    </item>
+    
+    <item>
+      <title>Binary Regression with Cross Validation</title>
+      <link>https://sabd-smartanalytics.netlify.app/post/2020-12-03-binary-regression-with-cross-validation/</link>
+      <pubDate>Thu, 03 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://sabd-smartanalytics.netlify.app/post/2020-12-03-binary-regression-with-cross-validation/</guid>
+      <description>Lets try and predict if an individual will earn more than $50K (ABOVE50K) using logistic regression based on demographic variables available in the adult data.
+In this process, we will:
+Part I
+Import the dataEstimate binary regression (logit and probit) and check some diagnosticsBuild logit models and predict on test dataDo model diagnosticsPart II
+Create training and test samplesCompare the cross-validation results with the regression only resultsLoad the datainputData &amp;lt;- read.</description>
+    </item>
+    
     <item>
       <title>Dynamic Documents with RMarkdown</title>
       <link>https://sabd-smartanalytics.netlify.app/post/2020-12-01-dynamic-documents-with-rmarkdown/</link>

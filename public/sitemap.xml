@@ -3,17 +3,32 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://sabd-smartanalytics.netlify.app/</loc>
-    <lastmod>2020-12-01T00:00:00+00:00</lastmod>
+    <loc>https://sabd-smartanalytics.netlify.app/post/2020-12-03-exercice-penalty-allison/</loc>
+    <lastmod>2020-12-04T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://sabd-smartanalytics.netlify.app/post/2020-12-01-dynamic-documents-with-rmarkdown/</loc>
-    <lastmod>2020-12-01T00:00:00+00:00</lastmod>
+    <loc>https://sabd-smartanalytics.netlify.app/post/2020-12-03-exercice-titanic/</loc>
+    <lastmod>2020-12-04T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://sabd-smartanalytics.netlify.app/post/</loc>
+    <lastmod>2020-12-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sabd-smartanalytics.netlify.app/</loc>
+    <lastmod>2020-12-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sabd-smartanalytics.netlify.app/post/2020-12-03-binary-regression-with-cross-validation/</loc>
+    <lastmod>2020-12-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://sabd-smartanalytics.netlify.app/post/2020-12-01-dynamic-documents-with-rmarkdown/</loc>
     <lastmod>2020-12-01T00:00:00+00:00</lastmod>
   </url>
   

@@ -1,0 +1,44 @@
+
+```{r echo=FALSE}
+library(stargazer)
+library(mlogit)
+```
+
+
+Dans cet exercice on réalise une estimation d'un modèle multinomial logit. Un exemple d'application de ce type de modélisation peut être trouvé dans @mjll17.
+
+```{r}
+Data <- read.table("../Data/clogit.csv" ,header = T, sep=",")
+
+kable(prop.table(table(Data$MODE), 1) )
+```
+
+
+<!-- Nous ajoutons une variable nécessaire pour la modélisation multinomiale  
+Mais sans le montrer dans le doc -->
+
+```{r echo=FALSE}
+Data$mode.ids<-factor(rep(1:4,210),labels=c("air","train","bus","car"))
+```
+
+## Estimation du logit multinomial {.allowframebreaks}
+
+```{r}
+# Estimation 1
+model1<-mlogit(MODE~TTME+GC, data=Data, shape="long", 
+               alt.var="mode.ids")
+summary(model1)
+```
+
+
+## Une table présentée avec `stargazer`  {.allowframebreaks}
+
+```{r , results='asis', size="footnotesize" , eval=FALSE}
+stargazer(model1, header=FALSE, type='latex')
+```
+
+***
+
+```{r , results='asis', size="tiny" , echo=FALSE}
+stargazer(model1, header=FALSE, type='latex')
+```

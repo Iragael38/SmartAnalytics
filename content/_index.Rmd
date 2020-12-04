@@ -1,5 +1,5 @@
 ---
-title: ""
+title: []
 authorbox: false
 link-citations: yes
 biblio-style: apalike
@@ -9,17 +9,16 @@ nocite: |
    @Agresti2013, @Millot2012,@Cornillonetal2008
 ---
 
-
 # Welcome {.tabset}
 
 ## What's New
-
 
 - `04/12/2020`: Help to build slides with RMarkdown: [post](../post/2020-12-01-dynamic-documents-with-rmarkdown)
 - `04/12/2020`: Correction of
     + [Exercise Penalty](../post/2020-12-03-exercice-penalty-allison)  [Rmd](/Data-pdf/Logistic/2020-12-03-exercice-penalty-allison.Rmd)   [Data](/Data-pdf/Logistic/02_Penalty.txt)
     + [Exercise Binary regression with crossvalidation](../post/2020-12-03-binary-regression-with-cross-validation)  [Rmd](/Data-pdf/Logistic/2020-12-03-binary-regression-with-cross-validation.Rmd)   [Data](/Data-pdf/Logistic/adult.csv)
     + [Exercise Titanic](../post/2020-12-03-exercice-penalty-allison) [Rmd](/Data-pdf/Logistic/2020-11-16_02-5_Titanic_Case_Logistic_Fit.Rmd)    [Data](/Data-pdf/Logistic/titanic4.RData)
+- `04/12/2020`: Recordings of Prof. B. Agard lessons [link](https://moodle.caseine.org/course/view.php?id=644&section=0)
 - `03/12/2020`: December 10th [Tenth Lesson](../post/2020-11-10-lesson-10)
 - `03/12/2020`: December 3rd [Nineth Lesson](../post/2020-11-10-lesson-9)
 - `24/11/2020`: [Eighth Lesson](../post/2020-11-10-lesson-8)
@@ -78,7 +77,7 @@ Each lesson is described as follows
 ## Organisation
 ### Posts
 
-Posts will be used to manage the contact (prof $\rightarrow$ student), as notification during the semester
+Posts will be used to manage the contact (prof -> student), as notification during the semester
 
 ### Caseine 
 
