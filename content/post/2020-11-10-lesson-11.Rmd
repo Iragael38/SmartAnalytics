@@ -37,8 +37,15 @@ Teachers: I Joly
 
 [Introduction to  Survival Analysis](/Data-pdf/Survival/SABD_SurvAn.pdf)
 
-[Applications of Survival Analysis](../lessons/2020-12-11-application-of-sa)
+[Applications of Survival Analysis - EX1](../lessons/2020-12-11-application-of-sa)  
 
+[Rmd](/Data-pdf/Survival/2020-12-11-application-of-sa.Rmd)
+
+[Applications of Survival Analysis - Ex2](../lessons/2020-12-11-apllication-of-sa-ex2)  
+
+[Rmd](/Data-pdf/Survival/2020-12-11-apllication-of-sa-ex2.Rmd) 
+
+[Data](/Data-pdf/Survival/jobdur.txt)
 
 [CheatSheet on survival Analysis](/Data-pdf/Survival/survminer_cheatsheet.pdf)
 

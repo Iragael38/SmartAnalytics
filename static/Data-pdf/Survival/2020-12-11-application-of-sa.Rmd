@@ -14,6 +14,7 @@ biblio-style: apalike
 bibliography: [./data/biblio_hdr_v2.bib, ./data/Liste_Publi3.bib, ./data/biblio_SABD.bib]
 nocite: |
   @Bivand2013, @lovelace2019
+draft: True
 ---
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
@@ -28,6 +29,8 @@ knitr::opts_chunk$set(fig.align = "center", message=FALSE, warning=FALSE, paged.
 
 knitr::opts_chunk$set(fig.width = 5, fig.height = 4)
 ```
+
+
 
 
 # Exercise - Unemployment duration
@@ -681,6 +684,89 @@ survfit(smooth1  , cov=cov)
 survfit(smooth1  , cov=cov, cdf=T)
 hazard(smooth1  , cov=cov)
 fdensity(smooth1  , cov=cov)
+```
+
+```{r}
+#########################################
+```
+
+
+# Exercise inspired from @Allison2010
+
+
+
+The exercise analyses the job duration `jobdur.txt`. The data consist of 100 job durations, measured from the year to entry into hte job until the year that the employee quit. 
+
+Duration after the fifth year are censored. If the employee is fired, the job duration is censored at the end of its last full year.
+
+Survival times have values of `1, 2, 3, 4 or 5`
+
+
+## Import data & Summary statistics
+
+
+```{r}
+jobdur <- read.table("./data/jobdur.txt", header = TRUE)
+head(jobdur)
+
+summary(jobdur)
+addmargins( table(jobdur$dur) )
+
+```
+
+## Data Handling
+
+
+```{r}
+jobdur$censored <- jobdur$event != 1
+addmargins(table(jobdur$censored))
+addmargins(table(jobdur$event))
+
+Surv_time <- with(jobdur , Surv(dur, censored))
+```
+
+
+
+## Survival curves & Life Table
+
+
+
+1. Simple survival curve that doesn’t consider any different groupings
+
+```{r}
+fit <- survfit(Surv_time~1, data = jobdur)
+fit
+summary(fit)
+plot(fit)
+```
+
+Or using the package `survminer` and `ggsurvplot()` function:
+
+```{r}
+library(survminer)
+ggsurvplot(fit)
+```
+
+
+2. Curves depending on education level.
+
+Let use the factor depending on education level $>12$ 
+
+```{r}
+ed_level <- factor(jobdur$ed>12, labels=c('Low Educ', 'High Educ') )
+```
+
+
+```{r}
+sfit <- survfit(Surv_time~ed_level, data = jobdur)
+sfit
+summary(sfit)
+plot(sfit)
+ggsurvplot(sfit, conf.int=TRUE, pval=TRUE, risk.table=TRUE, 
+           legend.labs=c("Low Educ", "High Educ"), legend.title="Sex",  
+           palette=c("dodgerblue2", "orchid2"), 
+           title="KM Curve for Jub Duration Survival", 
+           risk.table.height=.15)
 ```
 
 

@@ -14,7 +14,6 @@ biblio-style: apalike
 bibliography: [./data/biblio_hdr_v2.bib, ./data/Liste_Publi3.bib, ./data/biblio_SABD.bib]
 nocite: |
   @Bivand2013, @lovelace2019
-draft: True
 ---
 
 <script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
@@ -924,31 +923,31 @@ summary(Coxfit2)</code></pre>
 ##   n= 452, number of events= 256 
 ## 
 ##                coef exp(coef)  se(coef)      z Pr(&gt;|z|)   
-## sexfemale  0.034136  1.034725  0.127740  0.267  0.78930   
-## racewhite  0.037004  1.037697  0.145064  0.255  0.79866   
-## searchyes  0.257571  1.293784  0.133026  1.936  0.05284 . 
-## pubempyes -0.517641  0.595925  0.165430 -3.129  0.00175 **
-## age       -0.003931  0.996077  0.003567 -1.102  0.27044   
+## sexfemale  0.037309  1.038014  0.128280  0.291  0.77117   
+## racewhite  0.036765  1.037450  0.145486  0.253  0.80049   
+## searchyes  0.239165  1.270188  0.132180  1.809  0.07039 . 
+## pubempyes -0.514447  0.597831  0.165574 -3.107  0.00189 **
+## age       -0.000408  0.999592  0.003463 -0.118  0.90621   
 ## ---
 ## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ##           exp(coef) exp(-coef) lower .95 upper .95
-## sexfemale    1.0347     0.9664    0.8055    1.3291
-## racewhite    1.0377     0.9637    0.7809    1.3790
-## searchyes    1.2938     0.7729    0.9968    1.6792
-## pubempyes    0.5959     1.6781    0.4309    0.8241
-## age          0.9961     1.0039    0.9891    1.0031
+## sexfemale    1.0380     0.9634    0.8073     1.335
+## racewhite    1.0374     0.9639    0.7801     1.380
+## searchyes    1.2702     0.7873    0.9803     1.646
+## pubempyes    0.5978     1.6727    0.4322     0.827
+## age          0.9996     1.0004    0.9928     1.006
 ## 
-## Concordance= 0.554  (se = 0.019 )
-## Likelihood ratio test= 15.2  on 5 df,   p=0.01
-## Wald test            = 14.24  on 5 df,   p=0.01
-## Score (logrank) test = 14.44  on 5 df,   p=0.01</code></pre>
+## Concordance= 0.56  (se = 0.02 )
+## Likelihood ratio test= 14  on 5 df,   p=0.02
+## Wald test            = 13.03  on 5 df,   p=0.02
+## Score (logrank) test = 13.24  on 5 df,   p=0.02</code></pre>
 <p>The p-value for all three overall tests (likelihood, Wald, and score) are significant, indicating that the model is significant compared to the null model (with intercept only).
 In the above example, the test statistics are in close agreement, and the null model is rejected.</p>
 <p>In the multivariate Cox analysis, the covariates sex and ph.ecog remain significant (p &lt; 0.05). However, the covariate age fails to be significant (p = 0.23, which is grater than 0.05).</p>
-<p>The p-value for <code>pubempyes</code> is , with a hazard ratio HR = 0.5959245 indicating a strong relationship between the public private status and return to employment.</p>
-<p>The hazard ratios of covariates are interpretable as multiplicative effects on the hazard. For example, holding the other covariates constant, being public status reduces the hazard by a factor of = 0.5959245 , or -58.5924519 %. We conclude that, being public employee is associated with longer unemployment period.</p>
-<p>By contrast, the p-value for <code>searchyes</code> covariates is now 0.0528375. The hazard ratio HR = 1.2937841. Holding the other covariates constant, an effective search induces weekly hazard of finding a job by a factor of 1.2937841, or `29.37840671%, which is a significant contribution.</p>
+<p>The p-value for <code>pubempyes</code> is , with a hazard ratio HR = 0.597831 indicating a strong relationship between the public private status and return to employment.</p>
+<p>The hazard ratios of covariates are interpretable as multiplicative effects on the hazard. For example, holding the other covariates constant, being public status reduces the hazard by a factor of = 0.597831 , or -58.7830965 %. We conclude that, being public employee is associated with longer unemployment period.</p>
+<p>By contrast, the p-value for <code>searchyes</code> covariates is now 0.0703921. The hazard ratio HR = 1.2701875. Holding the other covariates constant, an effective search induces weekly hazard of finding a job by a factor of 1.2701875, or `27.01874641%, which is a significant contribution.</p>
 <div id="visualizing-the-estimated-distribution-of-survival-times" class="section level3">
 <h3>Visualizing the estimated distribution of survival times</h3>
 <p><strong>Plot the baseline survival function</strong></p>
@@ -975,7 +974,7 @@ ggsurvplot(survfit(Surv_time~cl_age, data=Unemployment), pval=TRUE)</code></pre>
 <pre class="r"><code>res.cut &lt;- surv_cutpoint(Unemployment, time = &quot;duration&quot;, event = &quot;spell&quot;,    variables = c(&quot;age&quot;))
 summary(res.cut)</code></pre>
 <pre><code>##     cutpoint statistic
-## age 26.81451  1.766935</code></pre>
+## age 40.47925   1.16299</code></pre>
 <pre class="r"><code># 2. Plot cutpoint for DEPDC1
 # palette = &quot;npg&quot; (nature publishing group), see ?ggpubr::ggpar
 plot(res.cut, &quot;age&quot;, palette = &quot;npg&quot;)</code></pre>
@@ -988,9 +987,9 @@ head(res.cat)</code></pre>
 ## 1        4     1 high
 ## 2        7     0 high
 ## 3        1     0  low
-## 4        1     1 high
-## 5        3     1 high
-## 6        1     1 high</code></pre>
+## 4        1     1  low
+## 5        3     1  low
+## 6        1     1  low</code></pre>
 <p>Fit survival curves and visualize</p>
 <pre class="r"><code>sfit3 &lt;- survfit(Surv_time ~age, data = res.cat)
 ggsurvplot(sfit3, risk.table = TRUE, conf.int = TRUE)</code></pre>
@@ -1045,12 +1044,12 @@ test.ph</code></pre>
 <pre class="r"><code>test.ph &lt;- cox.zph(Coxfit2)
 test.ph</code></pre>
 <pre><code>##        chisq df     p
-## sex    0.298  1 0.585
-## race   1.928  1 0.165
-## search 3.897  1 0.048
-## pubemp 2.609  1 0.106
-## age    0.127  1 0.721
-## GLOBAL 8.759  5 0.119</code></pre>
+## sex    0.331  1 0.565
+## race   1.886  1 0.170
+## search 3.306  1 0.069
+## pubemp 2.563  1 0.109
+## age    0.703  1 0.402
+## GLOBAL 7.622  5 0.178</code></pre>
 <pre class="r"><code>ggcoxzph(test.ph)</code></pre>
 <p><img src="/post/Lessons/2020-12-11-application-of-sa_files/figure-html/unnamed-chunk-24-2.png" width="576" style="display: block; margin: auto;" />
 In the figure above, the solid line is a smoothing spline fit to the plot, with the dashed lines representing a <span class="math inline">\(\pm 2 \sigma\)</span> band around the fit.</p>
@@ -1231,18 +1230,18 @@ summary(Weib1)</code></pre>
 ## Covariate           Mean       Coef Exp(Coef)  se(Coef)    Wald p
 ## sex 
 ##             male    0.553     0         1           (reference)
-##           female    0.447     0.110     1.116     0.125     0.382 
-## age                37.207    -0.004     0.996     0.004     0.261 
+##           female    0.447     0.115     1.121     0.126     0.362 
+## age                35.444     0.000     1.000     0.003     0.953 
 ## 
-## log(scale)                    3.448    31.428     0.181     0.000 
-## log(shape)                   -0.155     0.856     0.048     0.001 
+## log(scale)                    3.629    37.663     0.182     0.000 
+## log(shape)                   -0.158     0.854     0.048     0.001 
 ## 
 ## Events                    256 
 ## Total time at risk          8819 
-## Max. log. likelihood      -1155.1 
-## LR test statistic         2.1 
+## Max. log. likelihood      -1155.7 
+## LR test statistic         0.83 
 ## Degrees of freedom        2 
-## Overall p-value           0.350712</code></pre>
+## Overall p-value           0.659888</code></pre>
 <pre class="r"><code>par(mfrow=c(2,2))
 plot(Weib1 , fn=&quot;sur&quot;, new.data = c(0, 40))</code></pre>
 <p><img src="/post/Lessons/2020-12-11-application-of-sa_files/figure-html/unnamed-chunk-31-1.png" width="480" style="display: block; margin: auto;" /></p>
@@ -1258,18 +1257,18 @@ summary(phreg1)</code></pre>
 ## Covariate          W.mean      Coef Exp(Coef)  se(Coef)    Wald p
 ## sex 
 ##             male    0.553     0         1           (reference)
-##           female    0.447     0.110     1.116     0.125     0.382 
-## age                37.207    -0.004     0.996     0.004     0.261 
+##           female    0.447     0.115     1.121     0.126     0.362 
+## age                35.444     0.000     1.000     0.003     0.953 
 ## 
-## log(scale)                    3.448               0.181     0.000 
-## log(shape)                   -0.155               0.048     0.001 
+## log(scale)                    3.629               0.182     0.000 
+## log(shape)                   -0.158               0.048     0.001 
 ## 
 ## Events                    256 
 ## Total time at risk          8819 
-## Max. log. likelihood      -1155.1 
-## LR test statistic         2.09 
+## Max. log. likelihood      -1155.7 
+## LR test statistic         0.83 
 ## Degrees of freedom        2 
-## Overall p-value           0.35082</code></pre>
+## Overall p-value           0.660091</code></pre>
 <pre class="r"><code>coxreg1 &lt;- coxreg(Surv_time2 ~ sex + age, data=Unemployment)
 summary(coxreg1)</code></pre>
 <pre><code>## Call:
@@ -1278,15 +1277,15 @@ summary(coxreg1)</code></pre>
 ## Covariate           Mean       Coef     Rel.Risk   S.E.    Wald p
 ## sex 
 ##             male    0.553     0         1 (reference)
-##           female    0.447     0.082     1.086     0.126     0.513 
-## age                37.207    -0.003     0.997     0.004     0.405 
+##           female    0.447     0.084     1.088     0.126     0.502 
+## age                35.444    -0.000     1.000     0.003     0.898 
 ## 
 ## Events                    256 
 ## Total time at risk          8819 
-## Max. log. likelihood      -1352.8 
-## LR test statistic         1.16 
+## Max. log. likelihood      -1353.1 
+## LR test statistic         0.48 
 ## Degrees of freedom        2 
-## Overall p-value           0.560093</code></pre>
+## Overall p-value           0.7862</code></pre>
 <pre class="r"><code>check.dist(phreg1, coxreg1)</code></pre>
 <p><img src="/post/Lessons/2020-12-11-application-of-sa_files/figure-html/unnamed-chunk-32-1.png" width="480" style="display: block; margin: auto;" /></p>
 <p>The solid line is the parametric Weibull cumulative hazard function and the dashed line is non-parametric function.</p>
@@ -1303,11 +1302,11 @@ anova(Weib2)</code></pre>
 <pre><code>##                 Wald Statistics          Response: Surv_time2 
 ## 
 ##  Factor     Chi-Square d.f. P     
-##  sex         0.12      1    0.7265
-##  race        0.08      1    0.7724
-##  age         1.18      1    0.2777
-##  pubemp     10.41      1    0.0013
-##  TOTAL      12.52      4    0.0139</code></pre>
+##  sex         0.15      1    0.7028
+##  race        0.09      1    0.7600
+##  age         0.03      1    0.8597
+##  pubemp     10.49      1    0.0012
+##  TOTAL      11.39      4    0.0225</code></pre>
 <pre class="r"><code>plot(anova(Weib2) , margin = c(&quot;chisq&quot;, &quot;d.f.&quot;, &quot;P&quot;))</code></pre>
 <p><img src="/post/Lessons/2020-12-11-application-of-sa_files/figure-html/unnamed-chunk-33-1.png" width="480" style="display: block; margin: auto;" /></p>
 <p>In the example, we included all available covariates into the model to rank their statistical importance. This is often the case in real research setting that researchers have no prior knowledge on which variable should be included.</p>
@@ -1318,15 +1317,15 @@ anova(Weib2)</code></pre>
 <pre class="r"><code>fastbw(Weib2, rule=&quot;aic&quot;)</code></pre>
 <pre><code>## 
 ##  Deleted Chi-Sq d.f. P      Residual d.f. P      AIC  
-##  race    0.08   1    0.7724 0.08     1    0.7724 -1.92
-##  sex     0.10   1    0.7496 0.19     2    0.9114 -3.81
-##  age     1.19   1    0.2759 1.37     3    0.7119 -4.63
+##  age     0.03   1    0.8597 0.03     1    0.8597 -1.97
+##  race    0.08   1    0.7712 0.12     2    0.9437 -3.88
+##  sex     0.11   1    0.7377 0.23     3    0.9729 -5.77
 ## 
 ## Approximate Estimates after Deleting Factors
 ## 
-##              Coef    S.E. Wald Z         P
-## (Intercept) 3.410 0.07972 42.783 0.0000000
-## pubemp=yes  0.628 0.18812  3.338 0.0008426
+##               Coef    S.E. Wald Z         P
+## (Intercept) 3.4132 0.07989 42.725 0.0000000
+## pubemp=yes  0.6297 0.18848  3.341 0.0008357
 ## 
 ## Factors in Final Model
 ## 
@@ -1342,8 +1341,8 @@ anova(Weib2)</code></pre>
 <p>We first use <code>Predict()</code> to calculate median survival time in log scale, then use <code>ggplot()</code> function to draw plots.</p>
 <pre class="r"><code>Weib3 &lt;- psm(Surv_time2 ~ race + age*sex, dist=&quot;weibull&quot;, data=Unemployment)
 summary(Unemployment$age)</code></pre>
-<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##  0.5346 22.5014 36.1486 36.2702 48.2031 79.4052</code></pre>
+<pre><code>##     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+##  0.09523 21.68801 36.50918 35.82539 46.78245 86.52079</code></pre>
 <pre class="r"><code>table(Unemployment$sex)</code></pre>
 <pre><code>## 
 ##   male female 
@@ -1362,123 +1361,7 @@ survfit(smooth1  , cov=cov, cdf=T)
 hazard(smooth1  , cov=cov)
 fdensity(smooth1  , cov=cov)</code></pre>
 <p><img src="/post/Lessons/2020-12-11-application-of-sa_files/figure-html/unnamed-chunk-37-1.png" width="480" style="display: block; margin: auto;" /></p>
-<pre class="r"><code>#########################################</code></pre>
-</div>
-</div>
-<div id="exercise-inspired-from-allison2010" class="section level1">
-<h1>Exercise inspired from <span class="citation"><a href="#ref-Allison2010" role="doc-biblioref">Allison</a> (<a href="#ref-Allison2010" role="doc-biblioref">2010</a>)</span></h1>
-<p>The exercise analyses the job duration <code>jobdur.txt</code>. The data consist of 100 job durations, measured from the year to entry into hte job until the year that the employee quit.</p>
-<p>Duration after the fifth year are censored. If the employee is fired, the job duration is censored at the end of its last full year.</p>
-<p>Survival times have values of <code>1, 2, 3, 4 or 5</code></p>
-<div id="import-data-summary-statistics" class="section level2">
-<h2>Import data &amp; Summary statistics</h2>
-<pre class="r"><code>jobdur &lt;- read.table(&quot;./data/jobdur.txt&quot;, header = TRUE)
-head(jobdur)</code></pre>
-<pre><code>##   dur event ed prestige salary
-## 1   1     1  7        3     19
-## 2   4     1 14       62     17
-## 3   5     0 16       70     18
-## 4   2     1 12       43    135
-## 5   3     1  9       18     12
-## 6   1     1 11       31     12</code></pre>
-<pre class="r"><code>summary(jobdur)</code></pre>
-<pre><code>##       dur           event            ed           prestige     
-##  Min.   :1.00   Min.   :0.00   Min.   : 6.00   Min.   :  1.00  
-##  1st Qu.:1.00   1st Qu.:1.00   1st Qu.:10.00   1st Qu.: 26.75  
-##  Median :2.50   Median :1.00   Median :12.00   Median : 45.00  
-##  Mean   :2.72   Mean   :0.98   Mean   :12.17   Mean   : 45.52  
-##  3rd Qu.:4.00   3rd Qu.:1.00   3rd Qu.:14.00   3rd Qu.: 63.00  
-##  Max.   :5.00   Max.   :2.00   Max.   :18.00   Max.   :100.00  
-##      salary      
-##  Min.   :  3.00  
-##  1st Qu.:  9.00  
-##  Median : 15.00  
-##  Mean   : 21.24  
-##  3rd Qu.: 22.25  
-##  Max.   :135.00</code></pre>
-<pre class="r"><code>addmargins( table(jobdur$dur) )</code></pre>
-<pre><code>## 
-##   1   2   3   4   5 Sum 
-##  29  21  20   9  21 100</code></pre>
-</div>
-<div id="data-handling-1" class="section level2">
-<h2>Data Handling</h2>
-<pre class="r"><code>jobdur$censored &lt;- jobdur$event != 1
-addmargins(table(jobdur$censored))</code></pre>
-<pre><code>## 
-## FALSE  TRUE   Sum 
-##    68    32   100</code></pre>
-<pre class="r"><code>addmargins(table(jobdur$event))</code></pre>
-<pre><code>## 
-##   0   1   2 Sum 
-##  17  68  15 100</code></pre>
-<pre class="r"><code>Surv_time &lt;- with(jobdur , Surv(dur, censored))</code></pre>
-</div>
-<div id="survival-curves-life-table-1" class="section level2">
-<h2>Survival curves &amp; Life Table</h2>
-<ol style="list-style-type: decimal">
-<li>Simple survival curve that doesn’t consider any different groupings</li>
-</ol>
-<pre class="r"><code>fit &lt;- survfit(Surv_time~1, data = jobdur)
-fit</code></pre>
-<pre><code>## Call: survfit(formula = Surv_time ~ 1, data = jobdur)
-## 
-##       n  events  median 0.95LCL 0.95UCL 
-##     100      32       5       5       5</code></pre>
-<pre class="r"><code>summary(fit)</code></pre>
-<pre><code>## Call: survfit(formula = Surv_time ~ 1, data = jobdur)
-## 
-##  time n.risk n.event survival std.err lower 95% CI upper 95% CI
-##     1    100       7    0.930  0.0255       0.8813        0.981
-##     2     71       3    0.891  0.0330       0.8283        0.958
-##     3     50       4    0.819  0.0457       0.7346        0.914
-##     4     30       1    0.792  0.0517       0.6970        0.900
-##     5     21      17    0.151  0.0686       0.0619        0.368</code></pre>
-<pre class="r"><code>plot(fit)</code></pre>
-<p><img src="/post/Lessons/2020-12-11-application-of-sa_files/figure-html/unnamed-chunk-41-1.png" width="480" style="display: block; margin: auto;" /></p>
-<p>Or using the package <code>survminer</code> and <code>ggsurvplot()</code> function:</p>
-<pre class="r"><code>library(survminer)
-ggsurvplot(fit)</code></pre>
-<p><img src="/post/Lessons/2020-12-11-application-of-sa_files/figure-html/unnamed-chunk-42-1.png" width="480" style="display: block; margin: auto;" /></p>
-<ol start="2" style="list-style-type: decimal">
-<li>Curves depending on education level.</li>
-</ol>
-<p>Let use the factor depending on education level <span class="math inline">\(&gt;12\)</span></p>
-<pre class="r"><code>ed_level &lt;- factor(jobdur$ed&gt;12, labels=c(&#39;Low Educ&#39;, &#39;High Educ&#39;) )</code></pre>
-<pre class="r"><code>sfit &lt;- survfit(Surv_time~ed_level, data = jobdur)
-sfit</code></pre>
-<pre><code>## Call: survfit(formula = Surv_time ~ ed_level, data = jobdur)
-## 
-##                     n events median 0.95LCL 0.95UCL
-## ed_level=Low Educ  55     13      5       5      NA
-## ed_level=High Educ 45     19      5       5       5</code></pre>
-<pre class="r"><code>summary(sfit)</code></pre>
-<pre><code>## Call: survfit(formula = Surv_time ~ ed_level, data = jobdur)
-## 
-##                 ed_level=Low Educ 
-##  time n.risk n.event survival std.err lower 95% CI upper 95% CI
-##     1     55       3    0.945  0.0306       0.8873        1.000
-##     2     36       3    0.867  0.0518       0.7708        0.974
-##     3     23       2    0.791  0.0695       0.6662        0.940
-##     5      6       5    0.132  0.1209       0.0219        0.796
-## 
-##                 ed_level=High Educ 
-##  time n.risk n.event survival std.err lower 95% CI upper 95% CI
-##     1     45       4    0.911  0.0424       0.8316        0.998
-##     3     27       2    0.844  0.0604       0.7331        0.971
-##     4     20       1    0.801  0.0706       0.6743        0.953
-##     5     15      12    0.160  0.0840       0.0574        0.448</code></pre>
-<pre class="r"><code>plot(sfit)
-ggsurvplot(sfit, conf.int=TRUE, pval=TRUE, risk.table=TRUE, 
-           legend.labs=c(&quot;Low Educ&quot;, &quot;High Educ&quot;), legend.title=&quot;Sex&quot;,  
-           palette=c(&quot;dodgerblue2&quot;, &quot;orchid2&quot;), 
-           title=&quot;KM Curve for Jub Duration Survival&quot;, 
-           risk.table.height=.15)</code></pre>
-<p><img src="/post/Lessons/2020-12-11-application-of-sa_files/figure-html/unnamed-chunk-44-1.png" width="480" style="display: block; margin: auto;" /><img src="/post/Lessons/2020-12-11-application-of-sa_files/figure-html/unnamed-chunk-44-2.png" width="480" style="display: block; margin: auto;" /></p>
 <div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-Allison2010" class="csl-entry">
-Allison, Paul D. 2010. <em>Survival Analysis Using SAS: A Practical Guide, Second Edition</em>. 2nd ed. SAS Publishing.
-</div>
 <div id="ref-Bivand2013" class="csl-entry">
 Bivand, Roger S., Edzer J. Pebesma, and Virgilio. Gómez-Rubio. 2008. <em>Applied Spatial Data Analysis with r</em>. New York; London: Springer.
 </div>
