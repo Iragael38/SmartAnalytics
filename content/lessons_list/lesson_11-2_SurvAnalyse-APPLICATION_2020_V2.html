@@ -1,0 +1,1487 @@
+---
+title: "Applications of Survival Analysis"
+subtitle: "Smart Analytics for Big Data"
+author: "Iragaël Joly"
+date: "Automn 2020"
+categories: ["R"]
+tags: ["R Markdown", "plot", "regression"]
+authorbox: false
+link-citations: yes
+biblio-style: apalike
+bibliography: [./data/biblio_hdr_v2.bib, ./data/Liste_Publi3.bib, ./data/biblio_SABD.bib]
+nocite: |
+  @Bivand2013, @lovelace2019
+draft: True
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
+
+
+<div id="exercise---unemployment-duration" class="section level1">
+<h1>Exercise - Unemployment duration</h1>
+<p>Survival analysis models covariates that influence time-to-event.</p>
+<p>OLS regression methods are less efficient because the time-to-event is typically not normally distributed (positive, skewed, nearly discret when rounding are present), and the model cannot handle censored observation, without modification.</p>
+<div id="unemployment-data" class="section level2">
+<h2>Unemployment data</h2>
+<p><strong>Description</strong></p>
+<ul>
+<li><p>a cross-section from 1993</p></li>
+<li><p>number of observations : 452</p></li>
+<li><p>observation : individuals</p></li>
+<li><p>country : United States</p></li>
+<li><p><code>duration</code> : duration of first spell of unemployment, t, in weeks</p></li>
+<li><p><code>spell</code>: 1 if spell is complete</p></li>
+<li><p><code>race</code>: one of nonwhite, white</p></li>
+<li><p><code>sex</code>: one of male, female</p></li>
+<li><p><code>reason</code>: reason for unemployment, one of new (new entrant), lose (job loser), leave (job leaver), reentr (labor force reentrant)</p></li>
+<li><p><code>search</code>: ‘yes’ if (1) the unemployment spell is completed between the first and second surveys and number of methods used to search &gt; average number of methods used across all records in the sample, or, (2) for individuals who remain unemployed for consecutive surveys, if the number of methods used is strictly nondecreasing at all survey points, and is strictly increasing at least at one survey point</p></li>
+<li><p><code>pubemp</code>: ‘yes’ if an individual used a public employment agency to search for work at any survey points relating to the individuals first unemployment spell</p></li>
+<li><p><code>ftpX</code>: 1 if an individual is searching for full time work at survey X, <span class="math inline">\(X=1,2...4\)</span></p></li>
+<li><p><code>nobs</code>: number of observations on the first spell of unemployment for the record</p></li>
+</ul>
+<pre class="r"><code>#### Packages
+library(dplyr)
+library(survival)
+library(survminer)
+library(lubridate)
+library(knitr)
+# Data package
+library(Ecdat)
+data(Unemployment)
+# Unemployment # Necessary to obtain the DF !
+head(Unemployment)</code></pre>
+<pre><code>##   duration spell     race    sex reason search pubemp ftp1 ftp2 ftp3 ftp4 nobs
+## 1        4     1    white   male reentr    yes    yes    1    0    0    0    1
+## 2        7     0    white   male   lose     no     no    1    1    1    1    2
+## 3        1     0 nonwhite   male   lose     no     no    0    0    0    0    1
+## 4        1     1 nonwhite   male reentr     no     no    0    1    0    0    1
+## 5        3     1 nonwhite female reentr     no     no    0    0    0    0    1
+## 6        1     1    white female reentr     no     no    0    0    0    0    1</code></pre>
+<pre class="r"><code>Unemployment &lt;- Unemployment[,-c(8:11)]</code></pre>
+</div>
+<div id="summary-statistics" class="section level2">
+<h2>Summary Statistics</h2>
+<pre class="r"><code>library(tidyr)
+library(ggplot2)
+Unemployment %&gt;%
+  gather(-duration, -sex, -race, key = &quot;var&quot;, value = &quot;value&quot;) %&gt;% 
+  ggplot(aes(x = value, y = duration, color = sex, shape = factor(race))) +
+    geom_point() +
+    facet_wrap(~ var, scales = &quot;free&quot;) +
+    theme_bw()</code></pre>
+<p><img src="/lessons_list/lesson_11-2_SurvAnalyse-APPLICATION_2020_V2_files/figure-html/unnamed-chunk-3-1.png" width="480" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>summary(Unemployment$duration)</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    0.00    4.00   10.00   18.51   22.25  117.00</code></pre>
+<pre class="r"><code>par(mfrow=c(2,2))
+plot(Unemployment$duration)
+boxplot(Unemployment$duration)
+plot(Unemployment$duration ~ Unemployment$sex)
+plot(Unemployment$duration ~ Unemployment$race)</code></pre>
+<p><img src="/lessons_list/lesson_11-2_SurvAnalyse-APPLICATION_2020_V2_files/figure-html/unnamed-chunk-4-1.png" width="480" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>t.test(Unemployment$duration ~ Unemployment$sex)</code></pre>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  Unemployment$duration by Unemployment$sex
+## t = 0.61614, df = 435.97, p-value = 0.5381
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -2.947326  5.639101
+## sample estimates:
+##   mean in group male mean in group female 
+##             19.13636             17.79048</code></pre>
+<pre class="r"><code>t.test(Unemployment$duration ~ Unemployment$race)</code></pre>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  Unemployment$duration by Unemployment$race
+## t = 0.2089, df = 208.95, p-value = 0.8347
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -4.301055  5.320624
+## sample estimates:
+## mean in group nonwhite    mean in group white 
+##               18.88889               18.37910</code></pre>
+<pre class="r"><code>t.test(Unemployment$duration ~ Unemployment$search)</code></pre>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  Unemployment$duration by Unemployment$search
+## t = 0.3496, df = 266.6, p-value = 0.7269
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -3.841640  5.500454
+## sample estimates:
+##  mean in group no mean in group yes 
+##          18.77346          17.94406</code></pre>
+<pre class="r"><code>t.test(Unemployment$duration ~ Unemployment$pubemp)</code></pre>
+<pre><code>## 
+##  Welch Two Sample t-test
+## 
+## data:  Unemployment$duration by Unemployment$pubemp
+## t = -3.0635, df = 119.58, p-value = 0.002704
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -15.704693  -3.373809
+## sample estimates:
+##  mean in group no mean in group yes 
+##          16.56944          26.10870</code></pre>
+</div>
+<div id="ols-regression-diagnostic" class="section level2">
+<h2>OLS regression &amp; Diagnostic</h2>
+<pre class="r"><code>OLS1 &lt;- lm(duration ~ sex + race + pubemp + search , data=Unemployment)
+summary(OLS1)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = duration ~ sex + race + pubemp + search, data = Unemployment)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -25.394 -13.868  -8.947   3.116  96.305 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  17.6096     2.5739   6.842 2.59e-11 ***
+## sexfemale    -0.6624     2.1704  -0.305 0.760360    
+## racewhite    -0.2525     2.4619  -0.103 0.918352    
+## pubempyes     9.6993     2.7010   3.591 0.000366 ***
+## searchyes    -1.8265     2.3285  -0.784 0.433211    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 22.85 on 447 degrees of freedom
+## Multiple R-squared:  0.02929,    Adjusted R-squared:  0.0206 
+## F-statistic: 3.372 on 4 and 447 DF,  p-value: 0.009827</code></pre>
+<pre class="r"><code>par(mfrow=c(2,2))
+plot(OLS1)</code></pre>
+<p><img src="/lessons_list/lesson_11-2_SurvAnalyse-APPLICATION_2020_V2_files/figure-html/unnamed-chunk-6-1.png" width="480" style="display: block; margin: auto;" /></p>
+</div>
+<div id="survival-analysis" class="section level2">
+<h2>Survival analysis</h2>
+<div id="data-handling" class="section level3">
+<h3>Data Handling</h3>
+<p>The duration data are of specific format.</p>
+<p>Function <code>Surv(time, status)</code> from <code>survival</code>package create data possibly censored.</p>
+<ul>
+<li><code>time</code>: real observed time</li>
+<li><code>status</code>: dummy for censored duration (<code>T</code>) or not(<code>F</code>)</li>
+</ul>
+<p>In presence of time-varying covariates, we use: <code>Surv(start,stop,event,data=mydata)</code>, avec <code>start</code>and <code>stop</code> the beginning and the end of the time at risk, and <code>status</code> is 1 when the event is observed.</p>
+</div>
+</div>
+<div id="survival-curves-life-table" class="section level2">
+<h2>Survival curves &amp; Life Table</h2>
+<p>The function <code>survfit()</code> computes Kaplan-Meier survival estimate.</p>
+<p>Its main arguments include:</p>
+<ul>
+<li>a survival time data (from <code>Surv()</code>)</li>
+<li>the data set containing the variables</li>
+</ul>
+<p>To compute survival curves:</p>
+<ol style="list-style-type: decimal">
+<li>Simple survival curve that doesn’t consider any different groupings</li>
+</ol>
+<div id="life-table" class="section level3">
+<h3>Life Table</h3>
+<pre class="r"><code>Surv_time &lt;- with( Unemployment, Surv(duration, spell))
+
+sfit1 &lt;- survfit(Surv_time~1, data = Unemployment)
+sfit1</code></pre>
+<pre><code>## Call: survfit(formula = Surv_time ~ 1, data = Unemployment)
+## 
+##       n  events  median 0.95LCL 0.95UCL 
+##     452     256      18      15      26</code></pre>
+<pre class="r"><code>kable(head(surv_summary(sfit1), 15))</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="right">time</th>
+<th align="right">n.risk</th>
+<th align="right">n.event</th>
+<th align="right">n.censor</th>
+<th align="right">surv</th>
+<th align="right">std.err</th>
+<th align="right">upper</th>
+<th align="right">lower</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">0</td>
+<td align="right">452</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">0.9955752</td>
+<td align="right">0.0031357</td>
+<td align="right">1.0000000</td>
+<td align="right">0.9894752</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="right">450</td>
+<td align="right">32</td>
+<td align="right">14</td>
+<td align="right">0.9247788</td>
+<td align="right">0.0134147</td>
+<td align="right">0.9494159</td>
+<td align="right">0.9007810</td>
+</tr>
+<tr class="odd">
+<td align="right">2</td>
+<td align="right">404</td>
+<td align="right">28</td>
+<td align="right">9</td>
+<td align="right">0.8606852</td>
+<td align="right">0.0190862</td>
+<td align="right">0.8934917</td>
+<td align="right">0.8290833</td>
+</tr>
+<tr class="even">
+<td align="right">3</td>
+<td align="right">367</td>
+<td align="right">18</td>
+<td align="right">8</td>
+<td align="right">0.8184717</td>
+<td align="right">0.0224681</td>
+<td align="right">0.8553199</td>
+<td align="right">0.7832110</td>
+</tr>
+<tr class="odd">
+<td align="right">4</td>
+<td align="right">341</td>
+<td align="right">19</td>
+<td align="right">14</td>
+<td align="right">0.7728677</td>
+<td align="right">0.0260356</td>
+<td align="right">0.8133299</td>
+<td align="right">0.7344185</td>
+</tr>
+<tr class="even">
+<td align="right">5</td>
+<td align="right">308</td>
+<td align="right">5</td>
+<td align="right">3</td>
+<td align="right">0.7603212</td>
+<td align="right">0.0270450</td>
+<td align="right">0.8017110</td>
+<td align="right">0.7210682</td>
+</tr>
+<tr class="odd">
+<td align="right">6</td>
+<td align="right">300</td>
+<td align="right">13</td>
+<td align="right">7</td>
+<td align="right">0.7273739</td>
+<td align="right">0.0297055</td>
+<td align="right">0.7709800</td>
+<td align="right">0.6862342</td>
+</tr>
+<tr class="even">
+<td align="right">7</td>
+<td align="right">280</td>
+<td align="right">11</td>
+<td align="right">6</td>
+<td align="right">0.6987985</td>
+<td align="right">0.0320696</td>
+<td align="right">0.7441315</td>
+<td align="right">0.6562272</td>
+</tr>
+<tr class="odd">
+<td align="right">8</td>
+<td align="right">263</td>
+<td align="right">17</td>
+<td align="right">6</td>
+<td align="right">0.6536290</td>
+<td align="right">0.0359336</td>
+<td align="right">0.7013230</td>
+<td align="right">0.6091786</td>
+</tr>
+<tr class="even">
+<td align="right">9</td>
+<td align="right">240</td>
+<td align="right">5</td>
+<td align="right">8</td>
+<td align="right">0.6400118</td>
+<td align="right">0.0371467</td>
+<td align="right">0.6883467</td>
+<td align="right">0.5950708</td>
+</tr>
+<tr class="odd">
+<td align="right">10</td>
+<td align="right">227</td>
+<td align="right">4</td>
+<td align="right">3</td>
+<td align="right">0.6287340</td>
+<td align="right">0.0381955</td>
+<td align="right">0.6776087</td>
+<td align="right">0.5833846</td>
+</tr>
+<tr class="even">
+<td align="right">11</td>
+<td align="right">220</td>
+<td align="right">3</td>
+<td align="right">5</td>
+<td align="right">0.6201604</td>
+<td align="right">0.0390094</td>
+<td align="right">0.6694357</td>
+<td align="right">0.5745121</td>
+</tr>
+<tr class="odd">
+<td align="right">12</td>
+<td align="right">212</td>
+<td align="right">15</td>
+<td align="right">11</td>
+<td align="right">0.5762811</td>
+<td align="right">0.0433693</td>
+<td align="right">0.6274085</td>
+<td align="right">0.5293201</td>
+</tr>
+<tr class="even">
+<td align="right">13</td>
+<td align="right">186</td>
+<td align="right">7</td>
+<td align="right">4</td>
+<td align="right">0.5545931</td>
+<td align="right">0.0457290</td>
+<td align="right">0.6065953</td>
+<td align="right">0.5070489</td>
+</tr>
+<tr class="odd">
+<td align="right">14</td>
+<td align="right">175</td>
+<td align="right">2</td>
+<td align="right">1</td>
+<td align="right">0.5482549</td>
+<td align="right">0.0464457</td>
+<td align="right">0.6005058</td>
+<td align="right">0.5005505</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>kable(tail(surv_summary(sfit1), 15))</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="right">time</th>
+<th align="right">n.risk</th>
+<th align="right">n.event</th>
+<th align="right">n.censor</th>
+<th align="right">surv</th>
+<th align="right">std.err</th>
+<th align="right">upper</th>
+<th align="right">lower</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">41</td>
+<td align="right">56</td>
+<td align="right">38</td>
+<td align="right">3</td>
+<td align="right">1</td>
+<td align="right">0.2599466</td>
+<td align="right">0.1156024</td>
+<td align="right">0.3260506</td>
+<td align="right">0.2072446</td>
+</tr>
+<tr class="even">
+<td align="left">42</td>
+<td align="right">58</td>
+<td align="right">34</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.2599466</td>
+<td align="right">0.1156024</td>
+<td align="right">0.3260506</td>
+<td align="right">0.2072446</td>
+</tr>
+<tr class="odd">
+<td align="left">43</td>
+<td align="right">60</td>
+<td align="right">33</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">0.2441922</td>
+<td align="right">0.1237697</td>
+<td align="right">0.3112324</td>
+<td align="right">0.1915927</td>
+</tr>
+<tr class="even">
+<td align="left">44</td>
+<td align="right">61</td>
+<td align="right">31</td>
+<td align="right">0</td>
+<td align="right">8</td>
+<td align="right">0.2441922</td>
+<td align="right">0.1237697</td>
+<td align="right">0.3112324</td>
+<td align="right">0.1915927</td>
+</tr>
+<tr class="odd">
+<td align="left">45</td>
+<td align="right">65</td>
+<td align="right">23</td>
+<td align="right">0</td>
+<td align="right">6</td>
+<td align="right">0.2441922</td>
+<td align="right">0.1237697</td>
+<td align="right">0.3112324</td>
+<td align="right">0.1915927</td>
+</tr>
+<tr class="even">
+<td align="left">46</td>
+<td align="right">69</td>
+<td align="right">17</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0.2298280</td>
+<td align="right">0.1378238</td>
+<td align="right">0.3011055</td>
+<td align="right">0.1754232</td>
+</tr>
+<tr class="odd">
+<td align="left">47</td>
+<td align="right">78</td>
+<td align="right">16</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0.2154637</td>
+<td align="right">0.1521909</td>
+<td align="right">0.2903483</td>
+<td align="right">0.1598928</td>
+</tr>
+<tr class="even">
+<td align="left">48</td>
+<td align="right">86</td>
+<td align="right">15</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0.2010995</td>
+<td align="right">0.1671047</td>
+<td align="right">0.2790299</td>
+<td align="right">0.1449343</td>
+</tr>
+<tr class="odd">
+<td align="left">49</td>
+<td align="right">100</td>
+<td align="right">14</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.2010995</td>
+<td align="right">0.1671047</td>
+<td align="right">0.2790299</td>
+<td align="right">0.1449343</td>
+</tr>
+<tr class="even">
+<td align="left">50</td>
+<td align="right">104</td>
+<td align="right">13</td>
+<td align="right">6</td>
+<td align="right">2</td>
+<td align="right">0.1082843</td>
+<td align="right">0.3063626</td>
+<td align="right">0.1973976</td>
+<td align="right">0.0594004</td>
+</tr>
+<tr class="odd">
+<td align="left">51</td>
+<td align="right">108</td>
+<td align="right">5</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0.0866275</td>
+<td align="right">0.3792862</td>
+<td align="right">0.1821817</td>
+<td align="right">0.0411914</td>
+</tr>
+<tr class="even">
+<td align="left">52</td>
+<td align="right">109</td>
+<td align="right">4</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.0866275</td>
+<td align="right">0.3792862</td>
+<td align="right">0.1821817</td>
+<td align="right">0.0411914</td>
+</tr>
+<tr class="odd">
+<td align="left">53</td>
+<td align="right">112</td>
+<td align="right">3</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0.0577516</td>
+<td align="right">0.5572474</td>
+<td align="right">0.1721449</td>
+<td align="right">0.0193747</td>
+</tr>
+<tr class="even">
+<td align="left">54</td>
+<td align="right">113</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.0577516</td>
+<td align="right">0.5572474</td>
+<td align="right">0.1721449</td>
+<td align="right">0.0193747</td>
+</tr>
+<tr class="odd">
+<td align="left">55</td>
+<td align="right">117</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.0577516</td>
+<td align="right">0.5572474</td>
+<td align="right">0.1721449</td>
+<td align="right">0.0193747</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="survival-curve-ci" class="section level3">
+<h3>Survival curve &amp; CI</h3>
+<p>Information about the survival curves</p>
+<pre class="r"><code>attr(surv_summary(sfit1), &quot;table&quot;)</code></pre>
+<pre><code>##            summary(x)$table
+## records          452.000000
+## n.max            452.000000
+## n.start          452.000000
+## events           256.000000
+## *rmean            38.567702
+## *se(rmean)         2.531508
+## median            18.000000
+## 0.95LCL           15.000000
+## 0.95UCL           26.000000</code></pre>
+<pre class="r"><code>plot(sfit1)
+ggsurvplot(sfit1, conf.int=TRUE, pval=TRUE, risk.table=TRUE, 
+           palette=c(&quot;dodgerblue2&quot;, &quot;orchid2&quot;), 
+           title=&quot;KM Curve for Job Duration Survival&quot;, 
+           risk.table.height=.15)</code></pre>
+<p><img src="/lessons_list/lesson_11-2_SurvAnalyse-APPLICATION_2020_V2_files/figure-html/unnamed-chunk-9-1.png" width="480" style="display: block; margin: auto;" /><img src="/lessons_list/lesson_11-2_SurvAnalyse-APPLICATION_2020_V2_files/figure-html/unnamed-chunk-9-2.png" width="480" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="different-survival-curves-depending-on-sex" class="section level2">
+<h2>Different survival curves depending on sex</h2>
+<pre class="r"><code>addmargins( table(Unemployment$sex))</code></pre>
+<pre><code>## 
+##   male female    Sum 
+##    242    210    452</code></pre>
+<pre class="r"><code>sfit2 &lt;- survfit(Surv_time~sex, data = Unemployment)
+sfit2</code></pre>
+<pre><code>## Call: survfit(formula = Surv_time ~ sex, data = Unemployment)
+## 
+##              n events median 0.95LCL 0.95UCL
+## sex=male   242    134     22      13      35
+## sex=female 210    122     16      13      22</code></pre>
+<pre class="r"><code>kable(head(surv_summary(sfit2), 15))</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="right">time</th>
+<th align="right">n.risk</th>
+<th align="right">n.event</th>
+<th align="right">n.censor</th>
+<th align="right">surv</th>
+<th align="right">std.err</th>
+<th align="right">upper</th>
+<th align="right">lower</th>
+<th align="left">strata</th>
+<th align="left">sex</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">0</td>
+<td align="right">242</td>
+<td align="right">1</td>
+<td align="right">0</td>
+<td align="right">0.9958678</td>
+<td align="right">0.0041408</td>
+<td align="right">1.0000000</td>
+<td align="right">0.9878182</td>
+<td align="left">sex=male</td>
+<td align="left">male</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="right">241</td>
+<td align="right">14</td>
+<td align="right">7</td>
+<td align="right">0.9380165</td>
+<td align="right">0.0165244</td>
+<td align="right">0.9688935</td>
+<td align="right">0.9081235</td>
+<td align="left">sex=male</td>
+<td align="left">male</td>
+</tr>
+<tr class="odd">
+<td align="right">2</td>
+<td align="right">220</td>
+<td align="right">14</td>
+<td align="right">5</td>
+<td align="right">0.8783246</td>
+<td align="right">0.0241240</td>
+<td align="right">0.9208512</td>
+<td align="right">0.8377619</td>
+<td align="left">sex=male</td>
+<td align="left">male</td>
+</tr>
+<tr class="even">
+<td align="right">3</td>
+<td align="right">201</td>
+<td align="right">10</td>
+<td align="right">3</td>
+<td align="right">0.8346268</td>
+<td align="right">0.0290249</td>
+<td align="right">0.8834834</td>
+<td align="right">0.7884720</td>
+<td align="left">sex=male</td>
+<td align="left">male</td>
+</tr>
+<tr class="odd">
+<td align="right">4</td>
+<td align="right">188</td>
+<td align="right">13</td>
+<td align="right">7</td>
+<td align="right">0.7769133</td>
+<td align="right">0.0351793</td>
+<td align="right">0.8323715</td>
+<td align="right">0.7251500</td>
+<td align="left">sex=male</td>
+<td align="left">male</td>
+</tr>
+<tr class="even">
+<td align="right">5</td>
+<td align="right">168</td>
+<td align="right">4</td>
+<td align="right">2</td>
+<td align="right">0.7584153</td>
+<td align="right">0.0371855</td>
+<td align="right">0.8157545</td>
+<td align="right">0.7051065</td>
+<td align="left">sex=male</td>
+<td align="left">male</td>
+</tr>
+<tr class="odd">
+<td align="right">6</td>
+<td align="right">162</td>
+<td align="right">7</td>
+<td align="right">5</td>
+<td align="right">0.7256443</td>
+<td align="right">0.0407620</td>
+<td align="right">0.7859962</td>
+<td align="right">0.6699265</td>
+<td align="left">sex=male</td>
+<td align="left">male</td>
+</tr>
+<tr class="even">
+<td align="right">7</td>
+<td align="right">150</td>
+<td align="right">6</td>
+<td align="right">4</td>
+<td align="right">0.6966185</td>
+<td align="right">0.0440377</td>
+<td align="right">0.7594163</td>
+<td align="right">0.6390136</td>
+<td align="left">sex=male</td>
+<td align="left">male</td>
+</tr>
+<tr class="odd">
+<td align="right">8</td>
+<td align="right">140</td>
+<td align="right">7</td>
+<td align="right">4</td>
+<td align="right">0.6617876</td>
+<td align="right">0.0481171</td>
+<td align="right">0.7272370</td>
+<td align="right">0.6022285</td>
+<td align="left">sex=male</td>
+<td align="left">male</td>
+</tr>
+<tr class="even">
+<td align="right">9</td>
+<td align="right">129</td>
+<td align="right">3</td>
+<td align="right">5</td>
+<td align="right">0.6463972</td>
+<td align="right">0.0499982</td>
+<td align="right">0.7129483</td>
+<td align="right">0.5860584</td>
+<td align="left">sex=male</td>
+<td align="left">male</td>
+</tr>
+<tr class="odd">
+<td align="right">10</td>
+<td align="right">121</td>
+<td align="right">2</td>
+<td align="right">2</td>
+<td align="right">0.6357129</td>
+<td align="right">0.0513685</td>
+<td align="right">0.7030497</td>
+<td align="right">0.5748256</td>
+<td align="left">sex=male</td>
+<td align="left">male</td>
+</tr>
+<tr class="even">
+<td align="right">11</td>
+<td align="right">117</td>
+<td align="right">3</td>
+<td align="right">2</td>
+<td align="right">0.6194126</td>
+<td align="right">0.0535130</td>
+<td align="right">0.6879081</td>
+<td align="right">0.5577373</td>
+<td align="left">sex=male</td>
+<td align="left">male</td>
+</tr>
+<tr class="odd">
+<td align="right">12</td>
+<td align="right">112</td>
+<td align="right">7</td>
+<td align="right">3</td>
+<td align="right">0.5806993</td>
+<td align="right">0.0588123</td>
+<td align="right">0.6516470</td>
+<td align="right">0.5174760</td>
+<td align="left">sex=male</td>
+<td align="left">male</td>
+</tr>
+<tr class="even">
+<td align="right">13</td>
+<td align="right">102</td>
+<td align="right">3</td>
+<td align="right">1</td>
+<td align="right">0.5636199</td>
+<td align="right">0.0612860</td>
+<td align="right">0.6355549</td>
+<td align="right">0.4998269</td>
+<td align="left">sex=male</td>
+<td align="left">male</td>
+</tr>
+<tr class="odd">
+<td align="right">14</td>
+<td align="right">98</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">0.5578687</td>
+<td align="right">0.0621383</td>
+<td align="right">0.6301214</td>
+<td align="right">0.4939009</td>
+<td align="left">sex=male</td>
+<td align="left">male</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>attr(surv_summary(sfit2), &quot;table&quot;)</code></pre>
+<pre><code>##            records n.max n.start events   *rmean *se(rmean) median 0.95LCL
+## sex=male       242   242     242    134 39.15475   3.430570     22      13
+## sex=female     210   210     210    122 37.17683   3.660689     16      13
+##            0.95UCL
+## sex=male        35
+## sex=female      22</code></pre>
+<pre class="r"><code>plot(sfit2)</code></pre>
+<p><img src="/lessons_list/lesson_11-2_SurvAnalyse-APPLICATION_2020_V2_files/figure-html/unnamed-chunk-10-1.png" width="480" style="display: block; margin: auto;" />
+More complete and complex plot function:</p>
+<pre class="r"><code>ggsurvplot(sfit2, conf.int=TRUE, pval=TRUE, risk.table=TRUE, 
+           legend.labs=c(&quot;male&quot;, &quot;female&quot;), legend.title=&quot;Sex&quot;,  
+           palette=c(&quot;dodgerblue2&quot;, &quot;orchid2&quot;), 
+           title=&quot;KM Curve for Job Duration Survival&quot;, 
+           risk.table.height=.3)</code></pre>
+<p><img src="/lessons_list/lesson_11-2_SurvAnalyse-APPLICATION_2020_V2_files/figure-html/unnamed-chunk-11-1.png" width="480" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>ggsurvplot(
+   sfit2,                     # survfit object with calculated statistics.
+   pval = TRUE,             # show p-value of log-rank test.
+   conf.int = TRUE,         # show confidence intervals for 
+                            # point estimaes of survival curves.
+   #conf.int.style = &quot;step&quot;,  # customize style of confidence intervals
+   xlab = &quot;Time in weeks&quot;,   # customize X axis label.
+   break.time.by = 5,     # break X axis in time intervals by 200.
+   ggtheme = theme_light(), # customize plot and risk table with a theme.
+   risk.table = &quot;abs_pct&quot;,  # absolute number and percentage at risk.
+  risk.table.y.text.col = T,# colour risk table text annotations.
+  risk.table.y.text = FALSE,# show bars instead of names in text annotations
+                            # in legend of risk table.
+  ncensor.plot = TRUE,      # plot the number of censored subjects at time t
+  surv.median.line = &quot;hv&quot;,  # add the median survival pointer.
+  legend.labs = 
+    c(&quot;Male&quot;, &quot;Female&quot;),    # change legend labels.
+  palette = 
+    c(&quot;#E7B800&quot;, &quot;#2E9FDF&quot;) # custom color palettes.
+)</code></pre>
+<p><img src="/lessons_list/lesson_11-2_SurvAnalyse-APPLICATION_2020_V2_files/figure-html/unnamed-chunk-11-2.png" width="480" style="display: block; margin: auto;" /></p>
+</div>
+<div id="cox-regression" class="section level2">
+<h2>Cox Regression</h2>
+<p>KM curves are good for visualizing differences in survival between two categorical groups, and the log-rank test for asking if there are differences in survival between different groups.</p>
+<p>But this doesn’t generalize well for assessing the effect of quantitative variables.</p>
+<p>At some point we may want to assess how multiple variables work together to influence survival.</p>
+<p>For example, we may want to simultaneously examine the effect of sex and socioeconomic status, so as to adjust for factors like income, access to care, etc., before concluding that gender influences some outcome.</p>
+<p>Cox PH regression can assess the effect of <strong>both categorical and continuous</strong> variables, and can model the effect of multiple variables at once.</p>
+<p>The <code>coxph()</code> function uses the same syntax as <code>lm()</code>, <code>glm()</code>, etc.</p>
+<p>The response variable (left hand-side) is the duration formated with <code>Surv()</code>. <code>~</code> separate left and right hand side in the formula. Explanatory variables go on the right side.</p>
+<pre class="r"><code>Coxfit &lt;- coxph(Surv_time~sex, data=Unemployment)
+Coxfit</code></pre>
+<pre><code>## Call:
+## coxph(formula = Surv_time ~ sex, data = Unemployment)
+## 
+##              coef exp(coef) se(coef)     z     p
+## sexfemale 0.08562   1.08939  0.12551 0.682 0.495
+## 
+## Likelihood ratio test=0.46  on 1 df, p=0.4955
+## n= 452, number of events= 256</code></pre>
+<div id="interpretation" class="section level3">
+<h3>Interpretation:</h3>
+<p><strong>Statistical significance</strong>: <code>z</code> gives the Wald statistic value (<span class="math inline">\(z = \beta/\sigma(\beta)\)</span>). The wald statistic tests <span class="math inline">\(H_0: \beta = 0\)</span></p>
+<p><strong>Regression coefficients</strong>:</p>
+<ul>
+<li><p>the <em>sign</em> of the regression <span class="math inline">\(\beta\)</span> give impact of the covariate on the hazard. A positive sign means that the hazard is higher. Thus the event is more likely, for subjects with higher values of that variable.</p></li>
+<li><p><span class="math inline">\(\beta\)</span> gives the hazard ratio (HR) for the second group relative to the first group, that is, female versus male.</p></li>
+<li><p><em>Hazard ratios</em> is given by <span class="math inline">\(exp(\beta)\)</span>. It gives the effect size of covariates.</p></li>
+</ul>
+<blockquote>
+<p>the multiplicative effect of that variable on the hazard rate (for each unit increase in that variable).</p>
+</blockquote>
+<p>So, for a categorical variable like gender, going from male (baseline) to female results in approximately 8.94 % change in hazard.</p>
+<p>The rate of female is higher than the rate of male.</p>
+<p>Remember:
+&gt; <span class="math inline">\(HR=e^{\beta} =1\)</span>: No effect
+&gt; <span class="math inline">\(HR=e^{\beta} &gt;1\)</span>: Increase in hazard
+&gt; <span class="math inline">\(HR=e^{\beta} &lt;1\)</span>: Reduction in hazard</p>
+<p><strong>Confidence intervals</strong> of the hazard ratios. The summary output also gives upper and lower 95% confidence intervals for the hazard ratio (<span class="math inline">\(exp(\beta)\)</span>).</p>
+<p><strong>Global statistical significance</strong> of the model. Finally, p-values for three alternative tests for overall significance of the model are produced: likelihood-ratio test, Wald test, and score logrank statistics.</p>
+<p>These three methods are asymptotically equivalent. For large enough <span class="math inline">\(N\)</span>, they will give similar results. For small <span class="math inline">\(N\)</span>, they may differ somewhat. The Likelihood ratio test has better behavior for small sample sizes, so it is generally preferred.</p>
+<p>Notice that the p-value of the LR test is close to the p-value of the KM curve (which is the log-rank test). The two tests evaluate the difference in survival between gender group.</p>
+<pre class="r"><code>summary(Coxfit)</code></pre>
+<pre><code>## Call:
+## coxph(formula = Surv_time ~ sex, data = Unemployment)
+## 
+##   n= 452, number of events= 256 
+## 
+##              coef exp(coef) se(coef)     z Pr(&gt;|z|)
+## sexfemale 0.08562   1.08939  0.12551 0.682    0.495
+## 
+##           exp(coef) exp(-coef) lower .95 upper .95
+## sexfemale     1.089     0.9179    0.8518     1.393
+## 
+## Concordance= 0.514  (se = 0.018 )
+## Likelihood ratio test= 0.46  on 1 df,   p=0.5
+## Wald test            = 0.47  on 1 df,   p=0.5
+## Score (logrank) test = 0.47  on 1 df,   p=0.5</code></pre>
+<pre class="r"><code># log-rank
+survdiff(Surv_time~sex, data=Unemployment)</code></pre>
+<pre><code>## Call:
+## survdiff(formula = Surv_time ~ sex, data = Unemployment)
+## 
+##              N Observed Expected (O-E)^2/E (O-E)^2/V
+## sex=male   242      134      139     0.182     0.426
+## sex=female 210      122      117     0.216     0.426
+## 
+##  Chisq= 0.4  on 1 degrees of freedom, p= 0.5</code></pre>
+<pre class="r"><code># Wilcoxon
+survdiff(Surv_time~sex, data=Unemployment, rho = 1)</code></pre>
+<pre><code>## Call:
+## survdiff(formula = Surv_time ~ sex, data = Unemployment, rho = 1)
+## 
+##              N Observed Expected (O-E)^2/E (O-E)^2/V
+## sex=male   242     91.9     96.1     0.185     0.563
+## sex=female 210     84.5     80.3     0.221     0.563
+## 
+##  Chisq= 0.6  on 1 degrees of freedom, p= 0.5</code></pre>
+<pre class="r"><code># log-rank
+survdiff(Surv_time~sex + race, data=Unemployment)</code></pre>
+<pre><code>## Call:
+## survdiff(formula = Surv_time ~ sex + race, data = Unemployment)
+## 
+##                             N Observed Expected (O-E)^2/E (O-E)^2/V
+## sex=male, race=nonwhite    56       31     31.2   0.00158   0.00192
+## sex=male, race=white      186      103    107.8   0.21454   0.39494
+## sex=female, race=nonwhite  61       34     37.0   0.24162   0.30249
+## sex=female, race=white    149       88     80.0   0.80447   1.25291
+## 
+##  Chisq= 1.4  on 3 degrees of freedom, p= 0.7</code></pre>
+</div>
+</div>
+<div id="cox-model-with-multiple-covariates" class="section level2">
+<h2>Cox model with multiple covariates</h2>
+<p>For the sake of the exercise, let add a quantitative variables like <code>age</code></p>
+<pre class="r"><code>Unemployment$age &lt;- abs(rnorm(length(Unemployment$duration), 35 , 20))
+Coxfit2 &lt;- coxph(Surv_time~sex + race + search + pubemp + age, data=Unemployment)
+summary(Coxfit2)</code></pre>
+<pre><code>## Call:
+## coxph(formula = Surv_time ~ sex + race + search + pubemp + age, 
+##     data = Unemployment)
+## 
+##   n= 452, number of events= 256 
+## 
+##                coef exp(coef)  se(coef)      z Pr(&gt;|z|)   
+## sexfemale  0.034177  1.034767  0.127921  0.267  0.78934   
+## racewhite  0.027854  1.028246  0.145609  0.191  0.84830   
+## searchyes  0.240373  1.271724  0.131916  1.822  0.06843 . 
+## pubempyes -0.506546  0.602573  0.165730 -3.056  0.00224 **
+## age        0.003153  1.003158  0.003454  0.913  0.36139   
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+##           exp(coef) exp(-coef) lower .95 upper .95
+## sexfemale    1.0348     0.9664    0.8053    1.3296
+## racewhite    1.0282     0.9725    0.7730    1.3679
+## searchyes    1.2717     0.7863    0.9820    1.6469
+## pubempyes    0.6026     1.6595    0.4355    0.8338
+## age          1.0032     0.9969    0.9964    1.0100
+## 
+## Concordance= 0.568  (se = 0.02 )
+## Likelihood ratio test= 14.81  on 5 df,   p=0.01
+## Wald test            = 13.92  on 5 df,   p=0.02
+## Score (logrank) test = 14.14  on 5 df,   p=0.01</code></pre>
+<p>The p-value for all three overall tests (likelihood, Wald, and score) are significant, indicating that the model is significant compared to the null model (with intercept only).
+In the above example, the test statistics are in close agreement, and the null model is rejected.</p>
+<p>In the multivariate Cox analysis, the covariates sex and ph.ecog remain significant (p &lt; 0.05). However, the covariate age fails to be significant (p = 0.23, which is grater than 0.05).</p>
+<p>The p-value for <code>pubempyes</code> is , with a hazard ratio HR = 0.6025734 indicating a strong relationship between the public private status and return to employment.</p>
+<p>The hazard ratios of covariates are interpretable as multiplicative effects on the hazard. For example, holding the other covariates constant, being public status reduces the hazard by a factor of = 0.6025734 , or -59.2573429 %. We conclude that, being public employee is associated with longer unemployment period.</p>
+<p>By contrast, the p-value for <code>searchyes</code> covariates is now 0.0684302. The hazard ratio HR = 1.2717238. Holding the other covariates constant, an effective search induces weekly hazard of finding a job by a factor of 1.2717238, or `27.17237851%, which is a significant contribution.</p>
+<div id="visualizing-the-estimated-distribution-of-survival-times" class="section level3">
+<h3>Visualizing the estimated distribution of survival times</h3>
+<p><strong>Plot the baseline survival function</strong></p>
+<p>Having fit a Cox model to the data, it’s possible to visualize the predicted survival proportion at any given point in time for a particular risk group. The function survfit() estimates the survival proportion, by default at the mean values of covariates.</p>
+<pre class="r"><code>plot(survfit(Coxfit2))
+
+fit &lt;- survfit(Coxfit2,  data = Unemployment)
+ggsurvplot(fit, conf.int = TRUE, palette = &quot;Dark2&quot;, 
+           censor = FALSE, surv.median.line = &quot;hv&quot;)</code></pre>
+<p><img src="/lessons_list/lesson_11-2_SurvAnalyse-APPLICATION_2020_V2_files/figure-html/unnamed-chunk-15-1.png" width="480" style="display: block; margin: auto;" /><img src="/lessons_list/lesson_11-2_SurvAnalyse-APPLICATION_2020_V2_files/figure-html/unnamed-chunk-15-2.png" width="480" style="display: block; margin: auto;" /></p>
+</div>
+<div id="continuing-with-categorical-age" class="section level3">
+<h3>Continuing with categorical <code>age</code></h3>
+<p>Finally, let’s try creating a categorical variable on <code>age</code>: upper or lower to the average age</p>
+<pre class="r"><code>hist(Unemployment$age)</code></pre>
+<p><img src="/lessons_list/lesson_11-2_SurvAnalyse-APPLICATION_2020_V2_files/figure-html/unnamed-chunk-16-1.png" width="480" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>ggplot(Unemployment, aes(age)) + geom_histogram(bins=20)</code></pre>
+<p><img src="/lessons_list/lesson_11-2_SurvAnalyse-APPLICATION_2020_V2_files/figure-html/unnamed-chunk-16-2.png" width="480" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>Unemployment$cl_age &lt;-  cut(Unemployment$age, breaks=c(0, mean(Unemployment$age), Inf), labels=c(&quot;young&quot;, &quot;old&quot;))
+
+ggsurvplot(survfit(Surv_time~cl_age, data=Unemployment), pval=TRUE)</code></pre>
+<p><img src="/lessons_list/lesson_11-2_SurvAnalyse-APPLICATION_2020_V2_files/figure-html/unnamed-chunk-16-3.png" width="480" style="display: block; margin: auto;" /></p>
+<p>The <code>survminer</code> package determines the optimal cutpoint for one or multiple continuous variables at once, using the maximally selected rank statistics from the <code>maxstat</code> R package.</p>
+<pre class="r"><code>res.cut &lt;- surv_cutpoint(Unemployment, time = &quot;duration&quot;, event = &quot;spell&quot;,    variables = c(&quot;age&quot;))
+summary(res.cut)</code></pre>
+<pre><code>##     cutpoint statistic
+## age 43.25707  2.189571</code></pre>
+<pre class="r"><code># 2. Plot cutpoint for DEPDC1
+# palette = &quot;npg&quot; (nature publishing group), see ?ggpubr::ggpar
+plot(res.cut, &quot;age&quot;, palette = &quot;npg&quot;)</code></pre>
+<pre><code>## $age</code></pre>
+<p><img src="/lessons_list/lesson_11-2_SurvAnalyse-APPLICATION_2020_V2_files/figure-html/unnamed-chunk-18-1.png" width="480" style="display: block; margin: auto;" /></p>
+<p>Categorize the variable</p>
+<pre class="r"><code>res.cat &lt;- surv_categorize(res.cut)
+head(res.cat)</code></pre>
+<pre><code>##   duration spell  age
+## 1        4     1 high
+## 2        7     0  low
+## 3        1     0  low
+## 4        1     1  low
+## 5        3     1 high
+## 6        1     1 high</code></pre>
+<p>Fit survival curves and visualize</p>
+<pre class="r"><code>sfit3 &lt;- survfit(Surv_time ~age, data = res.cat)
+ggsurvplot(sfit3, risk.table = TRUE, conf.int = TRUE)</code></pre>
+<p><img src="/lessons_list/lesson_11-2_SurvAnalyse-APPLICATION_2020_V2_files/figure-html/unnamed-chunk-20-1.png" width="480" style="display: block; margin: auto;" /></p>
+<p>Facet the output crossing categorical covariates</p>
+<pre class="r"><code>sfit4 &lt;- survfit( Surv_time ~ sex + pubemp + race,
+                data = Unemployment )
+
+ggsurv &lt;- ggsurvplot(sfit4, fun = &quot;event&quot;, conf.int = TRUE,
+  risk.table = TRUE, risk.table.col=&quot;strata&quot;, 
+  ggtheme = theme_bw())
+ggsurv</code></pre>
+<p><img src="/lessons_list/lesson_11-2_SurvAnalyse-APPLICATION_2020_V2_files/figure-html/unnamed-chunk-21-1.png" width="480" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>curv_facet &lt;- ggsurv$plot + facet_grid(race~sex)
+curv_facet</code></pre>
+<p><img src="/lessons_list/lesson_11-2_SurvAnalyse-APPLICATION_2020_V2_files/figure-html/unnamed-chunk-22-1.png" width="480" style="display: block; margin: auto;" /></p>
+<p>Facetting risk tables: Generate risk table for each facet plot item</p>
+<pre class="r"><code>ggsurv$table + facet_grid(race ~sex, scales = &quot;free&quot;)+
+ theme(legend.position = &quot;none&quot;)</code></pre>
+<p><img src="/lessons_list/lesson_11-2_SurvAnalyse-APPLICATION_2020_V2_files/figure-html/unnamed-chunk-23-1.png" width="480" style="display: block; margin: auto;" /></p>
+<p>Remember, the Cox regression analyzes the continuous variable over the whole range of its distribution, where the log-rank test on the Kaplan-Meier plot can change depending on how you categorize your continuous variable. They’re answering a similar question in a different way: the regression model is asking, “what is the effect of age on survival?” while the log-rank test and the KM plot is asking, “are there differences in survival between those less than 70 and those greater than 70 years old?”</p>
+</div>
+</div>
+<div id="diagnostic-of-cox-ph-model" class="section level2">
+<h2>Diagnostic of Cox PH model</h2>
+<ol style="list-style-type: decimal">
+<li>Testing the proportional hazards assumption.</li>
+<li>Examining influential observations (or outliers).</li>
+<li>Detecting nonlinearity in relationship between the log hazard and the covariates.</li>
+</ol>
+<p>In order to check these model assumptions, Residuals method are used. The common residuals for the Cox model include:</p>
+<ul>
+<li>Schoenfeld residuals to check the proportional hazards assumption</li>
+<li>Martingale residual to assess nonlinearity</li>
+<li>Deviance residual (symmetric transformation of the Martinguale residuals), to examine influential observations</li>
+</ul>
+<div id="testing-proportional-hazards-assumption" class="section level3">
+<h3>Testing proportional Hazards assumption</h3>
+<p>The PH assumption can be checked using statistical tests and graphical diagnostics based on the scaled Schoenfeld residuals.</p>
+<p>In principle, the Schoenfeld residuals are independent of time. A plot that shows a non-random pattern against time is evidence of violation of the PH assumption.</p>
+<p>The function <code>cox.zph()</code> provides a convenient solution to test the proportional hazards assumption for each covariate included in a Cox model.</p>
+<p>For each covariate, correlation between the corresponding set of scaled Schoenfeld residuals with time is calculated to test for independence between residuals and time.</p>
+<p>Additionally, it performs a global test for the model as a whole.</p>
+<p>The proportional hazard assumption is supported by a non-significant relationship between residuals and time, and refuted by a significant relationship.</p>
+<pre class="r"><code>test.ph &lt;- cox.zph(Coxfit)
+test.ph</code></pre>
+<pre><code>##        chisq df   p
+## sex    0.151  1 0.7
+## GLOBAL 0.151  1 0.7</code></pre>
+<pre class="r"><code>ggcoxzph(test.ph)</code></pre>
+<p><img src="/lessons_list/lesson_11-2_SurvAnalyse-APPLICATION_2020_V2_files/figure-html/unnamed-chunk-24-1.png" width="576" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>test.ph &lt;- cox.zph(Coxfit2)
+test.ph</code></pre>
+<pre><code>##        chisq df     p
+## sex    0.398  1 0.528
+## race   2.021  1 0.155
+## search 3.088  1 0.079
+## pubemp 2.508  1 0.113
+## age    1.807  1 0.179
+## GLOBAL 8.548  5 0.129</code></pre>
+<pre class="r"><code>ggcoxzph(test.ph)</code></pre>
+<p><img src="/lessons_list/lesson_11-2_SurvAnalyse-APPLICATION_2020_V2_files/figure-html/unnamed-chunk-24-2.png" width="576" style="display: block; margin: auto;" />
+In the figure above, the solid line is a smoothing spline fit to the plot, with the dashed lines representing a <span class="math inline">\(\pm 2 \sigma\)</span> band around the fit.</p>
+<p>Systematic departures from a horizontal line are indicative of <strong>non-proportional</strong> hazards, since proportional hazards assumes that estimates <span class="math inline">\(\beta_1, \beta_2,\dots \beta_k\)</span> do not vary much over time.</p>
+<p>Another graphical methods for checking proportional hazards is to plot <span class="math inline">\(\ln (-\ln (S(t)))\)</span> vs. <span class="math inline">\(t\)</span> or <span class="math inline">\(\ln(t)\)</span> and look for parallelism. This can be done only for categorical covariates.</p>
+<p>A violations of proportional hazards assumption can be resolved by:</p>
+<ul>
+<li>Adding covariate*time interaction</li>
+<li>Stratification</li>
+</ul>
+</div>
+<div id="testing-influential-observations" class="section level3">
+<h3>Testing influential observations</h3>
+<p>Influential observotation can be visualized with the <em>deviance residuals</em> or the <em>dfbeta values</em>.</p>
+<p><code>ggcoxdiagnostics()</code> permits residuals diagnostic and visualisation</p>
+<p>argument <code>type</code> precises the type of residuals to present on Y axis (<code>c(“martingale”, “deviance”, “score”, “schoenfeld”, “dfbeta”, “dfbetas”, “scaledsch”, “partial”)</code>.</p>
+<p><code>linear.predictions</code>: a logical value <code>TRUE</code> to show linear predictions for observations or <code>FALSE</code> just indexed of observations on X axis.</p>
+<p><code>dfbeta</code> estimates changes in the regression coefficients upon deleting each observation in turn;</p>
+<p><code>dfbetas</code> produces the estimated changes in the coefficients divided by their standard errors.</p>
+<pre class="r"><code>ggcoxdiagnostics(Coxfit2, type = &quot;dfbetas&quot;,
+                 linear.predictions = FALSE, ggtheme = theme_bw())</code></pre>
+<p><img src="/lessons_list/lesson_11-2_SurvAnalyse-APPLICATION_2020_V2_files/figure-html/unnamed-chunk-25-1.png" width="480" style="display: block; margin: auto;" /></p>
+<p>To check outliers: The deviance residual is a normalized transform of the martingale residual.</p>
+<p>These residuals should be roughtly symmetrically distributed about zero with a standard deviation of 1.</p>
+<p>Positive values correspond to events that “occur too soon” compared to expected survival times.</p>
+<p>Negative values correspond to states that “are longer.”</p>
+<p>Very large or small values are outliers, which are poorly predicted by the model.</p>
+<pre class="r"><code>ggcoxdiagnostics(Coxfit2, type = &quot;deviance&quot;,
+                 linear.predictions = FALSE, ggtheme = theme_bw())</code></pre>
+<p><img src="/lessons_list/lesson_11-2_SurvAnalyse-APPLICATION_2020_V2_files/figure-html/unnamed-chunk-26-1.png" width="480" style="display: block; margin: auto;" /></p>
+</div>
+<div id="testing-non-linearity-of-covariates-effects" class="section level3">
+<h3>Testing non linearity of covariates effects</h3>
+<p>We asses linear functional form between duration and covariates with Martingale residuals and partial residuals.</p>
+<p>Martingale residuals may present any value in the range <span class="math inline">\((-\infty, +1)\)</span>:</p>
+<p>A value of martinguale residuals near 1 represents events that occur too soon and large negative values correspond to state lasting too long.</p>
+<p>Graphs of continuous covariates against martingale residuals help to choose the functional form, which is suggested by the approximated line on residuals</p>
+<p>Low increase tendancy reveals a functional form like logarithme or square root. Fast increases correspond to power transformation.</p>
+<pre class="r"><code>ggcoxfunctional(Surv(duration, spell) ~ age + log(age) + sqrt(age), data = Unemployment)</code></pre>
+<p><img src="/lessons_list/lesson_11-2_SurvAnalyse-APPLICATION_2020_V2_files/figure-html/unnamed-chunk-27-1.png" width="480" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="parametric-model---aft" class="section level2">
+<h2>Parametric model - AFT</h2>
+<p>An accelerated failure-time (AFT) model is a parametric model with covariates and failure times following the survival function of the form <span class="math inline">\(S(x_{jZ}) = S_0 (x \cdot exp \{\theta&#39;Z\})\)</span>, where <span class="math inline">\(S_0\)</span> is a function for the baseline survival rate. The term <span class="math inline">\(exp \{\theta&#39;Z\})\)</span> is called the <em>acceleration factor</em>.</p>
+<p>The AFT model uses covariates to place individuals on different time scales - scaling by the covariates in <span class="math inline">\(S(t_{jZ})\)</span> via <span class="math inline">\(exp \{\theta&#39;Z\})\)</span>.</p>
+<p>The AFT model can be rewritten in a log-linear form, where the log of
+failure time is linearly related to the mean <span class="math inline">\(\mu\)</span> (the acceleration factor), and an error term <span class="math inline">\(\sigma W\)</span>:
+<span class="math display">\[ln t = \mu - \theta&#39; Z + \sigma \epsilon\]</span></p>
+<p><span class="math inline">\(\epsilon\)</span> describes the error distribution. The following models for <span class="math inline">\(\epsilon\)</span> are implemented in R <code>survival</code> :</p>
+<table>
+<thead>
+<tr class="header">
+<th>Distribution</th>
+<th>df</th>
+<th align="center">Included in survival?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>exponential</td>
+<td>1</td>
+<td align="center">yes</td>
+</tr>
+<tr class="even">
+<td>Weibull</td>
+<td>2</td>
+<td align="center">yes</td>
+</tr>
+<tr class="odd">
+<td>lognormal</td>
+<td>2</td>
+<td align="center">yes</td>
+</tr>
+<tr class="even">
+<td>log logistic</td>
+<td>2</td>
+<td align="center">yes</td>
+</tr>
+<tr class="odd">
+<td>generalized gamma</td>
+<td>3</td>
+<td align="center">no</td>
+</tr>
+</tbody>
+</table>
+<p>The <code>survreg()</code> function from the <code>survival</code> package is used for AFT modeling.</p>
+<p>The 1rst argument is <code>formula</code>, where a survival object is regressed on predictors.</p>
+<p>The argument <code>dist</code> has several options to describe the parametric model used <code>("weibull", "exponential", "gaussian", "logistic", "lognormal", or "loglogistic")</code>.</p>
+<pre class="r"><code># srFit &lt;- survreg(Surv(duration, spell) ~ sex + race, dist=&quot;weibull&quot;, data=Unemployment)
+# Error, likely choking on the zeros.
+Surv_time2 &lt;- with( Unemployment, Surv(duration+1, spell))# weeks starts with one.
+Model0 &lt;-  survreg(Surv_time2~sex,dist=&#39;weibull&#39;, data=Unemployment)
+summary(Model0)</code></pre>
+<pre><code>## 
+## Call:
+## survreg(formula = Surv_time2 ~ sex, data = Unemployment, dist = &quot;weibull&quot;)
+##               Value Std. Error     z       p
+## (Intercept)  3.6199     0.1019 35.53 &lt; 2e-16
+## sexfemale   -0.1335     0.1467 -0.91 0.36273
+## Log(scale)   0.1584     0.0478  3.31 0.00093
+## 
+## Scale= 1.17 
+## 
+## Weibull distribution
+## Loglik(model)= -1155.7   Loglik(intercept only)= -1156.1
+##  Chisq= 0.83 on 1 degrees of freedom, p= 0.36 
+## Number of Newton-Raphson Iterations: 5 
+## n= 452</code></pre>
+<p>When <span class="math inline">\(\sigma = 1\)</span>, the Weibull model is equivalent to the exponential model. We consider two strategies
+for choosing the final model:</p>
+<ul>
+<li>a likelihood ratio test, which evaluates the null hypothesis <span class="math inline">\(\sigma = 1\)</span> against the two-sided
+alternative, and</li>
+<li>examination of the significance of the Log(scale) coefficient (see the output to summary(srFit)).</li>
+</ul>
+<p>In the example, both approaches result in the same conclusion: there is insuficient evidence to
+reject the hypothesis that <span class="math inline">\(\sigma = 1\)</span> (H0). For this reason, we would likely go with the simpler
+exponential model.</p>
+</div>
+<div id="weibull-model" class="section level2">
+<h2>Weibull Model</h2>
+<pre class="r"><code>library( SurvRegCensCov)
+WeibullReg(Surv_time2 ~ sex, data=Unemployment)</code></pre>
+<pre><code>## $formula
+## Surv_time2 ~ sex
+## 
+## $coef
+##             Estimate          SE
+## lambda    0.04551665 0.007404146
+## gamma     0.85353226 0.040819167
+## sexfemale 0.11395918 0.125144711
+## 
+## $HR
+##                 HR        LB       UB
+## sexfemale 1.120706 0.8769372 1.432238
+## 
+## $ETR
+##                 ETR        LB       UB
+## sexfemale 0.8750145 0.6563751 1.166483
+## 
+## $summary
+## 
+## Call:
+## survival::survreg(formula = formula, data = data, dist = &quot;weibull&quot;)
+##               Value Std. Error     z       p
+## (Intercept)  3.6199     0.1019 35.53 &lt; 2e-16
+## sexfemale   -0.1335     0.1467 -0.91 0.36273
+## Log(scale)   0.1584     0.0478  3.31 0.00093
+## 
+## Scale= 1.17 
+## 
+## Weibull distribution
+## Loglik(model)= -1155.7   Loglik(intercept only)= -1156.1
+##  Chisq= 0.83 on 1 degrees of freedom, p= 0.36 
+## Number of Newton-Raphson Iterations: 5 
+## n= 452</code></pre>
+<div id="adequacy-of-weibull-model" class="section level3">
+<h3>Adequacy of Weibull model</h3>
+<p>Weibull model with categorical variables can be checked for its adequacy by stratified Kaplan-Meier curves.</p>
+<p>A plot of log survival time versus <span class="math inline">\(log[–log(KM)]\)</span> will show linear and parallel lines if the model is adequate : Weibull regression diagnostic plot showing that the lines for male and female are generally parallel and linear in its scale.</p>
+<pre class="r"><code>WeibullDiag(Surv_time2 ~ sex, data=Unemployment)</code></pre>
+<p><img src="/lessons_list/lesson_11-2_SurvAnalyse-APPLICATION_2020_V2_files/figure-html/unnamed-chunk-30-1.png" width="480" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<div id="weibull-version-2" class="section level2">
+<h2>Weibull version 2</h2>
+<p>With <code>eha</code>package</p>
+<p>The coefficient of covariates in the above output is the HR in log scale. Thus, the exponentiation of coefficient gives the HR.</p>
+<p>Hazard, cumulative hazard, density and survivor functions can be plotted from the output of a Weibull regression model.</p>
+<p>graphical display of the output of Weibull regression model. The fn argument specifies the functions to be plotted. It receives a vector of string values, choosing from “haz,” “cum,” “den” and “sur.” The newdata argument specifies covariate values at which to plot the function. If covariates are left unspecified, the default value is the mean of the covariate in the training dataset. In the example, four plots were drawn at age of 80, 60, 40 and 20 years old (in the order from left to right and from top to bottom). The sex and ph.ecog variables were set at values of 2 and 3, respectively.</p>
+<pre class="r"><code>library(eha)
+Weib1 &lt;- weibreg(Surv_time2 ~ sex + age, data=Unemployment)
+summary(Weib1)</code></pre>
+<pre><code>## Call:
+## weibreg(formula = Surv_time2 ~ sex + age, data = Unemployment)
+## 
+## Covariate           Mean       Coef Exp(Coef)  se(Coef)    Wald p
+## sex 
+##             male    0.553     0         1           (reference)
+##           female    0.447     0.107     1.113     0.126     0.392 
+## age                36.242     0.002     1.002     0.003     0.481 
+## 
+## log(scale)                    3.720    41.284     0.177     0.000 
+## log(shape)                   -0.160     0.852     0.048     0.001 
+## 
+## Events                    256 
+## Total time at risk          8819 
+## Max. log. likelihood      -1155.4 
+## LR test statistic         1.32 
+## Degrees of freedom        2 
+## Overall p-value           0.516256</code></pre>
+<pre class="r"><code>par(mfrow=c(2,2))
+plot(Weib1 , fn=&quot;sur&quot;, new.data = c(0, 40))</code></pre>
+<p><img src="/lessons_list/lesson_11-2_SurvAnalyse-APPLICATION_2020_V2_files/figure-html/unnamed-chunk-31-1.png" width="480" style="display: block; margin: auto;" /></p>
+<div id="graphical-goodness-of-fit-test" class="section level3">
+<h3>Graphical goodness-of-fit test</h3>
+<p>The eha package has a function check.dist() to test the goodness-of-fit by graphical visualization. It compares the cumulative hazards functions for non-parametric and parametric model, requiring objects of “coxreg” and “phreg” as the first and second argument.</p>
+<pre class="r"><code>phreg1 &lt;- phreg(Surv_time2 ~ sex + age, data=Unemployment, dist = &#39;weibull&#39;)
+summary(phreg1)</code></pre>
+<pre><code>## Call:
+## phreg(formula = Surv_time2 ~ sex + age, data = Unemployment, 
+##     dist = &quot;weibull&quot;)
+## 
+## Covariate          W.mean      Coef Exp(Coef)  se(Coef)    Wald p
+## sex 
+##             male    0.553     0         1           (reference)
+##           female    0.447     0.107     1.113     0.126     0.392 
+## age                36.242     0.002     1.002     0.003     0.481 
+## 
+## log(scale)                    3.720               0.177     0.000 
+## log(shape)                   -0.160               0.048     0.001 
+## 
+## Events                    256 
+## Total time at risk          8819 
+## Max. log. likelihood      -1155.4 
+## LR test statistic         1.32 
+## Degrees of freedom        2 
+## Overall p-value           0.516415</code></pre>
+<pre class="r"><code>coxreg1 &lt;- coxreg(Surv_time2 ~ sex + age, data=Unemployment)
+summary(coxreg1)</code></pre>
+<pre><code>## Call:
+## coxreg(formula = Surv_time2 ~ sex + age, data = Unemployment)
+## 
+## Covariate           Mean       Coef     Rel.Risk   S.E.    Wald p
+## sex 
+##             male    0.553     0         1 (reference)
+##           female    0.447     0.078     1.082     0.126     0.532 
+## age                36.242     0.004     1.004     0.003     0.283 
+## 
+## Events                    256 
+## Total time at risk          8819 
+## Max. log. likelihood      -1352.6 
+## LR test statistic         1.61 
+## Degrees of freedom        2 
+## Overall p-value           0.447331</code></pre>
+<pre class="r"><code>check.dist(phreg1, coxreg1)</code></pre>
+<p><img src="/lessons_list/lesson_11-2_SurvAnalyse-APPLICATION_2020_V2_files/figure-html/unnamed-chunk-32-1.png" width="480" style="display: block; margin: auto;" /></p>
+<p>The solid line is the parametric Weibull cumulative hazard function and the dashed line is non-parametric function.</p>
+<p>It appears that the parametric function fits well to the semi-parametric function (Figure 3). Note that non-parametric model is closer to the observed data because no function is assumed for the baseline hazard function.</p>
+</div>
+<div id="variable-selection-and-model-development" class="section level3">
+<h3>Variable selection and model development</h3>
+<p>Expertise and the statistical importance (determined by software) are essential to choose relevant covariates.</p>
+<p>The <code>anova()</code> function tests models restrictions and competing specifications (covariate, interaction and non-linear terms).</p>
+<p>It reports indicator of the covariates contribution.</p>
+<pre class="r"><code>library(rms)
+Weib2 &lt;- psm(Surv_time2 ~ sex + race + age  + pubemp, dist=&quot;weibull&quot;, data=Unemployment)
+anova(Weib2)</code></pre>
+<pre><code>##                 Wald Statistics          Response: Surv_time2 
+## 
+##  Factor     Chi-Square d.f. P     
+##  sex         0.11      1    0.7425
+##  race        0.05      1    0.8180
+##  age         0.32      1    0.5690
+##  pubemp     10.38      1    0.0013
+##  TOTAL      11.65      4    0.0202</code></pre>
+<pre class="r"><code>plot(anova(Weib2) , margin = c(&quot;chisq&quot;, &quot;d.f.&quot;, &quot;P&quot;))</code></pre>
+<p><img src="/lessons_list/lesson_11-2_SurvAnalyse-APPLICATION_2020_V2_files/figure-html/unnamed-chunk-33-1.png" width="480" style="display: block; margin: auto;" /></p>
+<p>In the example, we included all available covariates into the model to rank their statistical importance. This is often the case in real research setting that researchers have no prior knowledge on which variable should be included.</p>
+<p>It appears that <code>race</code> is the least important variable and<code>pubemp</code> is the most important one.</p>
+<p>Alternatively, model development can be done with <em>backward elimination</em> on covariates.</p>
+<p>This method starts with a full model that included all available covariates and then applies Wald test to examine the relative importance of each one.</p>
+<p>R provides a function <code>fastbw()</code> to perform fast backward variable selection.</p>
+<pre class="r"><code>fastbw(Weib2, rule=&quot;aic&quot;)</code></pre>
+<pre><code>## 
+##  Deleted Chi-Sq d.f. P      Residual d.f. P      AIC  
+##  race    0.05   1    0.8180 0.05     1    0.8180 -1.95
+##  sex     0.09   1    0.7623 0.14     2    0.9303 -3.86
+##  age     0.38   1    0.5390 0.52     3    0.9140 -5.48
+## 
+## Approximate Estimates after Deleting Factors
+## 
+##               Coef    S.E. Wald Z         P
+## (Intercept) 3.4125 0.07999 42.660 0.0000000
+## pubemp=yes  0.6294 0.18872  3.335 0.0008525
+## 
+## Factors in Final Model
+## 
+## [1] pubemp</code></pre>
+<p>The rule argument defines stopping rule for backward elimination. The default is Akaike’s information criterion (AIC).</p>
+<p>If P value is used as the stopping rule (<code>rule=“p”</code>), the significance level for staying in a model can be modified using <code>sls</code> argument (<code>sls =0.1</code> for example).</p>
+<p>The output shows that variables <code>race</code>, <code>sex</code> and <code>age</code> are eliminated from the model based on AIC.</p>
+</div>
+</div>
+<div id="visualisation-of-weibull-regression-model" class="section level2">
+<h2>Visualisation of Weibull regression model</h2>
+<p>Weibull model can be used to predict outcomes of new subjects, allowing predictors to vary. In Weibull regression model, the outcome is median survival time for a given combination of covariates.</p>
+<p>We first use <code>Predict()</code> to calculate median survival time in log scale, then use <code>ggplot()</code> function to draw plots.</p>
+<pre class="r"><code>Weib3 &lt;- psm(Surv_time2 ~ race + age*sex, dist=&quot;weibull&quot;, data=Unemployment)
+summary(Unemployment$age)</code></pre>
+<pre><code>##     Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+##   0.3352  20.7061  35.6906  35.7347  49.0937 103.5700</code></pre>
+<pre class="r"><code>table(Unemployment$sex)</code></pre>
+<pre><code>## 
+##   male female 
+##    242    210</code></pre>
+<pre class="r"><code># ddist &lt;- datadist(Unemployment$age, Unemployment$race, Unemployment$sex)
+# options(datadist=&#39;ddist&#39;)
+
+ggplot(Predict(Weib3,  age=seq(min(Unemployment$age), max(Unemployment$age), by=10) , race=c(&#39;nonwhite&#39;,&#39;white&#39;), sex = c(&#39;male&#39; ,&#39;female&#39; )))</code></pre>
+<p><img src="/lessons_list/lesson_11-2_SurvAnalyse-APPLICATION_2020_V2_files/figure-html/unnamed-chunk-35-1.png" width="480" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>library(smoothSurv)
+smooth1 &lt;-smoothSurvReg(Surv_time2 ~ race+sex+age, init.dist=&quot;weibull&quot;, data=Unemployment)</code></pre>
+<pre class="r"><code>cov &lt;- matrix(  c( 1,1, 2, 2, 1,2,1,2,25, 45, 68, 80), ncol=3, byrow = F )
+par(mfrow=c(2,2))
+survfit(smooth1  , cov=cov)
+survfit(smooth1  , cov=cov, cdf=T)
+hazard(smooth1  , cov=cov)
+fdensity(smooth1  , cov=cov)</code></pre>
+<p><img src="/lessons_list/lesson_11-2_SurvAnalyse-APPLICATION_2020_V2_files/figure-html/unnamed-chunk-37-1.png" width="480" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>#########################################</code></pre>
+</div>
+</div>
+<div id="exercise-inspired-from-allison2010" class="section level1">
+<h1>Exercise inspired from <span class="citation"><a href="#ref-Allison2010" role="doc-biblioref">Allison</a> (<a href="#ref-Allison2010" role="doc-biblioref">2010</a>)</span></h1>
+<p>The exercise analyses the job duration <code>jobdur.txt</code>. The data consist of 100 job durations, measured from the year to entry into hte job until the year that the employee quit.</p>
+<p>Duration after the fifth year are censored. If the employee is fired, the job duration is censored at the end of its last full year.</p>
+<p>Survival times have values of <code>1, 2, 3, 4 or 5</code></p>
+<div id="import-data-summary-statistics" class="section level2">
+<h2>Import data &amp; Summary statistics</h2>
+<pre class="r"><code>jobdur &lt;- read.table(&quot;./data/jobdur.txt&quot;, header = TRUE)
+head(jobdur)</code></pre>
+<pre><code>##   dur event ed prestige salary
+## 1   1     1  7        3     19
+## 2   4     1 14       62     17
+## 3   5     0 16       70     18
+## 4   2     1 12       43    135
+## 5   3     1  9       18     12
+## 6   1     1 11       31     12</code></pre>
+<pre class="r"><code>summary(jobdur)</code></pre>
+<pre><code>##       dur           event            ed           prestige     
+##  Min.   :1.00   Min.   :0.00   Min.   : 6.00   Min.   :  1.00  
+##  1st Qu.:1.00   1st Qu.:1.00   1st Qu.:10.00   1st Qu.: 26.75  
+##  Median :2.50   Median :1.00   Median :12.00   Median : 45.00  
+##  Mean   :2.72   Mean   :0.98   Mean   :12.17   Mean   : 45.52  
+##  3rd Qu.:4.00   3rd Qu.:1.00   3rd Qu.:14.00   3rd Qu.: 63.00  
+##  Max.   :5.00   Max.   :2.00   Max.   :18.00   Max.   :100.00  
+##      salary      
+##  Min.   :  3.00  
+##  1st Qu.:  9.00  
+##  Median : 15.00  
+##  Mean   : 21.24  
+##  3rd Qu.: 22.25  
+##  Max.   :135.00</code></pre>
+<pre class="r"><code>addmargins( table(jobdur$dur) )</code></pre>
+<pre><code>## 
+##   1   2   3   4   5 Sum 
+##  29  21  20   9  21 100</code></pre>
+</div>
+<div id="data-handling-1" class="section level2">
+<h2>Data Handling</h2>
+<pre class="r"><code>jobdur$censored &lt;- jobdur$event != 1
+addmargins(table(jobdur$censored))</code></pre>
+<pre><code>## 
+## FALSE  TRUE   Sum 
+##    68    32   100</code></pre>
+<pre class="r"><code>addmargins(table(jobdur$event))</code></pre>
+<pre><code>## 
+##   0   1   2 Sum 
+##  17  68  15 100</code></pre>
+<pre class="r"><code>Surv_time &lt;- with(jobdur , Surv(dur, censored))</code></pre>
+</div>
+<div id="survival-curves-life-table-1" class="section level2">
+<h2>Survival curves &amp; Life Table</h2>
+<ol style="list-style-type: decimal">
+<li>Simple survival curve that doesn’t consider any different groupings</li>
+</ol>
+<pre class="r"><code>fit &lt;- survfit(Surv_time~1, data = jobdur)
+fit</code></pre>
+<pre><code>## Call: survfit(formula = Surv_time ~ 1, data = jobdur)
+## 
+##       n  events  median 0.95LCL 0.95UCL 
+##     100      32       5       5       5</code></pre>
+<pre class="r"><code>summary(fit)</code></pre>
+<pre><code>## Call: survfit(formula = Surv_time ~ 1, data = jobdur)
+## 
+##  time n.risk n.event survival std.err lower 95% CI upper 95% CI
+##     1    100       7    0.930  0.0255       0.8813        0.981
+##     2     71       3    0.891  0.0330       0.8283        0.958
+##     3     50       4    0.819  0.0457       0.7346        0.914
+##     4     30       1    0.792  0.0517       0.6970        0.900
+##     5     21      17    0.151  0.0686       0.0619        0.368</code></pre>
+<pre class="r"><code>plot(fit)</code></pre>
+<p><img src="/lessons_list/lesson_11-2_SurvAnalyse-APPLICATION_2020_V2_files/figure-html/unnamed-chunk-41-1.png" width="480" style="display: block; margin: auto;" /></p>
+<p>Or using the package <code>survminer</code> and <code>ggsurvplot()</code> function:</p>
+<pre class="r"><code>library(survminer)
+ggsurvplot(fit)</code></pre>
+<p><img src="/lessons_list/lesson_11-2_SurvAnalyse-APPLICATION_2020_V2_files/figure-html/unnamed-chunk-42-1.png" width="480" style="display: block; margin: auto;" /></p>
+<ol start="2" style="list-style-type: decimal">
+<li>Curves depending on education level.</li>
+</ol>
+<p>Let use the factor depending on education level <span class="math inline">\(&gt;12\)</span></p>
+<pre class="r"><code>ed_level &lt;- factor(jobdur$ed&gt;12, labels=c(&#39;Low Educ&#39;, &#39;High Educ&#39;) )</code></pre>
+<pre class="r"><code>sfit &lt;- survfit(Surv_time~ed_level, data = jobdur)
+sfit</code></pre>
+<pre><code>## Call: survfit(formula = Surv_time ~ ed_level, data = jobdur)
+## 
+##                     n events median 0.95LCL 0.95UCL
+## ed_level=Low Educ  55     13      5       5      NA
+## ed_level=High Educ 45     19      5       5       5</code></pre>
+<pre class="r"><code>summary(sfit)</code></pre>
+<pre><code>## Call: survfit(formula = Surv_time ~ ed_level, data = jobdur)
+## 
+##                 ed_level=Low Educ 
+##  time n.risk n.event survival std.err lower 95% CI upper 95% CI
+##     1     55       3    0.945  0.0306       0.8873        1.000
+##     2     36       3    0.867  0.0518       0.7708        0.974
+##     3     23       2    0.791  0.0695       0.6662        0.940
+##     5      6       5    0.132  0.1209       0.0219        0.796
+## 
+##                 ed_level=High Educ 
+##  time n.risk n.event survival std.err lower 95% CI upper 95% CI
+##     1     45       4    0.911  0.0424       0.8316        0.998
+##     3     27       2    0.844  0.0604       0.7331        0.971
+##     4     20       1    0.801  0.0706       0.6743        0.953
+##     5     15      12    0.160  0.0840       0.0574        0.448</code></pre>
+<pre class="r"><code>plot(sfit)
+ggsurvplot(sfit, conf.int=TRUE, pval=TRUE, risk.table=TRUE, 
+           legend.labs=c(&quot;Low Educ&quot;, &quot;High Educ&quot;), legend.title=&quot;Sex&quot;,  
+           palette=c(&quot;dodgerblue2&quot;, &quot;orchid2&quot;), 
+           title=&quot;KM Curve for Jub Duration Survival&quot;, 
+           risk.table.height=.15)</code></pre>
+<p><img src="/lessons_list/lesson_11-2_SurvAnalyse-APPLICATION_2020_V2_files/figure-html/unnamed-chunk-44-1.png" width="480" style="display: block; margin: auto;" /><img src="/lessons_list/lesson_11-2_SurvAnalyse-APPLICATION_2020_V2_files/figure-html/unnamed-chunk-44-2.png" width="480" style="display: block; margin: auto;" /></p>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-Allison2010" class="csl-entry">
+Allison, Paul D. 2010. <em>Survival Analysis Using SAS: A Practical Guide, Second Edition</em>. 2nd ed. SAS Publishing.
+</div>
+<div id="ref-Bivand2013" class="csl-entry">
+Bivand, Roger S., Edzer J. Pebesma, and Virgilio. Gómez-Rubio. 2008. <em>Applied Spatial Data Analysis with r</em>. New York; London: Springer.
+</div>
+<div id="ref-lovelace2019" class="csl-entry">
+Lovelace, R., J. Nowosad, and J. Muenchow. 2019. <em>Geocomputation with r</em>. Chapman &amp; Hall/CRC the r Series. CRC Press. <a href="https://books.google.fr/books?id=0y6ODwAAQBAJ">https://books.google.fr/books?id=0y6ODwAAQBAJ</a>.
+</div>
+</div>
+</div>
+</div>

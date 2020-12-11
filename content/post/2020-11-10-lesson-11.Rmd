@@ -13,29 +13,36 @@ thumbnail: ''
 
 # Eleventh Lesson
 
-Welcome to the Eleventh Lesson - 17/12/2020 **13:30 - 18:00**
+Welcome to the Eleventh Lesson - 17/12/2020 **8:00 - 12:30**
 
 **Big Data for Industry 4.0**
 
-Teachers: B Agard
+Teachers: I Joly
 
 ## Zoom meeting
 
-**From 13:30 - 18:00**
+**From 8:00 - 12:30**
 
-1. following this link: (https://us02web.zoom.us/j/89030085456?pwd=TmNwUnJqMTZmODdLQ1pFS2sxQlZKQT09)
+1. following this link: (https://grenoble-inp.zoom.us/j/98803904957?pwd=RlB3ZXpLMmZ6bHVHQXlVeXBrU05Odz09)
 
 (and, if needed, install the zoom app).
 
 1. or you can start the Zoom app with the following information
-  + meeting ID: 890 3008 5456
-  + Password: 287243
+  + meeting ID: 988 0390 4957
+  + Password: SABD
 
 
 ## Materials:
 
-On [Caseine](https://moodle.caseine.org/course/view.php?id=644&section=0#section-11)
 
+[Introduction to  Survival Analysis](/Data-pdf/Survival/SABD_SurvAn.pdf)
+
+[Applications of Survival Analysis](../lessons/2020-12-11-application-of-sa)
+
+
+[CheatSheet on survival Analysis](/Data-pdf/Survival/survminer_cheatsheet.pdf)
+
+Written version of the lesson [Introduction to Survival Analysis](../lessons/2020-12-11-introduction-to-sa)
 
 
 

@@ -1,0 +1,565 @@
+---
+title: "Graphics with R"
+subtitle: "Smart Analytics for Big Data"
+author: "Iragaël Joly"
+date: '2020-12-11'
+slug: []
+categories: ["R"]
+tags: ["R Markdown", "plot", "regression"]
+authorbox: false
+---
+
+<script src="/rmarkdown-libs/header-attrs/header-attrs.js"></script>
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
+
+
+<div id="grammar-of-ggplot2" class="section level1">
+<h1>Grammar of <code>ggplot2()</code></h1>
+<div id="start-example" class="section level2">
+<h2>Start example</h2>
+<pre class="r"><code>df &lt;- data.frame(x=1:15, y=1:15)
+ggplot(df, aes(x,y)) +
+  geom_point() +
+  labs(
+    title= &quot;Plot example&quot;,
+    subtitle = &quot;Subtitled&quot;,
+    x=&quot;x-values&quot;, y = &quot;y-values&quot;
+    ) +
+  theme(panel.background = element_rect(fill = &quot;white&quot;, color= &quot;grey50&quot;))</code></pre>
+<p><img src="/post/Lessons/2020-12-11-graphics-with-r_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+</div>
+<div id="grammar-of-graphic-ggplot" class="section level2">
+<h2>Grammar of graphic: <code>ggplot</code></h2>
+<p>The <code>ggplot2</code> package is loaded to access the <code>ggplot()</code> function.</p>
+<p>The graph is created by stacking together several short phrases, each describing an aspect of the graphic.</p>
+<p>With <code>ggplot</code>, the data need need not to be reshaped for each type of graphical representation (boxplot, histogram, scatter,…).</p>
+<p>Components of a <code>ggplot</code>graph:</p>
+<div id="geometric-object-functions" class="section level3">
+<h3>Geometric object functions</h3>
+<p>Geometric objects that describe the type of graph being created.</p>
+<p>Their names start with <code>geom_</code>: <code>geom_line</code>, <code>geom_boxplot</code>, <code>geom_point</code>, etc.</p>
+</div>
+<div id="aesthetics" class="section level3">
+<h3>Aesthetics</h3>
+<p>Aesthetics mappings communicates to <code>ggplot</code> which variables in the source data get mapped to which visual elements in the graphics.</p>
+</div>
+<div id="stats" class="section level3">
+<h3>Stats</h3>
+<p>Stats are statistical transformations that are done before displaying the data.</p>
+<p>Not all graphs will have stats. Examples are <code>stat_ecdf</code>, <code>stat_identity</code> (which tells to pass the data without doing any stat at all)</p>
+</div>
+<div id="facet-function" class="section level3">
+<h3>Facet function</h3>
+<p>Facets are subplots where each plot represents a subgroup of the data.
+Functions are <code>facet_wrap</code> <code>facet_grid</code>.</p>
+</div>
+<div id="themes" class="section level3">
+<h3>Themes</h3>
+<p>Themes are the visual elements of the graph that are not linked to the data: titles, margins, font, …</p>
+</div>
+<div id="layer" class="section level3">
+<h3>Layer</h3>
+<p>A layer is a combination of data, aesthitics, a geometric object, a stat, and other options to produce a visal layer in the graphic.</p>
+</div>
+</div>
+<div id="long-vs-wide-data-with-ggplot" class="section level2">
+<h2><em>Long</em> vs <em>Wide</em> data with <code>ggplot</code></h2>
+<p><em>Wide</em> means every variable to be ploted is its own column in the underlying dataframe. This is the approach used in Excel.</p>
+<p>R works most easily with <em>Long</em> data, where additional data are added as rows in the dataframe.</p>
+<p>The side effect of adding more measurements as rows is that any properly constructed <code>ggplot</code>graph will automatically update to reflect the new data, without changing the code.</p>
+<div id="additional-references" class="section level3">
+<h3>Additional references</h3>
+<p>See <em>R for Data Science</em> (chap. 28) (<a href="https://r4ds.had.co.nz/graphics-for-communication.html" class="uri">https://r4ds.had.co.nz/graphics-for-communication.html</a>)[<a href="https://r4ds.had.co.nz/graphics-for-communication.html" class="uri">https://r4ds.had.co.nz/graphics-for-communication.html</a>] of H. Wickham and G. Grolemund for additional notes on the graph customisation (labels, position, colours, etc.)</p>
+</div>
+</div>
+<div id="examples-of-graphics" class="section level2">
+<h2>Examples of graphics</h2>
+<div id="creating-a-scatter-plot" class="section level3">
+<h3>Creating a Scatter Plot</h3>
+<p>You want to create a scatter plot of the paired observations: <span class="math inline">\((x_1, y_1), (x_2, y_2), \dots, (x_n, y_n)\)</span></p>
+<pre class="r"><code>ggplot(df, aes(x, y)) +
+  geom_point()</code></pre>
+<p><code>ggplot</code>requires:</p>
+<ul>
+<li>what are the dataframe <code>df</code></li>
+<li>and which is the aesthietic mapping (<code>aes</code>) to use. <code>aes</code> defines which fiels of <code>df</code> goes into which axis of the plot.</li>
+<li>the geometric object: <code>geom_point</code> for a point graph.</li>
+</ul>
+<p>We can easily add title and axis-label</p>
+<pre class="r"><code>p &lt;- ggplot(mtcars, aes(hp, mpg)) +
+  geom_point() +
+  labs(title = &quot;Cars: Horsepower vs. Fuel Economy&quot;,
+       x = &quot;HP&quot;,
+       y = &quot;Economy (miles per gallon)&quot;)
+p</code></pre>
+<p><img src="/post/Lessons/2020-12-11-graphics-with-r_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>Some theme options can be used :</p>
+<pre class="r"><code>g1 &lt;- ggplot(df) +
+  geom_point(aes(x, y)) +
+    labs(title = &quot;Cars: Horsepower vs. Fuel Economy&quot;,
+       x = &quot;HP&quot;,
+       y = &quot;Economy (miles per gallon)&quot;) +
+    theme(panel.background = element_rect(fill = &quot;white&quot;, colour = &quot;grey50&quot;))
+g1</code></pre>
+<p><img src="/post/Lessons/2020-12-11-graphics-with-r_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<pre class="r"><code>g2 &lt;- g1 + theme(panel.grid.major =
+                   element_line(color = &quot;black&quot;, linetype = 3)) + 
+  # linetype = 3 is dash
+  theme(panel.grid.minor =
+          element_line(color = &quot;darkgrey&quot;, linetype = 4)) 
+  # linetype = 4 is dot dash
+g2</code></pre>
+<p><img src="/post/Lessons/2020-12-11-graphics-with-r_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+</div>
+<div id="applying-a-theme" class="section level3">
+<h3>Applying a Theme</h3>
+<p>Use of a preset collection of colors, styles, and formatting</p>
+<pre class="r"><code>theme_bw()
+theme_dark() 
+theme_classic()
+theme_gray()
+theme_linedraw()
+theme_light()
+theme_minimal()
+theme_test()
+theme_void()</code></pre>
+<p>We can apply each of them. For example:</p>
+<pre class="r"><code>p + theme_bw()</code></pre>
+<p><img src="/post/Lessons/2020-12-11-graphics-with-r_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p>Packages, like <code>ggtheme</code>, that include additional themes with some popular theme like <em>Stata</em> or <em>The Economist</em></p>
+</div>
+<div id="scatter-plot-of-multiple-groups" class="section level3">
+<h3>Scatter Plot of Multiple Groups</h3>
+<p>The dataframe is multiple observations per record: x, y, and a factor f</p>
+<pre class="r"><code>ggplot(data = iris,
+       aes(
+         x = Petal.Length,
+         y = Petal.Width,
+         shape = Species,
+         color = Species
+       )) +
+  geom_point()</code></pre>
+<p><img src="/post/Lessons/2020-12-11-graphics-with-r_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><em>About the legend</em></p>
+<p>It is automatic with a factor in <code>aes</code>.</p>
+<p>It can be hiden with <code>+   theme(legend.position = "none")</code></p>
+<p>or added with <code>+ guides(shape=guide_legend(title="My Legend Title"))</code></p>
+<p>Position can be changed with <code>+ theme(legend.position = "bottom")</code> or <code>+ theme(legend.position = c(.8, .2))</code> : center of the legend at 80% to the right and 20% up from the bottom</p>
+</div>
+<div id="a-scatter-plot-for-each-factor-values" class="section level3">
+<h3>A scatter plot for each factor values</h3>
+<pre class="r"><code>data(Cars93, package = &quot;MASS&quot;)
+ggplot(Cars93, aes(MPG.city, Horsepower)) +
+  geom_point() +
+  facet_wrap( ~ Origin)</code></pre>
+<p><img src="/post/Lessons/2020-12-11-graphics-with-r_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+</div>
+<div id="regression-line-of-a-scatter-plot" class="section level3">
+<h3>Regression Line of a Scatter Plot</h3>
+<p>Adding the regression line with <code>geom_smooth</code>:</p>
+<pre class="r"><code>ggplot(df, aes(x, y)) +
+  geom_point() +
+  geom_smooth(method = &quot;lm&quot;,
+              formula = y ~ x,
+              se = FALSE)</code></pre>
+<p><img src="/post/Lessons/2020-12-11-graphics-with-r_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p><code>se = FALSE</code> parameter tells ggplot not to plot the standard error bands around our regression</p>
+<div id="example" class="section level4">
+<h4>Example</h4>
+<pre class="r"><code>library(faraway)
+data(strongx)
+g &lt;- ggplot(strongx, aes(energy, crossx)) +
+  geom_point()
+
+g + geom_smooth(method = &quot;lm&quot;, 
+                formula = y ~ x)</code></pre>
+<p><img src="/post/Lessons/2020-12-11-graphics-with-r_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p>and</p>
+<pre class="r"><code>g + geom_smooth(method = &quot;lm&quot;,
+                formula = y ~ x,
+                se = FALSE)</code></pre>
+<p><img src="/post/Lessons/2020-12-11-graphics-with-r_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p>Specific line can be added using <code>intercept</code> and <code>slope</code>. For example, extractiong the values from a regression</p>
+<pre class="r"><code>m &lt;- lm(crossx ~ energy, data = strongx)
+
+ggplot(strongx, aes(energy, crossx)) +
+  geom_point() +
+  geom_abline(
+    intercept = m$coefficients[1],
+    slope = m$coefficients[2]
+  )</code></pre>
+<p><img src="/post/Lessons/2020-12-11-graphics-with-r_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+</div>
+</div>
+<div id="plotting-all-variables-against-all-other-variables" class="section level3">
+<h3>Plotting All Variables Against All Other Variables</h3>
+<p>Dataframe contains multiple numeric variables. The scatter plots for all pairs of variables uses the <code>GGally</code> package.</p>
+<pre class="r"><code>library(GGally)</code></pre>
+<pre><code>## Warning: le package &#39;GGally&#39; a été compilé avec la version R 3.6.3</code></pre>
+<pre><code>## Registered S3 method overwritten by &#39;GGally&#39;:
+##   method from   
+##   +.gg   ggplot2</code></pre>
+<pre><code>## 
+## Attachement du package : &#39;GGally&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:faraway&#39;:
+## 
+##     happy</code></pre>
+<pre class="r"><code>ggpairs(iris)</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="/post/Lessons/2020-12-11-graphics-with-r_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p>or for simpler and faster graph : <code>plot(iris)</code></p>
+</div>
+<div id="creating-a-bar-chart" class="section level3">
+<h3>Creating a Bar Chart</h3>
+<div id="from-the-count-table-or-equivalent" class="section level4">
+<h4>From the count table (or equivalent)</h4>
+<pre class="r"><code>ford_cars &lt;- Cars93 %&gt;%
+  filter(Manufacturer == &quot;Ford&quot;) 
+
+ggplot(ford_cars, aes(Model, Horsepower)) +
+  geom_bar(stat = &quot;identity&quot;)</code></pre>
+<p><img src="/post/Lessons/2020-12-11-graphics-with-r_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p><code>stat = "identity"</code>, which assumes that the heights of your bars are conveniently stored as a value in one field with only one record per column</p>
+</div>
+<div id="from-the-raw-variable" class="section level4">
+<h4>From the ‘raw’ variable</h4>
+<p>From the vector of numeric data and associated factor, you can produce a bar chart of the group means or the group totals</p>
+<pre class="r"><code>ggplot(airquality, aes(month.abb[Month], Temp)) +
+  geom_bar(stat = &quot;summary&quot;, fun.y = &quot;mean&quot;) +
+  labs(title = &quot;Mean Temp by Month&quot;,
+       x = &quot;&quot;,
+       y = &quot;Temp (deg. F)&quot;)</code></pre>
+<pre><code>## Warning: Ignoring unknown parameters: fun.y</code></pre>
+<pre><code>## No summary function supplied, defaulting to `mean_se()`</code></pre>
+<p><img src="/post/Lessons/2020-12-11-graphics-with-r_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+</div>
+<div id="sorting-the-factor-in-graph" class="section level4">
+<h4>Sorting the factor in graph</h4>
+<pre class="r"><code>library(forcats)
+
+aq_data &lt;- airquality %&gt;%
+  arrange(Month) %&gt;%
+  mutate(month_abb = fct_inorder(month.abb[Month]))
+
+ggplot(aq_data, aes(month_abb, Temp)) +
+  geom_bar(stat = &quot;summary&quot;, fun.y = &quot;mean&quot;) +
+  labs(title = &quot;Mean Temp by Month&quot;,
+       x = &quot;&quot;,
+       y = &quot;Temp (deg. F)&quot;)</code></pre>
+<pre><code>## Warning: Ignoring unknown parameters: fun.y</code></pre>
+<pre><code>## No summary function supplied, defaulting to `mean_se()`</code></pre>
+<p><img src="/post/Lessons/2020-12-11-graphics-with-r_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p>Sorted x-axis with respect to the value in y-axis</p>
+<pre class="r"><code>ggplot(aq_data, aes(reorder(month_abb, -Temp, mean), Temp)) +
+  geom_bar(stat = &quot;summary&quot;,
+           fun.y = &quot;mean&quot;,
+           fill = &quot;tomato&quot;) +
+  stat_summary(fun.data = mean_se, geom = &quot;errorbar&quot;) +
+  labs(title = &quot;Mean Temp by Month&quot;,
+       x = &quot;&quot;,
+       y = &quot;Temp (deg. F)&quot;)</code></pre>
+<pre><code>## Warning: Ignoring unknown parameters: fun.y</code></pre>
+<pre><code>## No summary function supplied, defaulting to `mean_se()`</code></pre>
+<p><img src="/post/Lessons/2020-12-11-graphics-with-r_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p>Modifiying the color and adding standard error bars:</p>
+<pre class="r"><code>ggplot(aq_data, aes(month_abb, Temp)) +
+  geom_bar(stat = &quot;summary&quot;,
+           fun.y = &quot;mean&quot;,
+           fill = &quot;cornflowerblue&quot;) +
+  stat_summary(fun.data = mean_se, geom = &quot;errorbar&quot;) +
+  labs(title = &quot;Mean Temp by Month&quot;,
+       x = &quot;&quot;,
+       y = &quot;Temp (deg. F)&quot;)</code></pre>
+<pre><code>## Warning: Ignoring unknown parameters: fun.y</code></pre>
+<pre><code>## No summary function supplied, defaulting to `mean_se()`</code></pre>
+<p><img src="/post/Lessons/2020-12-11-graphics-with-r_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<p>Using a palette color:</p>
+<pre class="r"><code>aq_data &lt;- airquality %&gt;%
+  arrange(Month) %&gt;%
+  mutate(month_abb = fct_inorder(month.abb[Month]))
+
+ggplot(data = aq_data, aes(month_abb, Temp, fill = month_abb)) +
+  geom_bar(stat = &quot;summary&quot;, fun.y = &quot;mean&quot;) +
+  labs(title = &quot;Mean Temp by Month&quot;,
+       x = &quot;&quot;,
+       y = &quot;Temp (deg. F)&quot;) +
+  scale_fill_brewer(palette = &quot;Paired&quot;)</code></pre>
+<pre><code>## Warning: Ignoring unknown parameters: fun.y</code></pre>
+<pre><code>## No summary function supplied, defaulting to `mean_se()`</code></pre>
+<p><img src="/post/Lessons/2020-12-11-graphics-with-r_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p>With colors associated to factor : <code>fill=</code></p>
+<pre class="r"><code>ggplot(airquality, aes(month.abb[Month], Temp, fill = ..y..)) +
+  geom_bar(stat = &quot;summary&quot;, fun.y = &quot;mean&quot;) +
+  labs(title = &quot;Mean Temp by Month&quot;,
+       x = &quot;&quot;,
+       y = &quot;Temp (deg. F)&quot;,
+       fill = &quot;Temp&quot;)</code></pre>
+<pre><code>## Warning: Ignoring unknown parameters: fun.y</code></pre>
+<pre><code>## No summary function supplied, defaulting to `mean_se()`</code></pre>
+<p><img src="/post/Lessons/2020-12-11-graphics-with-r_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+</div>
+</div>
+<div id="plotting-a-line-from-x-and-y-points" class="section level3">
+<h3>Plotting a Line from x and y Points</h3>
+<p>Add the <code>+ geom_line()</code> to the scater plot</p>
+<pre class="r"><code>ggplot(economics, aes(date , unemploy)) +
+  geom_point() +
+  geom_line()</code></pre>
+<p><img src="/post/Lessons/2020-12-11-graphics-with-r_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<div id="changing-the-type-width-or-color-of-a-line" class="section level4">
+<h4>Changing the Type, Width, or Color of a Line</h4>
+<p><code>linetype=""</code> parameter for controlling the appearance of lines:</p>
+<table>
+<thead>
+<tr class="header">
+<th><code>linetype=</code> Character</th>
+<th><code>linetype=</code> Numeric</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>“solid”</td>
+<td>=1 (default)</td>
+</tr>
+<tr class="even">
+<td>“dashed”</td>
+<td>=2</td>
+</tr>
+<tr class="odd">
+<td>“dotted”</td>
+<td>=3</td>
+</tr>
+<tr class="even">
+<td>“dotdash”</td>
+<td>=4</td>
+</tr>
+<tr class="odd">
+<td>“longdash”</td>
+<td>=5</td>
+</tr>
+<tr class="even">
+<td>“twodash”</td>
+<td>=6</td>
+</tr>
+<tr class="odd">
+<td>“blank”</td>
+<td>=0 (inhibits drawing)</td>
+</tr>
+</tbody>
+</table>
+<p>The <code>linetype</code>, <code>col</code>, and <code>size</code> params to <code>geom_line</code>:</p>
+<pre class="r"><code>ggplot(df, aes(x, y)) +
+  geom_line(linetype = 2,
+            size = 2,
+            col = &quot;red&quot;)</code></pre>
+<p><img src="/post/Lessons/2020-12-11-graphics-with-r_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+</div>
+<div id="from-wide-to-long-format-in-line-grah" class="section level4">
+<h4>From wide to long format in Line grah</h4>
+<p>A classic case is when you want to draw multiple lines with multiple y-variables and a unique x-variable</p>
+<pre class="r"><code>x &lt;- 1:10
+y1 &lt;- x**1.5
+y2 &lt;- x**2
+y3 &lt;- x**2.5
+df &lt;- data.frame(x, y1, y2, y3)</code></pre>
+<p>Pass wide data to long by using the gather function from the core tidyverse package</p>
+<pre class="r"><code>df_long &lt;- gather(df, bucket, y, -x)</code></pre>
+<pre class="r"><code>ggplot(df_long, aes(x, y, col = bucket)) +
+  geom_line()</code></pre>
+<p><img src="/post/Lessons/2020-12-11-graphics-with-r_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+</div>
+<div id="plotting-multiple-datasets" class="section level4">
+<h4>Plotting Multiple Datasets</h4>
+<p>creating an empty plot and then adding two different geoms to the plot:</p>
+<pre class="r"><code>ggplot() +
+  geom_line(data = df1, aes(x1, y1)) +
+  geom_line(data = df2, aes(x2, y2))</code></pre>
+<pre class="r"><code># example data
+n &lt;- 10
+n2 &lt;- 21
+x1 &lt;- 1:n
+y1 &lt;- rnorm(n, 0, .5)
+df1 &lt;- data.frame(x1, y1)
+
+x2 &lt;- (.5 * n2):((1.5 * n2) - 1)
+y2 &lt;- rnorm(n2, 1, .5)
+df2 &lt;- data.frame(x2, y2)</code></pre>
+<pre class="r"><code>ggplot() +
+  geom_line(data = df1, aes(x1, y1), color = &quot;darkblue&quot;) +
+  geom_line(data = df2, aes(x2, y2), linetype = &quot;dashed&quot;)+
+  geom_point(data=df1, aes(x1, y1)) +
+  geom_point(data=df2, aes(x2, y2))</code></pre>
+<p><img src="/post/Lessons/2020-12-11-graphics-with-r_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
+<p>Adding vertical and horizontal lines</p>
+<pre class="r"><code>ggplot(df1) +
+  aes(x = x1, y = y1) +
+  geom_point() +
+  geom_vline(
+    xintercept = 10,
+    color = &quot;red&quot;,
+    linetype = &quot;dashed&quot;,
+    size = 1.5
+     ) +
+  geom_hline(yintercept = 0, color = &quot;blue&quot;)</code></pre>
+<p><img src="/post/Lessons/2020-12-11-graphics-with-r_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
+</div>
+<div id="exercise" class="section level4">
+<h4>Exercise</h4>
+<pre class="r"><code>samp &lt;- rnorm(1000)
+samp_df &lt;- data.frame(samp, x = 1:length(samp))
+
+mean_line &lt;- mean(samp_df$samp)
+sd_lines &lt;- mean_line + c(-2, -1, +1, +2) * sd(samp_df$samp)
+
+ggplot(samp_df) +
+  aes(x = x, y = samp) +
+  geom_point() +
+  geom_hline(yintercept = mean_line, color = &quot;darkblue&quot;) +
+  geom_hline(yintercept = sd_lines, linetype = &quot;dotted&quot;)</code></pre>
+<p><img src="/post/Lessons/2020-12-11-graphics-with-r_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
+</div>
+</div>
+<div id="creating-a-boxplot" class="section level3">
+<h3>Creating a Boxplot</h3>
+<pre class="r"><code>ggplot(samp_df) +
+  aes(y = samp) +
+  geom_boxplot() +
+  coord_flip()</code></pre>
+<p><img src="/post/Lessons/2020-12-11-graphics-with-r_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
+<pre class="r"><code>data(UScereal, package = &quot;MASS&quot;)
+
+ggplot(UScereal) +
+  aes(x = as.factor(shelf), y = sugars) +
+  geom_boxplot() +
+  labs(
+    title = &quot;Sugar Content by Shelf&quot;,
+    x = &quot;Shelf&quot;,
+    y = &quot;Sugar (grams per portion)&quot;
+  )</code></pre>
+<p><img src="/post/Lessons/2020-12-11-graphics-with-r_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
+<div id="creating-a-histogram" class="section level4">
+<h4>Creating a Histogram</h4>
+<p>The <code>geom_histogram</code> function must decide how many cells (bins) to create for binning the data.</p>
+<p>Automatic bins nunber</p>
+<pre class="r"><code>data(Cars93, package = &quot;MASS&quot;)
+
+ggplot(Cars93) +
+  geom_histogram(aes(x = MPG.city))</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="/post/Lessons/2020-12-11-graphics-with-r_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
+<p>Customized bins number</p>
+<pre class="r"><code>ggplot(Cars93) +
+  geom_histogram(aes(x = MPG.city), bins = 13)</code></pre>
+<p><img src="/post/Lessons/2020-12-11-graphics-with-r_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
+</div>
+<div id="adding-a-density-estimate-to-a-histogram" class="section level4">
+<h4>Adding a Density Estimate to a Histogram</h4>
+<pre class="r"><code>ggplot(Cars93) +
+  aes(x = MPG.city) +
+  geom_histogram(aes(y = ..density..), bins = 21) +
+  geom_density()</code></pre>
+<p><img src="/post/Lessons/2020-12-11-graphics-with-r_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
+</div>
+<div id="creating-a-normal-quantilequantile-plot" class="section level4">
+<h4>Creating a Normal Quantile–Quantile Plot</h4>
+<pre class="r"><code>df &lt;- data.frame(x = rnorm(100))
+
+ggplot(df, aes(sample = x)) +
+  stat_qq() +
+  stat_qq_line()</code></pre>
+<p><img src="/post/Lessons/2020-12-11-graphics-with-r_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
+<p>Example:</p>
+<p><img src="/post/Lessons/2020-12-11-graphics-with-r_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
+<p>Is the <span class="math inline">\(log(price)\)</span> ‘more normal’?</p>
+</div>
+</div>
+<div id="creating-other-quantilequantile-plots" class="section level3">
+<h3>Creating Other Quantile–Quantile Plots</h3>
+<p>The recipe steps:</p>
+<ol style="list-style-type: decimal">
+<li>Use the ppoints function to generate a sequence of points between 0 and 1.</li>
+<li>Transform those points into quantiles, using the quantile function for the assumed distribution.</li>
+<li>Sort your sample data.</li>
+<li>Plot the sorted data against the computed quantiles.</li>
+<li>Use abline to plot the diagonal line.</li>
+</ol>
+<div id="example-1" class="section level4">
+<h4>Example</h4>
+<p>Testing the Student distribution</p>
+<p>Create the data to be tested</p>
+<pre class="r"><code>df_t &lt;- data.frame(y = rt(100, 5))</code></pre>
+<p>Estimate the parameters of the distribution we’re wanting to plot. Since this is a Student’s t distribution, we only need to estimate one parameter, the degrees of freedom.
+We use <code>MASS::fitdistr</code> function</p>
+<pre class="r"><code>est_df &lt;- as.list(MASS::fitdistr(df_t$y, &quot;t&quot;)$estimate)[[&quot;df&quot;]]</code></pre>
+<pre><code>## Warning in log(s): production de NaN</code></pre>
+<pre><code>## Warning in dt((x - m)/s, df, log = TRUE): production de NaN</code></pre>
+<pre><code>## Warning in log(s): production de NaN
+
+## Warning in log(s): production de NaN</code></pre>
+<pre><code>## Warning in dt((x - m)/s, df, log = TRUE): production de NaN</code></pre>
+<pre class="r"><code>est_df</code></pre>
+<pre><code>## [1] 2.755965</code></pre>
+<p>There is a match !</p>
+<pre class="r"><code>p2 &lt;- ggplot(df_t) +
+  aes(sample = y) +
+  geom_qq(distribution = qt, dparams = est_df) +
+  stat_qq_line(distribution = qt, dparams = est_df)
+p2</code></pre>
+<p><img src="/post/Lessons/2020-12-11-graphics-with-r_files/figure-html/unnamed-chunk-43-1.png" width="672" /></p>
+</div>
+</div>
+<div id="graphing-a-function" class="section level3">
+<h3>Graphing a Function</h3>
+<p><code>stat_function</code> will graph a function across a range</p>
+<pre class="r"><code>p3 &lt;- ggplot(data.frame(x = c(-3, 3))) +
+  aes(x) +
+  stat_function(fun = sin)
+p3</code></pre>
+<p><img src="/post/Lessons/2020-12-11-graphics-with-r_files/figure-html/unnamed-chunk-44-1.png" width="672" /></p>
+<p>Another example</p>
+<pre class="r"><code>p4 &lt;- ggplot(data.frame(x = c(-3.5, 3.5))) +
+  aes(x) +
+  stat_function(fun = dnorm) +
+  ggtitle(&quot;Standard Normal Density&quot;)
+p4</code></pre>
+<p><img src="/post/Lessons/2020-12-11-graphics-with-r_files/figure-html/unnamed-chunk-45-1.png" width="672" /></p>
+<p>or again</p>
+<pre class="r"><code>f &lt;- function(x) exp(-abs(x)) * sin(2 * pi * x)
+
+ggplot(data.frame(x = c(-3.5, 3.5))) +
+  aes(x) +
+  stat_function(fun = f) +
+  ggtitle(&quot;Dampened Sine Wave&quot;)</code></pre>
+<p><img src="/post/Lessons/2020-12-11-graphics-with-r_files/figure-html/unnamed-chunk-46-1.png" width="672" /></p>
+</div>
+<div id="displaying-several-figures-on-one-page" class="section level3">
+<h3>Displaying Several Figures on One Page</h3>
+<p>With the <code>patchwork</code> by Thomas Lin Pedersen.</p>
+<p>After installing the package, we can use it to plot multiple ggplot objects using a <code>+</code> between the objects, then a call to <code>plot_layout</code> to arrange the images into a grid, as shown in Figure 10.59. Our example code here has four ggplot objects:</p>
+<pre class="r"><code>#install.packages(&quot;patchwork&quot;)
+library(patchwork)</code></pre>
+<pre><code>## Warning: le package &#39;patchwork&#39; a été compilé avec la version R 3.6.3</code></pre>
+<pre class="r"><code>p1 + p2 + p3 + p4</code></pre>
+<p><img src="/post/Lessons/2020-12-11-graphics-with-r_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
+<p>Grouping with parentheses and using / to put groupings under other elements</p>
+<pre class="r"><code>p3 / (p1 + p2 + p4)</code></pre>
+<p><img src="/post/Lessons/2020-12-11-graphics-with-r_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
+<pre class="r"><code>p1 + p2 + p3 + p4 + plot_layout(ncol = 2, byrow = FALSE)</code></pre>
+<p><img src="/post/Lessons/2020-12-11-graphics-with-r_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
+</div>
+<div id="writing-your-plot-to-a-file" class="section level3">
+<h3>Writing Your Plot to a File</h3>
+<p>In the <em>RStudio</em> plot panel, the <code>Export</code> button permits to “Save as Image,” “Save as PDF,” or “Copy to Clipboard.”</p>
+<p>The “Copy to Clipboard” option can be handy if you are manually copying and pasting your graphics into a presentation or word processor.</p>
+<p>A reproducible manner is to use <code>ggsave</code> to save a displayed image to a file. <code>ggsave</code> will make some default assumptions about size and file type for you, allowing you to specify only a filename: <code>ggsave("filename.jpg")</code></p>
+<p>Remember that the file will be written to your current working directory (unless you use an absolute filepath), so be certain you know which directory is your working directory.</p>
+<p>In a noninteractive script using ggplot, you can pass plot objects directly to <code>ggsave</code> so they need not be displayed before saving.</p>
+<pre class="r"><code>ggsave(&quot;g1.png&quot;, plot = g1, units = &quot;in&quot;, width = 5, height = 4)</code></pre>
+<p>Note that <code>in</code> for inches and <code>ggsave</code> also supports <code>mm</code> and <code>cm</code></p>
+</div>
+</div>
+</div>

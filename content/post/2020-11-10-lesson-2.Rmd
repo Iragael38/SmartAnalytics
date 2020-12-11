@@ -9,6 +9,9 @@ tags:
   - Lesson
 description: ''
 thumbnail: ''
+link-citations: yes
+biblio-style: apalike
+bibliography: [ ./data/biblio_SABD.bib]
 ---
 
 # Second Lesson
@@ -44,11 +47,11 @@ You can connect to zoom:
 
 #### Grammar of graphics with R
 
-[Grammar of graphics with R](../../lessons_list/lesson_1.2_Grammar)
+[Grammar of graphics with R](../lessons/2020-12-11-graphics-with-r)
 
 #### Application: Visualisation
 
-[Visualization application](../../lessons_list/lesson_1.3_Application)
+[Visualization application](../lessons/2020-12-11-introvizu)
 
 ##### Reference
 
@@ -63,7 +66,7 @@ You can connect to zoom:
 [Introduction to GIS](/Data-pdf/lesson_1.2_01_GIS_V1.pdf)
 
 
-[Application GIS with R](../../lessons_list/lesson_2_GIS)
+[Application GIS with R](../lessons/2020-12-11-introgis)
 
 #### Data files
 
