@@ -13,6 +13,7 @@ nocite: |
 
 ## What's New
 
+- `07/01/2021`: **January 07th** [12th Lesson](../post/2021-01-07-lesson-12)
 - `11/12/2020`: **December 17th** [Eleventh Lesson](../post/2020-11-10-lesson-11)
 - `04/12/2020`: Help to build slides with RMarkdown: [post](../post/2020-12-01-dynamic-documents-with-rmarkdown)
 - `04/12/2020`: Correction of
