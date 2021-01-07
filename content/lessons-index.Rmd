@@ -13,6 +13,11 @@ This is the website of the Lesson **Smart Analytics for Big Data** taught at Gre
 
 Lessons list **in reverse order**
 
+### 12th Lesson - 07/01/2021 - **13:30  - 16:60**
+
+Material for the [12th Lesson](../post/2021-01-07-lesson-12)
+
+
 ### Eleventh Lesson - 17/12/2020 - **08:00 - 12:30**
 
 Material for the [Eleventh Lesson](../post/2020-11-10-lesson-11)
