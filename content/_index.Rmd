@@ -13,6 +13,7 @@ nocite: |
 
 ## What's New
 
+- `13/01/2021`: **January 14th** Project Defense [13th Lesson](../post/2021-01-07-lesson-13)
 - `07/01/2021`: **January 07th** [12th Lesson](../post/2021-01-07-lesson-12)
 - `11/12/2020`: **December 17th** [Eleventh Lesson](../post/2020-11-10-lesson-11)
 - `04/12/2020`: Help to build slides with RMarkdown: [post](../post/2020-12-01-dynamic-documents-with-rmarkdown)
@@ -71,9 +72,9 @@ Analysis of complex and big data, temporal  and spatial data needs specific skil
 
 Each lesson is described as follows
 
-![Planning 2020 - Version sept - Red hours are to be validated](/Data-pdf/Planning_v4.png)
+![Planning 2020 - Version sept - Red hours are to be validated](/Data-pdf/Planning_v5.png)
 
-[Planning](/Data-pdf/Planning_v4.png) downloadable format
+[Planning](/Data-pdf/Planning_v5.png) downloadable format
 
 
 ## Organisation
