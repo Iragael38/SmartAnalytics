@@ -63,7 +63,7 @@ You can connect to zoom:
 
 ##### GIS Lesson
 
-[Introduction to GIS](/Data-pdf/lesson_1.2_01_GIS_V1.pdf)
+[Introduction to GIS](/Data-pdf/lesson_1.2_01_GIS_V2.pdf)
 
 
 [Application GIS with R](../lessons/2020-12-11-introgis)
