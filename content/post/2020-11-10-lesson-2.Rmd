@@ -66,7 +66,7 @@ You can connect to zoom:
 [Introduction to GIS](/Data-pdf/lesson_1.2_01_GIS_V2.pdf)
 
 
-[Application GIS with R](../lessons/2020-12-11-introgis)
+[Application GIS with R](../lessons/2021-01-21-introduction-gis)
 
 #### Data files
 
